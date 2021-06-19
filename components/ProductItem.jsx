@@ -10,7 +10,7 @@ const ProductItem = ({ imgSrc, productName, price, discount, isRecommended = fal
         <Link href={slug}>
             <div className='shadow-sm cursor-pointer w-full border border-gray-200 hover:bg-blue-100 transition ease-in-out duration-300'>
                 {/* Product Image */}
-                <Image src={imgSrc} width={255} height={340} layout='responsive' priority objectFit='cover' />
+                <Image src={imgSrc} width={4} height={5} layout='responsive' priority objectFit='cover' />
                 <div className='flex flex-col space-y-1 p-2'>
                     <div className='line-clamp-2 text-md font-medium text-blueGray-900 leading-snug'>{productName}</div>
                     <div className='flex justify-between items-center leading-loose'>

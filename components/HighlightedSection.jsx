@@ -27,17 +27,20 @@ const HighlightedSection = ({ sectionTitle, href, data }) => {
 
             {/* Product Item */}
             <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-8'>
-                {data.map((product, index) => (
-                    <ProductItem
-                        key={index}
-                        slug={product.slug}
-                        imgSrc={product.thumbnail[0]}
-                        productName={product.productName}
-                        price={product.sellingPrice}
-                        discount={product.discount ? product.discount : null}
-                        isRecommended={product.isRecommended}
-                    />
-                ))}
+                {data.map(
+                    (product, index) => (
+                        <ProductItem
+                            key={index}
+                            slug={product.slug}
+                            imgSrc={product.images[0].url}
+                            productName={product.name}
+                            price={product.sellingPrice}
+                            discount={product.discount ? product.discount : null}
+                            isRecommended={product.isRecommended}
+                        />
+                    )
+                    // console.log(product.images[0].formats.thumbnail.url)
+                )}
             </div>
         </div>
     )

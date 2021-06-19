@@ -24,8 +24,8 @@ const HighlightedSection = ({ sectionTitle, href, data }) => {
                     <ProductItem
                         key={index}
                         slug={product.slug}
-                        imgSrc={product.thumbnail[0]}
-                        productName={product.productName + ' loremi psum dolor sit amet'}
+                        imgSrc={product.images[0].formats.thumbnail.url}
+                        productName={product.productName}
                         price={product.sellingPrice}
                         discount={product.discount ? product.discount : null}
                         isRecommended={product.isRecommended}

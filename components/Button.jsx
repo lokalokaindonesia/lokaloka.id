@@ -8,10 +8,10 @@ const Button = ({ children, type, size, href }) => {
         xl: 'px-10 py-4 text-xl',
     }
     const types = {
-        primary: `bg-blue-500 text-white tracking-wide font-bold transiton duration-300 ease-in-out hover:bg-blue-600`,
-        secondary: `bg-blue-100 text-blue-500 tracking-wide font-bold transiton duration-300 ease-in-out hover:bg-blue-200`,
-        tertiary: `bg-orange-500 text-white tracking-wide font-bold transiton duration-300 ease-in-out hover:bg-orange-600`,
-        tertiaryAccent: `bg-orange-100 text-orange-500 tracking-wide font-bold transiton duration-300 ease-in-out hover:bg-orange-200`,
+        primary: `bg-blue-500 text-white font-bold transiton duration-300 ease-in-out hover:bg-blue-600`,
+        secondary: `bg-blue-100 text-blue-500 font-bold transiton duration-300 ease-in-out hover:bg-blue-200`,
+        tertiary: `bg-orange-500 text-white font-bold transiton duration-300 ease-in-out hover:bg-orange-600`,
+        tertiaryAccent: `bg-orange-100 text-orange-500 font-bold transiton duration-300 ease-in-out hover:bg-orange-200`,
     }
 
     const pickedtype = types[type]
