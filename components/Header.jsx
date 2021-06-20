@@ -30,13 +30,13 @@ const Header = () => {
             <div className='w-2/12 flex items-center justify-end space-x-6'>
                 <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-800 cursor-pointer' />
                 {user ? (
-                    <></>
+                    <div className='cursor-pointer px-3 py-1 bg-red-100 text-extrabold text-red-500' onClick={() => logout()}>
+                        Logout
+                    </div>
                 ) : (
-                    <>
-                        <Button href='/account/login' size='md' type='secondary'>
-                            <span>Sign In</span>
-                        </Button>
-                    </>
+                    <Button href='/account/login' size='md' type='secondary'>
+                        <span>Sign In</span>
+                    </Button>
                 )}
             </div>
         </header>

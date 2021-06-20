@@ -13,7 +13,24 @@ export const AuthProvider = ({ children }) => {
 
     // Register
     const register = async (user) => {
-        console.log(user)
+        const res = await fetch(`${process.env.NEXT_URL}/api/register`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+
+        const data = await res.json()
+
+        if (res.ok) {
+            setUser(data.user)
+            router.push('/')
+            return
+        }
+        setError(data.message)
+        setError(null)
+        return
     }
 
     // Login
@@ -41,7 +58,14 @@ export const AuthProvider = ({ children }) => {
 
     // Logout
     const logout = async () => {
-        console.log('logout')
+        const res = await fetch(`${process.env.NEXT_URL}/api/logout`, {
+            method: 'POST'
+        })
+
+        if (res.ok) {
+            setUser(null)
+            router.push('/account/login')
+        }
     }
 
     // Check is User is Logged In

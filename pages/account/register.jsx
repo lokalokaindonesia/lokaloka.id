@@ -32,12 +32,12 @@ const register = () => {
             <div className=''>
                 <section className='flex flex-col md:flex-row h-screen items-center'>
                     <div className='bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen'>
-                        <Image src='https://source.unsplash.com/collection/1808212' layout='responsive' width={1} height={1} objectFit='cover' priority />
+                        <img src='https://source.unsplash.com/collection/1808212' className='object-cover w-full h-full' />
                     </div>
 
                     <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center'>
-                        <div className='w-full h-100'>
-                            <h1 className='text-2xl md:text-2xl font-bold leading-tight mt-12'>Register an Account 😁</h1>
+                        <div className='w-full h-scsreen'>
+                            <h1 className='text-2xl md:text-4xl font-bold leading-loose'>Register an Account</h1>
 
                             <form className='mt-6' method='POST' onSubmit={handleSubmit}>
                                 <div>
