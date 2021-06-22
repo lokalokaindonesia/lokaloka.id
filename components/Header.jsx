@@ -7,9 +7,11 @@ const Header = () => {
     const { user, logout } = useContext(AuthContext)
 
     return (
-        <header className='w-full px-4 h-20 xl:container xl:mx-auto flex justify-between items-center '>
+        <header className='w-full px-4 xl:px-0 h-20 xl:container xl:mx-auto flex justify-between items-center '>
             <div className='w-2/12 text-2xl font-extrabold text-blue-500 tracking-wide'>
-                <ColorSwatchIcon className='h-10 w-10 text-blue-800' />
+                <a href='/'>
+                    <ColorSwatchIcon className='cursor-pointer h-10 w-10 text-blue-800' />
+                </a>
             </div>
 
             <div className='w-8/12 flex justify-center'>

@@ -3,7 +3,6 @@ import Link from 'next/link'
 import ProductItem from './ProductItem'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {
-    // console.log(products)
     return (
         <div className='w-full flex space-y-6 my-8 flex-col px-4 xl:container xl:mx-auto xl:my-12'>
             {/* Section Title */}
@@ -32,7 +31,8 @@ const HighlightedSection = ({ sectionTitle, href, data }) => {
                         <ProductItem
                             key={index}
                             slug={product.slug}
-                            imgSrc={product.images[0].url}
+                            category={product.product_category.slug}
+                            imgSrc={product.images[0].formats.medium.url}
                             productName={product.name}
                             price={product.sellingPrice}
                             discount={product.discount ? product.discount : null}
