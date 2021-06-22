@@ -1,5 +1,3 @@
-import { ArrowRightIcon } from '@heroicons/react/solid'
-import Link from 'next/link'
 import ProductItem from './ProductItem'
 import Button from './Button'
 
@@ -25,7 +23,7 @@ const HighlightedSection = ({ sectionTitle, href, data }) => {
                         key={index}
                         slug={product.slug}
                         imgSrc={product.images[0].formats.medium.url}
-                        productName={product.productName}
+                        productName={product.name}
                         price={product.sellingPrice}
                         discount={product.discount ? product.discount : null}
                         isRecommended={product.isRecommended}

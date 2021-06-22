@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { useContext } from 'react'
 import { SearchIcon, ColorSwatchIcon } from '@heroicons/react/outline'
-import AuthContext from '../context/AuthContext'
-import Button from './Button'
+import AuthContext from '@/context/AuthContext'
+import Button from '@/components/Button'
 const Header = () => {
     const { user, logout } = useContext(AuthContext)
 

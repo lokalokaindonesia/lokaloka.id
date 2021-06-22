@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Head from 'next/head'
 import { useEffect, useState, useContext } from 'react'
 import { useRouter } from 'next/router'
-import AuthContext from '../../context/AuthContext'
+import AuthContext from '@/context/AuthContext'
 
 const login = () => {
     const [email, setEmail] = useState('')

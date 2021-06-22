@@ -1,12 +1,12 @@
 import { ColorSwatchIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
-import PaymentGateway from './PaymentGateway'
+import PaymentGatewayFooter from './PaymentGatewayFooter'
 
 const Footer = () => {
     return (
         <div>
-            <PaymentGateway />
+            <PaymentGatewayFooter />
             <div className='w-full h-auto bg-gray-300 py-12 '>
                 <div className='container mx-auto grid grid-flow-col grid-cols-4'>
                     {/* 1 */}

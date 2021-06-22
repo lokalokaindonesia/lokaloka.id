@@ -1,5 +1,5 @@
 import { SparklesIcon, ArrowRightIcon } from '@heroicons/react/solid'
-import Button from './Button'
+import Button from '@/components/Button'
 const Hero = () => {
     const backgroundImage = {
         backgroundImage: 'url("./images/hero-images.png")',

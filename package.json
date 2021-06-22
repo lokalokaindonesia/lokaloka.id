@@ -20,6 +20,7 @@
     "next-images": "^1.8.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-icons": "^4.2.0",
     "react-number-format": "^4.6.3"
   },
   "devDependencies": {

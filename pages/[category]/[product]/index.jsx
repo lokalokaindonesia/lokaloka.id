@@ -1,27 +1,36 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
-import { useState } from 'react'
+import { ChevronRightIcon, ChevronLeftIcon, LinkIcon } from '@heroicons/react/solid'
+import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart } from 'react-icons/fa'
+import { useState, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
-import Layout from '../../../components/Layout'
-import Badge from '../../../components/Badge'
-import VariantBadge from '../../../components/VariantBadge'
-import Button from '../../../components/Button'
-import ProductItem from '../../../components/ProductItem'
+import Layout from '@/components/Layout'
+import Badge from '@/components/Badge'
+import VariantBadge from '@/components/VariantBadge'
+import ProductItem from '@/components/ProductItem'
 
 const Product = ({ product, similarProducts }) => {
+    const discountPrice = product.sellingPrice - (product.sellingPrice * product.discount) / 100
+    const isDiscount = product.discount !== 0 && product.discount !== null ? true : false
+    const xPrice = product.discount ? discountPrice : product.sellingPrice
+
     const router = useRouter()
 
     const productRoute = router.query.product || 'Lokaloka'
     const categoryRoute = '/' + router.query.category || []
 
+    // Slider Image
     const [current, setCurrent] = useState(0)
+
+    // Product
     const [quantity, setQuantity] = useState(1)
+    const [subtotal, setSubtotal] = useState(xPrice)
+    const [favorite, setFavorite] = useState(false)
 
     const length = product.images.length
 
-    // Carousel Func
+    // * Carousel Func
     const nextSlide = () => {
         setCurrent(current === length - 1 ? 0 : current + 1)
     }
@@ -29,16 +38,33 @@ const Product = ({ product, similarProducts }) => {
         setCurrent(current === 0 ? length - 1 : current - 1)
     }
 
-    // Qty Func
+    // * Qty Func
     const addQty = () => {
         setQuantity(quantity + 1)
+        countSubtotal()
     }
 
     const reduceQty = () => {
         setQuantity(quantity === 1 ? 1 : quantity - 1)
+        countSubtotal()
+    }
+
+    // * Count Subtotal
+    const countSubtotal = () => {
+        const xPrice = product.discount ? discountPrice : product.sellingPrice
+        setSubtotal(quantity * xPrice)
+    }
+
+    // * Favorite Func
+    const favoriteHandle = () => {
+        setFavorite(!favorite)
     }
 
     if (!Array.isArray(product.images) || product.images.length <= 0) return null
+
+    useEffect(() => {
+        countSubtotal()
+    }, [subtotal, quantity])
 
     return (
         <Layout title={productRoute}>
@@ -60,7 +86,12 @@ const Product = ({ product, similarProducts }) => {
                 <div className='flex justify-start space-x-8 my-8'>
                     {/* Images */}
                     <div className='w-auto'>
-                        <div className='flex justify-between w-96 h-96 absolute bg-red-500'>
+                        <div className='flex justify-end absolute w-96 z-40 items-start px-4 py-4'>
+                            <div className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50' onClick={favoriteHandle}>
+                                <FaHeart className='text-white hover:text-red-500 transition duration-300 ease-in-out w-6 h-6' />
+                            </div>
+                        </div>
+                        <div className='flex justify-between w-96 h-96 absolute bg-gray-300'>
                             {product.images.map((img, index) => {
                                 return (
                                     <div key={index} className={index === current ? 'block w-full h-full ease-in-out duration-300 transition-all select-none' : 'hidden'}>
@@ -77,81 +108,97 @@ const Product = ({ product, similarProducts }) => {
 
                     {/* Product Details */}
                     <div className='h-full w-full flex-auto'>
-                        <div className='text-3xl mb-4 font-bold text-blueGray-800 '>{product.name}</div>
-                        <Badge text='Recommended' color='green' />
-                        <div className='my-4 flex space-x-8 items-baseline'>
-                            <NumberFormat
-                                value={product.sellingPrice}
-                                displayType={'text'}
-                                thousandSeparator={true}
-                                prefix={'Rp. '}
-                                className='text-3xl font-extrabold text-blue-500'
-                            />
-                            <NumberFormat
-                                value={product.sellingPrice - (product.discount * product.sellingPrice) / 100}
-                                displayType={'text'}
-                                thousandSeparator={true}
-                                prefix={'Rp. '}
-                                className='font-semibold line-through text-red-500'
-                            />
-                        </div>
-                        <div className='flex flex-col space-y-2 mb-4'>
-                            <p className='text-xl font-semibold text-blueGray-600'>Variants</p>
-                            <div className='flex space-x-2'>
-                                <VariantBadge text='XL' />
-                                <VariantBadge text='L' />
-                                <VariantBadge text='M' />
-                                <VariantBadge text='S' />
+                        <div className='flex flex-col space-y-2'>
+                            <div className='text-2xl font-bold text-blueGray-800 -mt-2'>{product.name}</div>
+                            <Badge text='Recommended' color='green' />
+                            <div className='my-4 flex space-x-8 items-baseline'>
+                                <NumberFormat
+                                    value={isDiscount ? discountPrice : product.sellingPrice}
+                                    displayType={'text'}
+                                    thousandSeparator={true}
+                                    prefix={'Rp. '}
+                                    className='text-3xl font-extrabold text-blue-500'
+                                />
+                                <NumberFormat
+                                    value={product.sellingPrice}
+                                    displayType={'text'}
+                                    thousandSeparator={true}
+                                    prefix={'Rp. '}
+                                    className='font-semibold line-through text-red-500'
+                                />
                             </div>
-                        </div>
-                        <div className='flex flex-col space-y-2 mb-4'>
-                            <p className='text-xl font-semibold text-blueGray-600'>Colors</p>
-                            <div className='flex space-x-2'>
-                                <VariantBadge text='Blue' />
-                                <VariantBadge text='Red' />
-                                <VariantBadge text='Green' />
-                                <VariantBadge text='Purple' />
+                            <div className='flex flex-col space-y-2 mb-4'>
+                                <p className='text-lg font-semibold text-blueGray-600'>Variants</p>
+                                <div className='flex space-x-2'>
+                                    <VariantBadge text='XL' />
+                                    <VariantBadge text='L' />
+                                    <VariantBadge text='M' />
+                                    <VariantBadge text='S' />
+                                </div>
                             </div>
-                        </div>
-                        <div className='flex flex-col space-y-1 mb-4'>
-                            <p className='text-xl font-semibold text-blueGray-600'>Description</p>
-                            <p>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum, pariatur obcaecati! Molestiae illo inventore, magni sint, temporibus dicta quas
-                                culpa voluptas quasi modi incidunt veniam. Velit, vel excepturi. Assumenda modi at inventore atque recusandae mollitia consequatur, ad repudiandae
-                                veniam expedita omnis voluptates, ea quod repellendus ab dignissimos veritatis iusto nisi libero excepturi quos illo laudantium? At illum cupiditate
-                                autem cum voluptate id sint totam,
-                            </p>
+                            <div className='flex flex-col space-y-2 mb-4'>
+                                <p className='text-lg font-semibold text-blueGray-600'>Colors</p>
+                                <div className='flex space-x-2'>
+                                    <VariantBadge text='Blue' />
+                                    <VariantBadge text='Red' />
+                                    <VariantBadge text='Green' />
+                                    <VariantBadge text='Purple' />
+                                </div>
+                            </div>
+                            <div className='flex flex-col space-y-1 mb-4'>
+                                <p className='text-lg font-semibold text-blueGray-600'>Description</p>
+                                <p>
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum, pariatur obcaecati! Molestiae illo inventore, magni sint, temporibus dicta
+                                    quas culpa voluptas quasi modi incidunt veniam. Velit, vel excepturi. Assumenda modi at inventore atque recusandae mollitia consequatur, ad
+                                    repudiandae veniam expedita omnis voluptates, ea quod repellendus ab dignissimos veritatis iusto nisi libero excepturi quos illo laudantium? At
+                                    illum cupiditate autem cum voluptate id sint totam,
+                                </p>
+                            </div>
                         </div>
                     </div>
 
                     {/* Navigation */}
                     <div className='flex flex-col space-y-4'>
-                        <p className='text-xl font-semibold text-blueGray-800'>Quantity</p>
-                        <div className='flex items-center border border-blueGray-400'>
-                            <div
-                                onClick={reduceQty}
-                                className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 border-r border-blueGray-600 text-blue-gray-800'
-                            >
-                                -
-                            </div>
-                            <div className='px-4 py-1 flex-1 text-center text-blue-gray-800 '>{quantity}</div>
-                            <div
-                                onClick={addQty}
-                                className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 border-l border-blueGray-600 text-blue-gray-800'
-                            >
-                                +
+                        <div className='flex flex-col space-y-2'>
+                            <div className='text-sm font-semibold text-blueGray-600'>Share Me</div>
+                            <div className='flex space-x-8 items-center'>
+                                <FaInstagram className='cursor-pointer w-6 h-6 text-blueGray-800' />
+                                <FaFacebookSquare className='cursor-pointer w-6 h-6 text-blueGray-800' />
+                                <FaWhatsapp className='cursor-pointer w-6 h-6 text-blueGray-800' />
+                                <LinkIcon className='cursor-pointer w-6 h-6 text-blueGray-800' />
                             </div>
                         </div>
-                        <hr className='border border-blueGray-300' />
-                        <Button size='lg' href='#' type='primary'>
-                            <p>Add to Cart</p>
-                        </Button>
+                        <div className='flex flex-col space-y-2'>
+                            <div className='text-sm font-semibold text-blueGray-600'>Quantity</div>
+                            <div className='flex items-center border-2 border-blueGray-800'>
+                                <div
+                                    onClick={reduceQty}
+                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r-2 border-blueGray-600 text-blue-gray-800'
+                                >
+                                    -
+                                </div>
+                                <div className='px-4 py-1 flex-1 text-center text-blue-gray-800 '>{quantity}</div>
+                                <div
+                                    onClick={addQty}
+                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l-2 border-blueGray-600 text-blue-gray-800'
+                                >
+                                    +
+                                </div>
+                            </div>
+                        </div>
+                        <div className='flex flex-col space-y-2'>
+                            <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
+                            <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-2xl font-extrabold text-blueGray-800' />
+                        </div>
+                        <div className='flex flex-col space-y-2'>
+                            <button className='px-5 py-3 w-full text-xl bg-blue-500 text-white text-center align-middle font-bold'>Buy Now</button>
+                        </div>
                     </div>
                 </div>
 
                 <br />
                 {/* Reviews */}
-                <div className='flex flex-col space-y-10 mb-12'>
+                <div className='flex flex-col space-y-10 my-12'>
                     <div className='relative bottom-3 xl:bottom-4'>
                         <div className='absolute w-auto h-auto bg-orange-500 px-2 left-1 -top-1'>
                             <span className='text-lg md:text-xl xl:text-2xl font-bold  text-orange-500'>Reviews</span>
@@ -219,7 +266,7 @@ const Product = ({ product, similarProducts }) => {
                                 <ProductItem
                                     key={index}
                                     imgSrc={item.images[0].formats.medium.url}
-                                    productName={item.productName}
+                                    productName={item.name}
                                     price={item.sellingPrice}
                                     discount={item.discount}
                                     isRecommended={item.isRecommended}
@@ -238,6 +285,12 @@ const Product = ({ product, similarProducts }) => {
 export const getServerSideProps = async ({ query }) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?slug=${query.product}`)
     const data = await res.json()
+
+    if (data.length === 0) {
+        return {
+            notFound: true,
+        }
+    }
 
     const resSimilarProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`)
     const dataSimilarProducts = await resSimilarProducts.json()
