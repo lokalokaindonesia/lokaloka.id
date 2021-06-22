@@ -1,10 +1,17 @@
 import Link from 'next/link'
-import { useContext } from 'react'
 import { SearchIcon, ColorSwatchIcon } from '@heroicons/react/outline'
-import AuthContext from '@/context/AuthContext'
 import Button from '@/components/Button'
-const Header = () => {
-    const { user, logout } = useContext(AuthContext)
+import { signOut } from 'next-auth/client'
+
+const Header = ({ session }) => {
+    const logoutHandler = () => {
+        if (session) {
+            return signOut({
+                redirect: true,
+                callbackUrl: process.env.NEXTAUTH_URL,
+            })
+        }
+    }
 
     return (
         <header className='w-full px-4 xl:px-0 h-20 xl:container xl:mx-auto flex justify-between items-center '>
@@ -19,20 +26,20 @@ const Header = () => {
                     <Link href='/' activeClassName='font-bold text-gray-800'>
                         Home
                     </Link>
-                    <Link href='/category/food-and-beverages'>Food & Beverages</Link>
-                    <Link href='/category/craft'>Craft</Link>
-                    <Link href='/category/fashion'>Fashion</Link>
-                    <Link href='/category/experience'>Experience</Link>
-                    <Link href='/category/rent'>Rent</Link>
-                    <Link href='/category/book'>Book</Link>
+                    <Link href='/food-and-beverages'>Food & Beverages</Link>
+                    <Link href='/craft'>Craft</Link>
+                    <Link href='/fashion'>Fashion</Link>
+                    <Link href='/experience'>Experience</Link>
+                    <Link href='/rent'>Rent</Link>
+                    <Link href='/book'>Book</Link>
                 </div>
                 <input type='text' className='block xl:hidden px-3 py-2 border border-gray-400 focus:outline-none text-blueGray-600 bg-blueGray-200 w-full' />
             </div>
 
             <div className='w-2/12 flex items-center justify-end space-x-6'>
                 <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-800 cursor-pointer' />
-                {user ? (
-                    <div className='cursor-pointer px-3 py-1 bg-red-100 text-extrabold text-red-500' onClick={() => logout()}>
+                {session ? (
+                    <div className='cursor-pointer px-3 py-1 bg-red-100 text-extrabold text-red-500' onClick={() => logoutHandler()}>
                         Logout
                     </div>
                 ) : (

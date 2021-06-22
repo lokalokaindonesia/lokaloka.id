@@ -2,7 +2,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import Head from 'next/head'
 
-const Layout = ({ title, children }) => {
+const Layout = ({ title, children, session }) => {
     return (
         <div>
             <Head>
@@ -10,7 +10,7 @@ const Layout = ({ title, children }) => {
             </Head>
 
             {/* Header - Navbar */}
-            <Header />
+            <Header session={session} />
 
             {children}
 
