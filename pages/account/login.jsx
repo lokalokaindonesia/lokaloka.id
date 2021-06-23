@@ -1,28 +1,22 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Head from 'next/head'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import AuthContext from '@/context/AuthContext'
-import { useSession, signIn } from 'next-auth/client'
+import { useSession, signIn, getProviders } from 'next-auth/client'
 
 const login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const { user, login, error } = useContext(AuthContext)
-
     const router = useRouter()
 
     const [session, loading] = useSession()
-
-    if (user) router.push('/')
 
     if (session) router.push('/')
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // login({ email, password })
         signIn('credentials', { email, password })
     }
 
@@ -93,19 +87,31 @@ const login = () => {
 
                             <hr className='my-6 border-gray-300 w-full' />
 
-                            {/* <Link href='/api/auth/signin'> */}
-                            <button
-                                onClick={() => signIn('google', { callbackUrl: process.env.NEXT_URL })}
-                                className='w-full block bg-white transition duration-300 ease-in-out hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold  px-4 py-3 border border-gray-300'
-                            >
-                                <div className='flex items-center justify-center'>
-                                    <div className='w-5 h-5'>
-                                        <Image src='/google.svg' layout='responsive' width={1} height={1} />
+                            <div className='flex flex-col space-y-4'>
+                                <button
+                                    onClick={() => signIn('google', { callbackUrl: process.env.NEXTAUTH_URL })}
+                                    className='w-full block bg-white transition duration-300 ease-in-out hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold  px-4 py-3 border border-gray-300'
+                                >
+                                    <div className='flex items-center justify-center'>
+                                        <div className='w-5 h-5'>
+                                            <Image src='/google.svg' layout='responsive' width={1} height={1} />
+                                        </div>
+                                        <span className='ml-4'> Sign In with Google</span>
                                     </div>
-                                    <span className='ml-4'> Sign In with Google</span>
-                                </div>
-                            </button>
-                            {/* </Link> */}
+                                </button>
+
+                                {/* <button
+                                    onClick={() => signIn('facebook', { callbackUrl: process.env.NEXTAUTH_URL })}
+                                    className='w-full block bg-white transition duration-300 ease-in-out hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold  px-4 py-3 border border-gray-300'
+                                >
+                                    <div className='flex items-center justify-center'>
+                                        <div className='w-6 h-6'>
+                                            <Image src='/facebook.svg' layout='responsive' width={1} height={1} />
+                                        </div>
+                                        <span className='ml-4'> Sign In with Facebook</span>
+                                    </div>
+                                </button> */}
+                            </div>
 
                             <p className='mt-8'>
                                 Don't Have an Account? &nbsp;

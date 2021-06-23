@@ -7,6 +7,10 @@ const options = {
             clientId: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         }),
+        Providers.Facebook({
+            clientId: process.env.FACEBOOK_CLIENT_ID,
+            clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+        }),
         Providers.Credentials({
             name: 'Credentials',
 
@@ -72,7 +76,4 @@ const options = {
     }
 };
 
-const Auth = (req, res) =>
-    NextAuth(req, res, options);
-
-export default Auth;
+export const Auth = (req, res) => NextAuth(req, res, options);
