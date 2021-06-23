@@ -1,5 +1,5 @@
-import ProductItem from './ProductItem'
-import Button from './Button'
+import ProductItem from '@/components/ProductItem'
+import Button from '@/components/Button'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {
     return (

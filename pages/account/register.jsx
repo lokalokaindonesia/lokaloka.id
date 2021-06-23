@@ -3,7 +3,6 @@ import Image from 'next/image'
 import Head from 'next/head'
 import { useEffect, useState, useContext } from 'react'
 import { useRouter } from 'next/router'
-import AuthContext from '@/context/AuthContext'
 
 const register = () => {
     const [email, setEmail] = useState('')
@@ -11,17 +10,10 @@ const register = () => {
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
 
-    const { user, register, error } = useContext(AuthContext)
-
     const router = useRouter()
-
-    if (user) {
-        router.push('/')
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        register({ email, password, username })
     }
 
     return (

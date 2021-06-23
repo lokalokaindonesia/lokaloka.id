@@ -6,8 +6,7 @@ function MyApp({
   pageProps
 }) {
   return <Provider session={pageProps.session}>
-    <Component {...pageProps}
-    />
+    <Component {...pageProps} />
   </Provider>
 }
 
