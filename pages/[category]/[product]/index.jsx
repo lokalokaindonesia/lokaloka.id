@@ -64,7 +64,7 @@ const Product = ({ product, similarProducts }) => {
 
     useEffect(() => {
         countSubtotal()
-    }, [subtotal, quantity])
+    })
 
     return (
         <Layout title={productRoute}>

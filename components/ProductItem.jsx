@@ -6,10 +6,8 @@ const ProductItem = ({ imgSrc, category, productName, price, discount, isRecomme
     const sellingPrice = price - (price * discount) / 100
     const isDiscount = discount === null ? false : true
 
-    const detailProductLink = `/${category}/${slug}`
-
     return (
-        <Link href={detailProductLink}>
+        <Link href={`/${category}/${slug}`}>
             <div className='shadow-sm cursor-pointer w-full border border-gray-200 hover:bg-blue-100 transition ease-in-out duration-300'>
                 {/* Product Image */}
                 <Image alt={productName} src={imgSrc} width={4} height={5} layout='responsive' priority objectFit='cover' />
