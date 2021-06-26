@@ -10,7 +10,7 @@ const ProductItem = ({ imgSrc, category, productName, price, discount, isRecomme
         <Link href={`/${category}/${slug}`}>
             <div className='shadow-sm cursor-pointer w-full border border-gray-200 hover:bg-blue-100 transition ease-in-out duration-300'>
                 {/* Product Image */}
-                <Image alt={productName} src={imgSrc} width={4} height={5} layout='responsive' priority objectFit='cover' />
+                <Image className='' alt={productName} src={imgSrc} width={4} height={5} layout='responsive' priority objectFit='cover' />
                 <div className='flex flex-col space-y-1 p-2'>
                     <div className='line-clamp-2 text-md font-medium text-blueGray-900 leading-snug'>{productName}</div>
                     <div className='flex justify-between items-center leading-loose'>

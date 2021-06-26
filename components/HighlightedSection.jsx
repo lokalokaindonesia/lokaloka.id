@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
-import ProductItem from './ProductItem'
+import Button from '@/components/Button'
+import ProductItem from '@/components/ProductItem'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {
     return (
@@ -16,12 +17,10 @@ const HighlightedSection = ({ sectionTitle, href, data }) => {
                     </div>
                 </div>
 
-                <Link href='#'>
-                    <div className='cursor-pointer transition ease-in-out duration-300 px-3 py-1 text-sm xl:text-lg font-bold text-blue-500 flex space-x-2 xl:space-x-4 items-center bg-blue-100 hover:bg-blue-200'>
-                        <span>Show More</span>
-                        <ArrowRightIcon className='h-5' />
-                    </div>
-                </Link>
+                <Button type='secondary' size='md' href='#'>
+                    <span>Show More</span>
+                    <ArrowRightIcon className='h-5' />
+                </Button>
             </div>
 
             {/* Product Item */}
