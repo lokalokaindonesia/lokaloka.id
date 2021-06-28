@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
+import { session } from 'next-auth/client'
 import { ChevronRightIcon, ChevronLeftIcon, LinkIcon } from '@heroicons/react/solid'
 import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart } from 'react-icons/fa'
+import moment from 'moment'
 import { useState, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import Layout from '@/components/Layout'
@@ -10,7 +12,7 @@ import Badge from '@/components/Badge'
 import VariantBadge from '@/components/VariantBadge'
 import ProductItem from '@/components/ProductItem'
 
-const Product = ({ product, similarProducts }) => {
+const Product = ({ product, similarProducts, reviews }) => {
     const discountPrice = product.sellingPrice - (product.sellingPrice * product.discount) / 100
     const isDiscount = product.discount !== 0 && product.discount !== null ? true : false
     const xPrice = product.discount ? discountPrice : product.sellingPrice
@@ -67,7 +69,7 @@ const Product = ({ product, similarProducts }) => {
     })
 
     return (
-        <Layout title={productRoute}>
+        <Layout title={productRoute} session={session}>
             <div className='container mx-auto'>
                 <div className='w-full flex space-x-2 items-center mt-4'>
                     <div className='text-blue-700 hover:text-blue-800'>
@@ -198,57 +200,34 @@ const Product = ({ product, similarProducts }) => {
 
                 <br />
                 {/* Reviews */}
-                <div className='flex flex-col space-y-10 my-12'>
-                    <div className='relative bottom-3 xl:bottom-4'>
-                        <div className='absolute w-auto h-auto bg-orange-500 px-2 left-1 -top-1'>
-                            <span className='text-lg md:text-xl xl:text-2xl font-bold  text-orange-500'>Reviews</span>
+                {reviews.length !== 0 && (
+                    <div className='flex flex-col space-y-10 my-12'>
+                        <div className='relative bottom-3 xl:bottom-4'>
+                            <div className='absolute w-auto h-auto bg-orange-500 px-2 left-1 -top-1'>
+                                <span className='text-lg md:text-xl xl:text-2xl font-bold  text-orange-500'>Reviews</span>
+                            </div>
+                            <div className='absolute w-auto h-auto bg-blue-400 px-2'>
+                                <span className='text-lg md:text-xl xl:text-2xl font-bold  text-white'>Reviews</span>
+                            </div>
                         </div>
-                        <div className='absolute w-auto h-auto bg-blue-400 px-2'>
-                            <span className='text-lg md:text-xl xl:text-2xl font-bold  text-white'>Reviews</span>
+                        <div className='flex space-y-4 flex-col'>
+                            {reviews.map((review) => {
+                                return (
+                                    <div className='flex flex-col space-y-2' key={review.id}>
+                                        <div className='flex space-x-4 items-center'>
+                                            <div className='w-12 h-12 rounded-full bg-red-500'></div>
+                                            <div className='flex flex-col'>
+                                                <p className='text-lg font-semibold text-blueGray-800'>{review.user.username}</p>
+                                                <p className='text-xs text-blueGray-500'>{moment(review.createdAt).format('ll')}</p>
+                                            </div>
+                                        </div>
+                                        <span className='pl-16'>{review.text}</span>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
-                    <div className='flex space-y-4 flex-col'>
-                        <div className='flex flex-col space-y-2'>
-                            <div className='flex space-x-2 items-center'>
-                                <div className='w-12 h-12 rounded-full bg-red-500'></div>
-                                <div className='flex flex-col'>
-                                    <p className='text-lg font-semibold text-blueGray-800'>Budi Hartono</p>
-                                    <p className='text-xs text-blueGray-500'>January 12</p>
-                                </div>
-                            </div>
-                            <span className='pl-14'>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, similique reiciendis veniam accusantium vero sed ab, ea eveniet quasi neque
-                                dignissimos ratione cumque reprehenderit maxime. Illum in temporibus perspiciatis aut.
-                            </span>
-                        </div>
-                        <div className='flex flex-col space-y-2'>
-                            <div className='flex space-x-2 items-center'>
-                                <div className='w-12 h-12 rounded-full bg-red-500'></div>
-                                <div className='flex flex-col'>
-                                    <p className='text-lg font-semibold text-blueGray-800'>Budi Hartono</p>
-                                    <p className='text-xs text-blueGray-500'>January 12</p>
-                                </div>
-                            </div>
-                            <span className='pl-14'>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, similique reiciendis veniam accusantium vero sed ab, ea eveniet quasi neque
-                                dignissimos ratione cumque reprehenderit maxime. Illum in temporibus perspiciatis aut.
-                            </span>
-                        </div>
-                        <div className='flex flex-col space-y-2'>
-                            <div className='flex space-x-2 items-center'>
-                                <div className='w-12 h-12 rounded-full bg-red-500'></div>
-                                <div className='flex flex-col'>
-                                    <p className='text-lg font-semibold text-blueGray-800'>Budi Hartono</p>
-                                    <p className='text-xs text-blueGray-500'>January 12</p>
-                                </div>
-                            </div>
-                            <span className='pl-14'>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, similique reiciendis veniam accusantium vero sed ab, ea eveniet quasi neque
-                                dignissimos ratione cumque reprehenderit maxime. Illum in temporibus perspiciatis aut.
-                            </span>
-                        </div>
-                    </div>
-                </div>
+                )}
                 <br />
                 {/* Similar Products */}
                 <div className='flex flex-col space-y-10 mb-12'>
@@ -284,9 +263,9 @@ const Product = ({ product, similarProducts }) => {
 
 export const getServerSideProps = async ({ query }) => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?slug=${query.product}`)
-    const data = await res.json()
+    const product = await res.json()
 
-    if (data.length === 0) {
+    if (product.length === 0) {
         return {
             notFound: true,
         }
@@ -295,8 +274,11 @@ export const getServerSideProps = async ({ query }) => {
     const resSimilarProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`)
     const dataSimilarProducts = await resSimilarProducts.json()
 
+    const resReviews = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reviews?product_eq=${product[0].id}`)
+    const reviews = await resReviews.json()
+
     return {
-        props: { product: data[0], similarProducts: dataSimilarProducts },
+        props: { product: product[0], similarProducts: dataSimilarProducts, reviews },
     }
 }
 

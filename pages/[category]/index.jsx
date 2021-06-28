@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { getSession, session } from 'next-auth/client'
 import Layout from '@/components/Layout'
 
 const Category = () => {
@@ -6,10 +7,16 @@ const Category = () => {
 
     const category = router.query.category || []
 
-    return <Layout title={category}>{category}</Layout>
+    return (
+        <Layout session={session} title={category}>
+            {category}
+        </Layout>
+    )
 }
 
-export const getServerSideProps = async ({ query }) => {
+export const getServerSideProps = async ({ req, query }) => {
+    const session = await getSession({ req })
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product-categories`)
     const data = await res.json()
 
