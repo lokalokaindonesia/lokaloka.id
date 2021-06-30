@@ -192,9 +192,11 @@ const Product = ({ product, similarProducts, reviews }) => {
                             <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
                             <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-2xl font-extrabold text-blueGray-800' />
                         </div>
-                        <div className='flex flex-col space-y-2'>
-                            <button className='px-5 py-3 w-full text-xl bg-blue-500 text-white text-center align-middle font-bold'>Buy Now</button>
-                        </div>
+                        <Link href='/cart'>
+                            <div className='flex flex-col space-y-2'>
+                                <button className='px-5 py-3 w-full text-xl bg-blue-500 text-white text-center align-middle font-bold'>Add to Cart</button>
+                            </div>
+                        </Link>
                     </div>
                 </div>
 
