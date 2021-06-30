@@ -130,7 +130,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                 />
                             </div>
                             <div className='flex flex-col space-y-2 mb-4'>
-                                <p className='text-lg font-semibold text-blueGray-600'>Variants</p>
+                                <p className='text-lg font-semibold text-blueGray-600'>Sizes</p>
                                 <div className='flex space-x-2'>
                                     <VariantBadge text='XL' />
                                     <VariantBadge text='L' />
