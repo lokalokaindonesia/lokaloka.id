@@ -107,7 +107,11 @@ const Cart = () => {
                     <div className='w-3/12 mt-10 sticky top-5 flex flex-col space-y-4'>
                         {/* Coupon Form */}
                         <div className='flex items-center '>
-                            <input className='px-3 py-2 w-full ring-2 ring-blue-500 border-0 font-bold text-blueGray-800' placeholder='Coupon Code' type='text' />
+                            <input
+                                className='px-3 py-2 w-full ring-2 focus:ring-blue-500 focus:ring-2 ring-blue-500 border-0 font-bold text-blueGray-800'
+                                placeholder='Coupon Code'
+                                type='text'
+                            />
                             <button className='px-3 py-2 text-white font-bold ring-2 ring-blue-500 bg-blue-500'>Apply</button>
                         </div>
 
