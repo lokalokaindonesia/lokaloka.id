@@ -6,6 +6,7 @@ import { ChevronRightIcon, ChevronLeftIcon, LinkIcon } from '@heroicons/react/so
 import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart } from 'react-icons/fa'
 import moment from 'moment'
 import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import NumberFormat from 'react-number-format'
 import Layout from '@/components/Layout'
 import Badge from '@/components/Badge'
@@ -13,8 +14,10 @@ import Button from '@/components/Button'
 import VariantBadge from '@/components/VariantBadge'
 import ProductItem from '@/components/ProductItem'
 import FancySecrionTitle from '@/components/FancySecrionTitle'
+import { increment, decrement } from 'redux/productQuantity'
 
 const Product = ({ product, similarProducts, reviews }) => {
+    const dispatch = useDispatch()
     const discountPrice = product.sellingPrice - (product.sellingPrice * product.discount) / 100
     const isDiscount = product.discount !== 0 && product.discount !== null ? true : false
     const xPrice = product.discount ? discountPrice : product.sellingPrice
@@ -28,7 +31,7 @@ const Product = ({ product, similarProducts, reviews }) => {
     const [current, setCurrent] = useState(0)
 
     // Product
-    const [quantity, setQuantity] = useState(1)
+    const { quantity } = useSelector((state) => state.productQuantity)
     const [subtotal, setSubtotal] = useState(xPrice)
     const [favorite, setFavorite] = useState(false)
 
@@ -44,12 +47,12 @@ const Product = ({ product, similarProducts, reviews }) => {
 
     // * Qty Func
     const addQty = () => {
-        setQuantity(quantity + 1)
+        dispatch(increment())
         countSubtotal()
     }
 
     const reduceQty = () => {
-        setQuantity(quantity === 1 ? 1 : quantity - 1)
+        dispatch(decrement())
         countSubtotal()
     }
 
