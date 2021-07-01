@@ -9,8 +9,10 @@ import { useState, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import Layout from '@/components/Layout'
 import Badge from '@/components/Badge'
+import Button from '@/components/Button'
 import VariantBadge from '@/components/VariantBadge'
 import ProductItem from '@/components/ProductItem'
+import FancySecrionTitle from '@/components/FancySecrionTitle'
 
 const Product = ({ product, similarProducts, reviews }) => {
     const discountPrice = product.sellingPrice - (product.sellingPrice * product.discount) / 100
@@ -93,7 +95,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                 <FaHeart className='text-white hover:text-red-500 transition duration-300 ease-in-out w-6 h-6' />
                             </div>
                         </div>
-                        <div className='flex justify-between w-96 h-96 absolute bg-gray-300'>
+                        <div className='flex justify-between w-96 h-96 absolute bg-gray-300 '>
                             {product.images.map((img, index) => {
                                 return (
                                     <div key={index} className={index === current ? 'block w-full h-full ease-in-out duration-300 transition-all select-none' : 'hidden'}>
@@ -172,7 +174,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                         </div>
                         <div className='flex flex-col space-y-2'>
                             <div className='text-sm font-semibold text-blueGray-600'>Quantity</div>
-                            <div className='flex items-center border-2 border-blueGray-800'>
+                            <div className='flex items-center border-2 border-blueGray-800 '>
                                 <div
                                     onClick={reduceQty}
                                     className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r-2 border-blueGray-600 text-blue-gray-800'
@@ -192,11 +194,9 @@ const Product = ({ product, similarProducts, reviews }) => {
                             <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
                             <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-2xl font-extrabold text-blueGray-800' />
                         </div>
-                        <Link href='/cart'>
-                            <div className='flex flex-col space-y-2'>
-                                <button className='px-5 py-3 w-full text-xl bg-blue-500 text-white text-center align-middle font-bold'>Add to Cart</button>
-                            </div>
-                        </Link>
+                        <Button type='primary' displayType='flex' size='lg' width='full' href='/cart'>
+                            <span>Add to Cart</span>
+                        </Button>
                     </div>
                 </div>
 
@@ -233,14 +233,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                 <br />
                 {/* Similar Products */}
                 <div className='flex flex-col space-y-10 mb-12'>
-                    <div className='relative bottom-3 xl:bottom-4'>
-                        <div className='absolute w-auto h-auto bg-orange-500 px-2 left-1 -top-1'>
-                            <span className='text-lg md:text-xl xl:text-2xl font-bold  text-orange-500'>Similar Products</span>
-                        </div>
-                        <div className='absolute w-auto h-auto bg-blue-400 px-2'>
-                            <span className='text-lg md:text-xl xl:text-2xl font-bold  text-white'>Similar Products</span>
-                        </div>
-                    </div>
+                    <FancySecrionTitle title='Similar Products' />
                     <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-8'>
                         {similarProducts.map((item, index) => {
                             return (

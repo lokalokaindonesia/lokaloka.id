@@ -43,7 +43,7 @@ const Header = ({ session }) => {
                         Logout
                     </div>
                 ) : (
-                    <Button href='/account/login' size='md' type='secondary'>
+                    <Button href='/account/login' size='md' width='max' display='block' type='secondary'>
                         <span>Sign In</span>
                     </Button>
                 )}

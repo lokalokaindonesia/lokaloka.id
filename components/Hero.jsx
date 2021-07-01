@@ -30,7 +30,7 @@ const Hero = () => {
                         Order only at <b>Lokaloka</b>, take an <b>advantage</b> of your time for vacation.
                     </p>
                 </div>
-                <Button size='xl' type='primary' href='#'>
+                <Button size='xl' type='primary' display='flex' width='max'>
                     <span className=''>Show Now</span>
                     <ArrowRightIcon className='h-5' />
                 </Button>

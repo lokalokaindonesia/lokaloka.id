@@ -7,28 +7,28 @@ const ProductItem = ({ imgSrc, category, productName, price, discount, isRecomme
     const isDiscount = discount == 0 ? false : true
 
     return (
-        <Link href={`/${category}/${slug}`}>
-            <div className='shadow-sm cursor-pointer w-full border border-gray-200 hover:bg-blue-100 transition ease-in-out duration-300'>
-                {/* Product Image */}
-                <Image alt={productName} src={imgSrc} width={4} height={5} layout='responsive' priority objectFit='cover' />
-                <div className='flex flex-col space-y-1 p-2'>
-                    <div className='line-clamp-2 text-md font-medium text-blueGray-900 leading-snug'>{productName}</div>
-                    <div className='flex justify-between items-center leading-loose'>
-                        <NumberFormat
-                            value={isDiscount ? sellingPrice : price}
-                            displayType={'text'}
-                            thousandSeparator={true}
-                            prefix={'Rp. '}
-                            className='text-md font-extrabold text-blue-500'
-                        />
-                        {isDiscount && (
-                            <NumberFormat value={price} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-xs font-normal text-red-500 line-through' />
-                        )}
-                    </div>
-                    <div className={isRecommended ? 'px-2 py-1 bg-green-100 text-xs font-bold text-green-500 w-max' : 'hidden'}>Recommended</div>
+        <div className='shadow-sm w-full border-2 border-blueGray-200 hover:bg-blue-100 transition ease-in-out duration-300'>
+            {/* Product Image */}
+            <Image className='' title={productName} alt={productName} src={imgSrc} width={4} height={5} layout='responsive' priority objectFit='cover' />
+            <div className='flex flex-col space-y-1 p-2'>
+                <Link href={`/${category}/${slug}`}>
+                    <a className='line-clamp-2 text-md font-medium text-blueGray-900 leading-snug'>{productName}</a>
+                </Link>
+                <div className='flex justify-between items-center leading-loose'>
+                    <NumberFormat
+                        value={isDiscount ? sellingPrice : price}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                        prefix={'Rp. '}
+                        className='text-md font-extrabold text-blue-500'
+                    />
+                    {isDiscount && (
+                        <NumberFormat value={price} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-xs font-normal text-red-500 line-through' />
+                    )}
                 </div>
+                <div className={isRecommended ? 'px-2 py-1 bg-green-100 text-xs font-bold text-green-500 w-max' : 'hidden'}>Recommended</div>
             </div>
-        </Link>
+        </div>
     )
 }
 

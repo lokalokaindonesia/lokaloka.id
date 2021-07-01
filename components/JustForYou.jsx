@@ -1,19 +1,13 @@
 import ProductItem from '@/components/ProductItem'
 import Button from '@/components/Button'
+import FancySecrionTitle from '@/components/FancySecrionTitle'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {
     return (
         <div className='w-full flex space-y-6 my-8 flex-col px-4 xl:container xl:mx-auto xl:my-16'>
             {/* Section Title */}
             <div className='flex w-full justify-between items-center mb-4'>
-                <div className='relative bottom-3 xl:bottom-4'>
-                    <div className='absolute w-max h-auto bg-orange-500 px-2 left-1 -top-1'>
-                        <span className='text-lg md:text-xl xl:text-2xl font-bold text-orange-500'>{sectionTitle}</span>
-                    </div>
-                    <div className='absolute w-max h-auto bg-blue-400 px-2'>
-                        <span className='text-lg md:text-xl xl:text-2xl font-bold text-white'>{sectionTitle}</span>
-                    </div>
-                </div>
+                <FancySecrionTitle title={sectionTitle} />
             </div>
 
             {/* Product Item */}

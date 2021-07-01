@@ -1,5 +1,5 @@
 import Link from 'next/link'
-const Button = ({ children, type, size, href }) => {
+const Button = ({ children, type, size, href = '#', width = 'max', display = 'block' }) => {
     const sizes = {
         sm: 'px-3 py-1 text-sm',
         base: 'px-4 py-1',
@@ -14,12 +14,24 @@ const Button = ({ children, type, size, href }) => {
         tertiaryAccent: `bg-orange-100 text-orange-500 font-bold transiton duration-300 ease-in-out hover:bg-orange-200`,
     }
 
+    const widthStyle = {
+        max: 'w-max',
+        full: 'w-full',
+    }
+
+    const displayStyle = {
+        flex: 'flex justify-between items-center space-x-8',
+        block: 'text-center',
+    }
+
     const pickedtype = types[type]
     const pickedSize = sizes[size]
+    const pickedWidth = widthStyle[width]
+    const pickedDisplay = displayStyle[display]
 
     return (
-        <Link href={href}>
-            <a className={`w-max flex justify-between items-center space-x-4 ${pickedtype} ${pickedSize} `}>{children}</a>
+        <Link href={href} className=''>
+            <button className={`${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}>{children}</button>
         </Link>
     )
 }
