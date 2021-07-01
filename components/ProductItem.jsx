@@ -7,7 +7,7 @@ const ProductItem = ({ imgSrc, category, productName, price, discount, isRecomme
     const isDiscount = discount == 0 ? false : true
 
     return (
-        <div className='shadow-sm w-full border-2 border-blueGray-200 hover:bg-blue-100 transition ease-in-out duration-300'>
+        <div className='shadow-sm w-full ring-1 ring-blueGray-200 hover:bg-blue-100 transition ease-in-out duration-300'>
             {/* Product Image */}
             <Image className='' title={productName} alt={productName} src={imgSrc} width={4} height={5} layout='responsive' priority objectFit='cover' />
             <div className='flex flex-col space-y-1 p-2'>

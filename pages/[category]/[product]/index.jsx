@@ -168,7 +168,9 @@ const Product = ({ product, similarProducts, reviews }) => {
                             <div className='flex space-x-8 items-center'>
                                 <FaInstagram className='cursor-pointer w-6 h-6 text-blueGray-800' />
                                 <FaFacebookSquare className='cursor-pointer w-6 h-6 text-blueGray-800' />
-                                <FaWhatsapp className='cursor-pointer w-6 h-6 text-blueGray-800' />
+                                <a href={`whatsapp://send?text=http://localhost:3000/${router.asPath}`} target='_blank'>
+                                    <FaWhatsapp className='cursor-pointer w-6 h-6 text-blueGray-800' />
+                                </a>
                                 <LinkIcon className='cursor-pointer w-6 h-6 text-blueGray-800' />
                             </div>
                         </div>
@@ -267,13 +269,17 @@ export const getServerSideProps = async ({ query }) => {
     }
 
     const resSimilarProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`)
-    const dataSimilarProducts = await resSimilarProducts.json()
+    const similarProducts = await resSimilarProducts.json()
 
     const resReviews = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reviews?product_eq=${product[0].id}`)
     const reviews = await resReviews.json()
 
     return {
-        props: { product: product[0], similarProducts: dataSimilarProducts, reviews },
+        props: {
+            product: product[0],
+            similarProducts,
+            reviews,
+        },
     }
 }
 
