@@ -43,58 +43,58 @@ const Cart = () => {
                                 {/* SelectAll Checkbox*/}
                                 <div className='flex space-x-4 items-center'>
                                     <input type='checkbox' className='h-4 w-4 text-blue-500 focus:ring-blue-600 border-blueGray-300' name='selectAll' id='selectAll' />
-                                    <label htmlFor='selectAll'>Select All</label>
+                                    <label htmlFor='selectAll' className='font-bold'>
+                                        Select All
+                                    </label>
                                 </div>
 
                                 {/* Delete Button */}
                                 <div>
-                                    <button className='text-red-500'>Delete</button>
+                                    <button className='text-red-500 font-bold'>Delete</button>
                                 </div>
                             </div>
                             {/* Product Cart Item */}
-                            <div className='flex flex-col space-y-4'>
+                            <div className='flex flex-col space-y-8'>
                                 {counter.map((item) => {
                                     return (
                                         <>
                                             {/* Item */}
-                                            <div key={item} className='flex flex-col space-y-2 p-4 ring-1 ring-blueGray-300 shadow-sm'>
-                                                <div className='flex space-y-2 flex-col'>
-                                                    <div className='flex space-x-4 items-center'>
-                                                        {/* Checkbox */}
-                                                        <input type='checkbox' className='h-4 w-4 text-blue-500 focus:ring-blue-600 border-blueGray-300' name='' id='1' />
-                                                        <div className='flex space-x-4 items-center w-full'>
-                                                            {/* Image */}
-                                                            <div className='px-10 py-10 bg-red-400'></div>
-                                                            <div className='flex flex-col space-y-1 w-full'>
-                                                                {/* Title */}
-                                                                <span className='text-lg font-medium text-blueGray-800 line-clamp-1'>
-                                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, enim? lorem
-                                                                </span>
-                                                                <div className='flex justify-between items-end'>
-                                                                    {/* Price */}
-                                                                    <div className='flex space-y-1 flex-col'>
-                                                                        <span className='text-lg font-black text-blueGray-800'>Rp. 12.000.000</span>
-                                                                        <span className='text-sm line-through font-black text-red-500'>Rp. 14.000.000</span>
-                                                                    </div>
-                                                                    {/* Qty */}
-                                                                    <div className='flex items-center ring-2 h-8  ring-blueGray-600'>
-                                                                        <div
-                                                                            onClick={reduceQty}
-                                                                            className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r-2 border-blueGray-600 text-blue-gray-800'
-                                                                        >
-                                                                            -
-                                                                        </div>
-                                                                        <div className='px-4 py-1 w-12 flex-1 text-center text-blue-gray-800 '>{quantity}</div>
-                                                                        <div
-                                                                            onClick={addQty}
-                                                                            className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l-2 border-blueGray-600 text-blue-gray-800'
-                                                                        >
-                                                                            +
-                                                                        </div>
-                                                                    </div>
+                                            <div key={item} className='flex space-y-4 flex-col'>
+                                                <div className='flex space-x-4 items-center'>
+                                                    {/* Checkbox */}
+                                                    <input type='checkbox' className='h-4 w-4 text-blue-500 focus:ring-blue-600 border-blueGray-300' name='' id='1' />
+                                                    <div className='flex space-x-4 items-center w-full'>
+                                                        {/* Image */}
+                                                        <div className='px-10 py-10 bg-red-400'></div>
+                                                        <div className='flex flex-col space-y-1 w-full'>
+                                                            {/* Title */}
+                                                            <span className='text-lg font-semibold text-blueGray-800 line-clamp-1'>
+                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, enim? lorem
+                                                            </span>
+                                                            <div className='flex justify-between items-end'>
+                                                                {/* Price */}
+                                                                <div className='flex space-y-1 flex-col'>
+                                                                    <span className='text-xl font-black text-blueGray-800'>Rp. 12.000.000</span>
+                                                                    <span className='text-xs line-through font-semibold text-red-500'>Rp. 14.000.000</span>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                {/* Qty */}
+                                                <div className='flex items-center border-2 h-8 w-max ml-32 border-blueGray-600'>
+                                                    <div
+                                                        onClick={reduceQty}
+                                                        className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r-2 border-blueGray-600 text-blue-gray-800'
+                                                    >
+                                                        -
+                                                    </div>
+                                                    <div className='px-4 py-1 w-12 flex-1 text-center text-blue-gray-800 '>{quantity}</div>
+                                                    <div
+                                                        onClick={addQty}
+                                                        className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l-2 border-blueGray-600 text-blue-gray-800'
+                                                    >
+                                                        +
                                                     </div>
                                                 </div>
                                             </div>

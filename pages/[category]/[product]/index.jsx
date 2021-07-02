@@ -6,7 +6,7 @@ import { ChevronRightIcon, ChevronLeftIcon, LinkIcon } from '@heroicons/react/so
 import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart } from 'react-icons/fa'
 import moment from 'moment'
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import NumberFormat from 'react-number-format'
 import Layout from '@/components/Layout'
 import Badge from '@/components/Badge'
@@ -14,10 +14,9 @@ import Button from '@/components/Button'
 import VariantBadge from '@/components/VariantBadge'
 import ProductItem from '@/components/ProductItem'
 import FancySecrionTitle from '@/components/FancySecrionTitle'
-import { increment, decrement } from 'redux/productQuantity'
+import { addToCart } from '@/redux/cartSlice'
 
 const Product = ({ product, similarProducts, reviews }) => {
-    const dispatch = useDispatch()
     const discountPrice = product.sellingPrice - (product.sellingPrice * product.discount) / 100
     const isDiscount = product.discount !== 0 && product.discount !== null ? true : false
     const xPrice = product.discount ? discountPrice : product.sellingPrice
@@ -31,7 +30,7 @@ const Product = ({ product, similarProducts, reviews }) => {
     const [current, setCurrent] = useState(0)
 
     // Product
-    const { quantity } = useSelector((state) => state.productQuantity)
+    const [quantity, setQuantity] = useState(1)
     const [subtotal, setSubtotal] = useState(xPrice)
     const [favorite, setFavorite] = useState(false)
 
@@ -47,12 +46,12 @@ const Product = ({ product, similarProducts, reviews }) => {
 
     // * Qty Func
     const addQty = () => {
-        dispatch(increment())
+        setQuantity(quantity + 1)
         countSubtotal()
     }
 
     const reduceQty = () => {
-        dispatch(decrement())
+        setQuantity(quantity === 1 ? 1 : quantity - 1)
         countSubtotal()
     }
 
@@ -69,9 +68,14 @@ const Product = ({ product, similarProducts, reviews }) => {
 
     if (!Array.isArray(product.images) || product.images.length <= 0) return null
 
+    // Render SubTotal
     useEffect(() => {
         countSubtotal()
     })
+
+    // Add To Cart
+    const { cartProducts } = useSelector((state) => state.cart)
+    const dispatch = useDispatch()
 
     return (
         <Layout title={productRoute} session={session}>
@@ -171,9 +175,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                             <div className='flex space-x-8 items-center'>
                                 <FaInstagram className='cursor-pointer w-6 h-6 text-blueGray-800' />
                                 <FaFacebookSquare className='cursor-pointer w-6 h-6 text-blueGray-800' />
-                                <a href={`whatsapp://send?text=http://localhost:3000/${router.asPath}`} target='_blank'>
-                                    <FaWhatsapp className='cursor-pointer w-6 h-6 text-blueGray-800' />
-                                </a>
+                                <FaWhatsapp className='cursor-pointer w-6 h-6 text-blueGray-800' />
                                 <LinkIcon className='cursor-pointer w-6 h-6 text-blueGray-800' />
                             </div>
                         </div>
@@ -199,9 +201,15 @@ const Product = ({ product, similarProducts, reviews }) => {
                             <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
                             <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-2xl font-extrabold text-blueGray-800' />
                         </div>
-                        <Button type='primary' displayType='flex' size='lg' width='full' href='/cart'>
-                            <span>Add to Cart</span>
-                        </Button>
+                        <div
+                            onClick={() => {
+                                // dispatch(addToCart({ product, quantity, subtotal }))
+                            }}
+                        >
+                            <Button type='primary' displayType='flex' size='lg' width='full'>
+                                <span>Add to Cart</span>
+                            </Button>
+                        </div>
                     </div>
                 </div>
 

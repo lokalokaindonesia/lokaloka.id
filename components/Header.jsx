@@ -1,9 +1,14 @@
 import Link from 'next/link'
+import { useDispatch, useSelector } from 'react-redux'
 import { SearchIcon, ColorSwatchIcon } from '@heroicons/react/outline'
 import Button from '@/components/Button'
 import { signOut } from 'next-auth/client'
+import { addToCart } from '@/redux/cartSlice'
 
-const Header = ({ session }) => {
+const Header = ({ session, cartProducts }) => {
+    const dispatch = useDispatch()
+    // dispatch(addToCart(cartProducts))
+
     const logoutHandler = () => {
         if (session) {
             return signOut({
@@ -50,6 +55,15 @@ const Header = ({ session }) => {
             </div>
         </header>
     )
+}
+
+export const getServerSideProps = async () => {
+    const getCartProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/carts`)
+    const cartProducts = await getCartProducts.json()
+
+    return {
+        props: { cartProducts },
+    }
 }
 
 export default Header

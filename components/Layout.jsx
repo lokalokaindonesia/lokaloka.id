@@ -1,8 +1,10 @@
+import Head from 'next/head'
+import { useSession } from 'next-auth/client'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import Head from 'next/head'
 
-const Layout = ({ title, children, session }) => {
+const Layout = ({ title, children }) => {
+    const [session, loading] = useSession()
     return (
         <div>
             <Head>
