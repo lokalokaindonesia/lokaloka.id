@@ -1,10 +1,11 @@
-import { getSession, session, signIn, signOut } from 'next-auth/client'
+import { getSession, useSession, signIn, signOut } from 'next-auth/client'
 import Hero from '@/components/Hero'
 import HighlightedSection from '@/components/HighlightedSection'
 import JustForYou from '@/components/JustForYou'
 import Layout from '@/components/Layout'
 
 const Home = ({ products }) => {
+    const [session, loading] = useSession()
     const promo = products.filter((item) => item.discount != 0)
     const recommended = products.filter((item) => item.isRecommended == true)
     return (
@@ -20,19 +21,18 @@ const Home = ({ products }) => {
     )
 }
 
-// export const getStaticProps = async () => {
 export const getServerSideProps = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`)
-    const data = await res.json()
+    const getProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`)
+    const products = await getProducts.json()
 
-    if (data.count == 0) {
+    if (products.count == 0) {
         return {
             notFound: true,
         }
     }
 
     return {
-        props: { products: data },
+        props: { products },
         // revalidate: 1
     }
 }
