@@ -1,13 +1,13 @@
-import { session } from 'next-auth/client'
 import Layout from '@/components/Layout'
-import { ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon, TrashIcon } from '@heroicons/react/solid'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Button from '@/components/Button'
 import { FaChevronRight } from 'react-icons/fa'
 
-const Cart = () => {
+const Cart = ({ cartProducts }) => {
     const router = useRouter()
 
     const [quantity, setQuantity] = useState(1)
@@ -21,10 +21,8 @@ const Cart = () => {
         setQuantity(quantity === 1 ? 1 : quantity - 1)
     }
 
-    const counter = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
     return (
-        <Layout title='Lokaloka Cart' session={session}>
+        <Layout title='Lokaloka Cart'>
             <div className='container mx-auto'>
                 <div className='w-full flex space-x-2 items-center mt-4'>
                     <div className='text-blue-700 hover:text-blue-800'>
@@ -42,77 +40,111 @@ const Cart = () => {
                             <div className='flex justify-between items-center'>
                                 {/* SelectAll Checkbox*/}
                                 <div className='flex space-x-4 items-center'>
-                                    <input type='checkbox' className='h-4 w-4 text-blue-500 focus:ring-blue-600 border-blueGray-300' name='selectAll' id='selectAll' />
+                                    <input
+                                        type='checkbox'
+                                        className='rounded h-4 w-4 text-blue-500 focus:ring-blue-600 border-2 border-blueGray-400'
+                                        name='selectAll'
+                                        id='selectAll'
+                                    />
                                     <label htmlFor='selectAll' className='font-bold'>
                                         Select All
                                     </label>
                                 </div>
 
-                                {/* Delete Button */}
-                                <div>
-                                    <button className='text-red-500 font-bold'>Delete</button>
-                                </div>
+                                {/* Remove Button */}
+                                <button type='button' className='flex border border-red-500 px-2 rounded items-center space-x-2 text-red-500 font-bold'>
+                                    <TrashIcon className='w-4' />
+                                    <span>Remove</span>
+                                </button>
                             </div>
                             {/* Product Cart Item */}
-                            <div className='flex flex-col space-y-8'>
-                                {counter.map((item) => {
+                            <div className='flex flex-col space-y-4'>
+                                {cartProducts.map((product) => {
+                                    // Count Price
+                                    const discountPrice = product.product.sellingPrice - (product.product.sellingPrice * product.product.discount) / 100
+                                    const isDiscount = product.product.discount !== 0 && product.product.discount !== null ? true : false
+                                    const xPrice = isDiscount ? discountPrice : product.product.sellingPrice
                                     return (
-                                        <>
-                                            {/* Item */}
-                                            <div key={item} className='flex space-y-4 flex-col'>
+                                        <div key={product._id} className='p-4 rounded-md border border-blueGray-300'>
+                                            <div className='flex space-y-4 flex-col'>
                                                 <div className='flex space-x-4 items-center'>
-                                                    {/* Checkbox */}
-                                                    <input type='checkbox' className='h-4 w-4 text-blue-500 focus:ring-blue-600 border-blueGray-300' name='' id='1' />
                                                     <div className='flex space-x-4 items-center w-full'>
-                                                        {/* Image */}
-                                                        <div className='px-10 py-10 bg-red-400'></div>
+                                                        {/* Checkbox */}
+                                                        <div className='flex items-center space-x-4'>
+                                                            <input
+                                                                type='checkbox'
+                                                                className='rounded h-4 w-4 text-blue-500 focus:ring-blue-600 border-2 border-blueGray-400'
+                                                                name=''
+                                                                id='1'
+                                                            />
+
+                                                            {/* Image */}
+                                                            <div className='h-20 w-20 rounded-md'>
+                                                                <Image
+                                                                    src={product.product.images[0].formats.medium.url}
+                                                                    layout='responsive'
+                                                                    width={1}
+                                                                    height={1}
+                                                                    objectFit='cover'
+                                                                />
+                                                            </div>
+                                                        </div>
                                                         <div className='flex flex-col space-y-1 w-full'>
                                                             {/* Title */}
-                                                            <span className='text-lg font-semibold text-blueGray-800 line-clamp-1'>
-                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, enim? lorem
-                                                            </span>
+                                                            <div className='flex justify-between items-start'>
+                                                                <Link href={`/${product.product.product_category.slug}/${product.product.slug}`}>
+                                                                    <span className='text-lg font-semibold text-blueGray-800 line-clamp-1'>{product.product.name}</span>
+                                                                </Link>
+                                                                <button type='button' className='flex items-center space-x-2 text-red-500 font-bold'>
+                                                                    <TrashIcon className='w-4' />
+                                                                </button>
+                                                            </div>
                                                             <div className='flex justify-between items-end'>
                                                                 {/* Price */}
                                                                 <div className='flex space-y-1 flex-col'>
-                                                                    <span className='text-xl font-black text-blueGray-800'>Rp. 12.000.000</span>
-                                                                    <span className='text-xs line-through font-semibold text-red-500'>Rp. 14.000.000</span>
+                                                                    <span className='text-xl font-black text-blueGray-800'>Rp. {xPrice}</span>
+                                                                    {isDiscount && (
+                                                                        <span className='text-xs line-through font-semibold text-red-500'>Rp. {product.product.sellingPrice}</span>
+                                                                    )}
+                                                                </div>
+                                                                {/* Qty */}
+                                                                <div className='flex items-center border h-8 w-max rounded ml-[8.7rem] border-blueGray-300'>
+                                                                    <div
+                                                                        onClick={reduceQty}
+                                                                        className='select-none rounded-l cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r border-blueGray-300 text-blue-gray-800'
+                                                                    >
+                                                                        -
+                                                                    </div>
+                                                                    <div className='px-4 py-1 w-12 flex-1 text-center text-blue-gray-800 '>{product.quantity}</div>
+                                                                    <div
+                                                                        onClick={addQty}
+                                                                        className='select-none rounded-r cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l border-blueGray-300 text-blue-gray-800'
+                                                                    >
+                                                                        +
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {/* Qty */}
-                                                <div className='flex items-center border-2 h-8 w-max ml-32 border-blueGray-600'>
-                                                    <div
-                                                        onClick={reduceQty}
-                                                        className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r-2 border-blueGray-600 text-blue-gray-800'
-                                                    >
-                                                        -
-                                                    </div>
-                                                    <div className='px-4 py-1 w-12 flex-1 text-center text-blue-gray-800 '>{quantity}</div>
-                                                    <div
-                                                        onClick={addQty}
-                                                        className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l-2 border-blueGray-600 text-blue-gray-800'
-                                                    >
-                                                        +
-                                                    </div>
-                                                </div>
                                             </div>
-                                        </>
+                                        </div>
                                     )
                                 })}
                             </div>
                         </div>
                     </div>
-                    <div className='w-3/12 mt-10 sticky top-5 flex flex-col space-y-4'>
+                    <div className='w-3/12 mt-12 flex flex-col space-y-4'>
                         {/* Coupon Form */}
                         <div className='flex items-center '>
                             <input
-                                className='px-3 py-2 w-full ring-2 focus:ring-blue-500 focus:ring-2 ring-blue-500 border-0 font-bold text-blueGray-800'
+                                className='px-3 py-2 rounded-l w-full ring-2 focus:ring-blue-500 focus:ring-2 ring-blue-500 border-0 font-bold text-blueGray-800'
                                 placeholder='Coupon Code'
                                 type='text'
                             />
-                            <button className='px-3 py-2 text-white font-bold ring-2 ring-blue-500 bg-blue-500'>Apply</button>
+                            <button type='button' className='rounded-r px-3 py-2 text-white font-bold ring-2 ring-blue-500 bg-blue-500'>
+                                Apply
+                            </button>
                         </div>
 
                         <hr />
@@ -152,6 +184,17 @@ const Cart = () => {
             </div>
         </Layout>
     )
+}
+
+export const getServerSideProps = async () => {
+    const getCartProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/carts`)
+    const cartProducts = await getCartProducts.json()
+
+    return {
+        props: {
+            cartProducts,
+        },
+    }
 }
 
 export default Cart

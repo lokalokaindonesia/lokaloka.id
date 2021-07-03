@@ -1,10 +1,8 @@
 import Head from 'next/head'
-import { useSession } from 'next-auth/client'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 
 const Layout = ({ title, children }) => {
-    const [session, loading] = useSession()
     return (
         <div>
             <Head>
@@ -12,7 +10,7 @@ const Layout = ({ title, children }) => {
             </Head>
 
             {/* Header - Navbar */}
-            <Header session={session} />
+            <Header />
 
             {children}
 

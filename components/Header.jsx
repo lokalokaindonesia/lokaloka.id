@@ -1,14 +1,10 @@
 import Link from 'next/link'
-import { useDispatch, useSelector } from 'react-redux'
 import { SearchIcon, ColorSwatchIcon } from '@heroicons/react/outline'
 import Button from '@/components/Button'
-import { signOut } from 'next-auth/client'
-import { addToCart } from '@/redux/cartSlice'
+import { signOut, useSession } from 'next-auth/client'
 
-const Header = ({ session, cartProducts }) => {
-    const dispatch = useDispatch()
-    // dispatch(addToCart(cartProducts))
-
+const Header = ({ cartProducts }) => {
+    const [session, loading] = useSession()
     const logoutHandler = () => {
         if (session) {
             return signOut({
@@ -44,13 +40,19 @@ const Header = ({ session, cartProducts }) => {
             <div className='w-2/12 flex items-center justify-end space-x-6'>
                 <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-800 cursor-pointer' />
                 {session ? (
-                    <div className='cursor-pointer px-3 py-1 bg-red-100 text-extrabold text-red-500' onClick={() => logoutHandler()}>
-                        Logout
-                    </div>
+                    <>
+                        <div onClick={() => logoutHandler()} className='cursor-pointer'>
+                            <Button size='md' width='max' display='block' type='logout'>
+                                <span>Logout</span>
+                            </Button>
+                        </div>
+                    </>
                 ) : (
-                    <Button href='/account/login' size='md' width='max' display='block' type='secondary'>
-                        <span>Sign In</span>
-                    </Button>
+                    <>
+                        <Button href='/account/login' size='md' width='max' display='block' type='secondary'>
+                            <span>Sign In</span>
+                        </Button>
+                    </>
                 )}
             </div>
         </header>

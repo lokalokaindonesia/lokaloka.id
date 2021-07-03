@@ -12,6 +12,7 @@ const Button = ({ children, type, size, href = '#', width = 'max', display = 'bl
         secondary: `bg-blue-100 text-blue-500 font-bold transiton duration-300 ease-in-out hover:bg-blue-200`,
         tertiary: `bg-orange-500 text-white font-bold transiton duration-300 ease-in-out hover:bg-orange-600`,
         tertiaryAccent: `bg-orange-100 text-orange-500 font-bold transiton duration-300 ease-in-out hover:bg-orange-200`,
+        logout: `bg-red-100 text-red-500 font-bold transiton duration-300 ease-in-out hover:bg-red-200`,
     }
 
     const widthStyle = {
@@ -30,8 +31,8 @@ const Button = ({ children, type, size, href = '#', width = 'max', display = 'bl
     const pickedDisplay = displayStyle[display]
 
     return (
-        <Link href={href} className=''>
-            <button className={`${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}>{children}</button>
+        <Link href={`${href}`}>
+            <div className={`rounded-md ${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}>{children}</div>
         </Link>
     )
 }

@@ -1,12 +1,12 @@
+import { getSession, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 import Link from 'next/link'
 import Image from 'next/image'
-import { session } from 'next-auth/client'
 import { ChevronRightIcon, ChevronLeftIcon, LinkIcon } from '@heroicons/react/solid'
 import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart } from 'react-icons/fa'
 import moment from 'moment'
 import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import NumberFormat from 'react-number-format'
 import Layout from '@/components/Layout'
 import Badge from '@/components/Badge'
@@ -14,9 +14,10 @@ import Button from '@/components/Button'
 import VariantBadge from '@/components/VariantBadge'
 import ProductItem from '@/components/ProductItem'
 import FancySecrionTitle from '@/components/FancySecrionTitle'
-import { addToCart } from '@/redux/cartSlice'
 
 const Product = ({ product, similarProducts, reviews }) => {
+    const [session, loading] = useSession()
+
     const discountPrice = product.sellingPrice - (product.sellingPrice * product.discount) / 100
     const isDiscount = product.discount !== 0 && product.discount !== null ? true : false
     const xPrice = product.discount ? discountPrice : product.sellingPrice
@@ -73,12 +74,37 @@ const Product = ({ product, similarProducts, reviews }) => {
         countSubtotal()
     })
 
-    // Add To Cart
-    const { cartProducts } = useSelector((state) => state.cart)
-    const dispatch = useDispatch()
+    // Add to Cart Handler
+    const addToCart = async () => {
+        const getCartProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
+        const cartProducts = await getCartProducts.data
+
+        const sameProduct = cartProducts.find((item) => item.product.id === product.id)
+
+        if (sameProduct != undefined) {
+            const updateCartProductQty = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/carts/${sameProduct.id}`, {
+                quantity: +sameProduct.quantity + quantity,
+            })
+            console.log(updateCartProductQty.data)
+            if (!updateCartProductQty) {
+                return console.log('something wrong when update product qty')
+            }
+            router.push('/cart')
+            return
+        }
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/carts`, {
+            product: product._id,
+            user: session.id,
+            quantity,
+        })
+        if (!res) {
+            return console.log('something wrong')
+        }
+        router.push('/cart')
+    }
 
     return (
-        <Layout title={productRoute} session={session}>
+        <Layout title={productRoute}>
             <div className='container mx-auto'>
                 <div className='w-full flex space-x-2 items-center mt-4'>
                     <div className='text-blue-700 hover:text-blue-800'>
@@ -102,18 +128,21 @@ const Product = ({ product, similarProducts, reviews }) => {
                                 <FaHeart className='text-white hover:text-red-500 transition duration-300 ease-in-out w-6 h-6' />
                             </div>
                         </div>
-                        <div className='flex justify-between w-96 h-96 absolute bg-gray-300 '>
+                        <div className='flex justify-between w-96 h-96 absolute '>
                             {product.images.map((img, index) => {
                                 return (
                                     <div key={index} className={index === current ? 'block w-full h-full ease-in-out duration-300 transition-all select-none' : 'hidden'}>
-                                        <Image src={img.formats.medium.url} layout='responsive' width={1} height={1} objectFit='cover' />
+                                        <Image src={img.formats.medium.url} className='rounded-lg' layout='responsive' width={1} height={1} objectFit='cover' />
                                     </div>
                                 )
                             })}
                         </div>
                         <div className='w-96 h-96 flex justify-between items-center'>
-                            <ChevronLeftIcon className='w-8 h-8 bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-50 cursor-pointer' onClick={prevSlide} />
-                            <ChevronRightIcon className='w-8 h-8 bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-50 cursor-pointer' onClick={nextSlide} />
+                            <ChevronLeftIcon className='w-8 h-8 rounded-r-md bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-50 cursor-pointer' onClick={prevSlide} />
+                            <ChevronRightIcon
+                                className='w-8 h-8 rounded-l-md bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-50 cursor-pointer'
+                                onClick={nextSlide}
+                            />
                         </div>
                     </div>
 
@@ -181,17 +210,17 @@ const Product = ({ product, similarProducts, reviews }) => {
                         </div>
                         <div className='flex flex-col space-y-2'>
                             <div className='text-sm font-semibold text-blueGray-600'>Quantity</div>
-                            <div className='flex items-center border-2 border-blueGray-800 '>
+                            <div className='flex items-center border border-blueGray-300 rounded'>
                                 <div
                                     onClick={reduceQty}
-                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r-2 border-blueGray-600 text-blue-gray-800'
+                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r border-blueGray-300 text-blueGray-800'
                                 >
                                     -
                                 </div>
-                                <div className='px-4 py-1 flex-1 text-center text-blue-gray-800 '>{quantity}</div>
+                                <div className='px-4 py-1 flex-1 text-center text-blueGray-800 '>{quantity}</div>
                                 <div
                                     onClick={addQty}
-                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l-2 border-blueGray-600 text-blue-gray-800'
+                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l border-blueGray-300 text-blueGray-800'
                                 >
                                     +
                                 </div>
@@ -201,11 +230,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                             <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
                             <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-2xl font-extrabold text-blueGray-800' />
                         </div>
-                        <div
-                            onClick={() => {
-                                // dispatch(addToCart({ product, quantity, subtotal }))
-                            }}
-                        >
+                        <div className='cursor-pointer' onClick={() => addToCart()}>
                             <Button type='primary' displayType='flex' size='lg' width='full'>
                                 <span>Add to Cart</span>
                             </Button>

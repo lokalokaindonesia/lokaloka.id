@@ -1,15 +1,13 @@
-import { getSession, useSession, signIn, signOut } from 'next-auth/client'
 import Hero from '@/components/Hero'
 import HighlightedSection from '@/components/HighlightedSection'
 import JustForYou from '@/components/JustForYou'
 import Layout from '@/components/Layout'
 
 const Home = ({ products }) => {
-    const [session, loading] = useSession()
     const promo = products.filter((item) => item.discount != 0)
     const recommended = products.filter((item) => item.isRecommended == true)
     return (
-        <Layout session={session} title='Liburan seru bareng Lokaloka.id'>
+        <Layout title='Liburan seru bareng Lokaloka.id'>
             {/* Hero */}
             <Hero />
 
