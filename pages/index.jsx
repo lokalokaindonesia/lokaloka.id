@@ -2,6 +2,7 @@ import Hero from '@/components/Hero'
 import HighlightedSection from '@/components/HighlightedSection'
 import JustForYou from '@/components/JustForYou'
 import Layout from '@/components/Layout'
+import { getSession } from 'next-auth/client'
 
 const Home = ({ products }) => {
     const promo = products.filter((item) => item.discount != 0)
