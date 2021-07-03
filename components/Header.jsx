@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import { SearchIcon, ColorSwatchIcon } from '@heroicons/react/outline'
+import { SearchIcon, ColorSwatchIcon, ShoppingCartIcon } from '@heroicons/react/outline'
 import Button from '@/components/Button'
-import { signOut, useSession } from 'next-auth/client'
+import { getSession, signOut, useSession } from 'next-auth/client'
 
-const Header = ({ cartProducts }) => {
+const Header = () => {
     const [session, loading] = useSession()
     const logoutHandler = () => {
         if (session) {
@@ -39,6 +39,15 @@ const Header = ({ cartProducts }) => {
 
             <div className='w-2/12 flex items-center justify-end space-x-6'>
                 <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-800 cursor-pointer' />
+                <Link href='/cart'>
+                    <div className='relative cursor-pointer'>
+                        <ShoppingCartIcon className='hidden xl:block h-6 w-6 text-blueGray-800 cursor-pointer' />
+                        <span className='flex h-3 w-3 absolute top-0 right-0'>
+                            <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
+                            <span className='relative inline-flex rounded-full h-3 w-3 bg-blue-500'></span>
+                        </span>
+                    </div>
+                </Link>
                 {session ? (
                     <>
                         <div onClick={() => logoutHandler()} className='cursor-pointer'>
@@ -57,15 +66,6 @@ const Header = ({ cartProducts }) => {
             </div>
         </header>
     )
-}
-
-export const getServerSideProps = async () => {
-    const getCartProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/carts`)
-    const cartProducts = await getCartProducts.json()
-
-    return {
-        props: { cartProducts },
-    }
 }
 
 export default Header

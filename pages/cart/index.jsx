@@ -2,10 +2,13 @@ import Layout from '@/components/Layout'
 import { ChevronRightIcon, TrashIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
+import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import Button from '@/components/Button'
 import { FaChevronRight } from 'react-icons/fa'
+import { getSession } from 'next-auth/client'
+import Button from '@/components/Button'
+import NumberFormat from 'react-number-format'
 
 const Cart = ({ cartProducts }) => {
     const router = useRouter()
@@ -102,9 +105,21 @@ const Cart = ({ cartProducts }) => {
                                                             <div className='flex justify-between items-end'>
                                                                 {/* Price */}
                                                                 <div className='flex space-y-1 flex-col'>
-                                                                    <span className='text-xl font-black text-blueGray-800'>Rp. {xPrice}</span>
+                                                                    <NumberFormat
+                                                                        value={xPrice}
+                                                                        displayType={'text'}
+                                                                        thousandSeparator={true}
+                                                                        prefix={'Rp. '}
+                                                                        className='text-xl font-black text-blueGray-800'
+                                                                    />
                                                                     {isDiscount && (
-                                                                        <span className='text-xs line-through font-semibold text-red-500'>Rp. {product.product.sellingPrice}</span>
+                                                                        <NumberFormat
+                                                                            value={product.product.sellingPrice}
+                                                                            displayType={'text'}
+                                                                            thousandSeparator={true}
+                                                                            prefix={'Rp. '}
+                                                                            className='text-xs line-through font-semibold text-red-500'
+                                                                        />
                                                                     )}
                                                                 </div>
                                                                 {/* Qty */}
@@ -186,9 +201,11 @@ const Cart = ({ cartProducts }) => {
     )
 }
 
-export const getServerSideProps = async () => {
-    const getCartProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/carts`)
-    const cartProducts = await getCartProducts.json()
+export const getServerSideProps = async (context) => {
+    const session = await getSession(context)
+
+    const getCartProducts = await axios(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
+    const cartProducts = await getCartProducts.data
 
     return {
         props: {
