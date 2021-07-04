@@ -1,9 +1,12 @@
 import Link from 'next/link'
 import { SearchIcon, ColorSwatchIcon, ShoppingCartIcon } from '@heroicons/react/outline'
-import Button from '@/components/Button'
 import { getSession, signOut, useSession } from 'next-auth/client'
+import { useRouter } from 'next/router'
+import Button from '@/components/Button'
+import HeaderActiveLink from '@/components/header/HeaderActiveLink'
 
 const Header = () => {
+    const router = useRouter()
     const [session, loading] = useSession()
     const logoutHandler = () => {
         if (session) {
@@ -22,17 +25,15 @@ const Header = () => {
                 </a>
             </div>
 
-            <div className='w-8/12 flex justify-center'>
+            <div className='w-8/12 flex justify-center '>
                 <div className='hidden xl:flex space-x-8 flex-initial font-medium text-blueGray-600'>
-                    <Link href='/' activeClassName='font-bold text-gray-800'>
-                        Home
-                    </Link>
-                    <Link href='/food-and-beverages'>Food & Beverages</Link>
-                    <Link href='/craft'>Craft</Link>
-                    <Link href='/fashion'>Fashion</Link>
-                    <Link href='/experience'>Experience</Link>
-                    <Link href='/rent'>Rent</Link>
-                    <Link href='/book'>Book</Link>
+                    <HeaderActiveLink href='/'>Home</HeaderActiveLink>
+                    <HeaderActiveLink href='/food-and-beverage'>Food & Beverages</HeaderActiveLink>
+                    <HeaderActiveLink href='/craft'>Craft</HeaderActiveLink>
+                    <HeaderActiveLink href='/fashion'>Fashion</HeaderActiveLink>
+                    <HeaderActiveLink href='/experience'>Experience</HeaderActiveLink>
+                    <HeaderActiveLink href='/rent'>Rent</HeaderActiveLink>
+                    <HeaderActiveLink href='/book'>Book</HeaderActiveLink>
                 </div>
                 <input type='text' className='block xl:hidden px-3 py-2 border border-gray-400 focus:outline-none text-blueGray-600 bg-blueGray-200 w-full' />
             </div>
@@ -50,11 +51,9 @@ const Header = () => {
                 </Link>
                 {session ? (
                     <>
-                        <div onClick={() => logoutHandler()} className='cursor-pointer'>
-                            <Button size='md' width='max' display='block' type='logout'>
-                                <span>Logout</span>
-                            </Button>
-                        </div>
+                        <Button size='md' width='max' display='block' type='logout'>
+                            <span onClick={() => logoutHandler()}>Logout</span>
+                        </Button>
                     </>
                 ) : (
                     <>

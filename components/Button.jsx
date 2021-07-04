@@ -32,7 +32,7 @@ const Button = ({ children, type, size, href = '#', width = 'max', display = 'bl
 
     return (
         <Link href={`${href}`}>
-            <div className={`rounded-md ${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}>{children}</div>
+            <a className={`transition ease-in-out duration-300 hover:scale-95 rounded-md ${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}>{children}</a>
         </Link>
     )
 }

@@ -9,10 +9,10 @@ import moment from 'moment'
 import { useState, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import Layout from '@/components/Layout'
-import Badge from '@/components/Badge'
+import Badge from '@/components/productItem/Badge'
 import Button from '@/components/Button'
-import VariantBadge from '@/components/VariantBadge'
-import ProductItem from '@/components/ProductItem'
+import VariantBadge from '@/components/productItem/VariantBadge'
+import ProductItem from '@/components/productItem/ProductItem'
 import FancySecrionTitle from '@/components/FancySecrionTitle'
 
 const Product = ({ product, similarProducts, reviews }) => {
@@ -23,9 +23,6 @@ const Product = ({ product, similarProducts, reviews }) => {
     const xPrice = product.discount ? discountPrice : product.sellingPrice
 
     const router = useRouter()
-
-    const productRoute = router.query.product || 'Lokaloka'
-    const categoryRoute = '/' + router.query.category || []
 
     // Slider Image
     const [current, setCurrent] = useState(0)
@@ -104,7 +101,7 @@ const Product = ({ product, similarProducts, reviews }) => {
     }
 
     return (
-        <Layout title={productRoute}>
+        <Layout title={product.name}>
             <div className='container mx-auto'>
                 <div className='w-full flex space-x-2 items-center mt-4'>
                     <div className='text-blue-700 hover:text-blue-800'>
@@ -112,7 +109,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
                     <div className='text-blue-700 hover:text-blue-800'>
-                        <Link href={categoryRoute}>{product.product_category.name}</Link>
+                        <Link href={`/${product.product_category.slug}`}>{product.product_category.name}</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
                     <div>
@@ -132,7 +129,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                             {product.images.map((img, index) => {
                                 return (
                                     <div key={index} className={index === current ? 'block w-full h-full ease-in-out duration-300 transition-all select-none' : 'hidden'}>
-                                        <Image src={img.formats.medium.url} className='rounded-lg' layout='responsive' width={1} height={1} objectFit='cover' />
+                                        <Image alt={product.name} src={img.formats.medium.url} className='rounded-lg' layout='responsive' width={1} height={1} objectFit='cover' />
                                     </div>
                                 )
                             })}
@@ -242,14 +239,8 @@ const Product = ({ product, similarProducts, reviews }) => {
                 {/* Reviews */}
                 {reviews.length !== 0 && (
                     <div className='flex flex-col space-y-10 my-12'>
-                        <div className='relative bottom-3 xl:bottom-4'>
-                            <div className='absolute w-auto h-auto bg-orange-500 px-2 left-1 -top-1'>
-                                <span className='text-lg md:text-xl xl:text-2xl font-bold  text-orange-500'>Reviews</span>
-                            </div>
-                            <div className='absolute w-auto h-auto bg-blue-400 px-2'>
-                                <span className='text-lg md:text-xl xl:text-2xl font-bold  text-white'>Reviews</span>
-                            </div>
-                        </div>
+                        <FancySecrionTitle title='Reviews' />
+
                         <div className='flex space-y-4 flex-col'>
                             {reviews.map((review) => {
                                 return (

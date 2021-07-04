@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import Button from '@/components/Button'
-import ProductItem from '@/components/ProductItem'
+import ProductItem from '@/components/productItem/ProductItem'
 import FancySecrionTitle from '@/components/FancySecrionTitle'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {

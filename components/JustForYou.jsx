@@ -1,4 +1,4 @@
-import ProductItem from '@/components/ProductItem'
+import ProductItem from '@/components/productItem/ProductItem'
 import Button from '@/components/Button'
 import FancySecrionTitle from '@/components/FancySecrionTitle'
 

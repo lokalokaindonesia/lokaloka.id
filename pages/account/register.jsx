@@ -42,7 +42,7 @@ const register = () => {
                                         id='username'
                                         onChange={(e) => setUsername(e.target.value)}
                                         placeholder='Enter Username'
-                                        className='w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
                                         required
@@ -59,7 +59,7 @@ const register = () => {
                                         id='email'
                                         onChange={(e) => setEmail(e.target.value)}
                                         placeholder='Enter Email Address'
-                                        className='w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
                                         required
@@ -77,7 +77,7 @@ const register = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                         placeholder='Enter Password'
                                         minLength={6}
-                                        className='w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         required
                                     />
                                 </div>
@@ -93,14 +93,14 @@ const register = () => {
                                         onChange={(e) => setPasswordConfirm(e.target.value)}
                                         placeholder='Enter Password'
                                         minLength={6}
-                                        className='w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         required
                                     />
                                 </div>
 
                                 <button
                                     type='submit'
-                                    className='w-full block bg-blue-500 transition duration-300 ease-in-out hover:bg-blue-600 focus:bg-blue-600 text-white font-semibold  px-4 py-3 mt-6'
+                                    className='rounded-md w-full block bg-blue-500 transition duration-300 ease-in-out hover:bg-blue-600 focus:bg-blue-600 text-white font-semibold  px-4 py-3 mt-6'
                                 >
                                     Register
                                 </button>
@@ -110,7 +110,7 @@ const register = () => {
 
                             <button
                                 type='button'
-                                className='w-full block bg-white transition duration-300 ease-in-out hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold  px-4 py-3 border border-gray-300'
+                                className='rounded-md w-full block bg-white transition duration-300 ease-in-out hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold  px-4 py-3 border border-gray-300'
                             >
                                 <div className='flex items-center justify-center'>
                                     <div className='w-5 h-5'>
