@@ -2,7 +2,7 @@ import { SparklesIcon, ArrowRightIcon } from '@heroicons/react/solid'
 import Button from '@/components/Button'
 const Hero = () => {
     const backgroundImage = {
-        backgroundImage: 'url("./images/hero-images.png")',
+        backgroundImage: 'url("./images/hero-images-min.jpg")',
         maxWidth: '100%',
         height: 'auto',
         position: 'relative',
@@ -19,8 +19,8 @@ const Hero = () => {
                         <SparklesIcon className='h-5 w-5 md:h-6 md:w-6 xl:h-8 xl:w-8 text-red-500' />
                         <span className='text-lg md:text-xl xl:text-2xl font-bold text-red-500'>New Semester 2021/2022</span>
                     </div>
-                    <span className='text-4xl md:text-5xl xl:text-6xl font-extrabold text-white filter drop-shadow'>Don't Waste Your</span>
-                    <span className='text-4xl md:text-5xl xl:text-6xl font-extrabold text-white filter drop-shadow'>Holiday Moment</span>
+                    <h1 className='text-4xl md:text-5xl xl:text-6xl font-extrabold text-white filter drop-shadow'>Don't Waste Your</h1>
+                    <h1 className='text-4xl md:text-5xl xl:text-6xl font-extrabold text-white filter drop-shadow'>Holiday Moment</h1>
                 </div>
                 <div className='flex flex-col space-y-2'>
                     <p className='text-base md:text-lg xl:text-xl font-normal text-white filter drop-shadow'>

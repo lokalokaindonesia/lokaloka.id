@@ -7,6 +7,7 @@ const Layout = ({ title, children }) => {
         <div>
             <Head>
                 <title>{title}</title>
+                <meta name='description' content='Lokaloka Indonesia - Belanja oleh-oleh dengan mudah !!!' />
             </Head>
 
             {/* Header - Navbar */}

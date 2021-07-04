@@ -20,9 +20,11 @@ const Header = () => {
     return (
         <header className='w-full px-4 xl:px-0 h-20 xl:container xl:mx-auto flex justify-between items-center '>
             <div className='w-2/12 text-2xl font-extrabold text-blue-500 tracking-wide'>
-                <a href='/'>
-                    <ColorSwatchIcon className='cursor-pointer h-10 w-10 text-blue-800' />
-                </a>
+                <Link href='/'>
+                    <button type='button' name='home'>
+                        <ColorSwatchIcon className='cursor-pointer h-10 w-10 text-blue-800' />
+                    </button>
+                </Link>
             </div>
 
             <div className='w-8/12 flex justify-center '>
@@ -39,15 +41,17 @@ const Header = () => {
             </div>
 
             <div className='w-2/12 flex items-center justify-end space-x-6'>
-                <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-800 cursor-pointer' />
+                <button type='button' name='search'>
+                    <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-800 cursor-pointer' />
+                </button>
                 <Link href='/cart'>
-                    <div className='relative cursor-pointer'>
+                    <button className='relative' type='button' name='cart'>
                         <ShoppingCartIcon className='hidden xl:block h-6 w-6 text-blueGray-800 cursor-pointer' />
                         <span className='flex h-3 w-3 absolute top-0 right-0'>
                             <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
                             <span className='relative inline-flex rounded-full h-3 w-3 bg-blue-500'></span>
                         </span>
-                    </div>
+                    </button>
                 </Link>
                 {session ? (
                     <>

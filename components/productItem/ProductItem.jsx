@@ -8,7 +8,7 @@ const ProductItem = ({ imgSrc, category, productName, price, discount, isRecomme
 
     return (
         <Link href={`/${category}/${slug}`}>
-            <div className='cursor-pointer hover:scale-95 shadow-sm w-full ring-1 ring-blueGray-200 hover:bg-blue-100 transition ease-in-out duration-300 rounded-md'>
+            <button className='cursor-pointer hover:scale-95 shadow-sm w-full ring-1 ring-blueGray-200 hover:bg-blue-100 transition ease-in-out duration-300 rounded-md'>
                 {/* Product Image */}
                 <Image
                     className='rounded-t-md hover:scale-105 transition ease-in-out duration-300'
@@ -20,9 +20,10 @@ const ProductItem = ({ imgSrc, category, productName, price, discount, isRecomme
                     layout='responsive'
                     priority
                     objectFit='cover'
+                    quality={50}
                 />
                 <div className='flex flex-col space-y-1 p-2'>
-                    <a className='line-clamp-2 text-md font-medium text-blueGray-900 leading-snug'>{productName}</a>
+                    <span className='line-clamp-2 text-md font-medium text-blueGray-900 leading-snug'>{productName}</span>
                     <div className='flex justify-between items-center leading-loose'>
                         <NumberFormat
                             value={isDiscount ? sellingPrice : price}
@@ -37,7 +38,7 @@ const ProductItem = ({ imgSrc, category, productName, price, discount, isRecomme
                     </div>
                     <div className={isRecommended ? 'px-2 py-1 bg-green-100 text-xs font-bold text-green-500 w-max' : 'hidden'}>Recommended</div>
                 </div>
-            </div>
+            </button>
         </Link>
     )
 }

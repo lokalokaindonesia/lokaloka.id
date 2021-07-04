@@ -6,7 +6,7 @@ const HeaderActiveLink = ({ router, children, href }) => {
 
     return (
         <Link href={href}>
-            <a className={isCurrentPath ? 'font-bold' : ''}>{children}</a>
+            <button className={isCurrentPath ? 'font-bold' : ''}>{children}</button>
         </Link>
     )
 }

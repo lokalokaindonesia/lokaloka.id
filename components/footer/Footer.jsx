@@ -13,14 +13,14 @@ const Footer = () => {
                     <div className='flex flex-col space-y-4'>
                         <ColorSwatchIcon className='h-16 w-16 text-blueGray-900' />
                         <div className='flex space-x-2 items-center'>
-                            <a href='https://instagram.com/lokaloka.official' target='_blank'>
+                            <a href='https://instagram.com/lokaloka.official' rel='noopener' target='_blank'>
                                 <div className='h-8 w-8'>
-                                    <Image src='/images/social-media/instagram.png' layout='responsive' width={38} height={38} />
+                                    <Image alt='Instagram Account' src='/images/social-media/instagram.png' rel='noopener' layout='responsive' width={38} height={38} />
                                 </div>
                             </a>
                             <a href='https://facebook.com/lokaloka.id' target='_blank'>
                                 <div className='h-8 w-8'>
-                                    <Image src='/images/social-media/facebook.png' layout='responsive' width={38} height={38} />
+                                    <Image alt='Facebook Account' src='/images/social-media/facebook.png' layout='responsive' width={38} height={38} />
                                 </div>
                             </a>
                         </div>
