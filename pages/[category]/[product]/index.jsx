@@ -249,7 +249,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                             <div className='w-12 h-12 rounded-full bg-red-500'></div>
                                             <div className='flex flex-col'>
                                                 <p className='text-lg font-semibold text-blueGray-800'>{review.user.username}</p>
-                                                <p className='text-xs text-blueGray-500'>{moment(review.createdAt).format('ll')}</p>
+                                                {/* <p className='text-xs text-blueGray-500'>{moment(review.createdAt).format('ll')}</p> */}
                                             </div>
                                         </div>
                                         <span className='pl-16'>{review.text}</span>
