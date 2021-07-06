@@ -21,8 +21,8 @@ export const getServerSideProps = async () => {
     const getProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`)
     const products = await getProducts.json()
 
-    const promo = products.filter((item) => item.discount != 0)
-    const recommended = products.filter((item) => item.isRecommended == true)
+    const promo = await products.filter((item) => item.discount != 0)
+    const recommended = await products.filter((item) => item.isRecommended == true)
 
     if (!products) {
         return {
