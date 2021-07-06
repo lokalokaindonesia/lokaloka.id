@@ -1,6 +1,6 @@
-// import { Provider as ReduxProvider } from 'react-redux'
+import { Provider as ReduxProvider } from 'react-redux'
 import { Provider } from 'next-auth/client'
-// import { store } from 'redux/store'
+import { store } from '@/redux/store'
 import '../styles/globals.css'
 
 function MyApp({
@@ -8,9 +8,9 @@ function MyApp({
   pageProps
 }) {
   return <Provider session={pageProps.session}>
-    {/* <ReduxProvider store={store}> */}
-    <Component {...pageProps} />
-    {/* </ReduxProvider> */}
+    <ReduxProvider store={store}>
+      <Component {...pageProps} />
+    </ReduxProvider>
   </Provider>
 }
 

@@ -82,7 +82,7 @@ const Product = ({ product, similarProducts, reviews }) => {
             const updateCartProductQty = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/carts/${sameProduct.id}`, {
                 quantity: +sameProduct.quantity + quantity,
             })
-            console.log(updateCartProductQty.data)
+
             if (!updateCartProductQty) {
                 return console.log('something wrong when update product qty')
             }

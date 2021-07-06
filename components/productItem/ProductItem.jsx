@@ -23,7 +23,7 @@ const ProductItem = ({ imgSrc, category, productName, price, discount, isRecomme
                     quality={50}
                 />
                 <div className='flex flex-col space-y-1 p-2'>
-                    <span className='line-clamp-2 text-md font-medium text-blueGray-900 leading-snug'>{productName}</span>
+                    <span className='line-clamp-2 text-md font-medium text-left text-blueGray-900 leading-snug'>{productName}</span>
                     <div className='flex justify-between items-center leading-loose'>
                         <NumberFormat
                             value={isDiscount ? sellingPrice : price}

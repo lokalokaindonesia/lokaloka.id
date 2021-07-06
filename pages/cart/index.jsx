@@ -4,24 +4,75 @@ import Image from 'next/image'
 import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
-import { getSession } from 'next-auth/client'
-import Button from '@/components/Button'
+import { getSession, useSession } from 'next-auth/client'
 import NumberFormat from 'react-number-format'
+import Button from '@/components/Button'
 
 const Cart = ({ cartProducts }) => {
     const router = useRouter()
+    const [session, loading] = useSession()
 
-    const [quantity, setQuantity] = useState(1)
+    const [cart, setCart] = useState(cartProducts)
+    const [summaryTotal, setSummaryTotal] = useState(0)
+    const [discountTotal, setDiscountTotal] = useState(0)
+    const [grandTotal, setGrandTotal] = useState(0)
 
-    // * Qty Func
-    const addQty = () => {
-        setQuantity(quantity + 1)
+    useEffect(() => {
+        countGrandTotal(), countSummaryTotal(), countDiscountTotal(), cart
+        return () => {}
+    }, [cart, summaryTotal, discountTotal])
+
+    const countSummaryTotal = async () => {
+        const sum = cart.reduce((currentSummary, product) => currentSummary + +product.quantity * +product.product.sellingPrice, 0)
+        setSummaryTotal(sum)
     }
 
-    const reduceQty = () => {
-        setQuantity(quantity === 1 ? 1 : quantity - 1)
+    const countDiscountTotal = async () => {
+        const sum = cart.reduce((currentDiscount, product) => currentDiscount + +product.quantity * ((+product.product.sellingPrice * +product.product.discount) / 100), 0)
+        setDiscountTotal(sum)
+    }
+
+    const countGrandTotal = async () => {
+        setGrandTotal(summaryTotal - discountTotal)
+    }
+
+    // * Qty Func
+    const addQty = async (product) => {
+        const updateQty = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/carts/${product.id}`, {
+            quantity: +product.quantity + 1,
+        })
+
+        const getUpdatedData = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
+        const updatedData = await getUpdatedData.data
+
+        setCart(updatedData)
+    }
+
+    const reduceQty = async (product) => {
+        if (product.quantity == 1) {
+            return
+        }
+        const updateQty = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/carts/${product.id}`, {
+            quantity: +product.quantity - 1,
+        })
+
+        const getUpdatedData = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
+        const updatedData = await getUpdatedData.data
+
+        setCart(updatedData)
+    }
+
+    const deleteItem = async (product) => {
+        const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${product.id}`)
+        const data = await res.data
+
+        if (!data) {
+            return console.log('gagal')
+        }
+
+        setCart(cart.filter((item) => item.id !== data.id))
     }
 
     return (
@@ -43,7 +94,7 @@ const Cart = ({ cartProducts }) => {
                             <div className='flex flex-col space-y-4'>
                                 {/* Product Cart Item */}
                                 <div className='flex flex-col space-y-4'>
-                                    {cartProducts.map((product) => {
+                                    {cart.map((product) => {
                                         // Count Price
                                         const discountPrice = product.product.sellingPrice - (product.product.sellingPrice * product.product.discount) / 100
                                         const isDiscount = product.product.discount !== 0 && product.product.discount !== null ? true : false
@@ -71,9 +122,13 @@ const Cart = ({ cartProducts }) => {
                                                                 {/* Title */}
                                                                 <div className='flex justify-between items-start'>
                                                                     <Link href={`/${product.product.product_category.slug}/${product.product.slug}`}>
-                                                                        <span className='text-lg font-semibold text-blueGray-800 line-clamp-1'>{product.product.name}</span>
+                                                                        <a className='text-lg font-semibold text-blueGray-800 line-clamp-1'>{product.product.name}</a>
                                                                     </Link>
-                                                                    <button type='button' className='flex items-center space-x-2 text-red-500 font-bold'>
+                                                                    <button
+                                                                        onClick={() => deleteItem(product)}
+                                                                        type='button'
+                                                                        className='flex items-center space-x-2 text-red-500 font-bold'
+                                                                    >
                                                                         <TrashIcon className='w-4' />
                                                                     </button>
                                                                 </div>
@@ -100,14 +155,14 @@ const Cart = ({ cartProducts }) => {
                                                                     {/* Qty */}
                                                                     <div className='flex items-center border h-8 w-max rounded ml-[8.7rem] border-blueGray-300'>
                                                                         <div
-                                                                            onClick={reduceQty}
+                                                                            onClick={() => reduceQty(product)}
                                                                             className='select-none rounded-l cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r border-blueGray-300 text-blue-gray-800'
                                                                         >
                                                                             -
                                                                         </div>
                                                                         <div className='px-4 py-1 w-12 flex-1 text-center text-blue-gray-800 '>{product.quantity}</div>
                                                                         <div
-                                                                            onClick={addQty}
+                                                                            onClick={() => addQty(product)}
                                                                             className='select-none rounded-r cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l border-blueGray-300 text-blue-gray-800'
                                                                         >
                                                                             +
@@ -145,11 +200,11 @@ const Cart = ({ cartProducts }) => {
                                 <div className='flex flex-col space-y-1'>
                                     <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
                                         <span>Total Price</span>
-                                        <span>Rp. 17.200.000</span>
+                                        <NumberFormat value={summaryTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                     </div>
                                     <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
                                         <span>Total Discount</span>
-                                        <span className='text-red-400'>-Rp. 7.200.000</span>
+                                        <NumberFormat value={discountTotal} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +214,7 @@ const Cart = ({ cartProducts }) => {
                             {/* Total */}
                             <div className='flex justify-between items-center'>
                                 <div className='text-xl font-bold text-blueGray-800'>Total</div>
-                                <div className='text-xl font-bold text-blue-500'>Rp. 10.000.000</div>
+                                <NumberFormat value={grandTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-xl font-bold text-blue-500' />
                             </div>
 
                             <hr />
