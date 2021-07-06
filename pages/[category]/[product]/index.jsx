@@ -13,7 +13,7 @@ import Toast from '@/components/ui/Toast'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import VariantBadge from '@/components/ui/VariantBadge'
-import ProductItem from '@/components/productCard/ProductCard'
+import ProductCard from '@/components/product/ProductCard'
 import FancySecrionTitle from '@/components/ui/FancySecrionTitle'
 
 const Product = ({ product, similarProducts, reviews }) => {
@@ -249,7 +249,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                             <div className='w-12 h-12 rounded-full bg-red-500'></div>
                                             <div className='flex flex-col'>
                                                 <p className='text-lg font-semibold text-blueGray-800'>{review.user.username}</p>
-                                                {/* <p className='text-xs text-blueGray-500'>{moment(review.createdAt).format('ll')}</p> */}
+                                                <p className='text-xs text-blueGray-500'>{moment(review.createdAt).format('ll')}</p>
                                             </div>
                                         </div>
                                         <span className='pl-16'>{review.text}</span>
@@ -266,7 +266,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                     <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-8'>
                         {similarProducts.map((item, index) => {
                             return (
-                                <ProductItem
+                                <ProductCard
                                     key={index}
                                     imgSrc={item.images[0].formats.medium.url}
                                     productName={item.name}

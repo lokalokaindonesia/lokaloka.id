@@ -1,4 +1,4 @@
-import ProductItem from '@/components/productCard/ProductCard'
+import ProductCard from '@/components/product/ProductCard'
 import FancySecrionTitle from '@/components/ui/FancySecrionTitle'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {
@@ -12,7 +12,7 @@ const HighlightedSection = ({ sectionTitle, href, data }) => {
             {/* Product Item */}
             <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-8'>
                 {data.map((product, index) => (
-                    <ProductItem
+                    <ProductCard
                         key={index}
                         slug={product.slug}
                         imgSrc={product.images[0].formats.medium.url}

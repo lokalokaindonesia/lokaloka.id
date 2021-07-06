@@ -2,7 +2,7 @@ import Image from 'next/image'
 import NumberFormat from 'react-number-format'
 import Link from 'next/link'
 
-const ProductItem = ({ imgSrc, category, productName, price, discount, isRecommended = false, slug }) => {
+const ProductCard = ({ imgSrc, category, productName, price, discount, isRecommended = false, slug }) => {
     const sellingPrice = price - (price * discount) / 100
     const isDiscount = discount == 0 ? false : true
 
@@ -43,4 +43,4 @@ const ProductItem = ({ imgSrc, category, productName, price, discount, isRecomme
     )
 }
 
-export default ProductItem
+export default ProductCard
