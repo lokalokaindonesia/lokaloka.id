@@ -19,11 +19,11 @@ const Home = ({ products }) => {
     )
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     const getProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`)
     const products = await getProducts.json()
 
-    if (products.count == 0) {
+    if (!products) {
         return {
             notFound: true,
         }
@@ -31,7 +31,6 @@ export const getStaticProps = async () => {
 
     return {
         props: { products },
-        revalidate: 10,
     }
 }
 
