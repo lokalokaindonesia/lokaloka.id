@@ -1,7 +1,7 @@
-import Hero from '@/components/Hero'
-import HighlightedSection from '@/components/HighlightedSection'
-import JustForYou from '@/components/JustForYou'
-import Layout from '@/components/Layout'
+import Hero from '@/components/layout/Hero'
+import HighlightedSection from '@/components/layout/HighlightedSection'
+import JustForYou from '@/components/layout/JustForYou'
+import Layout from '@/components/layout/Layout'
 
 const Home = ({ products }) => {
     const promo = products.filter((item) => item.discount != 0)

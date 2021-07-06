@@ -4,16 +4,17 @@ import axios from 'axios'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ChevronRightIcon, ChevronLeftIcon, LinkIcon } from '@heroicons/react/solid'
-import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart } from 'react-icons/fa'
+import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart, FaCheckCircle } from 'react-icons/fa'
 import moment from 'moment'
 import { useState, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
-import Layout from '@/components/Layout'
-import Badge from '@/components/productItem/Badge'
-import Button from '@/components/Button'
-import VariantBadge from '@/components/productItem/VariantBadge'
-import ProductItem from '@/components/productItem/ProductItem'
-import FancySecrionTitle from '@/components/FancySecrionTitle'
+import Layout from '@/components/layout/Layout'
+import Toast from '@/components/ui/toast'
+import Badge from '@/components/ui/Badge'
+import Button from '@/components/ui/Button'
+import VariantBadge from '@/components/ui/VariantBadge'
+import ProductItem from '@/components/productCard/ProductCard'
+import FancySecrionTitle from '@/components/layout/FancySecrionTitle'
 
 const Product = ({ product, similarProducts, reviews }) => {
     const [session, loading] = useSession()
@@ -227,11 +228,11 @@ const Product = ({ product, similarProducts, reviews }) => {
                             <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
                             <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-2xl font-extrabold text-blueGray-800' />
                         </div>
-                        <div className='cursor-pointer' onClick={() => addToCart()}>
-                            <Button type='primary' displayType='flex' size='lg' width='full'>
-                                <span>Add to Cart</span>
-                            </Button>
-                        </div>
+                        <Button type='primary' displayType='flex' size='lg' width='full'>
+                            <span className='block' onClick={() => addToCart()}>
+                                Add to Cart
+                            </span>
+                        </Button>
                     </div>
                 </div>
 

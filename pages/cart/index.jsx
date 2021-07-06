@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout'
+import Layout from '@/components/layout/Layout'
 import { ChevronRightIcon, TrashIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { getSession, useSession } from 'next-auth/client'
 import NumberFormat from 'react-number-format'
-import Button from '@/components/Button'
+import Button from '@/components/ui/Button'
 
 const Cart = ({ cartProducts }) => {
     const router = useRouter()

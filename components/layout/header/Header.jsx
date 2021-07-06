@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { SearchIcon, ColorSwatchIcon, ShoppingCartIcon } from '@heroicons/react/outline'
 import { getSession, signOut, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
-import Button from '@/components/Button'
-import HeaderActiveLink from '@/components/header/HeaderActiveLink'
+import Button from '@/components/ui/Button'
+import HeaderActiveLink from '@/components/layout/header/HeaderActiveLink'
 
 const Header = () => {
     const router = useRouter()

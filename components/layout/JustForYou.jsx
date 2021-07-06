@@ -1,6 +1,6 @@
-import ProductItem from '@/components/productItem/ProductItem'
-import Button from '@/components/Button'
-import FancySecrionTitle from '@/components/FancySecrionTitle'
+import ProductItem from '@/components/productCard/ProductCard'
+import Button from '@/components/ui/Button'
+import FancySecrionTitle from '@/components/layout/FancySecrionTitle'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {
     return (
