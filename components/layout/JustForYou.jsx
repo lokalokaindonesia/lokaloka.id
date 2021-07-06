@@ -1,6 +1,5 @@
 import ProductItem from '@/components/productCard/ProductCard'
-import Button from '@/components/ui/Button'
-import FancySecrionTitle from '@/components/layout/FancySecrionTitle'
+import FancySecrionTitle from '@/components/ui/FancySecrionTitle'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {
     return (
@@ -23,11 +22,6 @@ const HighlightedSection = ({ sectionTitle, href, data }) => {
                         isRecommended={product.isRecommended}
                     />
                 ))}
-            </div>
-            <div className='w-full flex justify-center items-center'>
-                <Button href='#' size='lg' type='secondary'>
-                    Load More
-                </Button>
             </div>
         </div>
     )

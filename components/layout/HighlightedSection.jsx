@@ -2,7 +2,7 @@ import { ArrowRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import ProductItem from '@/components/productCard/ProductCard'
-import FancySecrionTitle from '@/components/layout/FancySecrionTitle'
+import FancySecrionTitle from '@/components/ui/FancySecrionTitle'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {
     return (

@@ -9,12 +9,12 @@ import moment from 'moment'
 import { useState, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import Layout from '@/components/layout/Layout'
-import Toast from '@/components/ui/toast'
+import Toast from '@/components/ui/Toast'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import VariantBadge from '@/components/ui/VariantBadge'
 import ProductItem from '@/components/productCard/ProductCard'
-import FancySecrionTitle from '@/components/layout/FancySecrionTitle'
+import FancySecrionTitle from '@/components/ui/FancySecrionTitle'
 
 const Product = ({ product, similarProducts, reviews }) => {
     const [session, loading] = useSession()
@@ -87,8 +87,7 @@ const Product = ({ product, similarProducts, reviews }) => {
             if (!updateCartProductQty) {
                 return console.log('something wrong when update product qty')
             }
-            router.push('/cart')
-            return
+            return router.push('/cart')
         }
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/carts`, {
             product: product._id,
