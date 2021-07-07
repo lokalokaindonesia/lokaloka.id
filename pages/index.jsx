@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Hero from '@/components/layout/Hero'
 import HighlightedSection from '@/components/layout/HighlightedSection'
 import JustForYou from '@/components/layout/JustForYou'
@@ -18,8 +19,8 @@ const Home = ({ products, promo, recommended }) => {
 }
 
 export const getServerSideProps = async () => {
-    const getProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`)
-    const products = await getProducts.json()
+    const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
+    const products = await getProducts.data
 
     const promo = await products.filter((item) => item.discount != 0)
     const recommended = await products.filter((item) => item.isRecommended == true)

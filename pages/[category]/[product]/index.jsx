@@ -74,7 +74,7 @@ const Product = ({ product, similarProducts, reviews }) => {
 
     // Add to Cart Handler
     const addToCart = async () => {
-        const getCartProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
+        const getCartProducts = await axios.get(`${process.env.NEXT_URL}/api/carts`)
         const cartProducts = await getCartProducts.data
 
         const sameProduct = cartProducts.find((item) => item.product.id === product.id)
@@ -289,7 +289,7 @@ const Product = ({ product, similarProducts, reviews }) => {
 }
 
 export const getServerSideProps = async ({ query }) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?slug=${query.product}`)
+    const res = await fetch(`${process.env.NEXT_URL}/api/products/${query.product}`)
     const product = await res.json()
 
     if (product.length === 0) {
@@ -298,15 +298,15 @@ export const getServerSideProps = async ({ query }) => {
         }
     }
 
-    const resSimilarProducts = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`)
+    const resSimilarProducts = await fetch(`${process.env.NEXT_URL}/api/products`)
     const similarProducts = await resSimilarProducts.json()
 
-    const resReviews = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reviews?product_eq=${product[0].id}`)
+    const resReviews = await fetch(`${process.env.NEXT_URL}/api/reviews/${product.id}`)
     const reviews = await resReviews.json()
 
     return {
         props: {
-            product: product[0],
+            product,
             similarProducts,
             reviews,
         },

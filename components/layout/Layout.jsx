@@ -11,7 +11,7 @@ const Layout = ({ title, children }) => {
             </Head>
 
             {/* Header - Navbar */}
-            <div className='sticky top-0 z-50 bg-white'>
+            <div className='sticky top-0 z-50 filter backdrop-blur-lg bg-opacity-75 bg-white drop-shadow-sm'>
                 <Header />
             </div>
 
