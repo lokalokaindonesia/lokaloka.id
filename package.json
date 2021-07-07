@@ -26,8 +26,7 @@
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
     "react-number-format": "^4.6.3",
-    "react-redux": "^7.2.4",
-    "strapi-provider-upload-do": "^3.5.4"
+    "react-redux": "^7.2.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.6",
