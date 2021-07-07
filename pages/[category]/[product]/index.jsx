@@ -84,19 +84,22 @@ const Product = ({ product, similarProducts, reviews }) => {
                 quantity: +sameProduct.quantity + quantity,
             })
 
-            if (!updateCartProductQty) {
+            if (!updateCartProductQty.data) {
                 return console.log('something wrong when update product qty')
             }
-            return router.push('/cart')
+            console.log(updateCartProductQty.data)
+            router.push('/cart')
+            return
         }
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/carts`, {
             product: product._id,
             user: session.id,
             quantity,
         })
-        if (!res) {
+        if (!res.data) {
             return console.log('something wrong')
         }
+        console.log(res.data)
         router.push('/cart')
     }
 

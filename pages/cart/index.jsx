@@ -238,6 +238,14 @@ export const getServerSideProps = async (context) => {
     const getCartProducts = await axios(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
     const cartProducts = await getCartProducts.data
 
+    if (!cartProducts) {
+        return {
+            props: {
+                notFound: true,
+            },
+        }
+    }
+
     return {
         props: {
             cartProducts,

@@ -1,3 +1,4 @@
+import axios from "axios";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
@@ -16,21 +17,18 @@ const options = {
 
             authorize: async (credentials, req) => {
                 const { email, password } = req.body
-                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/local`, {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': "application/json"
-                    },
-                    body: JSON.stringify({ identifier: email, password })
+                const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/local`, {
+                    identifier: email,
+                    password
                 })
 
-                const user = res.json()
+                const user = res.data
 
                 if (user) {
                     return user
-                } else {
-                    return null
                 }
+
+                return null
             }
         })
     ],
@@ -39,32 +37,47 @@ const options = {
         jwt: true,
     },
     callbacks: {
-        session: async (session, user) => {
-            session.jwt = user.jwt;
-            session.id = user.id;
-            return Promise.resolve(session);
-        },
-        jwt: async (token, user, account) => {
+        jwt: async (token, user, account, profile, isNewUser) => {
             const isSignIn = user ? true : false;
             if (isSignIn) {
                 const provider = account.provider === 'credentials' ? 'local' : account.provider
                 const accessToken = account.provider === 'credentials' ? user.jwt : account?.accessToken
 
+                if (account.provider !== 'google' || account.id === 'credentials') {
+                    try {
+                        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
+                            headers: {
+                                Authorization: 'Bearer ' + user.jwt
+                            }
+                        })
+
+                        const data = await response.data
+
+                        if (data) {
+                            token.jwt = user.jwt
+                            token.id = user.user.id
+                            token.name = user.user.name
+                            token.email = user.user.email
+                            return token
+                        }
+                    } catch (error) {
+                        return console.log({ message: error })
+                    }
+                }
+
                 const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/${provider}/callback?access_token=${accessToken}`);
                 const data = await response.json();
 
-                if (account.provider !== 'google' || account.id === 'credentials') {
-                    if (response.ok) {
-                        token.jwt = data.jwt;
-                        token.id = data.user.id;
-                        return
-                    }
-                    return console.log({ message: data.message[0].messages[0].message })
-                }
                 token.jwt = data.jwt;
                 token.id = data.user.id;
             }
             return Promise.resolve(token);
+        },
+        session: async (session, user) => {
+            console.log({ userini: user }, { sessionini: session })
+            session.jwt = user.jwt;
+            session.id = user.id;
+            return Promise.resolve(session);
         },
     },
 };

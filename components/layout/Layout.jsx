@@ -11,7 +11,9 @@ const Layout = ({ title, children }) => {
             </Head>
 
             {/* Header - Navbar */}
-            <Header />
+            <div className='sticky top-0 z-50 bg-white'>
+                <Header />
+            </div>
 
             {children}
 

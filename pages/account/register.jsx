@@ -2,7 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Head from 'next/head'
 import { useEffect, useState, useContext } from 'react'
+import { useSession, signIn, getProviders } from 'next-auth/client'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 const register = () => {
     const [email, setEmail] = useState('')
@@ -12,8 +14,28 @@ const register = () => {
 
     const router = useRouter()
 
-    const handleSubmit = (e) => {
+    const [session, loading] = useSession()
+
+    if (session) return router.push('/')
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        const register = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/local/register`, {
+            email,
+            password,
+            username,
+        })
+
+        const registerRes = await register.data
+
+        if (!registerRes) {
+            return console.log('failed to register')
+        }
+
+        console.log(registerRes)
+
+        return router.push('/account/login')
+        // console.log(e)
     }
 
     return (
@@ -31,7 +53,7 @@ const register = () => {
                         <div className='w-full h-scsreen'>
                             <h1 className='text-2xl md:text-4xl font-bold leading-loose'>Register an Account</h1>
 
-                            <form className='mt-6' method='POST' onSubmit={handleSubmit}>
+                            <form className='mt-6' method='POST' onSubmit={() => handleSubmit(event)}>
                                 <div>
                                     <label htmlFor='name' className='block text-gray-700'>
                                         Username
@@ -110,6 +132,7 @@ const register = () => {
 
                             <button
                                 type='button'
+                                onClick={() => signIn('google', { callbackUrl: process.env.NEXTAUTH_URL })}
                                 className='rounded-md w-full block bg-white transition duration-300 ease-in-out hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold  px-4 py-3 border border-gray-300'
                             >
                                 <div className='flex items-center justify-center'>

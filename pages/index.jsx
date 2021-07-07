@@ -1,9 +1,13 @@
+import { useSession } from 'next-auth/client'
 import Hero from '@/components/layout/Hero'
 import HighlightedSection from '@/components/layout/HighlightedSection'
 import JustForYou from '@/components/layout/JustForYou'
 import Layout from '@/components/layout/Layout'
 
 const Home = ({ products, promo, recommended }) => {
+    const session = useSession()
+
+    console.log(session)
     return (
         <Layout title='Liburan seru bareng Lokaloka.id'>
             {/* Hero */}
