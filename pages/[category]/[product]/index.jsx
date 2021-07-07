@@ -9,7 +9,6 @@ import moment from 'moment'
 import { useState, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
 import Layout from '@/components/layout/Layout'
-import Toast from '@/components/ui/Toast'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import VariantBadge from '@/components/ui/VariantBadge'
@@ -74,23 +73,22 @@ const Product = ({ product, similarProducts, reviews }) => {
 
     // Add to Cart Handler
     const addToCart = async () => {
-        const getCartProducts = await axios.get(`${process.env.NEXT_URL}/api/carts`)
+        const getCartProducts = await axios.get(`/api/cart`)
         const cartProducts = await getCartProducts.data
 
-        const sameProduct = cartProducts.find((item) => item.product.id === product.id)
+        const sameProduct = await cartProducts.find((item) => item.product.id === product.id)
 
-        if (sameProduct != undefined) {
-            const updateCartProductQty = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/carts/${sameProduct.id}`, {
+        if (sameProduct) {
+            const { data } = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/carts/${sameProduct.id}`, {
                 quantity: +sameProduct.quantity + quantity,
             })
 
-            if (!updateCartProductQty.data) {
+            if (!data) {
                 return console.log('something wrong when update product qty')
             }
-            console.log(updateCartProductQty.data)
-            router.push('/cart')
-            return
+            return router.push('/cart')
         }
+
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/carts`, {
             product: product._id,
             user: session.id,
@@ -99,8 +97,7 @@ const Product = ({ product, similarProducts, reviews }) => {
         if (!res.data) {
             return console.log('something wrong')
         }
-        console.log(res.data)
-        router.push('/cart')
+        return router.push('/cart')
     }
 
     return (
@@ -230,10 +227,8 @@ const Product = ({ product, similarProducts, reviews }) => {
                             <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
                             <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-2xl font-extrabold text-blueGray-800' />
                         </div>
-                        <Button type='primary' displayType='flex' size='lg' width='full'>
-                            <span className='block' onClick={() => addToCart()}>
-                                Add to Cart
-                            </span>
+                        <Button type='primary' displayType='flex' size='lg' width='full' href={() => addToCart()}>
+                            <span>Add to Cart</span>
                         </Button>
                     </div>
                 </div>

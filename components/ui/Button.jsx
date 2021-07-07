@@ -1,5 +1,5 @@
 import Link from 'next/link'
-const Button = ({ children, type, size, href = '#', width = 'max', display = 'block' }) => {
+const Button = ({ children, type, size, href, width = 'max', display = 'block' }) => {
     const sizes = {
         sm: 'px-3 py-1 text-sm',
         base: 'px-4 py-1',
@@ -31,9 +31,9 @@ const Button = ({ children, type, size, href = '#', width = 'max', display = 'bl
     const pickedDisplay = displayStyle[display]
 
     return (
-        <Link href={`${href}`}>
-            <a className={`transition ease-in-out duration-300 hover:scale-95 rounded-md ${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}>{children}</a>
-        </Link>
+        <button onClick={href} className={`transition ease-in-out duration-300 hover:scale-95 rounded-md ${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}>
+            {children}
+        </button>
     )
 }
 

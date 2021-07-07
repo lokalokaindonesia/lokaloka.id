@@ -54,14 +54,12 @@ const Header = () => {
                     </button>
                 </Link>
                 {session ? (
-                    <div onClick={() => logoutHandler()}>
-                        <Button size='md' width='max' display='block' type='logout'>
-                            <span>Logout</span>
-                        </Button>
-                    </div>
+                    <Button size='md' width='max' display='block' href={() => logoutHandler()} type='logout'>
+                        <span>Logout</span>
+                    </Button>
                 ) : (
                     <>
-                        <Button href='/account/login' size='md' width='max' display='block' type='secondary'>
+                        <Button href={() => router.push('/account/login')} size='md' width='max' display='block' type='secondary'>
                             <span>Sign In</span>
                         </Button>
                     </>

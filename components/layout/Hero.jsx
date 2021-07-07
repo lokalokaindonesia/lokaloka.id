@@ -1,6 +1,8 @@
 import { SparklesIcon, ArrowRightIcon } from '@heroicons/react/solid'
+import { useRouter } from 'next/router'
 import Button from '@/components/ui/Button'
 const Hero = () => {
+    const router = useRouter()
     const backgroundImage = {
         backgroundImage: 'url("./images/hero-images-min.jpg")',
         maxWidth: '100%',
@@ -30,7 +32,7 @@ const Hero = () => {
                         Order only at <b>Lokaloka</b>, take an <b>advantage</b> of your time for vacation.
                     </p>
                 </div>
-                <Button size='xl' type='primary' display='flex' width='max'>
+                <Button size='xl' type='primary' display='flex' width='max' href={() => router.push(`/`)}>
                     <span className=''>Show Now</span>
                     <ArrowRightIcon className='h-5' />
                 </Button>
