@@ -17,12 +17,27 @@ const Cart = ({ cartProducts }) => {
     const [cart, setCart] = useState(cartProducts)
     const [summaryTotal, setSummaryTotal] = useState(0)
     const [discountTotal, setDiscountTotal] = useState(0)
+    const [subTotal, setSubTotal] = useState(0)
     const [grandTotal, setGrandTotal] = useState(0)
+    const [couponPromo, setCouponPromo] = useState(0)
+    const [coupon, setCoupon] = useState(null)
+    const [couponInput, setCouponInput] = useState(null)
 
+    // * QTY Effect
     useEffect(() => {
-        countGrandTotal(), countSummaryTotal(), countDiscountTotal(), cart
+        countGrandTotal(), countSummaryTotal(), countDiscountTotal(), cart, countCouponPromo(), countSubTotal()
         return () => {}
-    }, [cart, summaryTotal, discountTotal])
+    }, [cart, summaryTotal, discountTotal, coupon, couponPromo])
+    // * END QTY Effect
+
+    // * PRICE
+    const countCouponPromo = async () => {
+        if (coupon) {
+            setCouponPromo((subTotal * coupon.discount) / 100)
+            return
+        }
+        return 0
+    }
 
     const countSummaryTotal = async () => {
         const sum = cart.reduce((currentSummary, product) => currentSummary + +product.quantity * +product.product.sellingPrice, 0)
@@ -34,9 +49,17 @@ const Cart = ({ cartProducts }) => {
         setDiscountTotal(sum)
     }
 
-    const countGrandTotal = async () => {
-        setGrandTotal(summaryTotal - discountTotal)
+    const countSubTotal = async () => {
+        return setSubTotal(summaryTotal - discountTotal)
     }
+
+    const countGrandTotal = async () => {
+        if (!coupon) {
+            return setGrandTotal(subTotal)
+        }
+        return setGrandTotal(subTotal - couponPromo)
+    }
+    // * END PRICE
 
     // * Qty Func
     const addQty = async (product) => {
@@ -74,6 +97,29 @@ const Cart = ({ cartProducts }) => {
 
         setCart(cart.filter((item) => item.id !== data.id))
     }
+    //  * END Qty Func
+
+    // * Handle Coupon Input
+    const handleCouponInput = (e) => {
+        e.preventDefault()
+        setCouponInput(e.target.value)
+    }
+    // * END Handle Coupon Input
+
+    //  * GET Coupons
+    const getCoupon = async (e) => {
+        e.preventDefault()
+        if (!couponInput) {
+            return alert('Fill the form')
+        }
+        const { data } = await axios.get(`/api/coupons`)
+        const couponData = await data.find((c) => c.code === couponInput)
+        if (!couponData) {
+            return alert('Coupon not found!')
+        }
+        setCoupon(couponData)
+    }
+    // * END GET Coupon
 
     return (
         <Layout title='Lokaloka Cart'>
@@ -195,16 +241,17 @@ const Cart = ({ cartProducts }) => {
                             </div>
                             <div className='w-3/12 flex flex-col space-y-4'>
                                 {/* Coupon Form */}
-                                <div className='flex items-center '>
+                                <form className='flex items-center' onSubmit={getCoupon} method='get'>
                                     <input
                                         className='px-3 py-2 rounded-l w-full border-2 focus:border-blue-500 focus:border-2 focus:ring-0 border-blue-400 transition ease-in-out duration-3007 font-bold text-blueGray-800'
                                         placeholder='Coupon Code'
+                                        onChange={handleCouponInput}
                                         type='text'
                                     />
-                                    <button type='button' className='rounded-r px-3 py-2 text-white font-bold border-2 border-blue-500 bg-blue-500'>
+                                    <button type='submit' className='rounded-r px-3 py-2 text-white font-bold border-2 border-blue-500 bg-blue-500'>
                                         Apply
                                     </button>
-                                </div>
+                                </form>
 
                                 <hr />
 
@@ -226,6 +273,16 @@ const Cart = ({ cartProducts }) => {
                                 <hr />
 
                                 {/* Total */}
+                                <div className='flex justify-between items-center'>
+                                    <div className='text-blueGray-500 font-semibold flex justify-between items-center'>Sub Total</div>
+                                    <NumberFormat value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
+                                </div>
+                                {coupon && (
+                                    <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
+                                        <span>Coupon {coupon.discount}%</span>
+                                        <NumberFormat value={couponPromo} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
+                                    </div>
+                                )}
                                 <div className='flex justify-between items-center'>
                                     <div className='text-xl font-bold text-blueGray-800'>Total</div>
                                     <NumberFormat value={grandTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-xl font-bold text-blue-500' />
