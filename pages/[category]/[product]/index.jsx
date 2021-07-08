@@ -74,7 +74,7 @@ const Product = ({ product, similarProducts, reviews }) => {
     // Add to Cart Handler
     const addToCart = async () => {
         const getCartProducts = await fetch(`/api/cart`)
-        const cartProducts = await getCartProducts.data
+        const cartProducts = await getCartProducts.json()
 
         const sameProduct = await cartProducts.find((item) => item.product.id === product.id)
 
@@ -285,8 +285,8 @@ const Product = ({ product, similarProducts, reviews }) => {
 
 // ! Static Path casuing error on build
 export const getStaticPaths = async () => {
-    const getProducts = await fetch(`${process.env.NEXT_URL}/api/products`)
-    const data = await getProducts.json()
+    const getProducts = await axios(`${process.env.NEXT_URL}/api/products`)
+    const data = await getProducts.data
 
     const paths = data.map((product) => {
         return { params: { category: product.product_category.slug, product: product.slug } }
@@ -299,8 +299,8 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }) => {
-    const getProduct = await fetch(`${process.env.NEXT_URL}/api/products/${params.product}`)
-    const data = await getProduct.json()
+    const getProduct = await axios(`${process.env.NEXT_URL}/api/products/${params.product}`)
+    const data = await getProduct.data
 
     if (!data) {
         return {
@@ -308,11 +308,11 @@ export const getStaticProps = async ({ params }) => {
         }
     }
 
-    const resSimilarProducts = await fetch(`${process.env.NEXT_URL}/api/products`)
-    const similarProducts = await resSimilarProducts.json()
+    const resSimilarProducts = await axios(`${process.env.NEXT_URL}/api/products`)
+    const similarProducts = await resSimilarProducts.data
 
-    const resReviews = await fetch(`${process.env.NEXT_URL}/api/reviews/${data.id}`)
-    const reviews = await resReviews.json()
+    const resReviews = await axios(`${process.env.NEXT_URL}/api/reviews/${data.id}`)
+    const reviews = await resReviews.data
 
     return {
         props: {

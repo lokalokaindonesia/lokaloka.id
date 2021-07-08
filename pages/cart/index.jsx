@@ -27,7 +27,7 @@ const Cart = ({ cartProducts }) => {
     useEffect(() => {
         countGrandTotal(), countSummaryTotal(), countDiscountTotal(), cart, countCouponPromo(), countSubTotal()
         return () => {}
-    }, [cart, summaryTotal, discountTotal, coupon, couponPromo])
+    }, [cart, summaryTotal, discountTotal, coupon, couponPromo, subTotal])
     // * END QTY Effect
 
     // * PRICE
@@ -243,12 +243,24 @@ const Cart = ({ cartProducts }) => {
                                 {/* Coupon Form */}
                                 <form className='flex items-center' onSubmit={getCoupon} method='get'>
                                     <input
-                                        className='px-3 py-2 rounded-l w-full border-2 focus:border-blue-500 focus:border-2 focus:ring-0 border-blue-400 transition ease-in-out duration-3007 font-bold text-blueGray-800'
+                                        className={
+                                            coupon
+                                                ? 'px-3 py-2 rounded-l w-full border-2 focus:border-green-500 focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-blueGray-400'
+                                                : 'px-3 py-2 rounded-l w-full border-2 focus:border-blue-500 focus:border-2 focus:ring-0 border-blue-500 transition ease-in-out duration-300 font-bold text-blueGray-800'
+                                        }
                                         placeholder='Coupon Code'
+                                        disabled={coupon && 'disabled'}
                                         onChange={handleCouponInput}
                                         type='text'
                                     />
-                                    <button type='submit' className='rounded-r px-3 py-2 text-white font-bold border-2 border-blue-500 bg-blue-500'>
+                                    <button
+                                        type='submit'
+                                        className={
+                                            coupon
+                                                ? 'rounded-r px-3 py-2 text-white font-bold border-2 border-green-300 bg-green-300'
+                                                : 'rounded-r px-3 py-2 text-white font-bold border-2 border-blue-500 bg-blue-500'
+                                        }
+                                    >
                                         Apply
                                     </button>
                                 </form>
