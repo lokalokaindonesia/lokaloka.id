@@ -255,9 +255,7 @@ export const getServerSideProps = async (context) => {
 
     if (!cartProducts) {
         return {
-            props: {
-                notFound: true,
-            },
+            notFound: true,
         }
     }
 

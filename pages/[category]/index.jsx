@@ -26,6 +26,12 @@ export const getStaticProps = async ({ params }) => {
     const res = await fetch(`${process.env.NEXT_URL}/api/product-categories/${params.category}`)
     const data = await res.json()
 
+    if (!data) {
+        return {
+            notFound: true,
+        }
+    }
+
     return {
         props: { category: data },
     }

@@ -1,4 +1,3 @@
-import axios from 'axios'
 import Hero from '@/components/layout/Hero'
 import HighlightedSection from '@/components/layout/HighlightedSection'
 import JustForYou from '@/components/layout/JustForYou'
@@ -19,8 +18,8 @@ const Home = ({ products, promo, recommended }) => {
 }
 
 export const getStaticProps = async () => {
-    const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
-    const products = await getProducts.data
+    const getProducts = await fetch(`${process.env.NEXT_URL}/api/products`)
+    const products = await getProducts.json()
 
     const promo = await products.filter((item) => item.discount != 0)
     const recommended = await products.filter((item) => item.isRecommended == true)
