@@ -12,7 +12,7 @@ const Category = ({ category }) => {
 }
 
 export const getStaticPaths = async () => {
-    const res = await fetch(`${process.env.NEXT_URL}/api/product-categories`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product-categories`)
     const categories = await res.json()
 
     const paths = categories.map((category) => {
@@ -23,7 +23,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }) => {
-    const res = await fetch(`${process.env.NEXT_URL}/api/product-categories/${params.category}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product-categories/${params.category}`)
     const data = await res.json()
 
     if (!data) {
