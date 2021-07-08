@@ -271,7 +271,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                     price={item.sellingPrice}
                                     discount={item.discount}
                                     isRecommended={item.isRecommended}
-                                    category={item.product_category.name}
+                                    category={item.product_category.slug}
                                     slug={item.slug}
                                 />
                             )
@@ -283,25 +283,37 @@ const Product = ({ product, similarProducts, reviews }) => {
     )
 }
 
-export const getServerSideProps = async ({ query }) => {
-    const res = await fetch(`${process.env.NEXT_URL}/api/products/${query.product}`)
-    const product = await res.json()
+export const getStaticPaths = async () => {
+    const { data } = await axios.get(`${process.env.NEXT_URL}/api/products`)
 
-    if (product.length === 0) {
+    const paths = data.map((product) => {
+        return { params: { category: product.product_category.slug, product: product.slug } }
+    })
+
+    return {
+        paths,
+        fallback: false,
+    }
+}
+
+export const getStaticProps = async ({ params }) => {
+    const { data } = await axios.get(`${process.env.NEXT_URL}/api/products/${params.product}`)
+
+    if (!data) {
         return {
             notFound: true,
         }
     }
 
-    const resSimilarProducts = await fetch(`${process.env.NEXT_URL}/api/products`)
-    const similarProducts = await resSimilarProducts.json()
+    const resSimilarProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
+    const similarProducts = await resSimilarProducts.data
 
-    const resReviews = await fetch(`${process.env.NEXT_URL}/api/reviews/${product.id}`)
-    const reviews = await resReviews.json()
+    const resReviews = await axios.get(`${process.env.NEXT_URL}/api/reviews/${data.id}`)
+    const reviews = await resReviews.data
 
     return {
         props: {
-            product,
+            product: data,
             similarProducts,
             reviews,
         },

@@ -74,7 +74,6 @@ const options = {
             return Promise.resolve(token);
         },
         session: async (session, user) => {
-            console.log({ userini: user }, { sessionini: session })
             session.jwt = user.jwt;
             session.id = user.id;
             return Promise.resolve(session);

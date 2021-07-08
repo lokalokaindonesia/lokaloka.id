@@ -11,7 +11,18 @@ const Category = ({ category }) => {
     )
 }
 
-export const getServerSideProps = async ({ params }) => {
+export const getStaticPaths = async () => {
+    const res = await fetch(`${process.env.NEXT_URL}/api/product-categories`)
+    const categories = await res.json()
+
+    const paths = categories.map((category) => {
+        return { params: { category: category.slug } }
+    })
+
+    return { paths, fallback: false }
+}
+
+export const getStaticProps = async ({ params }) => {
     const res = await fetch(`${process.env.NEXT_URL}/api/product-categories/${params.category}`)
     const data = await res.json()
 

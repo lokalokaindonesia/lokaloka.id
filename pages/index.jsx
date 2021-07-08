@@ -18,7 +18,7 @@ const Home = ({ products, promo, recommended }) => {
     )
 }
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
     const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
     const products = await getProducts.data
 
