@@ -121,6 +121,12 @@ const Cart = ({ cartProducts }) => {
     }
     // * END GET Coupon
 
+    // * DELETE COUPON
+    const deleteCoupon = async () => {
+        setCoupon(null)
+    }
+    // * END DELETE COUPON
+
     return (
         <Layout title='Lokaloka Cart'>
             {cart.length == 0 ? (
@@ -291,7 +297,12 @@ const Cart = ({ cartProducts }) => {
                                 </div>
                                 {coupon && (
                                     <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
-                                        <span>Coupon {coupon.discount}%</span>
+                                        <div className='flex space-x-2 items-center'>
+                                            <span>Coupon {coupon.discount}%</span>
+                                            <button type='button' onClick={() => deleteCoupon()}>
+                                                <TrashIcon className='text-red-500 w-4 h-4' />
+                                            </button>
+                                        </div>
                                         <NumberFormat value={couponPromo} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
                                     </div>
                                 )}
