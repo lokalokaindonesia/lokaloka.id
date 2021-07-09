@@ -4,7 +4,7 @@ import Header from '@/components/layout/header/Header'
 
 const Layout = ({ title, children }) => {
     return (
-        <div>
+        <div className='bg-gradient-to-bl from-blueGray-100 to-blueGray-50'>
             <Head>
                 <title>{title}</title>
                 <meta name='description' content='Lokaloka Indonesia - Belanja oleh-oleh dengan mudah !!!' />
