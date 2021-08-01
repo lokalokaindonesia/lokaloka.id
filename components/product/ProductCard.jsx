@@ -8,7 +8,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
 
     return (
         <Link href={`/${category}/${slug}`}>
-            <button className='cursor-pointer hover:scale-95 shadow-sm w-full ring-1 ring-blueGray-200 hover:bg-blue-100 transition ease-in-out duration-300 rounded-md'>
+            <button className='cursor-pointer hover:scale-95 shadow-sm w-full bg-white ring-1 ring-blueGray-200 hover:bg-blue-100 transition ease-in-out duration-300 rounded-md'>
                 {/* Product Image */}
                 <Image
                     className='rounded-t-md hover:scale-105 transition ease-in-out duration-300'

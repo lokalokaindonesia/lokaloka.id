@@ -207,7 +207,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                         </div>
                         <div className='flex flex-col space-y-2'>
                             <div className='text-sm font-semibold text-blueGray-600'>Quantity</div>
-                            <div className='flex items-center border border-blueGray-300 rounded'>
+                            <div className='flex items-center border border-blueGray-300 bg-white rounded'>
                                 <div
                                     onClick={reduceQty}
                                     className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r border-blueGray-300 text-blueGray-800'
@@ -283,9 +283,8 @@ const Product = ({ product, similarProducts, reviews }) => {
     )
 }
 
-// ! Static Path casuing error on build
 export const getStaticPaths = async () => {
-    const getProducts = await axios(`${process.env.NEXT_URL}/api/products`)
+    const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
     const data = await getProducts.data
 
     const paths = data.map((product) => {
@@ -299,7 +298,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }) => {
-    const getProduct = await axios(`${process.env.NEXT_URL}/api/products/${params.product}`)
+    const getProduct = await axios.get(`${process.env.NEXT_URL}/api/products/${params.product}`)
     const data = await getProduct.data
 
     if (!data) {

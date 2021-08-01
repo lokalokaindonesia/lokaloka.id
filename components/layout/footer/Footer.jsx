@@ -55,7 +55,7 @@ const Footer = () => {
                             </Link>
                         </li>
                         <li>
-                            <a href='https://kuloaja.com'>
+                            <a href='https://kuloaja.com' target='_blank'>
                                 <div className='underline lg:no-underline cursor-pointer'>Courier by KULO</div>
                             </a>
                         </li>

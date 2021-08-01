@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useRouter } from 'next/router'
 import Layout from '@/components/layout/Layout'
 
@@ -12,8 +13,8 @@ const Category = ({ category }) => {
 }
 
 export const getStaticPaths = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product-categories`)
-    const categories = await res.json()
+    const res = await axios.get(`${process.env.NEXT_URL}/api/product-categories`)
+    const categories = await res.data
 
     const paths = categories.map((category) => {
         return { params: { category: category.slug } }
@@ -23,8 +24,10 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/product-categories/${params.category}`)
-    const data = await res.json()
+    const res = await axios.get(`${process.env.NEXT_URL}/api/product-categories/${params.category}`)
+    const data = await res.data
+
+    console.log(data)
 
     if (!data) {
         return {
