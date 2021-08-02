@@ -1,37 +1,43 @@
 import Link from 'next/link'
-const Button = ({ children, type, size, href, width = 'max', display = 'block' }) => {
+const Button = ({ children, type, size, href, width = 'max', display = 'block', buttonType = 'button' }) => {
     const sizes = {
         sm: 'px-3 py-1 text-sm',
         base: 'px-4 py-1',
         md: 'px-6 py-2 text-md',
         lg: 'px-8 py-3 text-lg',
         xl: 'px-10 py-4 text-xl',
+        ghostSize: 'px-4 py-3',
     }
     const types = {
-        primary: `bg-blue-500 text-white font-bold transiton duration-300 ease-in-out hover:bg-blue-600`,
-        secondary: `bg-blue-100 text-blue-500 font-bold transiton duration-300 ease-in-out hover:bg-blue-200`,
-        tertiary: `bg-orange-500 text-white font-bold transiton duration-300 ease-in-out hover:bg-orange-600`,
-        tertiaryAccent: `bg-orange-100 text-orange-500 font-bold transiton duration-300 ease-in-out hover:bg-orange-200`,
-        logout: `bg-red-100 text-red-500 font-bold transiton duration-300 ease-in-out hover:bg-red-200`,
+        primary: `drop-shadow bg-blue-500 text-white font-bold transiton duration-300 ease-in-out hover:bg-blue-600`,
+        secondary: `drop-shadow bg-blue-100 text-blue-500 font-bold transiton duration-300 ease-in-out hover:bg-blue-200`,
+        tertiary: `drop-shadow bg-orange-500 text-white font-bold transiton duration-300 ease-in-out hover:bg-orange-600`,
+        tertiaryAccent: `drop-shadow bg-orange-100 text-orange-500 font-bold transiton duration-300 ease-in-out hover:bg-orange-200`,
+        logout: `drop-shadow bg-red-100 text-red-500 font-bold transiton duration-300 ease-in-out hover:bg-red-200`,
+        ghost: `drop-shadow bg-white text-blueGray-800 font-bold transiton duration-300 ease-in-out hover:bg-white border border-blueGray-200`,
     }
 
-    const widthStyle = {
+    const widthStyles = {
         max: 'w-max',
         full: 'w-full',
     }
 
-    const displayStyle = {
+    const displayStyles = {
         flex: 'flex justify-between items-center space-x-8',
         block: 'text-center',
     }
 
     const pickedtype = types[type]
     const pickedSize = sizes[size]
-    const pickedWidth = widthStyle[width]
-    const pickedDisplay = displayStyle[display]
+    const pickedWidth = widthStyles[width]
+    const pickedDisplay = displayStyles[display]
 
     return (
-        <button onClick={href} className={`transition ease-in-out duration-300 hover:scale-95 rounded-md ${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}>
+        <button
+            type={buttonType}
+            onClick={href}
+            className={`transition ease-in-out duration-300 hover:scale-95 rounded-md ${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}
+        >
             {children}
         </button>
     )

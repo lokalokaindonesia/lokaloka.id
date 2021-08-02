@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <div>
             <PaymentGatewayFooter />
-            <div className='w-full h-auto bg-gray-300 py-12 '>
+            <div className='w-full h-auto bg-blueGray-200 py-12 '>
                 <div className='container mx-auto grid grid-flow-col grid-cols-4'>
                     {/* 1 */}
                     <div className='flex flex-col space-y-4'>
@@ -76,6 +76,9 @@ const Footer = () => {
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div className='w-full h-auto bg-blueGray-100 py-4 flex items-center justify-center'>
+                Made with ❤️ from &nbsp; <b>Lokaloka Group</b>
             </div>
         </div>
     )

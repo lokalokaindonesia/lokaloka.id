@@ -8,6 +8,8 @@ import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart, FaCheckCircle } fro
 import moment from 'moment'
 import { useState, useEffect } from 'react'
 import NumberFormat from 'react-number-format'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer, toast } from 'react-toastify'
 import Layout from '@/components/layout/Layout'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
@@ -16,6 +18,10 @@ import ProductCard from '@/components/product/ProductCard'
 import FancySecrionTitle from '@/components/ui/FancySecrionTitle'
 
 const Product = ({ product, similarProducts, reviews }) => {
+    const addToCartSuccessToast = () => toast.success('Nice move 😍')
+
+    const addToCartFailedToast = () => toast.error('Ooops, you failed 😢')
+
     const [session, loading] = useSession()
 
     const discountPrice = product.sellingPrice - (product.sellingPrice * product.discount) / 100
@@ -86,7 +92,8 @@ const Product = ({ product, similarProducts, reviews }) => {
             if (!data) {
                 return console.log('something wrong when update product qty')
             }
-            return router.push('/cart')
+            // return
+            return addToCartSuccessToast()
         }
 
         const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/carts`, {
@@ -95,13 +102,15 @@ const Product = ({ product, similarProducts, reviews }) => {
             quantity,
         })
         if (!res.data) {
-            return console.log('something wrong')
+            return addToCartFailedToast()
         }
-        return router.push('/cart')
+        // return
+        return addToCartSuccessToast()
     }
 
     return (
         <Layout title={product.name}>
+            <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div className='container mx-auto'>
                 <div className='w-full flex space-x-2 items-center mt-4'>
                     <div className='text-blue-700 hover:text-blue-800'>

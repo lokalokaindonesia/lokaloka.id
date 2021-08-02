@@ -3,16 +3,17 @@ import { ChevronRightIcon, TrashIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
 import axios from 'axios'
-import { useRouter } from 'next/router'
+import router, { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
+import { setOrder } from '@/redux/orderSlice'
 import { useState, useEffect } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { getSession, useSession } from 'next-auth/client'
 import NumberFormat from 'react-number-format'
 import Button from '@/components/ui/Button'
 
-const Cart = ({ cartProducts }) => {
+const Cart = ({ cartProducts, session }) => {
     const router = useRouter()
-    const [session, loading] = useSession()
 
     const [cart, setCart] = useState(cartProducts)
     const [summaryTotal, setSummaryTotal] = useState(0)
@@ -22,6 +23,8 @@ const Cart = ({ cartProducts }) => {
     const [couponPromo, setCouponPromo] = useState(0)
     const [coupon, setCoupon] = useState(null)
     const [couponInput, setCouponInput] = useState(null)
+
+    const dispatch = useDispatch()
 
     // * QTY Effect
     useEffect(() => {
@@ -123,9 +126,22 @@ const Cart = ({ cartProducts }) => {
 
     // * DELETE COUPON
     const deleteCoupon = async () => {
-        setCoupon(null)
+        setCoupon('')
     }
     // * END DELETE COUPON
+
+    // * SET ORDER DATA AND CHECKOUT
+    const checkout = async () => {
+        const totalQuantity = cart.reduce((a, b) => +a + +b.quantity, 0)
+        const orderData = {
+            cart,
+            grandTotal,
+            totalQuantity,
+        }
+        dispatch(setOrder(orderData))
+        return router.push('/checkout')
+    }
+    // * END SET ORDER DATA AND CHECKOUT
 
     return (
         <Layout title='Lokaloka Cart'>
@@ -155,7 +171,7 @@ const Cart = ({ cartProducts }) => {
                         <h1 className='text-blueGray-800 font-extrabold text-3xl'>Cart</h1>
                     </div>
                     <div className='flex flex-col space-y-8 mb-12'>
-                        <div className='flex justify-between space-x-12'>
+                        <div className='flex justify-between space-x-5'>
                             <div className='w-9/12'>
                                 <div className='flex flex-col space-y-4'>
                                     {/* Product Cart Item */}
@@ -166,7 +182,7 @@ const Cart = ({ cartProducts }) => {
                                             const isDiscount = product.product.discount !== 0 && product.product.discount !== null ? true : false
                                             const xPrice = isDiscount ? discountPrice : product.product.sellingPrice
                                             return (
-                                                <div key={product._id} className='p-4 rounded-md border border-blueGray-300'>
+                                                <div key={product._id} className='p-4 rounded-md border drop-shadow-sm bg-white border-blueGray-300'>
                                                     <div className='flex space-y-4 flex-col'>
                                                         <div className='flex space-x-4 items-center'>
                                                             <div className='flex space-x-4 items-center w-full'>
@@ -178,6 +194,7 @@ const Cart = ({ cartProducts }) => {
                                                                             alt={product.product.name}
                                                                             src={product.product.images[0].formats.medium.url}
                                                                             layout='responsive'
+                                                                            className='rounded'
                                                                             width={1}
                                                                             height={1}
                                                                             objectFit='cover'
@@ -245,79 +262,81 @@ const Cart = ({ cartProducts }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='w-3/12 flex flex-col space-y-4'>
-                                {/* Coupon Form */}
-                                <form className='flex items-center' onSubmit={getCoupon} method='get'>
-                                    <input
-                                        className={
-                                            coupon
-                                                ? 'px-3 py-2 rounded-l w-full border-2 focus:border-green-500 focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-blueGray-400'
-                                                : 'px-3 py-2 rounded-l w-full border-2 focus:border-blue-500 focus:border-2 focus:ring-0 border-blue-500 transition ease-in-out duration-300 font-bold text-blueGray-800'
-                                        }
-                                        placeholder='Coupon Code'
-                                        disabled={coupon && 'disabled'}
-                                        onChange={handleCouponInput}
-                                        type='text'
-                                    />
-                                    <button
-                                        type='submit'
-                                        className={
-                                            coupon
-                                                ? 'rounded-r px-3 py-2 text-white font-bold border-2 border-green-300 bg-green-300'
-                                                : 'rounded-r px-3 py-2 text-white font-bold border-2 border-blue-500 bg-blue-500'
-                                        }
-                                    >
-                                        Apply
-                                    </button>
-                                </form>
-
-                                <hr />
-
-                                {/* Summary */}
-                                <div className='flex flex-col space-y-2'>
-                                    <div className='text-xl font-bold text-blueGray-800'>Summary</div>
-                                    <div className='flex flex-col space-y-1'>
-                                        <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
-                                            <span>Total Price</span>
-                                            <NumberFormat value={summaryTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
-                                        </div>
-                                        <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
-                                            <span>Total Discount</span>
-                                            <NumberFormat value={discountTotal} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
+                            <div className='w-3/12'>
+                                <div className='sticky top-28 p-4 bg-white border drop-shadow-sm border-blueGray-300 h-auto rounded-md flex flex-col space-y-4'>
+                                    {/* Coupon Form */}
+                                    <form className='flex items-center' onSubmit={getCoupon} method='get'>
+                                        <input
+                                            className={
+                                                coupon
+                                                    ? 'px-3 py-2 rounded-l w-full border-2 focus:border-green-500 focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-blueGray-400'
+                                                    : 'px-3 py-2 rounded-l w-full border-2 focus:border-blueGray-500 focus:border-2 focus:ring-0 border-blueGray-500 transition ease-in-out duration-300 font-bold text-blueGray-800'
+                                            }
+                                            placeholder='Coupon Code'
+                                            disabled={coupon && 'disabled'}
+                                            onChange={handleCouponInput}
+                                            type='text'
+                                        />
+                                        <button
+                                            type='submit'
+                                            className={
+                                                coupon
+                                                    ? 'rounded-r px-3 py-2 text-white font-bold border-2 border-green-300 bg-green-300'
+                                                    : 'rounded-r px-3 py-2 text-white font-bold border-2 border-blueGray-500 bg-blueGray-500'
+                                            }
+                                        >
+                                            Apply
+                                        </button>
+                                    </form>
+                                    <hr />
+                                    {/* Summary */}
+                                    <div className='flex flex-col space-y-2'>
+                                        <div className='text-xl font-bold text-blueGray-800'>Summary</div>
+                                        <div className='flex flex-col space-y-1'>
+                                            <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
+                                                <span>Total Price</span>
+                                                <NumberFormat value={summaryTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
+                                            </div>
+                                            <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
+                                                <span>Total Discount</span>
+                                                <NumberFormat value={discountTotal} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <hr />
-
-                                {/* Total */}
-                                <div className='flex justify-between items-center'>
-                                    <div className='text-blueGray-500 font-semibold flex justify-between items-center'>Sub Total</div>
-                                    <NumberFormat value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
-                                </div>
-                                {coupon && (
-                                    <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
-                                        <div className='flex space-x-2 items-center'>
-                                            <span>Coupon {coupon.discount}%</span>
-                                            <button type='button' onClick={() => deleteCoupon()}>
-                                                <TrashIcon className='text-red-500 w-4 h-4' />
-                                            </button>
-                                        </div>
-                                        <NumberFormat value={couponPromo} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
+                                    <hr />
+                                    {/* Total */}
+                                    <div className='flex justify-between items-center'>
+                                        <div className='text-blueGray-500 font-semibold flex justify-between items-center'>Sub Total</div>
+                                        <NumberFormat value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                     </div>
-                                )}
-                                <div className='flex justify-between items-center'>
-                                    <div className='text-xl font-bold text-blueGray-800'>Total</div>
-                                    <NumberFormat value={grandTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-xl font-bold text-blue-500' />
+                                    {coupon && (
+                                        <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
+                                            <div className='flex space-x-2 items-center'>
+                                                <span>Coupon {coupon.discount}%</span>
+                                                <button type='button' onClick={() => deleteCoupon()}>
+                                                    <TrashIcon className='text-red-500 w-4 h-4' />
+                                                </button>
+                                            </div>
+                                            <NumberFormat value={couponPromo} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
+                                        </div>
+                                    )}
+                                    <div className='flex justify-between items-center'>
+                                        <div className='text-xl font-bold text-blueGray-800'>Total</div>
+                                        <NumberFormat
+                                            value={grandTotal}
+                                            displayType={'text'}
+                                            thousandSeparator={true}
+                                            prefix={'Rp. '}
+                                            className='text-xl font-bold text-blue-500'
+                                        />
+                                    </div>
+                                    <hr />
+                                    {/* Checkout Button */}
+                                    <Button href={() => checkout()} type='primary' size='lg' width='full' display='flex'>
+                                        <span>Checkout</span>
+                                        <FaChevronRight className='w-6' />
+                                    </Button>
                                 </div>
-
-                                <hr />
-
-                                {/* Checkout Button */}
-                                <Button href={() => router.push('/cart')} type='primary' size='lg' width='full' display='flex'>
-                                    <span>Checkout</span>
-                                    <FaChevronRight className='w-6' />
-                                </Button>
                             </div>
                         </div>
                     </div>
@@ -329,6 +348,12 @@ const Cart = ({ cartProducts }) => {
 
 export const getServerSideProps = async (context) => {
     const session = await getSession(context)
+
+    if (!session) {
+        return {
+            notFound: true,
+        }
+    }
 
     const getCartProducts = await axios(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
     const cartProducts = await getCartProducts.data
@@ -342,6 +367,7 @@ export const getServerSideProps = async (context) => {
     return {
         props: {
             cartProducts,
+            session,
         },
     }
 }

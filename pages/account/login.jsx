@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSession, signIn, getProviders } from 'next-auth/client'
+import Button from '@/components/ui/Button'
 
 const login = () => {
     const [email, setEmail] = useState('')
@@ -77,28 +78,22 @@ const login = () => {
                                     </Link>
                                 </div>
 
-                                <button
-                                    type='submit'
-                                    className='rounded-md w-full block bg-blue-500 transition duration-300 ease-in-out hover:bg-blue-600 focus:bg-blue-600 text-white font-semibold  px-4 py-3 mt-6'
-                                >
+                                <Button type='primary' width='full' size='ghostSize' buttonType='submit'>
                                     Sign In
-                                </button>
+                                </Button>
                             </form>
 
                             <hr className='my-6 border-gray-300 w-full' />
 
                             <div className='flex flex-col space-y-4'>
-                                <button
-                                    onClick={() => signIn('google', { callbackUrl: process.env.NEXTAUTH_URL })}
-                                    className='rounded-md w-full block bg-white transition duration-300 ease-in-out hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold  px-4 py-3 border border-gray-300'
-                                >
+                                <Button type='ghost' width='full' size='ghostSize' href={() => signIn('google', { callbackUrl: process.env.NEXTAUTH_URL })}>
                                     <div className='flex items-center justify-center'>
                                         <div className='w-5 h-5'>
                                             <Image src='/google.svg' layout='responsive' width={1} height={1} />
                                         </div>
                                         <span className='ml-4'> Sign In with Google</span>
                                     </div>
-                                </button>
+                                </Button>
 
                                 {/* <button
                                     onClick={() => signIn('facebook', { callbackUrl: process.env.NEXTAUTH_URL })}
