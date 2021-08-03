@@ -15,7 +15,7 @@ import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import VariantBadge from '@/components/ui/VariantBadge'
 import ProductCard from '@/components/product/ProductCard'
-import FancySecrionTitle from '@/components/ui/FancySecrionTitle'
+import FancySectionTitle from '@/components/ui/FancySectionTitle'
 
 const Product = ({ product, similarProducts, reviews }) => {
     const addToCartSuccessToast = () => toast.success('Nice move 😍')
@@ -111,8 +111,8 @@ const Product = ({ product, similarProducts, reviews }) => {
     return (
         <Layout title={product.name}>
             <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-            <div className='container mx-auto'>
-                <div className='w-full flex space-x-2 items-center mt-4'>
+            <div className='container mx-auto my-6'>
+                <div className='w-full flex space-x-2 items-center'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
                     </div>
@@ -126,7 +126,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                     </div>
                 </div>
 
-                <div className='flex justify-start space-x-8 my-8'>
+                <div className='flex justify-start space-x-8 my-6'>
                     {/* Images */}
                     <div className='w-auto'>
                         <div className='flex justify-end absolute w-96 z-40 items-start px-4 py-4'>
@@ -246,7 +246,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                 {/* Reviews */}
                 {reviews.length !== 0 && (
                     <div className='flex flex-col space-y-10 my-12'>
-                        <FancySecrionTitle title='Reviews' />
+                        <FancySectionTitle title='Reviews' />
 
                         <div className='flex space-y-4 flex-col'>
                             {reviews.map((review) => {
@@ -268,8 +268,8 @@ const Product = ({ product, similarProducts, reviews }) => {
                 )}
                 <br />
                 {/* Similar Products */}
-                <div className='flex flex-col space-y-10 mb-12'>
-                    <FancySecrionTitle title='Similar Products' />
+                <div className='flex flex-col space-y-10 mb-8'>
+                    <FancySectionTitle title='Similar Products' />
                     <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-8'>
                         {similarProducts.map((item, index) => {
                             return (

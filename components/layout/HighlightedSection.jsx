@@ -2,7 +2,7 @@ import { ArrowRightIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import Button from '@/components/ui/Button'
 import ProductCard from '@/components/product/ProductCard'
-import FancySecrionTitle from '@/components/ui/FancySecrionTitle'
+import FancySectionTitle from '@/components/ui/FancySectionTitle'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {
     const router = useRouter()
@@ -10,7 +10,7 @@ const HighlightedSection = ({ sectionTitle, href, data }) => {
         <div className='w-full flex space-y-6 my-8 flex-col px-4 xl:container xl:mx-auto xl:my-12'>
             {/* Section Title */}
             <div className='flex w-full justify-between items-center'>
-                <FancySecrionTitle title={sectionTitle} />
+                <FancySectionTitle title={sectionTitle} />
 
                 <Button href={() => router.push(`/${sectionTitle.toLowerCase()}`)} type='secondary' size='md' display='flex' width='max'>
                     <span>Show More</span>

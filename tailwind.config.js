@@ -7,7 +7,8 @@ module.exports = {
     extend: {
       colors: {
         orange: color.amber,
-        blueGray: color.blueGray
+        blueGray: color.blueGray,
+        lolman: "#3498db"
       }
     },
   },

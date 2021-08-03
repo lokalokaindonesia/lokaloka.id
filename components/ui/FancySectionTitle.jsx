@@ -1,4 +1,4 @@
-const FancySecrionTitle = ({ title }) => {
+const FancySectionTitle = ({ title }) => {
     return (
         <div className='relative bottom-3 xl:bottom-3'>
             <div className='absolute rounded w-max h-auto bg-orange-500 px-2 left-1 -top-1'>
@@ -11,4 +11,4 @@ const FancySecrionTitle = ({ title }) => {
     )
 }
 
-export default FancySecrionTitle
+export default FancySectionTitle

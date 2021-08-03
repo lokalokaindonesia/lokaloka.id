@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 const initialState = {
-    value: [],
+    value: undefined,
 }
 
 export const orderSlice = createSlice({

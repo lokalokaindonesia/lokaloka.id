@@ -134,11 +134,25 @@ const Cart = ({ cartProducts, session }) => {
     const checkout = async () => {
         const totalQuantity = cart.reduce((a, b) => +a + +b.quantity, 0)
         const orderData = {
-            cart,
-            grandTotal,
+            products: cart,
+            totalPrice: grandTotal,
             totalQuantity,
+            user: session.id,
         }
-        dispatch(setOrder(orderData))
+
+        const getOrder = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders?user_eq=${session.id}`)
+        const order = getOrder.data[0]
+
+        if (!order) {
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/orders`, orderData)
+            return dispatch(setOrder(data))
+        }
+
+        const updateOrder = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/orders/${order.id}`, orderData)
+        const updatedOrder = updateOrder.data
+
+        dispatch(setOrder(updatedOrder))
+
         return router.push('/checkout')
     }
     // * END SET ORDER DATA AND CHECKOUT
@@ -205,7 +219,7 @@ const Cart = ({ cartProducts, session }) => {
                                                                     {/* Title */}
                                                                     <div className='flex justify-between items-start'>
                                                                         <Link href={`/${product.product.product_category.slug}/${product.product.slug}`}>
-                                                                            <a className='text-lg font-semibold text-blueGray-800 line-clamp-1'>{product.product.name}</a>
+                                                                            <a className='text-lg font-semibold text-blueGray-600 line-clamp-1'>{product.product.name}</a>
                                                                         </Link>
                                                                         <button
                                                                             onClick={() => deleteItem(product)}
@@ -223,7 +237,7 @@ const Cart = ({ cartProducts, session }) => {
                                                                                 displayType={'text'}
                                                                                 thousandSeparator={true}
                                                                                 prefix={'Rp. '}
-                                                                                className='text-xl font-black text-blueGray-800'
+                                                                                className='text-xl font-black text-blue-500'
                                                                             />
                                                                             {isDiscount && (
                                                                                 <NumberFormat
@@ -307,7 +321,7 @@ const Cart = ({ cartProducts, session }) => {
                                     {/* Total */}
                                     <div className='flex justify-between items-center'>
                                         <div className='text-blueGray-500 font-semibold flex justify-between items-center'>Sub Total</div>
-                                        <NumberFormat value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
+                                        <NumberFormat className='text-blueGray-500 font-semibold' value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                     </div>
                                     {coupon && (
                                         <div className='text-blueGray-500 font-semibold flex justify-between items-center'>

@@ -1,12 +1,12 @@
 import ProductCard from '@/components/product/ProductCard'
-import FancySecrionTitle from '@/components/ui/FancySecrionTitle'
+import FancySectionTitle from '@/components/ui/FancySectionTitle'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {
     return (
         <div className='w-full flex space-y-6 my-8 flex-col px-4 xl:container xl:mx-auto xl:my-16'>
             {/* Section Title */}
             <div className='flex w-full justify-between items-center mb-4'>
-                <FancySecrionTitle title={sectionTitle} />
+                <FancySectionTitle title={sectionTitle} />
             </div>
 
             {/* Product Item */}
