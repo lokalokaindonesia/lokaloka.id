@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { Listbox, Transition } from '@headlessui/react'
+import { Fragment, useState } from 'react'
 import { CheckIcon, ChevronRightIcon, SelectorIcon } from '@heroicons/react/solid'
 import Layout from '@/components/layout/Layout'
 import ProductCard from '@/components/product/ProductCard'
-import { Listbox, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
 
 const people = [
     {
