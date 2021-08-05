@@ -44,12 +44,12 @@ const Cart = ({ cartProducts, session }) => {
 
     const countSummaryTotal = async () => {
         const sum = cart.reduce((currentSummary, product) => currentSummary + +product.quantity * +product.product.sellingPrice, 0)
-        setSummaryTotal(sum)
+        return setSummaryTotal(sum)
     }
 
     const countDiscountTotal = async () => {
         const sum = cart.reduce((currentDiscount, product) => currentDiscount + +product.quantity * ((+product.product.sellingPrice * +product.product.discount) / 100), 0)
-        setDiscountTotal(sum)
+        return setDiscountTotal(sum)
     }
 
     const countSubTotal = async () => {
@@ -73,7 +73,7 @@ const Cart = ({ cartProducts, session }) => {
         const getUpdatedData = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
         const updatedData = await getUpdatedData.data
 
-        setCart(updatedData)
+        return setCart(updatedData)
     }
 
     const reduceQty = async (product) => {
@@ -87,7 +87,7 @@ const Cart = ({ cartProducts, session }) => {
         const getUpdatedData = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
         const updatedData = await getUpdatedData.data
 
-        setCart(updatedData)
+        return setCart(updatedData)
     }
 
     const deleteItem = async (product) => {
@@ -98,14 +98,14 @@ const Cart = ({ cartProducts, session }) => {
             return console.log('gagal')
         }
 
-        setCart(cart.filter((item) => item.id !== data.id))
+        return setCart(cart.filter((item) => item.id !== data.id))
     }
     //  * END Qty Func
 
     // * Handle Coupon Input
     const handleCouponInput = (e) => {
         e.preventDefault()
-        setCouponInput(e.target.value)
+        return setCouponInput(e.target.value)
     }
     // * END Handle Coupon Input
 
@@ -120,13 +120,13 @@ const Cart = ({ cartProducts, session }) => {
         if (!couponData) {
             return alert('Coupon not found!')
         }
-        setCoupon(couponData)
+        return setCoupon(couponData)
     }
     // * END GET Coupon
 
     // * DELETE COUPON
     const deleteCoupon = async () => {
-        setCoupon('')
+        return setCoupon('')
     }
     // * END DELETE COUPON
 
@@ -153,7 +153,7 @@ const Cart = ({ cartProducts, session }) => {
 
         dispatch(setOrder(updatedOrder))
 
-        return router.push('/checkout')
+        return router.push('/cart/checkout')
     }
     // * END SET ORDER DATA AND CHECKOUT
 
