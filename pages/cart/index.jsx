@@ -1,15 +1,15 @@
-import Layout from '@/components/layout/Layout'
 import { ChevronRightIcon, TrashIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
 import axios from 'axios'
 import router, { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { setOrder } from '@/redux/orderSlice'
 import { useState, useEffect } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { getSession, useSession } from 'next-auth/client'
 import NumberFormat from 'react-number-format'
+import Layout from '@/components/layout/Layout'
+import { setOrder } from '@/redux/orderSlice'
 import Button from '@/components/ui/Button'
 
 const Cart = ({ cartProducts, session }) => {
