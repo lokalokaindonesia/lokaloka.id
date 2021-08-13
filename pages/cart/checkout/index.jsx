@@ -1,136 +1,139 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { useRouter } from 'next/router'
 import { getSession } from 'next-auth/client'
 import axios from 'axios'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ChevronRightIcon, SelectorIcon } from '@heroicons/react/solid'
 import { FaCheckCircle, FaWallet } from 'react-icons/fa'
 import NumberFormat from 'react-number-format'
 import { useEffect, useState } from 'react'
 import Layout from '@/components/layout/Layout'
-import { setOrder } from '@/redux/orderSlice'
 import Button from '@/components/ui/Button'
-import Image from 'next/image'
+
+// Area Data
+const areaCollection = [
+    {
+        value: 'malang-batu',
+        label: 'Malang - Batu City',
+    },
+    {
+        value: 'anotherCity',
+        label: 'Another City',
+    },
+]
+
+// Images Payment Methods
+const paymentMethodCollection = [
+    {
+        src: '/images/payment-gateway-small/bni.png',
+        type: 'va',
+        id: 'bni',
+        label: 'BNI Virtual Account',
+    },
+    {
+        src: '/images/payment-gateway-small/briva.png',
+        type: 'va',
+        id: 'bri',
+        label: 'BRI Virtual Account',
+    },
+    {
+        src: '/images/payment-gateway-small/mandiri.png',
+        type: 'va',
+        id: 'mandiri',
+        label: 'Mandiri Virtual Account',
+    },
+    {
+        src: '/images/payment-gateway-small/permata.png',
+        type: 'va',
+        id: 'permata',
+        label: 'Permata Virtual Account',
+    },
+    {
+        src: '/images/payment-gateway-small/ovo.png',
+        type: 'ewallet',
+        id: 'ovo',
+        label: 'OVO',
+    },
+    {
+        src: '/images/payment-gateway-small/dana.png',
+        type: 'ewallet',
+        id: 'dana',
+        label: 'DANA',
+    },
+    {
+        src: '/images/payment-gateway-small/linkaja.png',
+        type: 'ewallet',
+        id: 'linkaja',
+        label: 'Link AJA',
+    },
+    {
+        src: '/images/payment-gateway-small/qris.png',
+        type: 'qrcode',
+        id: 'qrcode',
+        label: 'QRIS',
+    },
+]
 
 const index = ({ orderData, cityData, provinceData }) => {
-    const dispatch = useDispatch()
-    const router = useRouter()
-
-    dispatch(setOrder(orderData[0]))
-    const order = useSelector((state) => state.order.value)
-
-    // Area Data
-    const areaCollection = [
-        {
-            value: 'malang-batu',
-            label: 'Malang - Batu City',
-        },
-        {
-            value: 'anotherCity',
-            label: 'Another City',
-        },
-    ]
-
-    // Images Payment Methods
-    const paymentMethodCollection = [
-        {
-            src: '/images/payment-gateway-small/bni.png',
-            type: 'va',
-            id: 'bni',
-            label: 'BNI Virtual Account',
-        },
-        {
-            src: '/images/payment-gateway-small/briva.png',
-            type: 'va',
-            id: 'bri',
-            label: 'BRI Virtual Account',
-        },
-        {
-            src: '/images/payment-gateway-small/mandiri.png',
-            type: 'va',
-            id: 'mandiri',
-            label: 'Mandiri Virtual Account',
-        },
-        {
-            src: '/images/payment-gateway-small/permata.png',
-            type: 'va',
-            id: 'permata',
-            label: 'Permata Virtual Account',
-        },
-        {
-            src: '/images/payment-gateway-small/ovo.png',
-            type: 'ewallet',
-            id: 'ovo',
-            label: 'OVO',
-        },
-        {
-            src: '/images/payment-gateway-small/dana.png',
-            type: 'ewallet',
-            id: 'dana',
-            label: 'DANA',
-        },
-        {
-            src: '/images/payment-gateway-small/linkaja.png',
-            type: 'ewallet',
-            id: 'linkaja',
-            label: 'Link AJA',
-        },
-        {
-            src: '/images/payment-gateway-small/qris.png',
-            type: 'qrcode',
-            id: 'qrcode',
-            label: 'QRIS',
-        },
-    ]
+    const order = orderData[0]
 
     const [area, setArea] = useState('malang-batu')
     const [choosenPaymentMethod, setChoosenPaymentMethod] = useState(undefined)
     const [shippingCost, setShippingCost] = useState(3000)
+    const [shippingEtd, setShippingEtd] = useState(null)
     const [total, setTotal] = useState(0)
-    const [inputCity, setInputCity] = useState('')
     const [filteredCity, setFilteredCity] = useState(cityData)
     const [city, setCity] = useState('')
     const [cityToggle, setCityToggle] = useState(false)
-    const [province, setProvince] = useState('')
+    const [province, setProvince] = useState({ province: '' })
 
     useEffect(() => {
         selectArea, selectPaymentMethod, countTotal()
         return () => {}
-    }, [area, choosenPaymentMethod, shippingCost, total, city])
+    }, [area, choosenPaymentMethod, shippingCost, total, shippingEtd])
 
     // Select Area
     const selectArea = (value) => {
         const data = areaCollection.find((area) => area.value == value)
         setArea(data.value)
         if (data.value == 'malang-batu') return setShippingCost(3000)
-        if (data.value == 'anotherCity') return setShippingCost(50000)
+        if (data.value == 'anotherCity') {
+            return setShippingCost(0)
+        }
     }
 
     // Handle Input City
     const handleCityInput = async (e) => {
         const ct = await cityData.filter((c) => {
-            return c.city_name.toLowerCase().includes(e.target.value.toLowerCase())
+            const x = c.type + ' ' + c.city_name
+            return x.toLowerCase().includes(e.target.value.toLowerCase())
         })
         setFilteredCity(ct)
-        setInputCity(e.target.value)
     }
 
     // Select City
     const selectCity = async (c) => {
         setCity(c)
-        const province = provinceData.find((p) => p.id == c.province_id)
-        console.log(c)
-        console.log(province)
-        console.log(provinceData)
-        // setProvince(province)
+        const province = await provinceData.find((p) => p.province_id == c.province_id)
+        setProvince(province)
         setCityToggle(false)
+
+        const destinationInfo = {
+            destination: c.city_id,
+            weight: 2000,
+            origin: process.env.NEXT_PUBLIC_RAJA_ONGKIR_ORIGIN,
+            courier: process.env.NEXT_PUBLIC_RAJA_ONGKIR_COURIER,
+        }
+
+        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/expedition/cost`, destinationInfo)
+
+        setShippingCost(data.value)
+        setShippingEtd(data.etd)
     }
 
     // Select Payment Method
     const selectPaymentMethod = (id) => {
         const data = paymentMethodCollection.find((paymentMethod) => paymentMethod.id == id)
-        setChoosenPaymentMethod(data.id)
-        return
+        return setChoosenPaymentMethod(data.id)
     }
 
     // count total
@@ -139,7 +142,7 @@ const index = ({ orderData, cityData, provinceData }) => {
     }
 
     // pay Handle
-    const pay = () => {
+    const pay = async () => {
         return
     }
 
@@ -248,9 +251,12 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                         <label htmlFor='city'>City</label>
                                                         <button
                                                             onClick={() => setCityToggle(!cityToggle)}
-                                                            className='rounded-md border flex text-sm px-2 text-blueGray-500 w-full py-2 border-blueGray-200'
+                                                            className='rounded-md border flex items-center justify-between text-sm px-2 text-blueGray-500 w-full py-2 border-blueGray-200'
                                                         >
-                                                            {city ? city.type + ' ' + city.city_name : 'Select City'}
+                                                            <span>{city ? city.type + ' ' + city.city_name : 'Select City'}</span>
+                                                            <span>
+                                                                <SelectorIcon className='w-4 h-4 text-blueGray-500' />
+                                                            </span>
                                                         </button>
                                                         {cityToggle && (
                                                             <div className='relative'>
@@ -270,7 +276,7 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                                                 id='city'
                                                                                 onChange={handleCityInput}
                                                                                 className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border border-blueGray-200'
-                                                                                placeholder='MA'
+                                                                                placeholder='Massachusetts'
                                                                             />
                                                                         </div>
                                                                         {filteredCity.map((c) => {
@@ -284,7 +290,7 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                                                     id='listbox-option-0'
                                                                                     role='option'
                                                                                 >
-                                                                                    <div className='flex items-center w-full'>
+                                                                                    <div className='flex text-left items-center w-full'>
                                                                                         <span className='font-normal ml-3 block truncate w-full'>
                                                                                             {c.type} {c.city_name}
                                                                                         </span>
@@ -302,8 +308,8 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                         <input
                                                             type='text'
                                                             name='province'
-                                                            value={province}
-                                                            onChange={() => {}}
+                                                            value={province.province}
+                                                            readOnly={true}
                                                             id='province'
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
                                                             placeholder='Massachusetts'
@@ -456,7 +462,10 @@ const index = ({ orderData, cityData, provinceData }) => {
                                             <NumberFormat value={order.totalPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
                                         <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
-                                            <span>Shipping</span>
+                                            <div className='flex space-x-2 items-baseline'>
+                                                <span>Shipping</span>
+                                                {shippingEtd && <span className='text-blueGray-400 text-sm'>{`(Est ${shippingEtd} Days via JNE)`}</span>}
+                                            </div>
                                             <NumberFormat value={shippingCost} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
                                     </div>
@@ -499,6 +508,7 @@ export const getServerSideProps = async (contex) => {
 
     return {
         props: {
+            session,
             orderData: order,
             cityData: city,
             provinceData: province,

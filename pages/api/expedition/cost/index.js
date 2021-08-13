@@ -1,16 +1,15 @@
 import axios from "axios"
 
 export default async (req, res) => {
-    const { data } = await axios.post(`${process.env.RAJA_ONGKIR_URL}/cost`, {
-        origin: process.env.RAJA_ONGKIR_ORIGIN,
-        destination: req.body.destination,
-        weight: req.body.weight,
-        courier: process.env.RAJA_ONGKIR_COURIER
-    }, {
+    const { data } = await axios.post(`${process.env.NEXT_PUBLIC_RAJA_ONGKIR_URL}/cost`, req.body, {
         headers: {
-            key: process.env.RAJA_ONGKIR_API_KEY
+            key: process.env.NEXT_PUBLIC_RAJA_ONGKIR_API_KEY
         }
     })
+
+    if (!data) {
+        return res.json({ value: undefined })
+    }
 
     return res.json(data.rajaongkir.results[0].costs[1].cost[0])
 }
