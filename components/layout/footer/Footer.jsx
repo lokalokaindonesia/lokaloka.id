@@ -5,13 +5,13 @@ import PaymentGatewayFooter from './PaymentGatewayFooter'
 
 const Footer = () => {
     return (
-        <div>
+        <div className='text-blueGray-800'>
             <PaymentGatewayFooter />
             <div className='w-full h-auto bg-blueGray-200 py-12 '>
                 <div className='container mx-auto grid grid-flow-col grid-cols-4'>
                     {/* 1 */}
                     <div className='flex flex-col space-y-4'>
-                        <ColorSwatchIcon className='h-16 w-16 text-blueGray-900' />
+                        <ColorSwatchIcon className='h-16 w-16 text-blueGray-800' />
                         <div className='flex space-x-2 items-center'>
                             <a href='https://instagram.com/lokaloka.official' rel='noopener' target='_blank'>
                                 <div className='h-8 w-8'>
@@ -29,12 +29,12 @@ const Footer = () => {
                     {/* 2 */}
                     <ul>
                         <li className='text-xl font-bold mb-2'>Useful Links</li>
-                        <li>
+                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link href='#'>
                                 <div className='underline lg:no-underline cursor-pointer'>About</div>
                             </Link>
                         </li>
-                        <li>
+                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link href='#'>
                                 <div className='underline lg:no-underline cursor-pointer'>Blog</div>
                             </Link>
@@ -44,17 +44,17 @@ const Footer = () => {
                     {/* 3 */}
                     <ul>
                         <li className='text-xl font-bold mb-2'>Services</li>
-                        <li>
+                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link href='#'>
                                 <div className='underline lg:no-underline cursor-pointer'>Affiliate City</div>
                             </Link>
                         </li>
-                        <li>
+                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link href='#'>
                                 <div className='underline lg:no-underline cursor-pointer'>Expedition</div>
                             </Link>
                         </li>
-                        <li>
+                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <a href='https://kuloaja.com' target='_blank'>
                                 <div className='underline lg:no-underline cursor-pointer'>Courier by KULO</div>
                             </a>
@@ -64,12 +64,12 @@ const Footer = () => {
                     {/* 4 */}
                     <ul>
                         <li className='text-xl font-bold mb-2'>Help and Guide</li>
-                        <li>
+                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link href='#'>
                                 <div className='underline lg:no-underline cursor-pointer'>Privacy Policy</div>
                             </Link>
                         </li>
-                        <li>
+                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link href='#'>
                                 <div className='underline lg:no-underline cursor-pointer'>Terms and Condition</div>
                             </Link>

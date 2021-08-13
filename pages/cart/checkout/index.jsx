@@ -464,7 +464,7 @@ const index = ({ orderData, cityData, provinceData }) => {
                                         <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-baseline'>
                                                 <span>Shipping</span>
-                                                {shippingEtd && <span className='text-blueGray-400 text-sm'>{`(Est ${shippingEtd} Days via JNE)`}</span>}
+                                                {shippingEtd && <span className='text-blueGray-400 text-sm'>{`(Etd ${shippingEtd} Days via JNE)`}</span>}
                                             </div>
                                             <NumberFormat value={shippingCost} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
