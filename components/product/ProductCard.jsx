@@ -1,10 +1,8 @@
 import Image from 'next/image'
 import NumberFormat from 'react-number-format'
 import Link from 'next/link'
-import { useSelector } from 'react-redux'
 
 const ProductCard = ({ imgSrc, category, productName, price, discount, isRecommended = false, slug }) => {
-    const blurData = useSelector((state) => state.blurData.value)
     const sellingPrice = price - (price * discount) / 100
     const isDiscount = discount == 0 ? false : true
 
@@ -17,9 +15,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                     title={productName}
                     alt={productName}
                     src={imgSrc}
-                    placeholder='blur'
-                    blurDataURL={blurData}
-                    width={5}
+                    width={4}
                     height={5}
                     layout='responsive'
                     priority

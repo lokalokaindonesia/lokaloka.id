@@ -211,9 +211,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                                             alt={product.product.name}
                                                                             src={product.product.images[0].formats.medium.url}
                                                                             layout='responsive'
-                                                                            placeholder='blur'
                                                                             quality='75'
-                                                                            blurDataURL={blurData}
                                                                             className='rounded'
                                                                             width={1}
                                                                             height={1}

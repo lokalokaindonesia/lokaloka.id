@@ -7,7 +7,6 @@ import { ChevronRightIcon, ChevronLeftIcon, LinkIcon } from '@heroicons/react/so
 import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart, FaCheckCircle } from 'react-icons/fa'
 import moment from 'moment'
 import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import NumberFormat from 'react-number-format'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify'
@@ -19,7 +18,6 @@ import ProductCard from '@/components/product/ProductCard'
 import FancySectionTitle from '@/components/ui/FancySectionTitle'
 
 const Product = ({ product, similarProducts, reviews }) => {
-    const blurData = useSelector((state) => state.blurData.value)
     const addToCartSuccessToast = () => toast.success('Nice move 😍')
 
     const addToCartFailedToast = () => toast.error('Ooops, you failed 😢')
@@ -140,17 +138,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                             {product.images.map((img, index) => {
                                 return (
                                     <div key={index} className={index === current ? 'block w-full h-full ease-in-out duration-300 transition-all select-none' : 'hidden'}>
-                                        <Image
-                                            alt={product.name}
-                                            src={img.formats.medium.url}
-                                            className='rounded-lg'
-                                            layout='responsive'
-                                            placeholder='blur'
-                                            blurDataURL={blurData}
-                                            width={1}
-                                            height={1}
-                                            objectFit='cover'
-                                        />
+                                        <Image alt={product.name} src={img.formats.medium.url} className='rounded-lg' layout='responsive' width={1} height={1} objectFit='cover' />
                                     </div>
                                 )
                             })}
