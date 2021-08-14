@@ -70,7 +70,7 @@ const login = () => {
                                     />
                                 </div>
 
-                                <div className='text-right mt-2'>
+                                <div className='text-right my-2'>
                                     <Link href='/forgot-password'>
                                         <span className='cursor-pointer text-sm font-semibold text-blue-500 transition duration-300 ease-in-out hover:text-blue-700 focus:text-blue-700'>
                                             Forgot Password?

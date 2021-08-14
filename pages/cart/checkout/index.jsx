@@ -8,7 +8,6 @@ import NumberFormat from 'react-number-format'
 import { useEffect, useState } from 'react'
 import Layout from '@/components/layout/Layout'
 import Button from '@/components/ui/Button'
-import { useSelector } from 'react-redux'
 
 // Area Data
 const areaCollection = [
@@ -75,7 +74,6 @@ const paymentMethodCollection = [
 ]
 
 const index = ({ orderData, cityData, provinceData }) => {
-    const blurData = useSelector((state) => state.blurData.value)
     const order = orderData[0]
 
     const [area, setArea] = useState('malang-batu')
@@ -436,8 +434,6 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                                 <Image
                                                                     title={paymentMethod.label}
                                                                     src={paymentMethod.src}
-                                                                    blurDataURL={blurData}
-                                                                    placeholder='blur'
                                                                     alt={paymentMethod.label}
                                                                     layout='responsive'
                                                                     priority

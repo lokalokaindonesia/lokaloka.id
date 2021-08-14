@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { getSession, useSession } from 'next-auth/client'
@@ -13,7 +13,6 @@ import { setOrder } from '@/redux/orderSlice'
 import Button from '@/components/ui/Button'
 
 const Cart = ({ cartProducts, session, productCategories }) => {
-    const blurData = useSelector((state) => state.blurData.value)
     const router = useRouter()
 
     const [cart, setCart] = useState(cartProducts)
