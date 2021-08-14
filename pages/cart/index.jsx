@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { getSession, useSession } from 'next-auth/client'
@@ -13,6 +13,7 @@ import { setOrder } from '@/redux/orderSlice'
 import Button from '@/components/ui/Button'
 
 const Cart = ({ cartProducts, session, productCategories }) => {
+    const blurData = useSelector((state) => state.blurData.value)
     const router = useRouter()
 
     const [cart, setCart] = useState(cartProducts)
@@ -162,7 +163,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
             {cart.length == 0 ? (
                 <div className='container my-12 mx-auto flex items-center space-x-24 justify-center'>
                     <div className='w-[32rem] h-[32rem]'>
-                        <Image src={'/images/add-to-cart.gif'} layout='responsive' width={1} height={1} priority />
+                        <Image src={'/images/add-to-cart.gif'} layout='responsive' placeholder='blur' quality='75' blurDataURL={blurData} width={1} height={1} priority />
                     </div>
                     <div className='flex space-y-8 flex-col justify-center items-center'>
                         <h1 className='text-4xl font-bold text-blueGray-800'>Your cart is empty</h1>
@@ -210,6 +211,9 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                                             alt={product.product.name}
                                                                             src={product.product.images[0].formats.medium.url}
                                                                             layout='responsive'
+                                                                            placeholder='blur'
+                                                                            quality='75'
+                                                                            blurDataURL={blurData}
                                                                             className='rounded'
                                                                             width={1}
                                                                             height={1}

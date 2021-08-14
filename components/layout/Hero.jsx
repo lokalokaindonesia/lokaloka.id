@@ -26,10 +26,10 @@ const Hero = () => {
                 </div>
                 <div className='flex flex-col space-y-2'>
                     <p className='text-base md:text-lg xl:text-xl font-normal text-white filter drop-shadow'>
-                        Buy souvenirs no <b>need to bother</b> !!!
+                        Buy souvenirs <b>with ease !!!</b>
                     </p>
                     <p className='text-base md:text-lg xl:text-xl font-normal text-white filter drop-shadow'>
-                        Order only at <b>Lokaloka</b>, take an <b>advantage</b> of your time for vacation.
+                        Order at <b>Lokaloka</b>, take the <b>advantages</b> for your holiday.
                     </p>
                 </div>
                 <Button size='xl' type='primary' display='flex' width='max' href={() => router.push(`/`)}>

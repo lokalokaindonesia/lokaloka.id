@@ -1,5 +1,5 @@
 import Link from 'next/link'
-const Button = ({ children, type, size, href, width = 'max', display = 'block', buttonType = 'button' }) => {
+const Button = ({ children, type, size = 'base', href, width = 'max', display = 'block', buttonType = 'button' }) => {
     const sizes = {
         sm: 'px-3 py-1 text-sm',
         base: 'px-4 py-1',
@@ -9,12 +9,12 @@ const Button = ({ children, type, size, href, width = 'max', display = 'block', 
         ghostSize: 'px-4 py-3',
     }
     const types = {
-        primary: `drop-shadow bg-blue-500 text-white font-bold transiton duration-300 ease-in-out hover:bg-blue-600`,
-        secondary: `drop-shadow bg-blue-100 text-blue-500 font-bold transiton duration-300 ease-in-out hover:bg-blue-200`,
-        tertiary: `drop-shadow bg-orange-500 text-white font-bold transiton duration-300 ease-in-out hover:bg-orange-600`,
-        tertiaryAccent: `drop-shadow bg-orange-100 text-orange-500 font-bold transiton duration-300 ease-in-out hover:bg-orange-200`,
-        logout: `drop-shadow bg-red-100 text-red-500 font-bold transiton duration-300 ease-in-out hover:bg-red-200`,
-        ghost: `drop-shadow bg-white text-blueGray-800 font-bold transiton duration-300 ease-in-out hover:bg-white border border-blueGray-200`,
+        primary: `drop-shadow rounded-md bg-blue-500 text-white font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-blue-600`,
+        secondary: `drop-shadow rounded-md bg-blue-100 text-blue-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-blue-200`,
+        tertiary: `drop-shadow rounded-md bg-orange-500 text-white font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-600`,
+        tertiaryAccent: `drop-shadow rounded-md bg-orange-100 text-orange-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-200`,
+        logout: `drop-shadow rounded-md bg-red-100 text-red-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-red-200`,
+        ghost: `drop-shadow rounded-md bg-white text-blueGray-800 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-white border border-blueGray-200`,
     }
 
     const widthStyles = {
@@ -33,11 +33,7 @@ const Button = ({ children, type, size, href, width = 'max', display = 'block', 
     const pickedDisplay = displayStyles[display]
 
     return (
-        <button
-            type={buttonType}
-            onClick={href}
-            className={`transition ease-in-out duration-300 hover:scale-95 rounded-md ${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}
-        >
+        <button type={buttonType} onClick={href} className={` ${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}>
             {children}
         </button>
     )
