@@ -6,7 +6,7 @@ import blurDataSlice from './blurDataSlice'
 export const store = configureStore({
     reducer: {
         order: orderSlice,
-        filter: filterSlice
+        filter: filterSlice,
         blurData: blurDataSlice
     },
 })
