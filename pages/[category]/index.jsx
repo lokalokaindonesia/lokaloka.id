@@ -104,6 +104,7 @@ const Category = ({ category, productsData }) => {
                             ))}
                         </div>
                     </div>
+                    {/* Filter */}
                     <div className='mt-4 w-full max-w-xs'>
                         <div className='sticky top-28 flex flex-col space-y-4 border border-blueGray-200 bg-white drop-shadow-sm rounded-md p-4'>
                             <div className='flex justify-between items-center'>
