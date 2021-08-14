@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { getSession, useSession } from 'next-auth/client'
@@ -12,7 +12,8 @@ import Layout from '@/components/layout/Layout'
 import { setOrder } from '@/redux/orderSlice'
 import Button from '@/components/ui/Button'
 
-const Cart = ({ cartProducts, session }) => {
+const Cart = ({ cartProducts, session, productCategories }) => {
+    const blurData = useSelector((state) => state.blurData.value)
     const router = useRouter()
 
     const [cart, setCart] = useState(cartProducts)
@@ -162,7 +163,7 @@ const Cart = ({ cartProducts, session }) => {
             {cart.length == 0 ? (
                 <div className='container my-12 mx-auto flex items-center space-x-24 justify-center'>
                     <div className='w-[32rem] h-[32rem]'>
-                        <Image src={'/images/add-to-cart.gif'} layout='responsive' width={1} height={1} priority />
+                        <Image src={'/images/add-to-cart.gif'} layout='responsive' placeholder='blur' quality='75' blurDataURL={blurData} width={1} height={1} priority />
                     </div>
                     <div className='flex space-y-8 flex-col justify-center items-center'>
                         <h1 className='text-4xl font-bold text-blueGray-800'>Your cart is empty</h1>
@@ -195,6 +196,8 @@ const Cart = ({ cartProducts, session }) => {
                                             const discountPrice = product.product.sellingPrice - (product.product.sellingPrice * product.product.discount) / 100
                                             const isDiscount = product.product.discount !== 0 && product.product.discount !== null ? true : false
                                             const xPrice = isDiscount ? discountPrice : product.product.sellingPrice
+
+                                            const category = productCategories.find((c) => c.id == product.product.product_category)
                                             return (
                                                 <div key={product._id} className='p-4 rounded-md border drop-shadow-sm bg-white border-blueGray-300'>
                                                     <div className='flex space-y-4 flex-col'>
@@ -208,6 +211,9 @@ const Cart = ({ cartProducts, session }) => {
                                                                             alt={product.product.name}
                                                                             src={product.product.images[0].formats.medium.url}
                                                                             layout='responsive'
+                                                                            placeholder='blur'
+                                                                            quality='75'
+                                                                            blurDataURL={blurData}
                                                                             className='rounded'
                                                                             width={1}
                                                                             height={1}
@@ -218,7 +224,7 @@ const Cart = ({ cartProducts, session }) => {
                                                                 <div className='flex flex-col space-y-1 w-full'>
                                                                     {/* Title */}
                                                                     <div className='flex justify-between items-start'>
-                                                                        <Link href={`/${product.product.product_category.slug}/${product.product.slug}`}>
+                                                                        <Link href={`/${category.slug}/${product.product.slug}`}>
                                                                             <a className='text-lg font-semibold text-blueGray-600 line-clamp-1'>{product.product.name}</a>
                                                                         </Link>
                                                                         <button
@@ -372,6 +378,9 @@ export const getServerSideProps = async (context) => {
     const getCartProducts = await axios(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
     const cartProducts = await getCartProducts.data
 
+    const getCategories = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/product-categories`)
+    const productCategories = await getCategories.data
+
     if (!cartProducts) {
         return {
             notFound: true,
@@ -382,6 +391,7 @@ export const getServerSideProps = async (context) => {
         props: {
             cartProducts,
             session,
+            productCategories,
         },
     }
 }

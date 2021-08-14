@@ -12,7 +12,7 @@ const HighlightedSection = ({ sectionTitle, href, data }) => {
             <div className='flex w-full justify-between items-center'>
                 <FancySectionTitle title={sectionTitle} />
 
-                <Button href={() => router.push(`/${sectionTitle.toLowerCase()}`)} type='secondary' size='md' display='flex' width='max'>
+                <Button href={() => router.push(`/${sectionTitle.toLowerCase()}`)} type='secondary' display='flex' width='max'>
                     <span>Show More</span>
                     <ArrowRightIcon className='h-5' />
                 </Button>
