@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 const initialState = {
-    value: [{ id: 0, value: 'Default' }, { id: 1, value: 'Lowest Price' }, { id: 2, value: 'Higest Price' }],
+    value: [{ id: 0, value: 'Default', query: '' }, { id: 1, value: 'Lowest Price', query: '_sort=sellingPrice:ASC' }, { id: 2, value: 'Higest Price', query: '_sort=sellingPrice:DESC' }],
 }
 
 export const filterSlice = createSlice({

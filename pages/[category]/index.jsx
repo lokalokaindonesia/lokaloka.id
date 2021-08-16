@@ -4,56 +4,67 @@ import Link from 'next/link'
 import { Listbox, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useState } from 'react'
 import { CheckIcon, ChevronRightIcon, SelectorIcon } from '@heroicons/react/solid'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Layout from '@/components/layout/Layout'
 import ProductCard from '@/components/product/ProductCard'
+// import { setProducts } from '@/redux/productsSlice'
 
 const classNames = (...classes) => {
     return classes.filter(Boolean).join(' ')
 }
 
 const Category = ({ category, productsData }) => {
+    // const dispatch = useDispatch()
     const filter = useSelector((state) => state.filter.value)
+    // const products = useSelector((state) => state.products.value)
 
     const router = useRouter()
 
     const [products, setProducts] = useState([])
-    const [originalProducts, setOriginalProducts] = useState([])
     const [price, setPrice] = useState(filter[0])
     const [recommended, setRecommended] = useState(false)
     const [discount, setDiscount] = useState(false)
     const [minimumPrice, setMinimumPrice] = useState(0)
     const [maximumPrice, setMaximumPrice] = useState(5000000)
-    const [reset, setReset] = useState(true)
+    const [params, setParams] = useState('')
 
-    useEffect(() => {
-        setProducts(productsData)
-    })
+    useEffect(async () => {
+        const { data } = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_URL}/products?${price.query}&product_category=${category.id}&sellingPrice_gt=${minimumPrice}&sellingPrice_lt=${maximumPrice}${params}`
+        )
+        setProducts(data)
+    }, [recommended, discount, minimumPrice, maximumPrice, category, price])
 
     const recommendedHandle = (e) => {
         setRecommended(!recommended)
-        setProducts(products.filter((p) => p.recommended == recommended))
+        if (!recommended) {
+            return setParams(params.concat('&isRecommended=true'))
+        }
+        if (recommended) {
+            return setParams(params.replace('&isRecommended=true', ''))
+        }
     }
 
     const discountHandle = (e) => {
         setDiscount(!discount)
         if (!discount) {
-            return products
+            return setParams(params.concat('&discount_gt=0'))
         }
-        // return setProducts(products.filter((p) => p.discount > 0))
+        if (discount) {
+            return setParams(params.replace('&discount_gt=0', ''))
+        }
     }
 
     const minPriceHandle = (e) => {
         if (e.target.value == '') return setMinimumPrice(0)
         return setMinimumPrice(e.target.value)
-        // setProducts(products.filter((p) => p.sellingPrice >= minimumPrice))
     }
 
     const maxPriceHandle = (e) => {
         if (e.target.value == '') return setMaximumPrice(5000000)
-        return setMinimumPrice(e.target.value)
-        // setProducts(products.filter((p) => p.sellingPrice >= maximumPrice))
+        return setMaximumPrice(e.target.value)
     }
+
     return (
         <Layout title={category.name}>
             <div className='container mx-auto my-6'>
@@ -257,8 +268,8 @@ export const getStaticProps = async ({ params }) => {
     const res = await axios.get(`${process.env.NEXT_URL}/api/product-categories/${params.category}`)
     const data = await res.data
 
-    const getProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.id}`)
-    const products = getProducts.data
+    // const getProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.id}`)
+    // const products = getProducts.data
 
     if (!data) {
         return {
@@ -267,7 +278,7 @@ export const getStaticProps = async ({ params }) => {
     }
 
     return {
-        props: { category: data, productsData: products },
+        props: { category: data },
     }
 }
 
