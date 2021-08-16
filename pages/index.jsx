@@ -9,12 +9,6 @@ import Promo from '@/components/ui/Promo'
 const Home = ({ products, promo, recommended }) => {
     return (
         <Layout title='Liburan seru bareng Lokaloka.id'>
-            {/* Header - Navbar */}
-            <div className='sticky top-0 z-50 filter backdrop-blur-lg bg-opacity-75 bg-white drop-shadow'>
-                <Banner />
-                <Header />
-            </div>
-
             {/* Hero */}
             <Hero />
 

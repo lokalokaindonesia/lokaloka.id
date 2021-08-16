@@ -2,12 +2,11 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Listbox, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { CheckIcon, ChevronRightIcon, SelectorIcon } from '@heroicons/react/solid'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Layout from '@/components/layout/Layout'
 import ProductCard from '@/components/product/ProductCard'
-import Button from '@/components/ui/Button'
 
 const classNames = (...classes) => {
     return classes.filter(Boolean).join(' ')
@@ -17,10 +16,44 @@ const Category = ({ category, productsData }) => {
     const filter = useSelector((state) => state.filter.value)
 
     const router = useRouter()
-    const [selected, setSelected] = useState(filter[0])
 
-    const products = productsData
+    const [products, setProducts] = useState([])
+    const [originalProducts, setOriginalProducts] = useState([])
+    const [price, setPrice] = useState(filter[0])
+    const [recommended, setRecommended] = useState(false)
+    const [discount, setDiscount] = useState(false)
+    const [minimumPrice, setMinimumPrice] = useState(0)
+    const [maximumPrice, setMaximumPrice] = useState(5000000)
+    const [reset, setReset] = useState(true)
 
+    useEffect(() => {
+        setProducts(productsData)
+    })
+
+    const recommendedHandle = (e) => {
+        setRecommended(!recommended)
+        setProducts(products.filter((p) => p.recommended == recommended))
+    }
+
+    const discountHandle = (e) => {
+        setDiscount(!discount)
+        if (!discount) {
+            return products
+        }
+        // return setProducts(products.filter((p) => p.discount > 0))
+    }
+
+    const minPriceHandle = (e) => {
+        if (e.target.value == '') return setMinimumPrice(0)
+        return setMinimumPrice(e.target.value)
+        // setProducts(products.filter((p) => p.sellingPrice >= minimumPrice))
+    }
+
+    const maxPriceHandle = (e) => {
+        if (e.target.value == '') return setMaximumPrice(5000000)
+        return setMinimumPrice(e.target.value)
+        // setProducts(products.filter((p) => p.sellingPrice >= maximumPrice))
+    }
     return (
         <Layout title={category.name}>
             <div className='container mx-auto my-6'>
@@ -40,56 +73,13 @@ const Category = ({ category, productsData }) => {
                     </p>
                 </div>
                 <div className='flex space-x-8'>
-                    <div className=''>
+                    <div className='w-full'>
+                        {products.length == 0 && (
+                            <div className='flex justify-center items-center h-full'>
+                                <div className='text-xl font-semibold text-blueGray-800'>Products not found</div>
+                            </div>
+                        )}
                         <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-8 mt-4'>
-                            {products.map((product, index) => (
-                                <ProductCard
-                                    key={index}
-                                    slug={product.slug}
-                                    category={product.product_category.slug}
-                                    imgSrc={product.images[0].formats.medium.url}
-                                    productName={product.name}
-                                    price={product.sellingPrice}
-                                    discount={product.discount ? product.discount : null}
-                                    isRecommended={product.isRecommended}
-                                />
-                            ))}
-                            {products.map((product, index) => (
-                                <ProductCard
-                                    key={index}
-                                    slug={product.slug}
-                                    category={product.product_category.slug}
-                                    imgSrc={product.images[0].formats.medium.url}
-                                    productName={product.name}
-                                    price={product.sellingPrice}
-                                    discount={product.discount ? product.discount : null}
-                                    isRecommended={product.isRecommended}
-                                />
-                            ))}
-                            {products.map((product, index) => (
-                                <ProductCard
-                                    key={index}
-                                    slug={product.slug}
-                                    category={product.product_category.slug}
-                                    imgSrc={product.images[0].formats.medium.url}
-                                    productName={product.name}
-                                    price={product.sellingPrice}
-                                    discount={product.discount ? product.discount : null}
-                                    isRecommended={product.isRecommended}
-                                />
-                            ))}
-                            {products.map((product, index) => (
-                                <ProductCard
-                                    key={index}
-                                    slug={product.slug}
-                                    category={product.product_category.slug}
-                                    imgSrc={product.images[0].formats.medium.url}
-                                    productName={product.name}
-                                    price={product.sellingPrice}
-                                    discount={product.discount ? product.discount : null}
-                                    isRecommended={product.isRecommended}
-                                />
-                            ))}
                             {products.map((product, index) => (
                                 <ProductCard
                                     key={index}
@@ -105,22 +95,29 @@ const Category = ({ category, productsData }) => {
                         </div>
                     </div>
                     {/* Filter */}
-                    <div className='mt-4 w-full max-w-xs'>
-                        <div className='sticky top-28 flex flex-col space-y-4 border border-blueGray-200 bg-white drop-shadow-sm rounded-md p-4'>
+                    <div className='mt-4 w-full max-w-xs drop-shadow-sm'>
+                        <div className='sticky top-28 flex flex-col space-y-4 border border-blueGray-200 bg-white rounded-md p-4'>
                             <div className='flex justify-between items-center'>
                                 <h1 className='text-xl font-semibold text-blueGray-700'>Filter</h1>
-                                <span className='text-blueGray-400 underline'>Reset</span>
+                                <button
+                                    onClick={() => {
+                                        setReset(true)
+                                    }}
+                                    className='text-blueGray-400 underline'
+                                >
+                                    Reset
+                                </button>
                             </div>
                             <hr />
                             {/* Sort By */}
-                            <Listbox value={selected} onChange={setSelected}>
+                            <Listbox value={price} onChange={setPrice}>
                                 {({ open }) => (
                                     <div className='flex flex-col space-y-2'>
                                         <Listbox.Label className='block font-medium text-blueGray-800'>Sort by</Listbox.Label>
                                         <div className='mt-1 relative w-full'>
                                             <Listbox.Button className='relative w-full bg-white border border-blueGray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'>
                                                 <span className='flex items-center'>
-                                                    <span className='block truncate'>{selected.value}</span>
+                                                    <span className='block truncate'>{price.value}</span>
                                                 </span>
                                                 <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
                                                     <SelectorIcon className='h-5 w-5 text-blueGray-400' aria-hidden='true' />
@@ -143,15 +140,15 @@ const Category = ({ category, productsData }) => {
                                                             }
                                                             value={filter}
                                                         >
-                                                            {({ selected, active }) => (
+                                                            {({ price, active }) => (
                                                                 <>
                                                                     <div className='flex items-center'>
-                                                                        <span className={classNames(selected ? 'font-semibold' : 'font-normal', 'block truncate')}>
+                                                                        <span className={classNames(price ? 'font-semibold' : 'font-normal', 'block truncate')}>
                                                                             {filter.value}
                                                                         </span>
                                                                     </div>
 
-                                                                    {selected ? (
+                                                                    {price ? (
                                                                         <span
                                                                             className={classNames(
                                                                                 active ? 'text-white' : 'text-blue-600',
@@ -177,6 +174,7 @@ const Category = ({ category, productsData }) => {
                                 <div className='flex items-center'>
                                     <div className='flex items-center h-5'>
                                         <input
+                                            onChange={recommendedHandle}
                                             id='recommended'
                                             name='recommended'
                                             type='checkbox'
@@ -191,7 +189,13 @@ const Category = ({ category, productsData }) => {
                                 </div>
                                 <div className='flex items-center'>
                                     <div className='flex items-center h-5'>
-                                        <input id='discount' name='discount' type='checkbox' className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-blueGray-300 rounded' />
+                                        <input
+                                            onChange={discountHandle}
+                                            id='discount'
+                                            name='discount'
+                                            type='checkbox'
+                                            className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-blueGray-300 rounded'
+                                        />
                                     </div>
                                     <div className='ml-3'>
                                         <label htmlFor='discount' className='font-medium text-blueGray-800'>
@@ -209,6 +213,7 @@ const Category = ({ category, productsData }) => {
                                     </label>
                                     <input
                                         type='text'
+                                        onChange={minPriceHandle}
                                         name='min'
                                         placeholder='Rp. 5.000'
                                         id='min'
@@ -220,6 +225,7 @@ const Category = ({ category, productsData }) => {
                                         Max
                                     </label>
                                     <input
+                                        onChange={maxPriceHandle}
                                         type='text'
                                         placeholder='Rp. 200.000'
                                         name='max'
@@ -228,10 +234,6 @@ const Category = ({ category, productsData }) => {
                                     />
                                 </div>
                             </div>
-                            <hr />
-                            <Button href={() => {}} type='secondary' width='full'>
-                                Apply
-                            </Button>
                         </div>
                     </div>
                 </div>
@@ -256,7 +258,7 @@ export const getStaticProps = async ({ params }) => {
     const data = await res.data
 
     const getProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.id}`)
-    const products = await getProducts.data
+    const products = getProducts.data
 
     if (!data) {
         return {

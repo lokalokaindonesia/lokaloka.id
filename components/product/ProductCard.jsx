@@ -8,7 +8,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
 
     return (
         <Link href={`/${category}/${slug}`}>
-            <button className='drop-shadow-sm w-full bg-white bg-opacity-90 filter backdrop-blur ring-1 ring-blueGray-200 hover:bg-blue-100 hover:scale-105 transition ease-in-out duration-300 rounded-md'>
+            <button className='drop-shadow-sm w-full bg-white ring-1 ring-blueGray-200 hover:bg-blue-100 transition ease-in-out duration-300 rounded-md'>
                 {/* Product Image */}
                 <Image
                     className='rounded-t-md transition ease-in-out duration-300'
@@ -30,7 +30,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                             displayType={'text'}
                             thousandSeparator={true}
                             prefix={'Rp. '}
-                            className='text-md font-extrabold text-blue-500'
+                            className='font-extrabold text-blue-500'
                         />
                         {isDiscount && (
                             <NumberFormat

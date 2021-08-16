@@ -144,9 +144,9 @@ const Product = ({ product, similarProducts, reviews }) => {
                             })}
                         </div>
                         <div className='w-96 h-96 flex justify-between items-center'>
-                            <ChevronLeftIcon className='w-8 h-8 rounded-r-md bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-50 cursor-pointer' onClick={prevSlide} />
+                            <ChevronLeftIcon className='w-8 h-8 rounded-r-md bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-10 cursor-pointer' onClick={prevSlide} />
                             <ChevronRightIcon
-                                className='w-8 h-8 rounded-l-md bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-50 cursor-pointer'
+                                className='w-8 h-8 rounded-l-md bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-10 cursor-pointer'
                                 onClick={nextSlide}
                             />
                         </div>
@@ -174,7 +174,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                 />
                             </div>
                             <div className='flex flex-col space-y-2 mb-4'>
-                                <p className='text-lg font-semibold text-blueGray-600'>Sizes</p>
+                                <p className='text-lg font-semibold text-blueGray-800'>Sizes</p>
                                 <div className='flex space-x-2'>
                                     <VariantBadge text='XL' />
                                     <VariantBadge text='L' />
@@ -183,7 +183,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                 </div>
                             </div>
                             <div className='flex flex-col space-y-2 mb-4'>
-                                <p className='text-lg font-semibold text-blueGray-600'>Colors</p>
+                                <p className='text-lg font-semibold text-blueGray-800'>Colors</p>
                                 <div className='flex space-x-2'>
                                     <VariantBadge text='Blue' />
                                     <VariantBadge text='Red' />
@@ -192,8 +192,8 @@ const Product = ({ product, similarProducts, reviews }) => {
                                 </div>
                             </div>
                             <div className='flex flex-col space-y-1 mb-4'>
-                                <p className='text-lg font-semibold text-blueGray-600'>Description</p>
-                                <p>
+                                <p className='text-lg font-semibold text-blueGray-800'>Description</p>
+                                <p className='text-base font-normal text-blueGray-600'>
                                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum, pariatur obcaecati! Molestiae illo inventore, magni sint, temporibus dicta
                                     quas culpa voluptas quasi modi incidunt veniam. Velit, vel excepturi. Assumenda modi at inventore atque recusandae mollitia consequatur, ad
                                     repudiandae veniam expedita omnis voluptates, ea quod repellendus ab dignissimos veritatis iusto nisi libero excepturi quos illo laudantium? At
