@@ -13,10 +13,8 @@ const classNames = (...classes) => {
     return classes.filter(Boolean).join(' ')
 }
 
-const Category = ({ category, productsData }) => {
-    // const dispatch = useDispatch()
+const Category = ({ category }) => {
     const filter = useSelector((state) => state.filter.value)
-    // const products = useSelector((state) => state.products.value)
 
     const router = useRouter()
 
@@ -110,14 +108,6 @@ const Category = ({ category, productsData }) => {
                         <div className='sticky top-28 flex flex-col space-y-4 border border-blueGray-200 bg-white rounded-md p-4'>
                             <div className='flex justify-between items-center'>
                                 <h1 className='text-xl font-semibold text-blueGray-700'>Filter</h1>
-                                <button
-                                    onClick={() => {
-                                        setReset(true)
-                                    }}
-                                    className='text-blueGray-400 underline'
-                                >
-                                    Reset
-                                </button>
                             </div>
                             <hr />
                             {/* Sort By */}
@@ -267,9 +257,6 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
     const res = await axios.get(`${process.env.NEXT_URL}/api/product-categories/${params.category}`)
     const data = await res.data
-
-    // const getProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.id}`)
-    // const products = getProducts.data
 
     if (!data) {
         return {
