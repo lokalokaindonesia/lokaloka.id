@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Footer from '@/components/layout/footer/Footer'
-import Banner from '../ui/Banner'
-import Header from './header/Header'
+import Header from '@/components/layout/header/Header'
+import Banner from '@/components/ui/Banner'
 
 const Layout = ({ title, children }) => {
     return (
@@ -11,15 +11,17 @@ const Layout = ({ title, children }) => {
                 <meta name='description' content='Lokaloka Indonesia - Belanja oleh-oleh dengan mudah !!!' />
             </Head>
             {/* Header - Navbar */}
-            <div className='sticky top-0 z-50 filter backdrop-blur-lg bg-opacity-75 bg-white drop-shadow'>
-                <Banner />
-                <Header />
+            <div className='sticky top-0 z-30'>
+                <div className='w-full absolute filter backdrop-blur-lg bg-opacity-75 bg-white'>
+                    <Header />
+                </div>
             </div>
 
             {children}
 
             {/* Footer */}
             <Footer />
+            <Banner msg='This is Beta Version, You transaction only a simulation. Please leave a feedback on this email (kampungvector@gmail.com)' />
         </div>
     )
 }

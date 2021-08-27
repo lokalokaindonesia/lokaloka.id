@@ -4,11 +4,15 @@ module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      'display': ['Plus Jakarta Display'],
+      'body': ['Plus Jakarta Text',],
+    },
     extend: {
       colors: {
         orange: color.amber,
         blueGray: color.blueGray,
-        lolman: "#3498db"
+        teal: color.teal
       }
     },
   },

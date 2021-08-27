@@ -1,23 +1,36 @@
-import Header from '@/components/layout/header/Header'
 import Hero from '@/components/layout/Hero'
 import HighlightedSection from '@/components/layout/HighlightedSection'
 import JustForYou from '@/components/layout/JustForYou'
 import Layout from '@/components/layout/Layout'
-import Banner from '@/components/ui/Banner'
 import Promo from '@/components/ui/Promo'
 
 const Home = ({ products, promo, recommended }) => {
     return (
-        <Layout title='Liburan seru bareng Lokaloka.id'>
-            {/* Hero */}
-            <Hero />
+        <>
+            <Layout title='Liburan seru bareng Lokaloka.id'>
+                {/* Hero */}
+                <Hero />
 
-            {/* Product Section */}
-            <HighlightedSection sectionTitle='Promo' href='#' data={promo} bgColor='bg-white' />
-            <HighlightedSection sectionTitle='Recommended' href='#' data={recommended} />
-            <Promo />
-            <JustForYou sectionTitle='Just For You' href='#' data={products} />
-        </Layout>
+                {/* Category */}
+                <div className='container mx-auto mt-10'>
+                    <div className='rounded bg-blueGray-200 p-6 h-72 flex justify-between space-x-6 items-center'>
+                        <div className='w-1/2 h-full bg-blueGray-600 rounded'></div>
+                        <div className='w-1/2 h-full flex flex-col space-y-6 items-center justify-between'>
+                            <div className='w-full h-full bg-blueGray-600 rounded'></div>
+                            <div className='w-full h-full bg-blueGray-600 rounded'></div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Product Section */}
+                <HighlightedSection sectionTitle='Promo' href='#' data={promo} bgColor='bg-white' />
+                <HighlightedSection sectionTitle='Recommended' href='#' data={recommended} />
+                {/* Promo Campaign */}
+                <Promo />
+                {/* Just For You */}
+                <JustForYou sectionTitle='Just For You' href='#' data={products} />
+            </Layout>
+        </>
     )
 }
 
