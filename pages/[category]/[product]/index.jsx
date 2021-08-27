@@ -129,7 +129,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                 <div className='flex justify-start space-x-8 my-6'>
                     {/* Images */}
                     <div className='w-auto'>
-                        <div className='flex justify-end absolute w-96 z-40 items-start px-4 py-4'>
+                        <div className='flex justify-end absolute w-96 z-30 items-start px-4 py-4'>
                             <div className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50' onClick={favoriteHandle}>
                                 <FaHeart className='text-white hover:text-red-500 transition duration-300 ease-in-out w-6 h-6' />
                             </div>

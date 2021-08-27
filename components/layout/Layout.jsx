@@ -11,10 +11,8 @@ const Layout = ({ title, children }) => {
                 <meta name='description' content='Lokaloka Indonesia - Belanja oleh-oleh dengan mudah !!!' />
             </Head>
             {/* Header - Navbar */}
-            <div className='sticky top-0 z-30'>
-                <div className='w-full absolute filter backdrop-blur-lg bg-opacity-75 bg-white'>
-                    <Header />
-                </div>
+            <div className='sticky top-0 z-30 backdrop-filter backdrop-blur-sm bg-opacity-75 shadow bg-white'>
+                <Header />
             </div>
 
             {children}
