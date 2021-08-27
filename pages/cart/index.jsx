@@ -66,11 +66,23 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
     // * Qty Func
     const addQty = async (product) => {
-        const updateQty = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/carts/${product.id}`, {
-            quantity: +product.quantity + 1,
-        })
+        const updateQty = await axios.put(
+            `${process.env.NEXT_PUBLIC_API_URL}/carts/${product.id}`,
+            {
+                quantity: +product.quantity + 1,
+            },
+            {
+                headers: {
+                    Authorization: 'Bearer ' + session.jwt,
+                },
+            }
+        )
 
-        const getUpdatedData = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
+        const getUpdatedData = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`, {
+            headers: {
+                Authorization: 'Bearer ' + session.jwt,
+            },
+        })
         const updatedData = await getUpdatedData.data
 
         return setCart(updatedData)
@@ -80,18 +92,34 @@ const Cart = ({ cartProducts, session, productCategories }) => {
         if (product.quantity == 1) {
             return
         }
-        const updateQty = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/carts/${product.id}`, {
-            quantity: +product.quantity - 1,
-        })
+        const updateQty = await axios.put(
+            `${process.env.NEXT_PUBLIC_API_URL}/carts/${product.id}`,
+            {
+                quantity: +product.quantity - 1,
+            },
+            {
+                headers: {
+                    Authorization: 'Bearer ' + session.jwt,
+                },
+            }
+        )
 
-        const getUpdatedData = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
+        const getUpdatedData = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`, {
+            headers: {
+                Authorization: 'Bearer ' + session.jwt,
+            },
+        })
         const updatedData = await getUpdatedData.data
 
         return setCart(updatedData)
     }
 
     const deleteItem = async (product) => {
-        const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${product.id}`)
+        const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${product.id}`, {
+            headers: {
+                Authorization: 'Bearer ' + session.jwt,
+            },
+        })
         const data = await res.data
 
         if (!data) {
@@ -140,15 +168,27 @@ const Cart = ({ cartProducts, session, productCategories }) => {
             user: session.id,
         }
 
-        const getOrder = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders?user_eq=${session.id}`)
+        const getOrder = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders?user_eq=${session.id}`, {
+            headers: {
+                Authorization: 'Bearer ' + session.jwt,
+            },
+        })
         const order = getOrder.data[0]
 
         if (!order) {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/orders`, orderData)
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/orders`, orderData, {
+                headers: {
+                    Authorization: 'Bearer ' + session.jwt,
+                },
+            })
             return dispatch(setOrder(data))
         }
 
-        const updateOrder = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/orders/${order.id}`, orderData)
+        const updateOrder = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/orders/${order.id}`, orderData, {
+            headers: {
+                Authorization: 'Bearer ' + session.jwt,
+            },
+        })
         const updatedOrder = updateOrder.data
 
         dispatch(setOrder(updatedOrder))
@@ -372,7 +412,11 @@ export const getServerSideProps = async (context) => {
         }
     }
 
-    const getCartProducts = await axios(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`)
+    const getCartProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`, {
+        headers: {
+            Authorization: 'Bearer ' + session.jwt,
+        },
+    })
     const cartProducts = await getCartProducts.data
 
     const getCategories = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/product-categories`)

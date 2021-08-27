@@ -497,7 +497,11 @@ export const getServerSideProps = async (contex) => {
         return { notFound: true }
     }
 
-    const getOrder = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders?user_eq=${session.id}`)
+    const getOrder = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders?user_eq=${session.id}`, {
+        headers: {
+            Authorization: 'Bearer ' + session.jwt,
+        },
+    })
     const order = getOrder.data
 
     const getCity = await axios.get(`${process.env.NEXT_URL}/api/expedition/cities`)
