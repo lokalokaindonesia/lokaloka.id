@@ -23,12 +23,13 @@ const Cart = ({ cartProducts, session, productCategories }) => {
     const [couponPromo, setCouponPromo] = useState(0)
     const [coupon, setCoupon] = useState(null)
     const [couponInput, setCouponInput] = useState(null)
+    const [totalWeight, setTotalWeight] = useState(0)
 
     const dispatch = useDispatch()
 
     // * QTY Effect
     useEffect(() => {
-        countGrandTotal(), countSummaryTotal(), countDiscountTotal(), cart, countCouponPromo(), countSubTotal()
+        countGrandTotal(), countSummaryTotal(), countDiscountTotal(), cart, countCouponPromo(), countSubTotal(), countWeight()
         return () => {}
     }, [cart, summaryTotal, discountTotal, coupon, couponPromo, subTotal])
     // * END QTY Effect
@@ -45,6 +46,12 @@ const Cart = ({ cartProducts, session, productCategories }) => {
     const countSummaryTotal = async () => {
         const sum = cart.reduce((currentSummary, product) => currentSummary + +product.quantity * +product.product.sellingPrice, 0)
         return setSummaryTotal(sum)
+    }
+
+    const countWeight = async () => {
+        const weight = cart.reduce((currentWeight, product) => currentWeight + +product.product.weight * +product.quantity, 0)
+        console.log(weight)
+        return setTotalWeight(weight)
     }
 
     const countDiscountTotal = async () => {
