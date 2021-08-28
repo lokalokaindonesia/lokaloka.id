@@ -85,9 +85,13 @@ const Product = ({ product, similarProducts, reviews }) => {
         const sameProduct = await cartProducts.find((item) => item.product.id === product.id)
 
         if (sameProduct) {
-            const { data } = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/carts/${sameProduct.id}`, {
-                quantity: +sameProduct.quantity + quantity,
-            })
+            const { data } = await axios.put(
+                `${process.env.NEXT_PUBLIC_API_URL}/carts/${sameProduct.id}`,
+                {
+                    quantity: +sameProduct.quantity + quantity,
+                },
+                { headers: { Authorization: 'Bearer ' + session.jwt } }
+            )
 
             if (!data) {
                 return console.log('something wrong when update product qty')
@@ -96,11 +100,15 @@ const Product = ({ product, similarProducts, reviews }) => {
             return addToCartSuccessToast()
         }
 
-        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/carts`, {
-            product: product._id,
-            user: session.id,
-            quantity,
-        })
+        const res = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/carts`,
+            {
+                product: product._id,
+                user: session.id,
+                quantity,
+            },
+            { headers: { Authorization: 'Bearer ' + session.jwt } }
+        )
         if (!res.data) {
             return addToCartFailedToast()
         }

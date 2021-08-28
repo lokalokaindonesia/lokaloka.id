@@ -16,7 +16,7 @@ const Hero = () => {
         marginRight: 'auto',
     }
     return (
-        <div className=' bg-blue-200 h-max py-32 flex items-center'>
+        <div className=' bg-blue-50 h-max py-32 flex items-center'>
             <div className='flex justify-between items-center flex-row-reverse container mx-auto'>
                 <div className='w-2/4 filter drop-shadow-2xl'>
                     <Image src={heroImage} layout='responsive' objectFit='cover' priority />

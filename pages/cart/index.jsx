@@ -222,7 +222,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                 </div>
             ) : (
                 <div className='container mx-auto'>
-                    <div className='w-full flex space-x-2 items-center mt-4'>
+                    <div className='w-full flex space-x-2 items-center mt-6'>
                         <div className='text-blue-700 hover:text-blue-800'>
                             <Link href='/'>Home</Link>
                         </div>
