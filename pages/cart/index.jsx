@@ -172,6 +172,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
             products: cart,
             totalPrice: grandTotal,
             totalQuantity,
+            totalWeight,
             user: session.id,
         }
 
