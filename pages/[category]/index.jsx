@@ -265,7 +265,7 @@ export const getStaticProps = async ({ params }) => {
     }
 
     return {
-        props: { category: data },
+        props: { category: data, revaldate: 1 },
     }
 }
 

@@ -335,6 +335,7 @@ export const getStaticProps = async ({ params }) => {
             product: data,
             similarProducts,
             reviews,
+            revalidate: 1,
         },
     }
 }
