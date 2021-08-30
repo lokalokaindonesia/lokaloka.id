@@ -71,6 +71,18 @@ const paymentMethodCollection = [
         id: 'qrcode',
         label: 'QRIS',
     },
+    {
+        src: '/images/payment-gateway-small/alfamart.png',
+        type: 'retail-outlet',
+        id: 'alfamart',
+        label: 'ALFAMART',
+    },
+    {
+        src: '/images/payment-gateway-small/indomaret.png',
+        type: 'retail-outlet',
+        id: 'indomaret',
+        label: 'INDOMARET',
+    },
 ]
 
 const index = ({ orderData, cityData, provinceData }) => {
@@ -357,8 +369,8 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md border-2 border-blue-500 bg-white h-12 w-36 px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border-2 border-blueGray-200 bg-white h-12 w-36 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md border-2 border-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
                                                                 <Image
@@ -392,8 +404,8 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md border-2 border-blue-500 bg-white h-12 w-36 px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border-2 border-blueGray-200 bg-white h-12 w-36 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md border-2 border-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
                                                                 <Image
@@ -427,8 +439,43 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md border-2 border-blue-500 bg-white h-12 w-36 px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border-2 border-blueGray-200 bg-white h-12 w-36 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md border-2 border-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                }
+                                                            >
+                                                                <Image
+                                                                    title={paymentMethod.label}
+                                                                    src={paymentMethod.src}
+                                                                    alt={paymentMethod.label}
+                                                                    layout='responsive'
+                                                                    priority
+                                                                    quality={100}
+                                                                    objectFit='scale-down'
+                                                                    width={8}
+                                                                    height={4}
+                                                                />
+                                                            </button>
+                                                        )
+                                                    })}
+                                            </div>
+                                        </div>
+                                        <div className='flex flex-col space-y-2'>
+                                            <h3 className='text-semibold'>Retail Outlet</h3>
+                                            <div className='flex space-x-4 items-center'>
+                                                {paymentMethodCollection
+                                                    .filter((pm) => pm.type == 'retail-outlet')
+                                                    .map((paymentMethod, index) => {
+                                                        return (
+                                                            <button
+                                                                key={index}
+                                                                onClick={() => {
+                                                                    selectPaymentMethod(paymentMethod.id)
+                                                                }}
+                                                                type='button'
+                                                                className={
+                                                                    choosenPaymentMethod == paymentMethod.id
+                                                                        ? 'rounded-md border-2 border-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
                                                                 <Image
