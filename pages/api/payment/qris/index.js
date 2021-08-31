@@ -12,7 +12,7 @@ export default async (req, res) => {
             externalID,
             callbackURL: 'https://9b36-36-85-79-220.ngrok.io/api/wh/payment/qrcode',
             type: 'DYNAMIC',
-            amount: 400000
+            amount: req.body.amount
         })
 
         return res.json(resp)

@@ -2,12 +2,15 @@ import { getSession } from 'next-auth/client'
 import axios from 'axios'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 import { ChevronRightIcon, SelectorIcon } from '@heroicons/react/solid'
 import { FaCheckCircle, FaWallet } from 'react-icons/fa'
 import NumberFormat from 'react-number-format'
 import { useEffect, useState } from 'react'
 import Layout from '@/components/layout/Layout'
 import Button from '@/components/ui/Button'
+import { setPaymentMethod } from '@/redux/paymentMethod'
 
 // Area Data
 const areaCollection = [
@@ -26,66 +29,69 @@ const paymentMethodCollection = [
     {
         src: '/images/payment-gateway-small/bni.png',
         type: 'va',
-        id: 'bni',
+        id: 'BNI',
         label: 'BNI Virtual Account',
     },
     {
         src: '/images/payment-gateway-small/briva.png',
         type: 'va',
-        id: 'bri',
+        id: 'BRI',
         label: 'BRI Virtual Account',
     },
     {
         src: '/images/payment-gateway-small/mandiri.png',
         type: 'va',
-        id: 'mandiri',
+        id: 'MANDIRI',
         label: 'Mandiri Virtual Account',
     },
     {
         src: '/images/payment-gateway-small/permata.png',
         type: 'va',
-        id: 'permata',
+        id: 'PERMATA',
         label: 'Permata Virtual Account',
     },
     {
         src: '/images/payment-gateway-small/ovo.png',
         type: 'ewallet',
-        id: 'ovo',
+        id: 'ID_OVO',
         label: 'OVO',
     },
     {
         src: '/images/payment-gateway-small/dana.png',
         type: 'ewallet',
-        id: 'dana',
+        id: 'ID_DANA',
         label: 'DANA',
     },
     {
         src: '/images/payment-gateway-small/linkaja.png',
         type: 'ewallet',
-        id: 'linkaja',
+        id: 'ID_LINKAJA',
         label: 'Link AJA',
     },
     {
         src: '/images/payment-gateway-small/qris.png',
         type: 'qrcode',
-        id: 'qrcode',
+        id: 'QRCODE',
         label: 'QRIS',
     },
     {
         src: '/images/payment-gateway-small/alfamart.png',
         type: 'retail-outlet',
-        id: 'alfamart',
+        id: 'ALFAMART',
         label: 'ALFAMART',
     },
     {
         src: '/images/payment-gateway-small/indomaret.png',
         type: 'retail-outlet',
-        id: 'indomaret',
+        id: 'INDOMARET',
         label: 'INDOMARET',
     },
 ]
 
-const index = ({ orderData, cityData, provinceData }) => {
+const index = ({ orderData, cityData, provinceData, session }) => {
+    const router = useRouter()
+    const dispatch = useDispatch()
+    const paymentMethod = useSelector((state) => state.paymentMethod.value)
     const order = orderData[0]
 
     const [area, setArea] = useState('malang-batu')
@@ -155,7 +161,67 @@ const index = ({ orderData, cityData, provinceData }) => {
 
     // pay Handle
     const pay = async () => {
-        return
+        if (choosenPaymentMethod == undefined) {
+            alert('select payment method!')
+        }
+        if (choosenPaymentMethod == 'BNI' || choosenPaymentMethod == 'BRI' || choosenPaymentMethod == 'MANDIRI' || choosenPaymentMethod == 'PERMATA') {
+            const createInvoice = await axios.get(`/api/payment/invoice`)
+            const invoiceResponse = await createInvoice.data
+
+            const selectedPaymentMethod = await invoiceResponse.available_banks.find((bank) => choosenPaymentMethod == bank.bank_code)
+
+            dispatch(setPaymentMethod(selectedPaymentMethod))
+
+            await router.push('/cart/checkout/pay')
+        }
+
+        if (choosenPaymentMethod == 'ID_OVO') {
+            const createEWalletInvoice = await axios.get(`/api/payment/e-wallet`, {
+                eWalletType: 'ID_OVO',
+                amount: total,
+                phoneNumber: '',
+            })
+
+            const eWalletResponse = await createEWalletInvoice.data
+
+            dispatch(setPaymentMethod(choosenPaymentMethod))
+            await router.push('/cart/checkout/pay')
+        }
+
+        if (choosenPaymentMethod == 'ID_DANA' || choosenPaymentMethod == 'ID_LINKAJA') {
+            const createEWalletInvoice = await axios.get(`/api/payment/e-wallet`, {
+                eWalletType: 'ID_DANA',
+                amount: total,
+            })
+
+            const eWalletResponse = await createEWalletInvoice.data
+
+            dispatch(setPaymentMethod(choosenPaymentMethod))
+            await router.push('/cart/checkout/pay')
+        }
+
+        if (choosenPaymentMethod == 'QRCODE') {
+            const createQrCodeInvoice = await axios.get(`/api/payment/qris`, {
+                amount: total,
+            })
+
+            const qrCodeResponse = await createQrCodeInvoice.data
+
+            dispatch(setPaymentMethod(choosenPaymentMethod))
+            await router.push('/cart/checkout/pay')
+        }
+
+        if (choosenPaymentMethod == 'ALFAMART' || choosenPaymentMethod == 'INDOMARET') {
+            const createRetailOutletInvoice = await axios.get(`/api/payment/retail-outlet`, {
+                amount: total,
+                retail: choosenPaymentMethod,
+            })
+
+            const retailOutletResponse = await createRetailOutletInvoice.data
+
+            dispatch(setPaymentMethod(choosenPaymentMethod))
+            await router.push('/cart/checkout/pay')
+        }
     }
 
     return (
@@ -218,6 +284,7 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                             type='text'
                                                             name='location'
                                                             id='location'
+                                                            required
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
                                                             placeholder='Massachusetts Institute of Technology'
                                                         />
@@ -227,6 +294,7 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                         <input
                                                             type='text'
                                                             name='address'
+                                                            required
                                                             id='address'
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
                                                             placeholder='77 Massachusetts Ave, Cambridge, MA 02139, United States'
@@ -252,6 +320,7 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                         <input
                                                             type='text'
                                                             name='address'
+                                                            required
                                                             id='address'
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
                                                             placeholder='77 Massachusetts Ave, Cambridge, MA 02139, United States'
@@ -283,6 +352,7 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                                         <div className='sticky top-2 bg-white z-10 m-2'>
                                                                             <input
                                                                                 type='text'
+                                                                                required
                                                                                 autoComplete='disabled'
                                                                                 name='city'
                                                                                 id='city'
@@ -323,6 +393,7 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                             value={province.province}
                                                             readOnly={true}
                                                             id='province'
+                                                            required
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
                                                             placeholder='Massachusetts'
                                                         />
@@ -333,6 +404,7 @@ const index = ({ orderData, cityData, provinceData }) => {
                                                             type='text'
                                                             name='postalCode'
                                                             id='postalCode'
+                                                            required
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
                                                             placeholder='MA 02139'
                                                         />

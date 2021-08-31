@@ -10,11 +10,12 @@ export default async (req, res) => {
         const resp = await ew.createEWalletCharge({
             referenceID: externalID,
             currency: 'IDR',
-            amount: 10000,
+            amount: req.body.amount,
             checkoutMethod: 'ONE_TIME_PAYMENT',
-            channelCode: 'ID_OVO',
+            channelCode: req.body.eWalletType,
             channelProperties: {
-                mobileNumber: '+6285855518752'
+                mobileNumber?: req.body.phoneNumber,
+                successRedirectURL?: req.body.successRedirectURL
             }
         });
 

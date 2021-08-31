@@ -78,7 +78,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className='w-full h-auto bg-blueGray-100 py-4 flex items-center justify-center'>
-                Made with ❤️ from &nbsp; <b>Lokaloka Group</b>
+                &copy; Lokaloka, With ❤️ from &nbsp; <b>Lokaloka Group</b>
             </div>
         </div>
     )
