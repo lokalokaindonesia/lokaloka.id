@@ -50,7 +50,6 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
     const countWeight = async () => {
         const weight = cart.reduce((currentWeight, product) => currentWeight + +product.product.weight * +product.quantity, 0)
-        console.log(weight)
         return setTotalWeight(weight)
     }
 
