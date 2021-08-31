@@ -7,6 +7,20 @@ export default async (req, res) => {
         const getExternalID = await axios.get(`${process.env.NEXT_URL}/api/generatePaymentID`)
         const externalID = getExternalID.data
 
+        if (req.body.eWalletType == 'ID_OVO') {
+            const resp = await ew.createEWalletCharge({
+                referenceID: externalID,
+                currency: 'IDR',
+                amount: req.body.amount,
+                checkoutMethod: 'ONE_TIME_PAYMENT',
+                channelCode: req.body.eWalletType,
+                channelProperties: {
+                    mobileNumber: req.body.phoneNumber,
+                }
+            })
+            return res.json(resp)
+        }
+
         const resp = await ew.createEWalletCharge({
             referenceID: externalID,
             currency: 'IDR',
@@ -14,8 +28,7 @@ export default async (req, res) => {
             checkoutMethod: 'ONE_TIME_PAYMENT',
             channelCode: req.body.eWalletType,
             channelProperties: {
-                mobileNumber?: req.body.phoneNumber,
-                successRedirectURL?: req.body.successRedirectURL
+                successRedirectURL: req.body.successRedirectURL
             }
         });
 
