@@ -103,6 +103,10 @@ const index = ({ orderData, cityData, provinceData, session }) => {
     const [city, setCity] = useState('')
     const [cityToggle, setCityToggle] = useState(false)
     const [province, setProvince] = useState({ province: '' })
+    const [address, setAddress] = useState('')
+    const [location, setLocation] = useState('')
+    const [postalCode, setPostalCode] = useState('')
+    const [note, setNote] = useState('')
     const [openModalConfirmation, setOpenModalConfirmation] = useState(false)
 
     useEffect(() => {
@@ -118,6 +122,26 @@ const index = ({ orderData, cityData, provinceData, session }) => {
         if (data.value == 'anotherCity') {
             return setShippingCost(0)
         }
+    }
+
+    // Handle Address
+    const handleAddress = async (e) => {
+        return setAddress(e.target.value)
+    }
+
+    // Handle Location
+    const handleLocation = async (e) => {
+        return setLocation(e.target.value)
+    }
+
+    // Handle Note
+    const handleNote = async (e) => {
+        return setNote(e.target.value)
+    }
+
+    // Handle PostalCode
+    const handlePostalCode = async (e) => {
+        return setPostalCode(e.target.value)
     }
 
     // Handle Input City
@@ -162,14 +186,24 @@ const index = ({ orderData, cityData, provinceData, session }) => {
 
     // Handle Modal
     const openModal = () => {
+        if (area != 'anotherCity') {
+            if (address == '' || location == '') {
+                return alert('Fill all inputs form')
+            }
+        }
+        if (area == 'anotherCity') {
+            if (address == '' || postalCode == '') {
+                return alert('Fill all inputs form')
+            }
+        }
+        if (choosenPaymentMethod == undefined) {
+            return alert('select payment method!')
+        }
         return setOpenModalConfirmation(!openModalConfirmation)
     }
 
     // pay Handle
     const pay = async () => {
-        if (choosenPaymentMethod == undefined) {
-            alert('select payment method!')
-        }
         if (choosenPaymentMethod == 'BNI' || choosenPaymentMethod == 'BRI' || choosenPaymentMethod == 'MANDIRI' || choosenPaymentMethod == 'PERMATA') {
             const createInvoice = await axios.get(`/api/payment/invoice`)
             const invoiceResponse = await createInvoice.data
@@ -233,7 +267,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
     return (
         <Layout title='Checkout'>
             {openModalConfirmation && (
-                <div className='fixed z-50 inset-0 overflow-y-auto' aria-labelledby='modal-title' role='dialog' aria-modal='true'>
+                <div className='fixed z-50 inset-0 overflow-y-auto text-blueGray-800' aria-labelledby='modal-title' role='dialog' aria-modal='true'>
                     <div className='flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
                         <div className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity' aria-hidden='true'></div>
 
@@ -245,14 +279,76 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                             <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
                                 <div className='sm:flex sm:items-start'>
                                     <div className='mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 sm:mx-0 sm:h-10 sm:w-10'>
-                                        <ExclamationIcon className='w-6 h-6 text-orange-500' />
+                                        <ExclamationIcon className='w-7 h-7 text-orange-500' />
                                     </div>
                                     <div className='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
-                                        <h3 className='text-lg leading-6 font-medium text-gray-900' id='modal-title'>
+                                        <h3 className='text-lg leading-none font-medium text-blueGray-800' id='modal-title'>
                                             Order confirmation
                                         </h3>
-                                        <div className='mt-2'>
+                                        <div className='mt-2 flex flex-col space-y-2'>
                                             <p className='text-sm text-gray-500'>Confirm order with the following details?</p>
+                                            <br />
+                                            <div className='font-medium tracking-wide text-sm text-blueGray-500'>Products</div>
+                                            {orderData[0].products.map((product, index) => {
+                                                return (
+                                                    <div className='flex justify-between space-x-2 ' key={index}>
+                                                        <div className='flex space-x-1'>
+                                                            <span className='w-10'>x {product.quantity}</span>
+                                                            <span className='w-10/12 line-clamp-1 flex-initial max-w-sm'>{product.product.name}</span>
+                                                        </div>
+                                                        <NumberFormat
+                                                            value={product.quantity * product.product.sellingPrice}
+                                                            displayType={'text'}
+                                                            thousandSeparator={true}
+                                                            prefix={'Rp. '}
+                                                        />
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                        <br />
+                                        <div className='flex flex-col space-y-2'>
+                                            <div className='flex justify-between space-x-4 font-medium'>
+                                                <span className='truncate font-bold w-1/2'>Sub Total</span>
+                                                <NumberFormat className='font-bold ' value={orderData[0].subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
+                                            </div>
+                                            <div className='flex justify-between space-x-4 font-medium'>
+                                                <span className='truncate font-bold w-1/2'>Discount</span>
+                                                <NumberFormat
+                                                    className='font-bold text-red-500'
+                                                    value={orderData[0].discount}
+                                                    displayType={'text'}
+                                                    thousandSeparator={true}
+                                                    prefix={'-Rp. '}
+                                                />
+                                            </div>
+                                            <hr className='border border-dashed' />
+                                            <div className='flex justify-between space-x-4 font-medium'>
+                                                <span className='truncate font-bold w-1/2'>Total</span>
+                                                <NumberFormat className='font-bold' value={orderData[0].totalPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div className='flex flex-col space-y-2'>
+                                            <div>
+                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Location</div>
+                                                {area != 'anotherCity' ? (
+                                                    <div className='font-medium text-blueGray-800'>{`${location}, ${address}`}</div>
+                                                ) : (
+                                                    <>
+                                                        <div className='font-medium text-blueGray-800'>{`${address}`}</div>
+                                                        <div className='font-medium text-blueGray-800'>{`${postalCode}, ${city.type} ${city.city_name}, ${province.province}`}</div>
+                                                    </>
+                                                )}
+                                            </div>
+                                            <div>
+                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Payment Method</div>
+                                                <div className='font-medium text-blueGray-800'>{`${choosenPaymentMethod}`}</div>
+                                            </div>
+                                            <div>
+                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Notes</div>
+                                                <div className='font-medium text-blueGray-800'>{`${note}`}</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -317,8 +413,8 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                             }}
                                                             className={
                                                                 area == n.value
-                                                                    ? 'py-1 px-2 flex items-center space-x-8 rounded-md border border-blue-500 bg-blue-500 text-white transition ease-in-out duration-300'
-                                                                    : 'py-1 px-2 flex items-center space-x-8 rounded-md border border-blueGray-200 bg-blueGray-300 text-blueGray-800 transition ease-in-out duration-300'
+                                                                    ? 'py-1 px-2 flex items-center space-x-2 rounded-md border border-blue-500 bg-blue-500 text-white transition ease-in-out duration-300'
+                                                                    : 'py-1 px-2 flex items-center space-x-2 rounded-md border border-blueGray-200 bg-blueGray-300 text-blueGray-800 transition ease-in-out duration-300'
                                                             }
                                                         >
                                                             {area != n.value && <div className='border border-blueGray-800 rounded-full w-4 h-4'></div>}
@@ -339,6 +435,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                             type='text'
                                                             name='location'
                                                             id='location'
+                                                            onChange={handleLocation}
                                                             required
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
                                                             placeholder='Massachusetts Institute of Technology'
@@ -348,6 +445,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                         <label htmlFor='address'>Address</label>
                                                         <input
                                                             type='text'
+                                                            onChange={handleAddress}
                                                             name='address'
                                                             required
                                                             id='address'
@@ -361,6 +459,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                     <textarea
                                                         name='notes'
                                                         id='notes'
+                                                        onChange={handleNote}
                                                         placeholder='Notes'
                                                         className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
                                                     ></textarea>
@@ -375,6 +474,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                         <input
                                                             type='text'
                                                             name='address'
+                                                            onChange={handleAddress}
                                                             required
                                                             id='address'
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
@@ -459,6 +559,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                             type='text'
                                                             name='postalCode'
                                                             id='postalCode'
+                                                            onChange={handlePostalCode}
                                                             required
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
                                                             placeholder='MA 02139'
@@ -469,6 +570,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                     <label htmlFor='notes'>Notes</label>
                                                     <textarea
                                                         name='notes'
+                                                        onChange={handleNote}
                                                         id='notes'
                                                         placeholder='Notes'
                                                         className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'

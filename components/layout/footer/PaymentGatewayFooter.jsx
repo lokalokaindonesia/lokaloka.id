@@ -14,9 +14,6 @@ const PaymentGateway = () => {
                     <Image alt='Link Aja' src='/images/payment-gateway/linkaja2.png' layout='responsive' objectFit='contain' width={162} height={65} priority quality={100} />
                 </div>
                 <div className='h-42 w-24 filter hover:grayscale-0 transition ease-in-out duration-300 hover:scale-110 grayscale'>
-                    <Image alt='Shopee Pay' src='/images/payment-gateway/shopeepay.png' layout='responsive' objectFit='contain' width={121.9} height={64} priority quality={100} />
-                </div>
-                <div className='h-42 w-24 filter hover:grayscale-0 transition ease-in-out duration-300 hover:scale-110 grayscale'>
                     <Image alt='Dana' src='/images/payment-gateway/dana2.png' layout='responsive' objectFit='contain' width={143} height={40} priority quality={100} />
                 </div>
                 <div className='h-42 w-24 filter hover:grayscale-0 transition ease-in-out duration-300 hover:scale-110 grayscale'>
@@ -39,6 +36,12 @@ const PaymentGateway = () => {
                 </div>
                 <div className='h-42 w-24 filter hover:grayscale-0 transition ease-in-out duration-300 hover:scale-110 grayscale'>
                     <Image alt='OVO' src='/images/payment-gateway/ovo.png' layout='responsive' objectFit='contain' width={127} height={40} priority quality={100} />
+                </div>
+                <div className='h-42 w-24 filter hover:grayscale-0 transition ease-in-out duration-300 hover:scale-110 grayscale'>
+                    <Image alt='ALFAMART' src='/images/payment-gateway/alfamart.png' layout='responsive' objectFit='contain' width={127} height={40} priority quality={100} />
+                </div>
+                <div className='h-42 w-24 filter hover:grayscale-0 transition ease-in-out duration-300 hover:scale-110 grayscale'>
+                    <Image alt='INDOMARET' src='/images/payment-gateway/indomaret.png' layout='responsive' objectFit='contain' width={127} height={40} priority quality={100} />
                 </div>
             </div>
         </div>

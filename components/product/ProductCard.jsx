@@ -24,7 +24,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                         quality={75}
                     />
                 </div>
-                <div className='flex flex-col space-y-1 p-2'>
+                <div className='flex flex-col space-y-2 p-2'>
                     <span className='line-clamp-2 text-sm font-medium text-left text-blueGray-900 leading-snug'>{productName}</span>
                     <div className='flex justify-between items-center leading-snug'>
                         <NumberFormat
@@ -32,19 +32,13 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                             displayType={'text'}
                             thousandSeparator={true}
                             prefix={'Rp. '}
-                            className='font-extrabold text-blue-500'
+                            className='font-extrabold text-orange-500'
                         />
                         {isDiscount && (
-                            <NumberFormat
-                                value={price}
-                                displayType={'text'}
-                                thousandSeparator={true}
-                                prefix={'Rp. '}
-                                className='text-xs font-normal text-red-500 line-through leading-snug'
-                            />
+                            <NumberFormat value={price} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-xs font-normal text-red-500 line-through ' />
                         )}
                     </div>
-                    <div className={isRecommended ? 'px-2 py-1 bg-green-100 text-xs font-bold text-green-500 w-max' : 'hidden'}>Recommended</div>
+                    <div className={isRecommended ? 'px-2 py-1 bg-green-100 text-xs font-bold text-green-500 w-max rounded' : 'hidden'}>Recommended</div>
                 </div>
             </button>
         </Link>

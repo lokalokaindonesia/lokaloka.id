@@ -72,7 +72,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
     // * Qty Func
     const addQty = async (product) => {
-        const updateQty = await axios.put(
+        await axios.put(
             `${process.env.NEXT_PUBLIC_API_URL}/carts/${product.id}`,
             {
                 quantity: +product.quantity + 1,
@@ -98,7 +98,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
         if (product.quantity == 1) {
             return
         }
-        const updateQty = await axios.put(
+        await axios.put(
             `${process.env.NEXT_PUBLIC_API_URL}/carts/${product.id}`,
             {
                 quantity: +product.quantity - 1,
@@ -149,7 +149,11 @@ const Cart = ({ cartProducts, session, productCategories }) => {
         if (!couponInput) {
             return alert('Fill the form')
         }
-        const { data } = await axios.get(`/api/coupons`)
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/coupons`, {
+            headers: {
+                Authorization: 'Bearer ' + session.jwt,
+            },
+        })
         const couponData = await data.find((c) => c.code === couponInput)
         if (!couponData) {
             return alert('Coupon not found!')
@@ -172,6 +176,8 @@ const Cart = ({ cartProducts, session, productCategories }) => {
             totalPrice: grandTotal,
             totalQuantity,
             totalWeight,
+            discount: couponPromo,
+            subTotal: subTotal,
             user: session.id,
         }
 
