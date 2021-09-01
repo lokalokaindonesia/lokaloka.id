@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
-import { ChevronRightIcon, SelectorIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon, ExclamationIcon, SelectorIcon } from '@heroicons/react/solid'
 import { FaCheckCircle, FaWallet } from 'react-icons/fa'
 import NumberFormat from 'react-number-format'
 import { useEffect, useState } from 'react'
@@ -103,6 +103,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
     const [city, setCity] = useState('')
     const [cityToggle, setCityToggle] = useState(false)
     const [province, setProvince] = useState({ province: '' })
+    const [openModalConfirmation, setOpenModalConfirmation] = useState(false)
 
     useEffect(() => {
         selectArea, selectPaymentMethod, countTotal()
@@ -157,6 +158,11 @@ const index = ({ orderData, cityData, provinceData, session }) => {
     // count total
     const countTotal = () => {
         return setTotal(+shippingCost + +order.totalPrice)
+    }
+
+    // Handle Modal
+    const openModal = () => {
+        return setOpenModalConfirmation(!openModalConfirmation)
     }
 
     // pay Handle
@@ -226,6 +232,55 @@ const index = ({ orderData, cityData, provinceData, session }) => {
 
     return (
         <Layout title='Checkout'>
+            {openModalConfirmation && (
+                <div className='fixed z-50 inset-0 overflow-y-auto' aria-labelledby='modal-title' role='dialog' aria-modal='true'>
+                    <div className='flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
+                        <div className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity' aria-hidden='true'></div>
+
+                        <span className='hidden sm:inline-block sm:align-middle sm:h-screen' aria-hidden='true'>
+                            &#8203;
+                        </span>
+
+                        <div className='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full 2xl:w-full 2xl:max-w-2xl'>
+                            <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
+                                <div className='sm:flex sm:items-start'>
+                                    <div className='mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 sm:mx-0 sm:h-10 sm:w-10'>
+                                        <ExclamationIcon className='w-6 h-6 text-orange-500' />
+                                    </div>
+                                    <div className='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
+                                        <h3 className='text-lg leading-6 font-medium text-gray-900' id='modal-title'>
+                                            Order confirmation
+                                        </h3>
+                                        <div className='mt-2'>
+                                            <p className='text-sm text-gray-500'>Confirm order with the following details?</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
+                                <button
+                                    type='button'
+                                    onClick={() => {
+                                        pay()
+                                    }}
+                                    className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm'
+                                >
+                                    Confirm
+                                </button>
+                                <button
+                                    type='button'
+                                    onClick={() => {
+                                        openModal()
+                                    }}
+                                    className='mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
+                                >
+                                    Check order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
             <div className='container mx-auto'>
                 <div className='w-full flex space-x-2 items-center mt-4'>
                     <div className='text-blue-700 hover:text-blue-800'>
@@ -597,7 +652,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                 </div>
                                 <hr />
                                 {/* Checkout Button */}
-                                <Button href={() => pay()} type='primary' size='lg' width='full' display='flex'>
+                                <Button href={() => openModal()} type='primary' size='lg' width='full' display='flex'>
                                     <span>Pay</span>
                                     <FaWallet className='w-6' />
                                 </Button>
