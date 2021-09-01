@@ -15,10 +15,10 @@ const Footer = () => {
                         <div className='flex space-x-2 items-center'>
                             <a href='https://instagram.com/lokaloka.official' rel='noopener' target='_blank'>
                                 <div className='h-8 w-8'>
-                                    <Image alt='Instagram Account' src='/images/social-media/instagram.png' rel='noopener' layout='responsive' width={38} height={38} />
+                                    <Image alt='Instagram Account' src='/images/social-media/instagram.png' layout='responsive' width={38} height={38} />
                                 </div>
                             </a>
-                            <a href='https://facebook.com/lokaloka.id' target='_blank'>
+                            <a href='https://facebook.com/lokaloka.id' rel='noopener' target='_blank'>
                                 <div className='h-8 w-8'>
                                     <Image alt='Facebook Account' src='/images/social-media/facebook.png' layout='responsive' width={38} height={38} />
                                 </div>
@@ -55,7 +55,7 @@ const Footer = () => {
                             </Link>
                         </li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
-                            <a href='https://kuloaja.com' target='_blank'>
+                            <a href='https://kuloaja.com' rel='noopener' target='_blank'>
                                 <div className='underline lg:no-underline cursor-pointer'>Courier by KULO</div>
                             </a>
                         </li>

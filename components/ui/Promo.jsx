@@ -1,4 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
+import Image from 'next/image'
 const Promo = () => {
     return (
         <div className='relative bg-white overflow-hidden'>
@@ -18,14 +19,24 @@ const Promo = () => {
                                     <div className='flex items-center space-x-6 lg:space-x-8'>
                                         <div className='flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8'>
                                             <div className='w-44 h-64 rounded-lg overflow-hidden sm:opacity-0 lg:opacity-100'>
-                                                <img
+                                                <Image
+                                                    layout='responsive'
+                                                    width={3}
+                                                    height={4}
+                                                    priority
+                                                    objectFit='cover'
                                                     src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg'
                                                     alt=''
                                                     className='w-full h-full object-center object-cover'
                                                 />
                                             </div>
                                             <div className='w-44 h-64 rounded-lg overflow-hidden'>
-                                                <img
+                                                <Image
+                                                    layout='responsive'
+                                                    width={3}
+                                                    height={4}
+                                                    priority
+                                                    objectFit='cover'
                                                     src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg'
                                                     alt=''
                                                     className='w-full h-full object-center object-cover'
@@ -34,21 +45,36 @@ const Promo = () => {
                                         </div>
                                         <div className='flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8'>
                                             <div className='w-44 h-64 rounded-lg overflow-hidden'>
-                                                <img
+                                                <Image
+                                                    layout='responsive'
+                                                    width={3}
+                                                    height={4}
+                                                    priority
+                                                    objectFit='cover'
                                                     src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg'
                                                     alt=''
                                                     className='w-full h-full object-center object-cover'
                                                 />
                                             </div>
                                             <div className='w-44 h-64 rounded-lg overflow-hidden'>
-                                                <img
+                                                <Image
+                                                    layout='responsive'
+                                                    width={3}
+                                                    height={4}
+                                                    priority
+                                                    objectFit='cover'
                                                     src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg'
                                                     alt=''
                                                     className='w-full h-full object-center object-cover'
                                                 />
                                             </div>
                                             <div className='w-44 h-64 rounded-lg overflow-hidden'>
-                                                <img
+                                                <Image
+                                                    layout='responsive'
+                                                    width={3}
+                                                    height={4}
+                                                    priority
+                                                    objectFit='cover'
                                                     src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg'
                                                     alt=''
                                                     className='w-full h-full object-center object-cover'
@@ -57,14 +83,24 @@ const Promo = () => {
                                         </div>
                                         <div className='flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8'>
                                             <div className='w-44 h-64 rounded-lg overflow-hidden'>
-                                                <img
+                                                <Image
+                                                    layout='responsive'
+                                                    width={3}
+                                                    height={4}
+                                                    priority
+                                                    objectFit='cover'
                                                     src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg'
                                                     alt=''
                                                     className='w-full h-full object-center object-cover'
                                                 />
                                             </div>
                                             <div className='w-44 h-64 rounded-lg overflow-hidden'>
-                                                <img
+                                                <Image
+                                                    layout='responsive'
+                                                    width={3}
+                                                    height={4}
+                                                    priority
+                                                    objectFit='cover'
                                                     src='https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg'
                                                     alt=''
                                                     className='w-full h-full object-center object-cover'

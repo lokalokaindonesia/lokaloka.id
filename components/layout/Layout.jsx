@@ -8,6 +8,7 @@ const Layout = ({ title, children }) => {
         <div className='bg-blueGray-50'>
             <Head>
                 <title>{title}</title>
+                <meta lang='en' />
                 <meta name='description' content='Lokaloka Indonesia - Belanja oleh-oleh dengan mudah !!!' />
             </Head>
             {/* Header - Navbar */}
