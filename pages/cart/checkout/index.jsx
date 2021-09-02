@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react'
 import Layout from '@/components/layout/Layout'
 import Button from '@/components/ui/Button'
 import { setPaymentMethod } from '@/redux/paymentMethod'
+import { setTransaction } from '@/redux/transactionSlice'
 
 // Area Data
 const areaCollection = [
@@ -91,7 +92,6 @@ const paymentMethodCollection = [
 const index = ({ orderData, cityData, provinceData, session }) => {
     const router = useRouter()
     const dispatch = useDispatch()
-    const paymentMethod = useSelector((state) => state.paymentMethod.value)
     const order = orderData[0]
 
     const [area, setArea] = useState('malang-batu')
@@ -108,6 +108,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
     const [postalCode, setPostalCode] = useState('')
     const [note, setNote] = useState('')
     const [openModalConfirmation, setOpenModalConfirmation] = useState(false)
+    const [ovoNumber, setOvoNumber] = useState('')
 
     useEffect(() => {
         selectArea, selectPaymentMethod, countTotal()
@@ -122,6 +123,14 @@ const index = ({ orderData, cityData, provinceData, session }) => {
         if (data.value == 'anotherCity') {
             return setShippingCost(0)
         }
+    }
+
+    // Handle Ovo Number
+    const handleOvoNumber = async (e) => {
+        if (e.target.value.startsWith('0')) {
+            return setOvoNumber(`+62${e.target.value.substring(1)}`)
+        }
+        return setOvoNumber(`+62${e.target.value}`)
     }
 
     // Handle Address
@@ -212,43 +221,81 @@ const index = ({ orderData, cityData, provinceData, session }) => {
 
             dispatch(setPaymentMethod(selectedPaymentMethod))
 
-            await router.push('/cart/checkout/pay')
+            const transactionData = {
+                ...orderData[0],
+                code: invoiceResponse.external_id,
+                paymentStatus: invoiceResponse.status,
+                paymentMethod: choosenPaymentMethod,
+                bankNumber: selectedPaymentMethod.bank_account_number,
+            }
+            dispatch(setTransaction(transactionData))
+
+            return await router.push('/cart/checkout/pay')
         }
 
         if (choosenPaymentMethod == 'ID_OVO') {
-            const createEWalletInvoice = await axios.get(`/api/payment/e-wallet`, {
+            const createEWalletInvoice = await axios.post(`/api/payment/e-wallet`, {
                 eWalletType: 'ID_OVO',
                 amount: total,
-                phoneNumber: '',
+                mobileNumber: ovoNumber,
             })
 
             const eWalletResponse = await createEWalletInvoice.data
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
-            await router.push('/cart/checkout/pay')
+
+            const transactionData = {
+                ...orderData[0],
+                code: eWalletResponse.reference_id,
+                paymentStatus: eWalletResponse.status,
+                paymentMethod: choosenPaymentMethod,
+                mobileNumber: ovoNumber,
+            }
+            dispatch(setTransaction(transactionData))
+
+            return await router.push('/cart/checkout/pay')
         }
 
         if (choosenPaymentMethod == 'ID_DANA' || choosenPaymentMethod == 'ID_LINKAJA') {
-            const createEWalletInvoice = await axios.get(`/api/payment/e-wallet`, {
-                eWalletType: 'ID_DANA',
+            const createEWalletInvoice = await axios.post(`/api/payment/e-wallet`, {
+                eWalletType: choosenPaymentMethod,
                 amount: total,
+                successRedirectURL: 'https://lokaloka.id',
             })
 
             const eWalletResponse = await createEWalletInvoice.data
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
-            await router.push('/cart/checkout/pay')
+
+            const transactionData = {
+                ...orderData[0],
+                code: eWalletResponse.reference_id,
+                paymentStatus: eWalletResponse.status,
+                paymentMethod: choosenPaymentMethod,
+            }
+            dispatch(setTransaction(transactionData))
+
+            return await router.push(eWalletResponse.actions.desktop_web_checkout_url)
         }
 
         if (choosenPaymentMethod == 'QRCODE') {
-            const createQrCodeInvoice = await axios.get(`/api/payment/qris`, {
+            const createQrCodeInvoice = await axios.post(`/api/payment/qris`, {
                 amount: total,
             })
 
             const qrCodeResponse = await createQrCodeInvoice.data
+            console.log(qrCodeResponse)
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
-            await router.push('/cart/checkout/pay')
+
+            const transactionData = {
+                ...orderData[0],
+                code: qrCodeResponse.external_id,
+                paymentStatus: qrCodeResponse.status,
+                paymentMethod: choosenPaymentMethod,
+            }
+            dispatch(setTransaction(transactionData))
+            return await router.push('/cart/checkout/pay')
         }
 
         if (choosenPaymentMethod == 'ALFAMART' || choosenPaymentMethod == 'INDOMARET') {
@@ -257,10 +304,11 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                 retail: choosenPaymentMethod,
             })
 
-            const retailOutletResponse = await createRetailOutletInvoice.data
+            const retailOutletInvoiceResponse = await createRetailOutletInvoice.data
+            console.log(retailOutletInvoiceResponse)
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
-            await router.push('/cart/checkout/pay')
+            // return await router.push('/cart/checkout/pay')
         }
     }
 
@@ -333,7 +381,10 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                             <div>
                                                 <div className='font-medium tracking-wide text-sm text-blueGray-500'>Location</div>
                                                 {area != 'anotherCity' ? (
-                                                    <div className='font-medium text-blueGray-800'>{`${location}, ${address}`}</div>
+                                                    <>
+                                                        <div className='font-medium text-blueGray-800'>{`${location}`}</div>
+                                                        <div className='font-medium text-blueGray-800'>{`${address}`}</div>
+                                                    </>
                                                 ) : (
                                                     <>
                                                         <div className='font-medium text-blueGray-800'>{`${address}`}</div>
@@ -343,7 +394,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                             </div>
                                             <div>
                                                 <div className='font-medium tracking-wide text-sm text-blueGray-500'>Payment Method</div>
-                                                <div className='font-medium text-blueGray-800'>{`${choosenPaymentMethod}`}</div>
+                                                <div className='font-medium text-blueGray-800'>{`${choosenPaymentMethod.replace('ID_', '')} (${ovoNumber})`}</div>
                                             </div>
                                             <div>
                                                 <div className='font-medium tracking-wide text-sm text-blueGray-500'>Notes</div>
@@ -753,6 +804,29 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                     <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-xl font-bold text-blue-500' />
                                 </div>
                                 <hr />
+                                {choosenPaymentMethod == 'ID_OVO' ? (
+                                    <div className='flex flex-col space-y-1'>
+                                        <label htmlFor='ovo_number' className='block text-sm font-medium text-blueGray-500'>
+                                            OVO Number
+                                        </label>
+                                        <div className='mt-1 flex rounded-md shadow-sm'>
+                                            <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-blueGray-300 bg-blueGray-50 text-blueGray-500 text-sm'>
+                                                +62
+                                            </span>
+                                            <input
+                                                type='text'
+                                                name='ovo_number'
+                                                id='ovo_number'
+                                                onChange={handleOvoNumber}
+                                                required
+                                                className='rounded-r-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm placeholder-gray-300 border-blueGray-300'
+                                                placeholder='85199992222'
+                                            />
+                                        </div>
+                                    </div>
+                                ) : (
+                                    ''
+                                )}
                                 {/* Checkout Button */}
                                 <Button href={() => openModal()} type='primary' size='lg' width='full' display='flex'>
                                     <span>Pay</span>

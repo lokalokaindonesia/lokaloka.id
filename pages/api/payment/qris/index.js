@@ -10,7 +10,7 @@ export default async (req, res) => {
 
         const resp = await qr.createCode({
             externalID,
-            callbackURL: 'https://9b36-36-85-79-220.ngrok.io/api/wh/payment/qrcode',
+            callbackURL: 'https://lokaloka-next.vercel.app/api/wh/payment/qrcode',
             type: 'DYNAMIC',
             amount: req.body.amount
         })

@@ -13,9 +13,9 @@ export default async (req, res) => {
                 currency: 'IDR',
                 amount: req.body.amount,
                 checkoutMethod: 'ONE_TIME_PAYMENT',
-                channelCode: req.body.eWalletType,
+                channelCode: 'ID_OVO',
                 channelProperties: {
-                    mobileNumber: req.body.phoneNumber,
+                    mobileNumber: req.body.mobileNumber,
                 }
             })
             return res.json(resp)

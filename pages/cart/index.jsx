@@ -170,15 +170,19 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
     // * SET ORDER DATA AND CHECKOUT
     const checkout = async () => {
+        const productsOrigin = cart.map((p) => p._id)
         const totalQuantity = cart.reduce((a, b) => +a + +b.quantity, 0)
+
         const orderData = {
             products: cart,
+            productsOrigin: productsOrigin,
             totalPrice: grandTotal,
             totalQuantity,
             totalWeight,
             discount: couponPromo,
             subTotal: subTotal,
             user: session.id,
+            coupon: coupon != null ? coupon._id : null,
         }
 
         const getOrder = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders?user_eq=${session.id}`, {
@@ -215,7 +219,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
             {cart.length == 0 ? (
                 <div className='container my-12 mx-auto flex items-center space-x-24 justify-center'>
                     <div className='w-[32rem] h-[32rem]'>
-                        <Image src={'/images/add-to-cart.gif'} layout='responsive' placeholder='blur' quality='75' blurDataURL={blurData} width={1} height={1} priority />
+                        <Image src={'/images/add-to-cart.gif'} layout='responsive' quality='75' width={1} height={1} priority />
                     </div>
                     <div className='flex space-y-8 flex-col justify-center items-center'>
                         <h1 className='text-4xl font-bold text-blueGray-800'>Your cart is empty</h1>
