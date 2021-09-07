@@ -42,11 +42,11 @@ const Header = () => {
 
             <div className='w-2/12 flex items-center justify-end space-x-6'>
                 <button type='button' name='search' aria-label='Search'>
-                    <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-800 cursor-pointer' />
+                    <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                 </button>
                 <Link href='/cart'>
                     <button className='relative' type='button' name='cart' aria-label='Cart'>
-                        <ShoppingCartIcon className='hidden xl:block h-6 w-6 text-blueGray-800 cursor-pointer' />
+                        <ShoppingCartIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                         {/* <span className='flex h-3 w-3 absolute top-0 right-0'>
                             <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
                             <span className='relative inline-flex rounded-full h-3 w-3 bg-blue-500'></span>

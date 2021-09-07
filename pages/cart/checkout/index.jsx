@@ -228,6 +228,11 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                 paymentMethod: choosenPaymentMethod,
                 bankNumber: selectedPaymentMethod.bank_account_number,
             }
+
+            const createTransaction = await axios.post(`/api/transactions`, transactionData)
+            const transactionResponse = await createTransaction.data
+            console.log(transactionResponse)
+
             dispatch(setTransaction(transactionData))
 
             return await router.push('/cart/checkout/pay')
@@ -251,6 +256,10 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                 paymentMethod: choosenPaymentMethod,
                 mobileNumber: ovoNumber,
             }
+
+            const createTransaction = await axios.post(`/api/transactions`, transactionData)
+            const transactionResponse = await createTransaction.data
+
             dispatch(setTransaction(transactionData))
 
             return await router.push('/cart/checkout/pay')
@@ -273,6 +282,10 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                 paymentStatus: eWalletResponse.status,
                 paymentMethod: choosenPaymentMethod,
             }
+
+            const createTransaction = await axios.post(`/api/transactions`, transactionData)
+            const transactionResponse = await createTransaction.data
+
             dispatch(setTransaction(transactionData))
 
             return await router.push(eWalletResponse.actions.desktop_web_checkout_url)
@@ -284,7 +297,6 @@ const index = ({ orderData, cityData, provinceData, session }) => {
             })
 
             const qrCodeResponse = await createQrCodeInvoice.data
-            console.log(qrCodeResponse)
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
 
@@ -294,6 +306,10 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                 paymentStatus: qrCodeResponse.status,
                 paymentMethod: choosenPaymentMethod,
             }
+
+            const createTransaction = await axios.post(`/api/transactions`, transactionData)
+            const transactionResponse = await createTransaction.data
+
             dispatch(setTransaction(transactionData))
             return await router.push('/cart/checkout/pay')
         }
@@ -305,10 +321,9 @@ const index = ({ orderData, cityData, provinceData, session }) => {
             })
 
             const retailOutletInvoiceResponse = await createRetailOutletInvoice.data
-            console.log(retailOutletInvoiceResponse)
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
-            // return await router.push('/cart/checkout/pay')
+            return await router.push('/cart/checkout/pay')
         }
     }
 

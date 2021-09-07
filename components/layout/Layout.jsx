@@ -5,7 +5,7 @@ import Banner from '@/components/ui/Banner'
 
 const Layout = ({ title, children }) => {
     return (
-        <div className='bg-blueGray-50'>
+        <div className='bg-blueGray-50 text-blueGray-800'>
             <Head>
                 <title>{title}</title>
                 <meta lang='en' />
