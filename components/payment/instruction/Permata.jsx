@@ -58,19 +58,19 @@ const Permata = ({ transaction }) => {
                 <div className='w-full'>
                     {via == 'mBanking' && (
                         <div className='shadow-sm border border-gray-200 w-full rounded-md p-4 flex flex-col space-y-2'>
-                            <div class='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 1: Masuk Ke Akun Anda</div>
-                            <div class='font-sans font-light text-base'>1. Buka aplikasi PermataMobile Internet</div>
-                            <div class='font-sans font-light text-base'>2. Masukkan User ID dan Password</div>
-                            <div class='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 2: Detail Pembayaran</div>
-                            <div class='font-sans font-light text-base'>1. Pilih "Pembayaran Tagihan"</div>
-                            <div class='font-sans font-light text-base'>2. Pilih "Virtual Account"</div>
-                            <div class='font-sans font-light text-base'>
-                                3. Masukkan Nomor Virtual Account Anda <span class='font-bold text-primary'>{transaction.bankNumber}</span>
+                            <div className='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 1: Masuk Ke Akun Anda</div>
+                            <div className='font-sans font-light text-base'>1. Buka aplikasi PermataMobile Internet</div>
+                            <div className='font-sans font-light text-base'>2. Masukkan User ID dan Password</div>
+                            <div className='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 2: Detail Pembayaran</div>
+                            <div className='font-sans font-light text-base'>1. Pilih "Pembayaran Tagihan"</div>
+                            <div className='font-sans font-light text-base'>2. Pilih "Virtual Account"</div>
+                            <div className='font-sans font-light text-base'>
+                                3. Masukkan Nomor Virtual Account Anda <span className='font-bold text-primary'>{transaction.bankNumber}</span>
                             </div>
-                            <div class='font-sans font-light text-base'>4. Masukkan otentikasi transaksi/token</div>
-                            <div class='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 3: Transaksi Berhasil</div>
-                            <div class='font-sans font-light text-base'>1. Transaksi Anda telah selesai</div>
-                            <div class='font-sans font-light text-base'>
+                            <div className='font-sans font-light text-base'>4. Masukkan otentikasi transaksi/token</div>
+                            <div className='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 3: Transaksi Berhasil</div>
+                            <div className='font-sans font-light text-base'>1. Transaksi Anda telah selesai</div>
+                            <div className='font-sans font-light text-base'>
                                 2. Setelah transaksi anda selesai, invoice ini akan diupdate secara otomatis. Proses ini mungkin memakan waktu hingga 5 menit
                             </div>
                         </div>
@@ -78,25 +78,25 @@ const Permata = ({ transaction }) => {
 
                     {via == 'iBanking' && (
                         <div className='shadow-sm border border-gray-200 w-full rounded-md p-4 flex flex-col space-y-2'>
-                            <div class='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 1: Masuk Ke Akun Anda</div>
-                            <div class='font-sans font-light text-base'>
+                            <div className='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 1: Masuk Ke Akun Anda</div>
+                            <div className='font-sans font-light text-base'>
                                 1. Buka situs
-                                <a href='https://new.permatanet.com' target='_blank' class='font-semibold text-primary'>
+                                <a href='https://new.permatanet.com' target='_blank' className='font-semibold text-primary'>
                                     https://new.permatanet.com
                                 </a>
                             </div>
-                            <div class='font-sans font-light text-base'>2. Masukkan User ID dan Password</div>
-                            <div class='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 2: Detail Pembayaran</div>
-                            <div class='font-sans font-light text-base'>1. Pilih "Pembayaran Tagihan"</div>
-                            <div class='font-sans font-light text-base'>2. Pilih "Virtual Account"</div>
-                            <div class='font-sans font-light text-base'>
-                                3. Masukk Nomor Virtual Account <span class='font-bold text-primary'>{transaction.bankNumber}</span>
+                            <div className='font-sans font-light text-base'>2. Masukkan User ID dan Password</div>
+                            <div className='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 2: Detail Pembayaran</div>
+                            <div className='font-sans font-light text-base'>1. Pilih "Pembayaran Tagihan"</div>
+                            <div className='font-sans font-light text-base'>2. Pilih "Virtual Account"</div>
+                            <div className='font-sans font-light text-base'>
+                                3. Masukk Nomor Virtual Account <span className='font-bold text-primary'>{transaction.bankNumber}</span>
                             </div>
-                            <div class='font-sans font-light text-base'>4. Periksa kembali detail pembayaran anda</div>
-                            <div class='font-sans font-light text-base'>5. Masukkan otentikasi transaksi/token</div>
-                            <div class='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 3: Transaksi Berhasil</div>
-                            <div class='font-sans font-light text-base'>1. Transaksi Anda telah selesai</div>
-                            <div class='font-sans font-light text-base'>
+                            <div className='font-sans font-light text-base'>4. Periksa kembali detail pembayaran anda</div>
+                            <div className='font-sans font-light text-base'>5. Masukkan otentikasi transaksi/token</div>
+                            <div className='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 3: Transaksi Berhasil</div>
+                            <div className='font-sans font-light text-base'>1. Transaksi Anda telah selesai</div>
+                            <div className='font-sans font-light text-base'>
                                 2. Setelah transaksi anda selesai, invoice ini akan diupdate secara otomatis. Proses ini mungkin memakan waktu hingga 5 menit
                             </div>
                         </div>
@@ -104,22 +104,22 @@ const Permata = ({ transaction }) => {
 
                     {via == 'atm' && (
                         <div className='shadow-sm border border-gray-200 w-full rounded-md p-4 flex flex-col space-y-2'>
-                            <div class='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 1: Temukan ATM Terdekat</div>
-                            <div class='font-sans font-light text-base'>1. Masukkan kartu ATM Permata anda</div>
-                            <div class='font-sans font-light text-base'>2. Masukkan PIN</div>
-                            <div class='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 2: Detail Pembayaran</div>
-                            <div class='font-sans font-light text-base'>1. Pilih menu "Transaksi Lainnya"</div>
-                            <div class='font-sans font-light text-base'>2. Pilih menu "Pembayaran"</div>
-                            <div class='font-sans font-light text-base'>3. Pilih menu "Pembayaran Lainnya"</div>
-                            <div class='font-sans font-light text-base'>4. Pilih menu "Virtual Account"</div>
-                            <div class='font-sans font-light text-base'>
-                                5. Masukkan Nomor Virtual Account <span class='font-bold text-primary'>{transaction.bankNumber}</span>
+                            <div className='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 1: Temukan ATM Terdekat</div>
+                            <div className='font-sans font-light text-base'>1. Masukkan kartu ATM Permata anda</div>
+                            <div className='font-sans font-light text-base'>2. Masukkan PIN</div>
+                            <div className='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 2: Detail Pembayaran</div>
+                            <div className='font-sans font-light text-base'>1. Pilih menu "Transaksi Lainnya"</div>
+                            <div className='font-sans font-light text-base'>2. Pilih menu "Pembayaran"</div>
+                            <div className='font-sans font-light text-base'>3. Pilih menu "Pembayaran Lainnya"</div>
+                            <div className='font-sans font-light text-base'>4. Pilih menu "Virtual Account"</div>
+                            <div className='font-sans font-light text-base'>
+                                5. Masukkan Nomor Virtual Account <span className='font-bold text-primary'>{transaction.bankNumber}</span>
                             </div>
-                            <div class='font-sans font-light text-base'>6. Lalu pilih rekening debet yang akan digunakan</div>
-                            <div class='font-sans font-light text-base'>7. Konfirmasi detail transaksi anda</div>
-                            <div class='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 3: Transaksi Berhasil</div>
-                            <div class='font-sans font-light text-base'>1. Transaksi Anda telah selesai</div>
-                            <div class='font-sans font-light text-base'>
+                            <div className='font-sans font-light text-base'>6. Lalu pilih rekening debet yang akan digunakan</div>
+                            <div className='font-sans font-light text-base'>7. Konfirmasi detail transaksi anda</div>
+                            <div className='font-sans font-bold text-base text-gray-500 uppercase'>Langkah 3: Transaksi Berhasil</div>
+                            <div className='font-sans font-light text-base'>1. Transaksi Anda telah selesai</div>
+                            <div className='font-sans font-light text-base'>
                                 2. Setelah transaksi anda selesai, invoice ini akan diupdate secara otomatis. Proses ini mungkin memakan waktu hingga 5 menit
                             </div>
                         </div>

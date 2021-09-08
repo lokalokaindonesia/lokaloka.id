@@ -5,6 +5,8 @@ import Bni from '@/components/payment/instruction/Bni'
 import Bri from '@/components/payment/instruction/Bri'
 import Mandiri from '@/components/payment/instruction/Mandiri'
 import Permata from '@/components/payment/instruction/Permata'
+import Ovo from '@/components/payment/instruction/Ovo'
+import Qris from '@/components/payment/instruction/Qris'
 
 const index = ({ transaction }) => {
     return (
@@ -15,6 +17,8 @@ const index = ({ transaction }) => {
                 {transaction.paymentMethod == 'BRI' && <Bri transaction={transaction} />}
                 {transaction.paymentMethod == 'MANDIRI' && <Mandiri transaction={transaction} />}
                 {transaction.paymentMethod == 'PERMATA' && <Permata transaction={transaction} />}
+                {transaction.paymentMethod == 'ID_OVO' && <Ovo transaction={transaction} />}
+                {transaction.paymentMethod == 'QRCODE' && <Qris transaction={transaction} />}
             </div>
         </Layout>
     )
@@ -23,7 +27,7 @@ const index = ({ transaction }) => {
 export const getServerSideProps = async (context) => {
     const session = await getSession(context)
 
-    const getTransaction = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/transactions?user=${session.id}&paymentStatus=PENDING`, {
+    const getTransaction = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/transactions?user=${session.id}&paymentStatus=PENDING&paymentStatus=ACTIVE`, {
         headers: {
             Authorization: `Bearer ${session.jwt}`,
         },
@@ -31,11 +35,10 @@ export const getServerSideProps = async (context) => {
 
     const transaction = getTransaction.data[0]
 
-    if (!transaction) return { redirect: { destination: '/', permanent: flase } }
+    if (!transaction) return { redirect: { destination: '/', permanent: false } }
 
     return {
         props: {
-            session,
             transaction,
         },
     }

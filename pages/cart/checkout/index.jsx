@@ -269,7 +269,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
             const createEWalletInvoice = await axios.post(`/api/payment/e-wallet`, {
                 eWalletType: choosenPaymentMethod,
                 amount: total,
-                successRedirectURL: 'https://lokaloka.id',
+                successRedirectURL: `${process.env.NEXT_PUBLIC_API_CALLBACK}/api/wh/payment/ewallet`,
             })
 
             const eWalletResponse = await createEWalletInvoice.data
@@ -305,6 +305,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                 code: qrCodeResponse.external_id,
                 paymentStatus: qrCodeResponse.status,
                 paymentMethod: choosenPaymentMethod,
+                qrCodeString: qrCodeResponse.qr_string,
             }
 
             const createTransaction = await axios.post(`/api/transactions`, transactionData)
@@ -409,7 +410,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                             </div>
                                             <div>
                                                 <div className='font-medium tracking-wide text-sm text-blueGray-500'>Payment Method</div>
-                                                <div className='font-medium text-blueGray-800'>{`${choosenPaymentMethod.replace('ID_', '')} (${ovoNumber})`}</div>
+                                                <div className='font-medium text-blueGray-800'>{`${choosenPaymentMethod.replace('ID_', '')} ${ovoNumber}`}</div>
                                             </div>
                                             <div>
                                                 <div className='font-medium tracking-wide text-sm text-blueGray-500'>Notes</div>
