@@ -1,10 +1,6 @@
 import axios from "axios"
 
 export default async (req, res) => {
-    if (req.method != 'POST') {
-        return res.status(405).json('Method not Allowed')
-    }
-
     try {
         const getTransaction = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/transactions?code=${req.body.external_id}`)
 
