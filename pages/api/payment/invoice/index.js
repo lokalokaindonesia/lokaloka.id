@@ -8,9 +8,10 @@ export default async (req, res) => {
     try {
         const getExternalID = await axios.get(`${process.env.NEXT_URL}/api/generatePaymentID`)
         const externalID = getExternalID.data
+
         const resp = await va.createInvoice({
             externalID,
-            amount: 230000,
+            amount: req.body.amount,
             payerEmail: session.email,
             description: 'Order Products',
         });

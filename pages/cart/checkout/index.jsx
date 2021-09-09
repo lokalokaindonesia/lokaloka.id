@@ -214,7 +214,9 @@ const index = ({ orderData, cityData, provinceData, session }) => {
     // pay Handle
     const pay = async () => {
         if (choosenPaymentMethod == 'BNI' || choosenPaymentMethod == 'BRI' || choosenPaymentMethod == 'MANDIRI' || choosenPaymentMethod == 'PERMATA') {
-            const createInvoice = await axios.get(`/api/payment/invoice`)
+            const createInvoice = await axios.post(`/api/payment/invoice`, {
+                amount: total,
+            })
             const invoiceResponse = await createInvoice.data
 
             const selectedPaymentMethod = await invoiceResponse.available_banks.find((bank) => choosenPaymentMethod == bank.bank_code)
@@ -231,7 +233,6 @@ const index = ({ orderData, cityData, provinceData, session }) => {
 
             const createTransaction = await axios.post(`/api/transactions`, transactionData)
             const transactionResponse = await createTransaction.data
-            console.log(transactionResponse)
 
             dispatch(setTransaction(transactionData))
 
