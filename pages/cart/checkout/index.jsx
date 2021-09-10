@@ -270,7 +270,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
             const createEWalletInvoice = await axios.post(`/api/payment/e-wallet`, {
                 eWalletType: choosenPaymentMethod,
                 amount: total,
-                successRedirectURL: `${process.env.NEXT_PUBLIC_API_CALLBACK}/api/wh/payment/ewallet`,
+                successRedirectURL: `${process.env.NEXT_PUBLIC_API_CALLBACK}/cart/checkout/pay`,
             })
 
             const eWalletResponse = await createEWalletInvoice.data
