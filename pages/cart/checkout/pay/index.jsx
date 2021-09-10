@@ -9,6 +9,7 @@ import Permata from '@/components/payment/instruction/Permata'
 import Ovo from '@/components/payment/instruction/Ovo'
 import Qris from '@/components/payment/instruction/Qris'
 import RetailOutlet from '@/components/payment/instruction/RetailOutlet'
+import Gopay from '@/components/payment/instruction/Gopay'
 
 const index = ({ transaction }) => {
     const router = useRouter()
@@ -16,7 +17,7 @@ const index = ({ transaction }) => {
     const getTransactionStatus = async () => {
         const { data } = await axios.get(`/api/transactions/check/${transaction.id}`)
 
-        if (data.paymentStatus == 'SETTLED' || data.paymentStatus == 'PAID' || data.paymentStatus == 'COMPLETED') {
+        if (data.paymentStatus == 'SETTLED' || data.paymentStatus == 'PAID' || data.paymentStatus == 'COMPLETED' || data.paymentStatus == 'SUCCESS') {
             return router.push('/')
         }
     }
@@ -37,6 +38,7 @@ const index = ({ transaction }) => {
                 {transaction.paymentMethod == 'QRCODE' && <Qris transaction={transaction} />}
                 {transaction.paymentMethod == 'ALFAMART' && <RetailOutlet transaction={transaction} />}
                 {transaction.paymentMethod == 'INDOMARET' && <RetailOutlet transaction={transaction} />}
+                {transaction.paymentMethod == 'GOPAY' && <Gopay transaction={transaction} />}
             </div>
         </Layout>
     )

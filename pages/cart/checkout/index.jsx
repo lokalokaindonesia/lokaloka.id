@@ -58,6 +58,12 @@ const paymentMethodCollection = [
         label: 'OVO',
     },
     {
+        src: '/images/payment-gateway-small/gopay.png',
+        type: 'ewallet',
+        id: 'GOPAY',
+        label: 'GOPAY',
+    },
+    {
         src: '/images/payment-gateway-small/dana.png',
         type: 'ewallet',
         id: 'ID_DANA',
@@ -237,6 +243,35 @@ const index = ({ orderData, cityData, provinceData, session }) => {
             dispatch(setTransaction(transactionData))
 
             return await router.push('/cart/checkout/pay')
+        }
+
+        if (choosenPaymentMethod == 'GOPAY') {
+            const createGopayCharge = await axios.post(`/api/payment/midtrans/gopay`, {
+                amount: total,
+            })
+
+            const gopayResponse = await createGopayCharge.data
+
+            dispatch(setPaymentMethod(choosenPaymentMethod))
+
+            const transactionData = {
+                ...orderData[0],
+                code: gopayResponse.order_id,
+                paymentStatus: gopayResponse.transaction_status.toUpperCase(),
+                qrCodeString: gopayResponse.actions[0].url,
+                paymentMethod: choosenPaymentMethod,
+            }
+
+            const createTransaction = await axios.post(`/api/transactions`, transactionData)
+            const transactionResponse = await createTransaction.data
+
+            dispatch(setTransaction(transactionResponse))
+
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return await router.push(`${gopayResponse.actions[1].url}`)
+            }
+
+            return await router.push(`/cart/checkout/pay`)
         }
 
         if (choosenPaymentMethod == 'ID_OVO') {
