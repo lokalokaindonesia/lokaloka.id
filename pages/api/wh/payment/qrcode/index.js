@@ -9,7 +9,9 @@ export default async (req, res) => {
         const getTransaction = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/transactions?code=${req.body.qr_code.external_id}`)
 
         const transaction = await getTransaction.data[0]
-
+        if (!transaction) {
+            return res.status(404).json('Not found')
+        }
         const updateEWalletTransaction = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/transactions/${transaction.id}`,
             { paymentStatus: req.body.status }
         )
