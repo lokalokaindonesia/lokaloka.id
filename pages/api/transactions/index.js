@@ -2,10 +2,6 @@ import axios from "axios"
 import { getSession } from "next-auth/client"
 
 export default async (req, res) => {
-    if (req.method == 'GET') {
-        return res.json('METHOD NOT ALLOWED')
-    }
-
     if (req.method == 'POST') {
         try {
             const session = await getSession({ req })

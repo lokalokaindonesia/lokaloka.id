@@ -17,6 +17,7 @@
     "@tailwindcss/typography": "^0.4.1",
     "axios": "^0.21.1",
     "cookie": "^0.4.1",
+    "midtrans-client": "^1.2.5",
     "moment": "^2.29.1",
     "mongodb": "^3.6.9",
     "next": "latest",

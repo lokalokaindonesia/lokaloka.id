@@ -261,7 +261,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
             const createTransaction = await axios.post(`/api/transactions`, transactionData)
             const transactionResponse = await createTransaction.data
 
-            dispatch(setTransaction(transactionData))
+            dispatch(setTransaction(transactionResponse))
 
             return await router.push('/cart/checkout/pay')
         }
@@ -287,7 +287,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
             const createTransaction = await axios.post(`/api/transactions`, transactionData)
             const transactionResponse = await createTransaction.data
 
-            dispatch(setTransaction(transactionData))
+            dispatch(setTransaction(transactionResponse))
 
             return await router.push(eWalletResponse.actions.desktop_web_checkout_url)
         }
@@ -312,12 +312,12 @@ const index = ({ orderData, cityData, provinceData, session }) => {
             const createTransaction = await axios.post(`/api/transactions`, transactionData)
             const transactionResponse = await createTransaction.data
 
-            dispatch(setTransaction(transactionData))
+            dispatch(setTransaction(transactionResponse))
             return await router.push('/cart/checkout/pay')
         }
 
         if (choosenPaymentMethod == 'ALFAMART' || choosenPaymentMethod == 'INDOMARET') {
-            const createRetailOutletInvoice = await axios.get(`/api/payment/retail-outlet`, {
+            const createRetailOutletInvoice = await axios.post(`/api/payment/retail-outlet`, {
                 amount: total,
                 retail: choosenPaymentMethod,
             })
@@ -325,6 +325,19 @@ const index = ({ orderData, cityData, provinceData, session }) => {
             const retailOutletInvoiceResponse = await createRetailOutletInvoice.data
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
+            // return console.log(retailOutletInvoiceResponse)
+            const transactionData = {
+                ...orderData[0],
+                code: retailOutletInvoiceResponse.external_id,
+                paymentStatus: retailOutletInvoiceResponse.status,
+                paymentMethod: choosenPaymentMethod,
+                paymentCode: retailOutletInvoiceResponse.payment_code,
+            }
+
+            const createTransaction = await axios.post(`/api/transactions`, transactionData)
+            const transactionResponse = await createTransaction.data
+
+            dispatch(setTransaction(transactionResponse))
             return await router.push('/cart/checkout/pay')
         }
     }
@@ -666,7 +679,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md border-2 border-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-4 ring-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
@@ -701,7 +714,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md border-2 border-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-4 ring-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
@@ -721,6 +734,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                     })}
                                             </div>
                                         </div>
+
                                         <div className='flex flex-col space-y-2'>
                                             <h3 className='text-semibold'>QRCodes</h3>
                                             <div className='flex space-x-4 items-center'>
@@ -729,6 +743,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                     .map((paymentMethod, index) => {
                                                         return (
                                                             <button
+                                                                disabled={orderData[0].totalPrice > 5000000 ? true : false}
                                                                 key={index}
                                                                 onClick={() => {
                                                                     selectPaymentMethod(paymentMethod.id)
@@ -736,7 +751,9 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md border-2 border-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-4 ring-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : orderData[0].totalPrice > 5000000
+                                                                        ? 'rounded-md border-2 border-blueGray-200 bg-blueGray-200 filter grayscale h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
@@ -768,10 +785,19 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                                 onClick={() => {
                                                                     selectPaymentMethod(paymentMethod.id)
                                                                 }}
+                                                                disabled={
+                                                                    (orderData[0].totalPrice > 5000000 && paymentMethod.id == 'INDOMARET') ||
+                                                                    (orderData[0].totalPrice > 2500000 && paymentMethod.id == 'ALFAMART')
+                                                                        ? true
+                                                                        : false
+                                                                }
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md border-2 border-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-4 ring-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : (orderData[0].totalPrice > 2500000 && paymentMethod.id == 'ALFAMART') ||
+                                                                          (orderData[0].totalPrice > 5000000 && paymentMethod.id == 'INDOMARET')
+                                                                        ? 'rounded-md border-2 border-blueGray-200 bg-blueGray-200 filter grayscale h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >

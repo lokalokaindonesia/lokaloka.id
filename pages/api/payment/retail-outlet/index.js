@@ -8,17 +8,18 @@ export default async (req, res) => {
     try {
         const session = await getSession({ req })
         const getExternalID = await axios.get(`${process.env.NEXT_URL}/api/generatePaymentID`)
-        const externalID = getExternalID.data
+        const externalID = await getExternalID.data
 
         const resp = await ro.createFixedPaymentCode({
             externalID,
             retailOutletName: req.body.retail,
-            name: session.name,
-            expectedAmt: req.body.amount
+            name: session.user.name,
+            expectedAmt: req.body.amount,
+            isSingleUse: true,
         })
 
         return res.json(resp)
     } catch (error) {
-        return res.status(401).json(error)
+        return res.json(error)
     }
 }
