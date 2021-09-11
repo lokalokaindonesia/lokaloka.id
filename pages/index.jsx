@@ -3,8 +3,26 @@ import HighlightedSection from '@/components/layout/HighlightedSection'
 import JustForYou from '@/components/layout/JustForYou'
 import Layout from '@/components/layout/Layout'
 import Promo from '@/components/ui/Promo'
+import { setOrder } from '@/redux/orderSlice'
+import axios from 'axios'
+import { useSession } from 'next-auth/client'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 const Home = ({ products, promo, recommended }) => {
+    const [session, loading] = useSession()
+
+    const dispatch = useDispatch()
+
+    const setLocalStorageCart = async () => {
+        const { data } = await axios.get('/api/cart')
+        dispatch(setOrder(data))
+    }
+
+    if (session) {
+        setLocalStorageCart()
+    }
+
     return (
         <>
             <Layout title='Liburan seru bareng Lokaloka.id'>
@@ -35,8 +53,8 @@ const Home = ({ products, promo, recommended }) => {
 }
 
 export const getStaticProps = async () => {
-    const getProducts = await fetch(`${process.env.NEXT_URL}/api/products`)
-    const products = await getProducts.json()
+    const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
+    const products = await getProducts.data
 
     const promo = await products.filter((item) => item.discount != 0)
     const recommended = await products.filter((item) => item.isRecommended == true)

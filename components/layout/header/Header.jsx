@@ -1,21 +1,14 @@
 import Link from 'next/link'
 import { SearchIcon, ColorSwatchIcon, ShoppingCartIcon } from '@heroicons/react/outline'
-import { getSession, signOut, useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import Button from '@/components/ui/Button'
 import HeaderActiveLink from '@/components/layout/header/HeaderActiveLink'
+import ProfileDropdown from '@/components/navbar/ProfileDropdown'
 
 const Header = () => {
     const router = useRouter()
     const [session, loading] = useSession()
-    const logoutHandler = () => {
-        if (session) {
-            return signOut({
-                redirect: true,
-                callbackUrl: process.env.NEXTAUTH_URL,
-            })
-        }
-    }
 
     return (
         <header className='w-full px-4 xl:px-0 h-20 xl:container xl:mx-auto flex justify-between items-center '>
@@ -47,16 +40,14 @@ const Header = () => {
                 <Link href='/cart'>
                     <button className='relative' type='button' name='cart' aria-label='Cart'>
                         <ShoppingCartIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
-                        {/* <span className='flex h-3 w-3 absolute top-0 right-0'>
+                        <span className='flex h-3 w-3 absolute top-0 right-0'>
                             <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
                             <span className='relative inline-flex rounded-full h-3 w-3 bg-blue-500'></span>
-                        </span> */}
+                        </span>
                     </button>
                 </Link>
                 {session ? (
-                    <Button size='md' width='max' display='block' href={() => logoutHandler()} type='logout'>
-                        <span>Logout</span>
-                    </Button>
+                    <ProfileDropdown />
                 ) : (
                     <>
                         <Button href={() => router.push('/account/login')} size='md' width='max' display='block' type='secondary'>

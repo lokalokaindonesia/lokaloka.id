@@ -16,8 +16,12 @@ import Button from '@/components/ui/Button'
 import VariantBadge from '@/components/ui/VariantBadge'
 import ProductCard from '@/components/product/ProductCard'
 import FancySectionTitle from '@/components/ui/FancySectionTitle'
+import { setOrder } from '@/redux/orderSlice'
+import { useDispatch } from 'react-redux'
 
 const Product = ({ product, similarProducts, reviews }) => {
+    const dispatch = useDispatch()
+
     const addToCartSuccessToast = () => toast.success('Nice move 😍')
 
     const addToCartFailedToast = () => toast.error('Ooops, you failed 😢')
@@ -96,6 +100,9 @@ const Product = ({ product, similarProducts, reviews }) => {
             if (!data) {
                 return console.log('something wrong when update product qty')
             }
+
+            const cart = await axios.get('/api/cart')
+            dispatch(setOrder(cart.data))
             // return
             return addToCartSuccessToast()
         }
@@ -112,6 +119,10 @@ const Product = ({ product, similarProducts, reviews }) => {
         if (!res.data) {
             return addToCartFailedToast()
         }
+
+        const cart = await axios.get('/api/cart')
+
+        dispatch(setOrder(cart.data))
         // return
         return addToCartSuccessToast()
     }
