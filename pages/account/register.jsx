@@ -8,6 +8,7 @@ import axios from 'axios'
 
 const register = () => {
     const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
@@ -23,6 +24,7 @@ const register = () => {
         const register = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/local/register`, {
             email,
             password,
+            name,
             username,
         })
 
@@ -55,7 +57,7 @@ const register = () => {
 
                             <form className='mt-6' method='POST' onSubmit={() => handleSubmit(event)}>
                                 <div>
-                                    <label htmlFor='name' className='block text-gray-700'>
+                                    <label htmlFor='username' className='block text-gray-700'>
                                         Username
                                     </label>
                                     <input
@@ -64,6 +66,23 @@ const register = () => {
                                         id='username'
                                         onChange={(e) => setUsername(e.target.value)}
                                         placeholder='Enter Username'
+                                        className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        autoFocus='autofocus'
+                                        autoComplete='autocomplete'
+                                        required
+                                    />
+                                </div>
+
+                                <div className='mt-4'>
+                                    <label htmlFor='name' className='block text-gray-700'>
+                                        Name
+                                    </label>
+                                    <input
+                                        type='name'
+                                        value={name}
+                                        id='name'
+                                        onChange={(e) => setName(e.target.value)}
+                                        placeholder='Full Name'
                                         className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'

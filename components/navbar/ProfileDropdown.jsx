@@ -24,8 +24,9 @@ const ProfileDropdown = () => {
 
     return (
         <Menu as='div' className='relative inline-block text-left'>
-            <Menu.Button className='w-12 h-12'>
-                <Image src={session.user.image} className='rounded-full' width={1} height={1} priority layout='responsive' />
+            <Menu.Button className='w-10 h-10'>
+                {!session.user.image && <img src={`https://ui-avatars.com/api/?name=${session.user.name}`} className='rounded-full' />}
+                {session.user.image && <Image src={session.user.image} className='rounded-full' width={1} height={1} priority layout='responsive' />}
             </Menu.Button>
 
             <Transition
@@ -42,9 +43,9 @@ const ProfileDropdown = () => {
                         <Menu.Item>
                             {({ active }) => (
                                 <div className='cursor-pointer w-full'>
-                                    <Link href='#'>
+                                    <Link href='/profile'>
                                         <div className={classNames(active ? 'bg-gray-100 text-blueGray-800' : 'text-blueGray-700', 'block w-full text-left px-4 py-2 text-sm')}>
-                                            Account Settings
+                                            Account
                                         </div>
                                     </Link>
                                 </div>

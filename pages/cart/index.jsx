@@ -425,7 +425,7 @@ export const getServerSideProps = async (context) => {
 
     if (!session) {
         return {
-            notFound: true,
+            redirect: { destination: '/', permanent: false },
         }
     }
 
@@ -438,12 +438,6 @@ export const getServerSideProps = async (context) => {
 
     const getCategories = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/product-categories`)
     const productCategories = await getCategories.data
-
-    if (!cartProducts) {
-        return {
-            notFound: true,
-        }
-    }
 
     return {
         props: {
