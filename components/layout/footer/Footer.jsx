@@ -27,7 +27,7 @@ const Footer = () => {
                     </div>
 
                     {/* 2 */}
-                    <ul>
+                    <ul className='flex flex-col space-y-4'>
                         <li className='text-xl font-bold mb-2'>Useful Links</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link href='#'>
@@ -42,7 +42,7 @@ const Footer = () => {
                     </ul>
 
                     {/* 3 */}
-                    <ul>
+                    <ul className='flex flex-col space-y-4'>
                         <li className='text-xl font-bold mb-2'>Services</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link href='#'>
@@ -62,7 +62,7 @@ const Footer = () => {
                     </ul>
 
                     {/* 4 */}
-                    <ul>
+                    <ul className='flex flex-col space-y-4'>
                         <li className='text-xl font-bold mb-2'>Help and Guide</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link href='#'>
