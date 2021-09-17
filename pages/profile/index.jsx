@@ -3,7 +3,7 @@ import { getSession, useSession } from 'next-auth/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import Layout from '@/components/layout/Layout'
-import React, { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { BadgeCheckIcon, CheckCircleIcon } from '@heroicons/react/solid'
 import Button from '@/components/ui/Button'
 
@@ -11,7 +11,7 @@ const index = ({ user }) => {
     const [session, loading] = useSession()
 
     const ref = useRef(null)
-    React.useEffect(() => {
+    useEffect(() => {
         import('@lottiefiles/lottie-player')
     })
 
@@ -21,11 +21,11 @@ const index = ({ user }) => {
 
     return (
         <Layout title='Profile'>
-            <div className='container mx-auto my-6 flex flex-col space-y-8'>
+            <div className='container mx-auto my-6 flex flex-col space-y-6'>
                 <div className='text-blueGray-800 font-extrabold leading-loose text-3xl'>My Account</div>
                 <div className='rounded-lg w-full'>
                     <div className='relative'>
-                        <Image src='/images/account/member.png' className='rounded-lg' layout='responsive' width={1680} height={295} priority objectFit='cover' />
+                        <Image src='/images/account/member.png' className='rounded-lg shadow' layout='responsive' width={1680} height={295} priority objectFit='cover' />
                         <div className='absolute top-12 left-12'>
                             <div className='flex items-center space-x-8'>
                                 {!session.user.image && <img src={`https://ui-avatars.com/api/?name=${session.user.name}`} className='rounded-full w-44 h-44 shadow' />}
@@ -81,7 +81,7 @@ const index = ({ user }) => {
                                 <Link href='/profile'>My Account</Link>
                             </li>
                             <li className='p-2 bg-blueGray-100 rounded text-blueGray-500'>
-                                <Link href='/profle/my-orders'>My Order</Link>
+                                <Link href='/profile/my-orders'>My Order</Link>
                             </li>
                             <li className='p-2 bg-blueGray-100 rounded text-blueGray-500'>
                                 <Link href='/profile/favorites'>Favorites</Link>
@@ -89,7 +89,7 @@ const index = ({ user }) => {
                         </ul>
                     </div>
                     <div className='w-10/12'>
-                        <div className='w-full h-full bg-blueGray-100 ring ring-blueGray-200 p-4 rounded-md flex flex-col'>
+                        <div className='w-full h-full bg-blueGray-50 border border-blueGray-200 p-4 rounded-md flex flex-col'>
                             <span className='text-xl font-bold'>My Profile</span>
                             <span className='text-base font-normal text-blueGray-400'>Manage your account to control, protect, and secure your credentials</span>
                             <br />
@@ -111,7 +111,7 @@ const index = ({ user }) => {
                                                     defaultValue={user.name}
                                                     id='name'
                                                     autoComplete='given-name'
-                                                    className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                                                    className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-200 rounded-md'
                                                 />
                                                 {/* {user.name} */}
                                             </div>
@@ -130,7 +130,7 @@ const index = ({ user }) => {
                                                     id='phone'
                                                     defaultValue={user.phone}
                                                     autoComplete='phone'
-                                                    className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                                                    className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-200 rounded-md'
                                                 />
                                             </div>
                                         </div>
