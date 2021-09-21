@@ -224,7 +224,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                     displayType={'text'}
                                     thousandSeparator={true}
                                     prefix={'Rp. '}
-                                    className='text-3xl font-extrabold text-blue-500'
+                                    className='text-3xl font-extrabold text-orange-500'
                                 />
                                 <NumberFormat
                                     value={product.sellingPrice}
@@ -254,12 +254,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                             </div> */}
                             <div className='flex flex-col space-y-1 mb-4 pt-4'>
                                 <p className='text-lg font-semibold tracking-wide py-2 text-blueGray-600'>Description</p>
-                                <p className='text-base font-medium text-justify leading-relaxed'>
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum, pariatur obcaecati! Molestiae illo inventore, magni sint, temporibus dicta
-                                    quas culpa voluptas quasi modi incidunt veniam. Velit, vel excepturi. Assumenda modi at inventore atque recusandae mollitia consequatur, ad
-                                    repudiandae veniam expedita omnis voluptates, ea quod repellendus ab dignissimos veritatis iusto nisi libero excepturi quos illo laudantium? At
-                                    illum cupiditate autem cum voluptate id sint totam,
-                                </p>
+                                <p className='text-base font-medium text-justify leading-relaxed'>{product.description}</p>
                             </div>
                         </div>
                     </div>
