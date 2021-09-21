@@ -3,7 +3,7 @@ import Image from 'next/image'
 const PaymentGateway = () => {
     return (
         <div className='bg-blueGray-75'>
-            <div className='w-full h-auto py-8 container mx-auto flex justify-between items-center '>
+            <div className='w-full h-auto py-8 px-12 flex justify-between items-center '>
                 <div className='h-42 w-24 filter hover:grayscale-0 transition ease-in-out duration-300 hover:scale-110 grayscale'>
                     <Image alt='BNI Virtual Account' src='/images/payment-gateway/bni.png' layout='responsive' objectFit='contain' width={3} height={1} quality={75} priority />
                 </div>

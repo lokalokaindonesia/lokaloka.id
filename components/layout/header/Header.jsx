@@ -1,14 +1,25 @@
 import Link from 'next/link'
-import { SearchIcon, ColorSwatchIcon, ShoppingCartIcon } from '@heroicons/react/outline'
+import { SearchIcon, ColorSwatchIcon, ShoppingCartIcon, HeartIcon } from '@heroicons/react/outline'
 import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import Button from '@/components/ui/Button'
 import HeaderActiveLink from '@/components/layout/header/HeaderActiveLink'
 import ProfileDropdown from '@/components/navbar/ProfileDropdown'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Header = () => {
     const router = useRouter()
     const [session, loading] = useSession()
+
+    const [cartLength, setCartLength] = useState(0)
+
+    useEffect(async () => {
+        const { data } = await axios.get(`/api/cart`)
+
+        setCartLength(data.length)
+        return () => {}
+    })
 
     return (
         <header className='w-full px-4 xl:px-0 h-20 xl:container xl:mx-auto flex justify-between items-center'>
@@ -37,14 +48,19 @@ const Header = () => {
                 <button type='button' name='search' aria-label='Search'>
                     <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                 </button>
+                <button type='button' name='search' aria-label='Favorites'>
+                    <HeartIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
+                </button>
                 {session && (
                     <Link href='/cart'>
                         <button className='relative' type='button' name='cart' aria-label='Cart'>
                             <ShoppingCartIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
-                            <span className='flex h-3 w-3 absolute top-0 right-0'>
-                                <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
-                                <span className='relative inline-flex rounded-full h-3 w-3 bg-blue-500'></span>
-                            </span>
+                            {cartLength > 0 && (
+                                <span className='flex h-3 w-3 absolute top-0 right-0'>
+                                    <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
+                                    <span className='relative inline-flex rounded-full h-3 w-3 bg-blue-500'></span>
+                                </span>
+                            )}
                         </button>
                     </Link>
                 )}

@@ -44,6 +44,13 @@ const Product = ({ product, similarProducts, reviews }) => {
 
     const length = product.images.length
 
+    useEffect(async () => {
+        const { data } = await axios.get(`/api/user`)
+        const isFavorited = await data.favorites.filter((f) => f.includes(product.id))
+        isFavorited.length > 0 ? setFavorite(true) : setFavorite(false)
+        return () => {}
+    })
+
     // * Carousel Func
     const nextSlide = () => {
         setCurrent(current === length - 1 ? 0 : current + 1)
@@ -70,8 +77,38 @@ const Product = ({ product, similarProducts, reviews }) => {
     }
 
     // * Favorite Func
-    const favoriteHandle = () => {
-        setFavorite(!favorite)
+    const favoriteHandle = async () => {
+        const getFavorites = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, { headers: { Authorization: 'Bearer ' + session.jwt } })
+
+        const favoritesData = await getFavorites.data.favorites
+
+        const filteredFavorites = await favoritesData.find((f) => f == product.id)
+
+        if (filteredFavorites) {
+            const x = await favoritesData.filter((f) => f != filteredFavorites)
+            const { data } = await axios.put(
+                `${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`,
+                { favorites: (x == [] && null) || (x != [] && x) },
+                {
+                    headers: {
+                        Authorization: `Bearer ${session.jwt}`,
+                    },
+                }
+            )
+            return setFavorite(!favorite)
+        }
+
+        const { data } = await axios.put(
+            `${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`,
+            { favorites: [...favoritesData, product.id] },
+            {
+                headers: {
+                    Authorization: `Bearer ${session.jwt}`,
+                },
+            }
+        )
+
+        return setFavorite(!favorite)
     }
 
     if (!Array.isArray(product.images) || product.images.length <= 0) return null
@@ -83,8 +120,8 @@ const Product = ({ product, similarProducts, reviews }) => {
 
     // Add to Cart Handler
     const addToCart = async () => {
-        const getCartProducts = await fetch(`/api/cart`)
-        const cartProducts = await getCartProducts.json()
+        const getCartProducts = await axios.get(`/api/cart`)
+        const cartProducts = await getCartProducts.data
 
         const sameProduct = await cartProducts.find((item) => item.product.id === product.id)
 
@@ -149,8 +186,13 @@ const Product = ({ product, similarProducts, reviews }) => {
                     {/* Images */}
                     <div className='w-auto'>
                         <div className='flex justify-end absolute w-96 z-30 items-start px-4 py-4'>
-                            <div className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50' onClick={favoriteHandle}>
-                                <FaHeart className='text-white hover:text-red-500 transition duration-300 ease-in-out w-6 h-6' />
+                            <div
+                                className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50'
+                                onClick={() => {
+                                    favoriteHandle()
+                                }}
+                            >
+                                <FaHeart className={`${favorite ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
                             </div>
                         </div>
                         <div className='flex justify-between w-96 h-96 absolute '>
@@ -174,7 +216,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                     {/* Product Details */}
                     <div className='h-full w-full flex-auto'>
                         <div className='flex flex-col space-y-2'>
-                            <div className='text-2xl font-bold text-blueGray-800 -mt-2'>{product.name}</div>
+                            <div className='text-2xl font-bold -mt-2'>{product.name}</div>
                             <Badge text='Recommended' color='green' />
                             <div className='my-4 flex space-x-8 items-baseline'>
                                 <NumberFormat
@@ -192,8 +234,8 @@ const Product = ({ product, similarProducts, reviews }) => {
                                     className='font-semibold line-through text-red-500'
                                 />
                             </div>
-                            <div className='flex flex-col space-y-2 mb-4'>
-                                <p className='text-lg font-semibold text-blueGray-800'>Sizes</p>
+                            {/* <div className='flex flex-col space-y-2 mb-4'>
+                                <p className='text-lg font-semibold'>Sizes</p>
                                 <div className='flex space-x-2'>
                                     <VariantBadge text='XL' />
                                     <VariantBadge text='L' />
@@ -202,17 +244,17 @@ const Product = ({ product, similarProducts, reviews }) => {
                                 </div>
                             </div>
                             <div className='flex flex-col space-y-2 mb-4'>
-                                <p className='text-lg font-semibold text-blueGray-800'>Colors</p>
+                                <p className='text-lg font-semibold'>Colors</p>
                                 <div className='flex space-x-2'>
                                     <VariantBadge text='Blue' />
                                     <VariantBadge text='Red' />
                                     <VariantBadge text='Green' />
                                     <VariantBadge text='Purple' />
                                 </div>
-                            </div>
-                            <div className='flex flex-col space-y-1 mb-4'>
-                                <p className='text-lg font-semibold text-blueGray-800'>Description</p>
-                                <p className='text-base font-normal text-blueGray-600'>
+                            </div> */}
+                            <div className='flex flex-col space-y-1 mb-4 pt-4'>
+                                <p className='text-lg font-semibold tracking-wide py-2 text-blueGray-600'>Description</p>
+                                <p className='text-base font-medium text-justify leading-relaxed'>
                                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum, pariatur obcaecati! Molestiae illo inventore, magni sint, temporibus dicta
                                     quas culpa voluptas quasi modi incidunt veniam. Velit, vel excepturi. Assumenda modi at inventore atque recusandae mollitia consequatur, ad
                                     repudiandae veniam expedita omnis voluptates, ea quod repellendus ab dignissimos veritatis iusto nisi libero excepturi quos illo laudantium? At
@@ -227,10 +269,10 @@ const Product = ({ product, similarProducts, reviews }) => {
                         <div className='flex flex-col space-y-2'>
                             <div className='text-sm font-semibold text-blueGray-600'>Share Me</div>
                             <div className='flex space-x-8 items-center'>
-                                <FaInstagram className='cursor-pointer w-6 h-6 text-blueGray-800' />
-                                <FaFacebookSquare className='cursor-pointer w-6 h-6 text-blueGray-800' />
-                                <FaWhatsapp className='cursor-pointer w-6 h-6 text-blueGray-800' />
-                                <LinkIcon className='cursor-pointer w-6 h-6 text-blueGray-800' />
+                                <FaInstagram className='cursor-pointer text-indigo-400 w-6 h-6' />
+                                <FaFacebookSquare className='cursor-pointer text-blue-500 w-6 h-6' />
+                                <FaWhatsapp className='cursor-pointer text-green-500 w-6 h-6' />
+                                <LinkIcon className='cursor-pointer w-6 h-6' />
                             </div>
                         </div>
                         <div className='flex flex-col space-y-2'>
@@ -238,14 +280,14 @@ const Product = ({ product, similarProducts, reviews }) => {
                             <div className='flex items-center border border-blueGray-300 bg-white rounded'>
                                 <div
                                     onClick={reduceQty}
-                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r border-blueGray-300 text-blueGray-800'
+                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r border-blueGray-300'
                                 >
                                     -
                                 </div>
-                                <div className='px-4 py-1 flex-1 text-center text-blueGray-800 '>{quantity}</div>
+                                <div className='px-4 py-1 flex-1 text-center '>{quantity}</div>
                                 <div
                                     onClick={addQty}
-                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l border-blueGray-300 text-blueGray-800'
+                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l border-blueGray-300'
                                 >
                                     +
                                 </div>
@@ -253,7 +295,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                         </div>
                         <div className='flex flex-col space-y-2'>
                             <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
-                            <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-2xl font-extrabold text-blueGray-800' />
+                            <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-2xl font-extrabold' />
                         </div>
                         <Button type='primary' displayType='flex' size='lg' width='full' href={() => addToCart()}>
                             <span>Add to Cart</span>
@@ -274,7 +316,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                         <div className='flex space-x-4 items-center'>
                                             <div className='w-12 h-12 rounded-full bg-red-500'></div>
                                             <div className='flex flex-col'>
-                                                <p className='text-lg font-semibold text-blueGray-800'>{review.user.username}</p>
+                                                <p className='text-lg font-semibold'>{review.user.username}</p>
                                                 <p className='text-xs text-blueGray-500'>{moment(review.createdAt).format('ll')}</p>
                                             </div>
                                         </div>
@@ -335,10 +377,10 @@ export const getStaticProps = async ({ params }) => {
         }
     }
 
-    const resSimilarProducts = await axios(`${process.env.NEXT_URL}/api/products`)
+    const resSimilarProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
     const similarProducts = await resSimilarProducts.data
 
-    const resReviews = await axios(`${process.env.NEXT_URL}/api/reviews/${data.id}`)
+    const resReviews = await axios.get(`${process.env.NEXT_URL}/api/reviews/${data.id}`)
     const reviews = await resReviews.data
 
     return {
