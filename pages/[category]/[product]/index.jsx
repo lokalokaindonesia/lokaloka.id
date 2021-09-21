@@ -46,7 +46,7 @@ const Product = ({ product, similarProducts, reviews }) => {
 
     useEffect(async () => {
         const { data } = await axios.get(`/api/user`)
-        const isFavorited = await data.favorites.filter((f) => f.includes(product.id))
+        const isFavorited = await data.favorites.filter((f) => f.id.includes(product.id))
         isFavorited.length > 0 ? setFavorite(true) : setFavorite(false)
         return () => {}
     })
@@ -199,7 +199,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                             {product.images.map((img, index) => {
                                 return (
                                     <div key={index} className={index === current ? 'block w-full h-full ease-in-out duration-300 transition-all select-none' : 'hidden'}>
-                                        <Image alt={product.name} src={img.formats.medium.url} className='rounded-lg' layout='responsive' width={1} height={1} objectFit='cover' />
+                                        <Image alt={product.name} src={img.url} className='rounded-lg' layout='responsive' width={1} height={1} objectFit='cover' />
                                     </div>
                                 )
                             })}
@@ -333,7 +333,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                             return (
                                 <ProductCard
                                     key={index}
-                                    imgSrc={item.images[0].formats.medium.url}
+                                    imgSrc={item.images[0].url}
                                     productName={item.name}
                                     price={item.sellingPrice}
                                     discount={item.discount}
