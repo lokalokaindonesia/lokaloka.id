@@ -29,7 +29,7 @@ const Product = ({ product, similarProducts, reviews }) => {
     const [session, loading] = useSession()
 
     const discountPrice = product.sellingPrice - (product.sellingPrice * product.discount) / 100
-    const isDiscount = product.discount !== 0 && product.discount !== null ? true : false
+    const isDiscount = product.discount == 0 ? false : true
     const xPrice = product.discount ? discountPrice : product.sellingPrice
 
     const router = useRouter()
@@ -226,13 +226,15 @@ const Product = ({ product, similarProducts, reviews }) => {
                                     prefix={'Rp. '}
                                     className='text-3xl font-extrabold text-orange-500'
                                 />
-                                <NumberFormat
-                                    value={product.sellingPrice}
-                                    displayType={'text'}
-                                    thousandSeparator={true}
-                                    prefix={'Rp. '}
-                                    className='font-semibold line-through text-red-500'
-                                />
+                                {isDiscount && (
+                                    <NumberFormat
+                                        value={product.sellingPrice}
+                                        displayType={'text'}
+                                        thousandSeparator={true}
+                                        prefix={'Rp. '}
+                                        className='font-semibold line-through text-red-500'
+                                    />
+                                )}
                             </div>
                             {/* <div className='flex flex-col space-y-2 mb-4'>
                                 <p className='text-lg font-semibold'>Sizes</p>
