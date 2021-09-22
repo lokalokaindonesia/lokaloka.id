@@ -16,7 +16,7 @@ const HighlightedSection = ({ sectionTitle, href, data }) => {
                         key={index}
                         slug={product.slug}
                         category={product.product_category.slug}
-                        imgSrc={product.images[0].formats.medium.url}
+                        imgSrc={product.images[0].url}
                         productName={product.name}
                         price={product.sellingPrice}
                         discount={product.discount ? product.discount : null}
