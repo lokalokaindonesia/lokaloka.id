@@ -94,7 +94,7 @@ const index = ({ user, session }) => {
                     <div className='w-2/12'>
                         <ul className='flex flex-col space-y-2'>
                             <li className='p-2 bg-blueGray-100 rounded text-blueGray-500'>
-                                <Link href='/profile'>My Account</Link>
+                                <Link href='/profile/my-account'>My Account</Link>
                             </li>
                             <li className='p-2 bg-blueGray-100 rounded font-semibold text-blueGray-500'>
                                 <Link href='/profile/my-orders'>My Order</Link>

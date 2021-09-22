@@ -54,7 +54,7 @@ const ProfileDropdown = () => {
                         <Menu.Item>
                             {({ active }) => (
                                 <div className='cursor-pointer w-full'>
-                                    <Link href='profile/my-orders'>
+                                    <Link href='/profile/my-orders'>
                                         <div className={classNames(active ? 'bg-gray-100 text-blueGray-800' : 'text-blueGray-700', 'block w-full text-left px-4 py-2 text-sm')}>
                                             My orders
                                         </div>
