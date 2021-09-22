@@ -4,7 +4,7 @@ import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useDispatch } from 'react-redux'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { FaChevronRight } from 'react-icons/fa'
 import { getSession, useSession } from 'next-auth/client'
 import NumberFormat from 'react-number-format'
@@ -14,6 +14,10 @@ import Button from '@/components/ui/Button'
 
 const Cart = ({ cartProducts, session, productCategories }) => {
     const router = useRouter()
+    const ref = useRef(null)
+    useEffect(() => {
+        import('@lottiefiles/lottie-player')
+    })
 
     const [cart, setCart] = useState(cartProducts)
     const [summaryTotal, setSummaryTotal] = useState(0)
@@ -218,9 +222,15 @@ const Cart = ({ cartProducts, session, productCategories }) => {
         <Layout title='Lokaloka Cart'>
             {cart.length == 0 ? (
                 <div className='container my-12 mx-auto flex items-center space-x-24 justify-center'>
-                    <div className='w-[32rem] h-[32rem]'>
-                        <Image src={'/images/add-to-cart.gif'} layout='responsive' quality='75' width={1} height={1} priority />
-                    </div>
+                    <lottie-player
+                        src='https://assets2.lottiefiles.com/private_files/lf30_x2lzmtdl.json'
+                        id='verified'
+                        ref={ref}
+                        autoplay
+                        mode='normal'
+                        loop
+                        style={{ width: '32rem', height: '32rem' }}
+                    ></lottie-player>
                     <div className='flex space-y-8 flex-col justify-center items-center'>
                         <h1 className='text-4xl font-bold text-blueGray-800'>Your cart is empty</h1>
                         <Button size='xl' width='max' display='flex' type='primary' href={() => router.push('/')}>

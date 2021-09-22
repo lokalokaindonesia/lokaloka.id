@@ -99,9 +99,6 @@ const index = ({ user, session }) => {
                             <li className='p-2 bg-blueGray-100 rounded font-semibold text-blueGray-500'>
                                 <Link href='/profile/my-orders'>My Order</Link>
                             </li>
-                            <li className='p-2 bg-blueGray-100 rounded text-blueGray-500'>
-                                <Link href='/profile/favorites'>Favorites</Link>
-                            </li>
                         </ul>
                     </div>
                     <div className='w-10/12 flex flex-col space-y-2'>

@@ -13,41 +13,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setFavorite } from '@/redux/favoriteSlice'
 import { Dialog, Transition } from '@headlessui/react'
 
-const Header = () => {
+const HeaderNotSignIn = () => {
     const router = useRouter()
-    const [session, loading] = useSession()
-
-    const dispatch = useDispatch()
-    const favorite = useSelector((state) => state.favorite.value)
 
     const [open, setOpen] = useState(false)
     const cancelButtonRef = useRef(null)
 
-    const [cartLength, setCartLength] = useState(0)
-    const [openFavorite, setOpenFavorite] = useState(false)
     const [inputText, setInputText] = useState('')
-
-    useEffect(async () => {
-        const getCart = await axios.get(`/api/cart`)
-        const cartData = await getCart.data
-
-        setCartLength(cartData.length)
-
-        const getUser = await axios.get('/api/user')
-        const userData = await getUser.data
-
-        const getProds = await axios.get(`/api/products`)
-        const prods = await getProds.data
-
-        const z = []
-        const filtered = await userData.favorites.forEach((f) => {
-            const x = prods.find((p) => p.id == f.id)
-            z.push(x)
-        })
-
-        dispatch(setFavorite(z))
-        return () => {}
-    }, [loading])
 
     const handleInputSearch = async (e) => {
         setInputText(e.target.value)
@@ -92,11 +64,10 @@ const Header = () => {
                                         </span>
                                         <input
                                             type='text'
-                                            required={true}
                                             name='search'
                                             onChange={handleInputSearch}
                                             id='search'
-                                            className='block w-full text-lg px-6 py-4 shadow-sm sm:text-sm ring-0 border-none rounded-l-0 rounded-r-md'
+                                            className='block w-full text-lg px-4 py-2 shadow-sm sm:text-sm ring-0 border-none rounded-l-0 rounded-r-md'
                                             placeholder='Apel Celup'
                                         />
                                     </div>
@@ -133,73 +104,12 @@ const Header = () => {
                 <button type='button' name='search' aria-label='Search' onClick={() => setOpen(true)}>
                     <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                 </button>
-                <button
-                    type='button'
-                    name='search'
-                    className='relative'
-                    aria-label='Favorites'
-                    onClick={() => {
-                        setOpenFavorite(!openFavorite)
-                    }}
-                >
-                    <HeartIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
-                    {favorite.length > 0 && (
-                        <span className='flex h-3 w-3 absolute top-0 right-0'>
-                            <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
-                            <span className='relative inline-flex rounded-full h-3 w-3 bg-blue-500'></span>
-                        </span>
-                    )}
-                </button>
-                <Link href='/cart'>
-                    <button className='relative' type='button' name='cart' aria-label='Cart'>
-                        <ShoppingCartIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
-                        {cartLength > 0 && (
-                            <span className='flex h-3 w-3 absolute top-0 right-0'>
-                                <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
-                                <span className='relative inline-flex rounded-full h-3 w-3 bg-blue-500'></span>
-                            </span>
-                        )}
-                    </button>
-                </Link>
-                <ProfileDropdown />
+                <Button href={() => router.push('/account/login')} size='md' width='max' display='block' type='secondary'>
+                    <span>Sign In</span>
+                </Button>
             </div>
-            {openFavorite && (
-                <div className='relative right-72 top-0 pt-10' onMouseEnter={() => setOpenFavorite(true)}>
-                    <div className='absolute flex flex-col space-y-2 p-2 rounded-md bg-white border border-blueGray-200 max-w-xs w-max'>
-                        {favorite
-                            .map((f, i) => {
-                                return (
-                                    <Link href={`/${f.product_category.slug}/${f.slug}`} key={i} className=''>
-                                        <div className='w-full flex cursor-pointer'>
-                                            <div className='w-3/12'>
-                                                <div className='w-14 h-14'>
-                                                    <Image src={f.images[0].url} priority layout='responsive' width={1} height={1} />
-                                                </div>
-                                            </div>
-                                            <div className='w-9/12 flex flex-col space-y-1'>
-                                                <span className='line-clamp-1 font-semibold text-blueGray-700 text-sm'>{f.name}</span>
-                                                <NumberFormat
-                                                    value={f.sellingPrice}
-                                                    displayType={'text'}
-                                                    thousandSeparator={true}
-                                                    prefix={'Rp. '}
-                                                    className='line-clamp-1 text-sm'
-                                                />
-                                            </div>
-                                        </div>
-                                    </Link>
-                                )
-                            })
-                            .splice(0, 3)}
-                        {favorite.length == 0 && <div className='w-full flex p-6'>No favorites here, Get Now!</div>}
-                        <Link href='/profile/favorites'>
-                            <div className='w-full text-sm cursor-pointer text-blue-400 text-center'>View All</div>
-                        </Link>
-                    </div>
-                </div>
-            )}
         </header>
     )
 }
 
-export default Header
+export default HeaderNotSignIn

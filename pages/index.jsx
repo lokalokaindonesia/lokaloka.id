@@ -13,12 +13,12 @@ const Home = ({ products, promo, recommended }) => {
 
     const dispatch = useDispatch()
 
-    const setLocalStorageCart = async () => {
-        const { data } = await axios.get('/api/cart')
-        dispatch(setOrder(data))
-    }
-
     if (session) {
+        const setLocalStorageCart = async () => {
+            const { data } = await axios.get('/api/cart')
+            dispatch(setOrder(data))
+        }
+
         setLocalStorageCart()
     }
 
@@ -29,7 +29,7 @@ const Home = ({ products, promo, recommended }) => {
                 <Hero />
 
                 {/* Category */}
-                <div className='container mx-auto mt-10'>
+                <div className='container mx-auto my-10'>
                     <div className='rounded bg-blueGray-200 p-6 h-72 flex justify-between space-x-6 items-center'>
                         <div className='w-1/2 h-full bg-blueGray-600 rounded'></div>
                         <div className='w-1/2 h-full flex flex-col space-y-6 items-center justify-between'>

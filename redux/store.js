@@ -4,6 +4,7 @@ import filterSlice from '@/redux/filterSlice'
 import productsSlice from '@/redux/productsSlice'
 import paymentMethodSlice from '@/redux/paymentMethod'
 import transactionSlice from '@/redux/transactionSlice'
+import favoriteSlice from './favoriteSlice'
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
         products: productsSlice,
         paymentMethod: paymentMethodSlice,
         filter: filterSlice,
-        transaction: transactionSlice
+        transaction: transactionSlice,
+        favorite: favoriteSlice
     },
 })

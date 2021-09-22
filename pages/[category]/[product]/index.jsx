@@ -18,13 +18,14 @@ import ProductCard from '@/components/product/ProductCard'
 import FancySectionTitle from '@/components/ui/FancySectionTitle'
 import { setOrder } from '@/redux/orderSlice'
 import { useDispatch } from 'react-redux'
+import { setFavorite } from '@/redux/favoriteSlice'
 
 const Product = ({ product, similarProducts, reviews }) => {
     const dispatch = useDispatch()
 
-    const addToCartSuccessToast = () => toast.success('Nice move 😍')
+    const addToCartSuccessToast = (msg) => toast.success(msg)
 
-    const addToCartFailedToast = () => toast.error('Ooops, you failed 😢')
+    const addToCartFailedToast = (msg) => toast.error(msg)
 
     const [session, loading] = useSession()
 
@@ -40,16 +41,18 @@ const Product = ({ product, similarProducts, reviews }) => {
     // Product
     const [quantity, setQuantity] = useState(1)
     const [subtotal, setSubtotal] = useState(xPrice)
-    const [favorite, setFavorite] = useState(false)
+    const [isFavorited, setIsFavorited] = useState(false)
 
     const length = product.images.length
 
-    useEffect(async () => {
-        const { data } = await axios.get(`/api/user`)
-        const isFavorited = await data.favorites.filter((f) => f.id.includes(product.id))
-        isFavorited.length > 0 ? setFavorite(true) : setFavorite(false)
-        return () => {}
-    })
+    if (session) {
+        useEffect(async () => {
+            const { data } = await axios.get(`/api/user`)
+            const isFavorited = await data.favorites.filter((f) => f.id.includes(product.id))
+            isFavorited.length > 0 ? setIsFavorited(true) : setIsFavorited(false)
+            return () => {}
+        })
+    }
 
     // * Carousel Func
     const nextSlide = () => {
@@ -84,6 +87,7 @@ const Product = ({ product, similarProducts, reviews }) => {
 
         const filteredFavorites = await favoritesData.find((f) => f == product.id)
 
+        // remove isFavorited
         if (filteredFavorites) {
             const x = await favoritesData.filter((f) => f != filteredFavorites)
             const { data } = await axios.put(
@@ -95,9 +99,10 @@ const Product = ({ product, similarProducts, reviews }) => {
                     },
                 }
             )
-            return setFavorite(!favorite)
+            setIsFavorited(!isFavorited)
+            return dispatch(setFavorite(data.favorites))
         }
-
+        // add isFavorited
         const { data } = await axios.put(
             `${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`,
             { favorites: [...favoritesData, product.id] },
@@ -108,7 +113,8 @@ const Product = ({ product, similarProducts, reviews }) => {
             }
         )
 
-        return setFavorite(!favorite)
+        setIsFavorited(!isFavorited)
+        return dispatch(setFavorite(data.favorites))
     }
 
     if (!Array.isArray(product.images) || product.images.length <= 0) return null
@@ -120,6 +126,9 @@ const Product = ({ product, similarProducts, reviews }) => {
 
     // Add to Cart Handler
     const addToCart = async () => {
+        if (!session) {
+            return addToCartFailedToast('You have to login')
+        }
         const getCartProducts = await axios.get(`/api/cart`)
         const cartProducts = await getCartProducts.data
 
@@ -141,7 +150,7 @@ const Product = ({ product, similarProducts, reviews }) => {
             const cart = await axios.get('/api/cart')
             dispatch(setOrder(cart.data))
             // return
-            return addToCartSuccessToast()
+            return addToCartSuccessToast('Product added to cart')
         }
 
         const res = await axios.post(
@@ -154,14 +163,14 @@ const Product = ({ product, similarProducts, reviews }) => {
             { headers: { Authorization: 'Bearer ' + session.jwt } }
         )
         if (!res.data) {
-            return addToCartFailedToast()
+            return addToCartFailedToast('Failed, try again')
         }
 
         const cart = await axios.get('/api/cart')
 
         dispatch(setOrder(cart.data))
         // return
-        return addToCartSuccessToast()
+        return addToCartSuccessToast('Product added to cart')
     }
 
     return (
@@ -192,7 +201,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                     favoriteHandle()
                                 }}
                             >
-                                <FaHeart className={`${favorite ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
+                                <FaHeart className={`${isFavorited ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
                             </div>
                         </div>
                         <div className='flex justify-between w-96 h-96 absolute '>
@@ -329,20 +338,22 @@ const Product = ({ product, similarProducts, reviews }) => {
                 <div className='flex flex-col space-y-10 mb-8'>
                     <FancySectionTitle title='Similar Products' />
                     <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-8'>
-                        {similarProducts.map((item, index) => {
-                            return (
-                                <ProductCard
-                                    key={index}
-                                    imgSrc={item.images[0].url}
-                                    productName={item.name}
-                                    price={item.sellingPrice}
-                                    discount={item.discount}
-                                    isRecommended={item.isRecommended}
-                                    category={item.product_category.slug}
-                                    slug={item.slug}
-                                />
-                            )
-                        })}
+                        {similarProducts
+                            .map((item, index) => {
+                                return (
+                                    <ProductCard
+                                        key={index}
+                                        imgSrc={item.images[0].url}
+                                        productName={item.name}
+                                        price={item.sellingPrice}
+                                        discount={item.discount}
+                                        isRecommended={item.isRecommended}
+                                        category={item.product_category.slug}
+                                        slug={item.slug}
+                                    />
+                                )
+                            })
+                            .splice(0, 12)}
                     </div>
                 </div>
             </div>

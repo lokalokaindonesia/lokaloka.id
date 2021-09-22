@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Layout from '@/components/layout/Layout'
 import { useEffect, useRef } from 'react'
-import { BadgeCheckIcon, CheckCircleIcon } from '@heroicons/react/solid'
 import Button from '@/components/ui/Button'
 
 const index = ({ user }) => {
@@ -16,7 +15,18 @@ const index = ({ user }) => {
     })
 
     if (loading) {
-        return <div>Loading</div>
+        return (
+            <div className='w-screen h-screen flex items-center justify-center'>
+                <lottie-player
+                    src='https://assets3.lottiefiles.com/datafiles/bEYvzB8QfV3EM9a/data.json'
+                    id='verified'
+                    ref={ref}
+                    autoplay
+                    mode='normal'
+                    style={{ width: '40%', height: '40%' }}
+                ></lottie-player>
+            </div>
+        )
     }
 
     return (
@@ -83,9 +93,6 @@ const index = ({ user }) => {
                             <li className='p-2 bg-blueGray-100 rounded text-blueGray-500'>
                                 <Link href='/profile/my-orders'>My Order</Link>
                             </li>
-                            <li className='p-2 bg-blueGray-100 rounded text-blueGray-500'>
-                                <Link href='/profile/favorites'>Favorites</Link>
-                            </li>
                         </ul>
                     </div>
                     <div className='w-10/12'>
@@ -136,7 +143,8 @@ const index = ({ user }) => {
                                         </div>
                                         <div className='flex items-center'>
                                             <div className='w-2/12'>Gender</div>
-                                            <div className='w-10/12'>{user.gender.charAt(0).toUpperCase() + user.gender.substring(1)}</div>
+                                            {user.gender || <div>-</div>}
+                                            {user.gender && <div className='w-10/12'>{user.gender.charAt(0).toUpperCase() + user.gender.substring(1)}</div>}
                                         </div>
                                         <div className='flex items-center'>
                                             <div className='w-2/12'>Date of Birth</div>
