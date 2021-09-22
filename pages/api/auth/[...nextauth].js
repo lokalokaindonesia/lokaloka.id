@@ -79,6 +79,11 @@ const options = {
             return Promise.resolve(session);
         },
     },
+    pages: {
+        error: '/account/login', // Error code passed in query string as ?error=
+        verifyRequest: '/account/verify-request', // (used for check email message)
+        newUser: null // If set, new users will be directed here on first sign in
+    }
 };
 
 const Auth = (req, res) => NextAuth(req, res, options);

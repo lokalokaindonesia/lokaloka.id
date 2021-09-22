@@ -5,12 +5,25 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSession, signIn, getProviders } from 'next-auth/client'
 import Button from '@/components/ui/Button'
+import 'react-toastify/dist/ReactToastify.css'
+import { toast, ToastContainer } from 'react-toastify'
 
 const login = () => {
+    const errorToast = (msg) => toast.error(msg)
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState(false)
 
     const router = useRouter()
+
+    useEffect(() => {
+        const query = router.query?.error
+        if (query) {
+            setError(true)
+            errorToast('Failed, Try Again')
+        }
+    }, [])
 
     const [session, loading] = useSession()
 
@@ -23,6 +36,7 @@ const login = () => {
 
     return (
         <div>
+            <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <Head>
                 <title>Sign In to Give your Ex an Souvenirs 😊</title>
             </Head>
