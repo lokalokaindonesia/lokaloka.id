@@ -30,13 +30,13 @@ const Footer = () => {
                     <ul className='flex flex-col space-y-4'>
                         <li className='text-xl font-bold mb-2'>Useful Links</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
-                            <Link href='#'>
-                                <div className='underline lg:no-underline cursor-pointer'>About</div>
+                            <Link className='underline lg:no-underline cursor-pointer' href='#'>
+                                About
                             </Link>
                         </li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
-                            <Link href='#'>
-                                <div className='underline lg:no-underline cursor-pointer'>Blog</div>
+                            <Link className='underline lg:no-underline cursor-pointer' href='#'>
+                                Blog
                             </Link>
                         </li>
                     </ul>
@@ -45,18 +45,18 @@ const Footer = () => {
                     <ul className='flex flex-col space-y-4'>
                         <li className='text-xl font-bold mb-2'>Services</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
-                            <Link href='#'>
-                                <div className='underline lg:no-underline cursor-pointer'>Affiliate City</div>
+                            <Link className='underline lg:no-underline cursor-pointer' href='#'>
+                                Affiliate City
                             </Link>
                         </li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
-                            <Link href='#'>
-                                <div className='underline lg:no-underline cursor-pointer'>Expedition</div>
+                            <Link className='underline lg:no-underline cursor-pointer' href='#'>
+                                Expedition
                             </Link>
                         </li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
-                            <a href='https://kuloaja.com' rel='noopener' target='_blank'>
-                                <div className='underline lg:no-underline cursor-pointer'>Courier by KULO</div>
+                            <a className='underline lg:no-underline cursor-pointer' href='https://kuloaja.com' rel='noopener' target='_blank'>
+                                Courier by KULO
                             </a>
                         </li>
                     </ul>
@@ -65,13 +65,13 @@ const Footer = () => {
                     <ul className='flex flex-col space-y-4'>
                         <li className='text-xl font-bold mb-2'>Help and Guide</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
-                            <Link href='#'>
-                                <div className='underline lg:no-underline cursor-pointer'>Privacy Policy</div>
+                            <Link className='underline lg:no-underline cursor-pointer' href='#'>
+                                Privacy Policy
                             </Link>
                         </li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
-                            <Link href='#'>
-                                <div className='underline lg:no-underline cursor-pointer'>Terms and Condition</div>
+                            <Link className='underline lg:no-underline cursor-pointer' href='#'>
+                                Terms and Condition
                             </Link>
                         </li>
                     </ul>

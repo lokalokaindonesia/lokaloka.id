@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { SearchIcon, ColorSwatchIcon, ShoppingCartIcon, HeartIcon } from '@heroicons/react/outline'
+import Image from 'next/image'
 import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import Button from '@/components/ui/Button'
@@ -7,19 +8,42 @@ import HeaderActiveLink from '@/components/layout/header/HeaderActiveLink'
 import ProfileDropdown from '@/components/navbar/ProfileDropdown'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import NumberFormat from 'react-number-format'
 
 const Header = () => {
     const router = useRouter()
     const [session, loading] = useSession()
 
+    if (loading) {
+        return <div></div>
+    }
+
     const [cartLength, setCartLength] = useState(0)
+    const [openFavorite, setOpenFavorite] = useState(false)
+    const [favorite, setFavorite] = useState([])
 
     useEffect(async () => {
-        const { data } = await axios.get(`/api/cart`)
+        const getCart = await axios.get(`/api/cart`)
+        const cartData = await getCart.data
 
-        setCartLength(data.length)
+        setCartLength(cartData.length)
+
+        const getUser = await axios.get('/api/user')
+        const userData = await getUser.data
+
+        const getProds = await axios.get(`/api/products`)
+        const prods = await getProds.data
+
+        const z = []
+        const filtered = await userData.favorites.forEach((f) => {
+            const x = prods.find((p) => p.id == f.id)
+            z.push(x)
+        })
+
+        setFavorite(z)
+
         return () => {}
-    })
+    }, [])
 
     return (
         <header className='w-full px-4 xl:px-0 h-20 xl:container xl:mx-auto flex justify-between items-center'>
@@ -48,7 +72,14 @@ const Header = () => {
                 <button type='button' name='search' aria-label='Search'>
                     <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                 </button>
-                <button type='button' name='search' aria-label='Favorites'>
+                <button
+                    type='button'
+                    name='search'
+                    aria-label='Favorites'
+                    onClick={() => {
+                        setOpenFavorite(!openFavorite)
+                    }}
+                >
                     <HeartIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                 </button>
                 {session && (
@@ -74,6 +105,29 @@ const Header = () => {
                     </>
                 )}
             </div>
+            {openFavorite && (
+                <div className='relative right-72 top-0 pt-10' onMouseEnter={() => setOpenFavorite(true)}>
+                    <div className='absolute flex flex-col space-y-2 p-2 rounded-md bg-white border border-blueGray-200 max-w-xs w-max'>
+                        {favorite.map((f, i) => {
+                            return (
+                                <Link href={`/${f.product_category.slug}/${f.slug}`} key={i} className=''>
+                                    <div className='w-full flex cursor-pointer'>
+                                        <div className='w-3/12'>
+                                            <div className='w-14 h-14'>
+                                                <Image src={f.images[0].url} priority layout='responsive' width={1} height={1} />
+                                            </div>
+                                        </div>
+                                        <div className='w-9/12 flex flex-col space-y-1'>
+                                            <span className='line-clamp-1 font-semibold text-blueGray-700 text-sm'>{f.name}</span>
+                                            <NumberFormat value={f.sellingPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='line-clamp-1 text-sm' />
+                                        </div>
+                                    </div>
+                                </Link>
+                            )
+                        })}
+                    </div>
+                </div>
+            )}
         </header>
     )
 }

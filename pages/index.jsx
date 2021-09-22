@@ -6,7 +6,6 @@ import Promo from '@/components/ui/Promo'
 import { setOrder } from '@/redux/orderSlice'
 import axios from 'axios'
 import { useSession } from 'next-auth/client'
-import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 const Home = ({ products, promo, recommended }) => {
@@ -54,10 +53,12 @@ const Home = ({ products, promo, recommended }) => {
 
 export const getStaticProps = async () => {
     const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
-    const products = await getProducts.data
+    const products = await getProducts.data.splice(0, 42)
 
-    const promo = await products.filter((item) => item.discount != 0)
-    const recommended = await products.filter((item) => item.isRecommended == true)
+    const getPromo = await products.filter((item) => item.discount != 0)
+    const promo = await getPromo.splice(0, 12)
+    const getRecommended = await products.filter((item) => item.isRecommended == true)
+    const recommended = await getRecommended.splice(0, 12)
 
     if (!products) {
         return {
@@ -66,7 +67,7 @@ export const getStaticProps = async () => {
     }
 
     return {
-        props: { products, promo, recommended },
+        props: { products, promo, recommended, revalidate: 1 },
     }
 }
 

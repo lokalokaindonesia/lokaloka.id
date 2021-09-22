@@ -9,7 +9,7 @@ export default async (req, res) => {
 
     const session = await getSession({ req })
     try {
-        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`, {
             headers: {
                 Authorization: `Bearer ${session.jwt}`
             }
