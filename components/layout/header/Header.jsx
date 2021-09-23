@@ -54,7 +54,7 @@ const Header = () => {
     }
 
     return (
-        <header className='w-full xl:px-4 2xl:px-0 h-20 2xl:container 2xl:mx-auto flex justify-between items-center'>
+        <header className='w-full h-20 lg:container lg:mx-auto lg:px-4 2xl:px-0 flex justify-between items-center'>
             {/* Modal Section */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as='div' className='fixed z-50 inset-0 overflow-y-auto' initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -117,7 +117,7 @@ const Header = () => {
             </div>
 
             <div className='w-8/12 flex justify-center '>
-                <div className='hidden xl:flex space-x-8 flex-initial font-medium text-blueGray-600'>
+                <div className='hidden lg:flex lg:space-x-4 xl:space-x-8 flex-initial font-medium text-blueGray-600'>
                     <HeaderActiveLink href='/'>Home</HeaderActiveLink>
                     <HeaderActiveLink href='/food-and-beverage'>Food & Beverages</HeaderActiveLink>
                     <HeaderActiveLink href='/craft'>Craft</HeaderActiveLink>
@@ -126,12 +126,12 @@ const Header = () => {
                     <HeaderActiveLink href='/rent'>Rent</HeaderActiveLink>
                     <HeaderActiveLink href='/book'>Book</HeaderActiveLink>
                 </div>
-                <input type='text' className='block xl:hidden px-3 py-2 border border-gray-400 focus:outline-none text-blueGray-600 bg-blueGray-200 w-full' />
+                <input type='text' className='block lg:hidden px-3 py-2 border border-gray-400 focus:outline-none text-blueGray-600 bg-blueGray-200 w-full' />
             </div>
 
-            <div className='w-2/12 flex items-center justify-end space-x-6'>
+            <div className='w-2/12 flex items-center justify-end lg:space-x-4 xl:space-x-6'>
                 <button type='button' name='search' aria-label='Search' onClick={() => setOpen(true)}>
-                    <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
+                    <SearchIcon className='hidden lg:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                 </button>
                 <button
                     type='button'
@@ -142,7 +142,7 @@ const Header = () => {
                         setOpenFavorite(!openFavorite)
                     }}
                 >
-                    <HeartIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
+                    <HeartIcon className='hidden lg:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                     {favorite.length > 0 && (
                         <span className='flex h-3 w-3 absolute top-0 right-0'>
                             <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
@@ -152,7 +152,7 @@ const Header = () => {
                 </button>
                 <Link href='/cart'>
                     <button className='relative' type='button' name='cart' aria-label='Cart'>
-                        <ShoppingCartIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
+                        <ShoppingCartIcon className='hidden lg:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                         {cartLength > 0 && (
                             <span className='flex h-3 w-3 absolute top-0 right-0'>
                                 <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
@@ -164,7 +164,7 @@ const Header = () => {
                 <ProfileDropdown />
             </div>
             {openFavorite && (
-                <div className='relative xl:right-80 xl:top-0 xl:pt-10 2xl:right-72 2xl:top-0 2xl:pt-10' onMouseEnter={() => setOpenFavorite(true)}>
+                <div className='relative lg:right-80 lg:top-0 lg:pt-10 2xl:right-72 2xl:top-0 2xl:pt-10' onMouseEnter={() => setOpenFavorite(true)}>
                     <div className='absolute flex flex-col space-y-2 p-2 rounded-md bg-white border border-blueGray-200 max-w-xs w-max'>
                         {favorite
                             .map((f, i) => {

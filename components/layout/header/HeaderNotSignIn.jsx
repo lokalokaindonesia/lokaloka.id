@@ -26,7 +26,7 @@ const HeaderNotSignIn = () => {
     }
 
     return (
-        <header className='w-full h-20 xl:container xl:mx-auto xl:px-4 2xl:px-0 flex justify-between items-center'>
+        <header className='w-full h-20 lg:container lg:mx-auto lg:px-4 2xl:px-0 flex justify-between items-center'>
             {/* Modal Section */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as='div' className='fixed z-50 inset-0 overflow-y-auto' initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -88,7 +88,7 @@ const HeaderNotSignIn = () => {
             </div>
 
             <div className='w-8/12 flex justify-center '>
-                <div className='hidden xl:flex space-x-8 flex-initial font-medium text-blueGray-600'>
+                <div className='hidden lg:flex lg:space-x-4 xl:space-x-8 flex-initial font-medium text-blueGray-600'>
                     <HeaderActiveLink href='/'>Home</HeaderActiveLink>
                     <HeaderActiveLink href='/food-and-beverage'>Food & Beverages</HeaderActiveLink>
                     <HeaderActiveLink href='/craft'>Craft</HeaderActiveLink>
@@ -97,12 +97,12 @@ const HeaderNotSignIn = () => {
                     <HeaderActiveLink href='/rent'>Rent</HeaderActiveLink>
                     <HeaderActiveLink href='/book'>Book</HeaderActiveLink>
                 </div>
-                <input type='text' className='block xl:hidden px-3 py-2 border border-gray-400 focus:outline-none text-blueGray-600 bg-blueGray-200 w-full' />
+                <input type='text' className='block lg:hidden px-3 py-2 border border-gray-400 focus:outline-none text-blueGray-600 bg-blueGray-200 w-full' />
             </div>
 
-            <div className='w-2/12 flex items-center justify-end space-x-6'>
+            <div className='w-2/12 flex items-center justify-end lg:space-x-4 xl:space-x-6'>
                 <button type='button' name='search' aria-label='Search' onClick={() => setOpen(true)}>
-                    <SearchIcon className='hidden xl:block h-6 w-6 text-blueGray-600 cursor-pointer' />
+                    <SearchIcon className='hidden lg:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                 </button>
                 <Button href={() => router.push('/account/login')} size='md' width='max' display='block' type='secondary'>
                     <span>Sign In</span>

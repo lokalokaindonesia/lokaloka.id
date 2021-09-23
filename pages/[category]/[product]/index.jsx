@@ -173,7 +173,7 @@ const Product = ({ product, similarProducts, reviews }) => {
     return (
         <Layout title={product.name}>
             <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-            <div className='xl:container xl:mx-auto xl:px-4 2xl:px-0 my-6'>
+            <div className='container mx-auto px-4 2xl:px-0 lg:my-5 2xl:my-6'>
                 <div className='w-full flex space-x-2 items-center'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
@@ -188,7 +188,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                     </div>
                 </div>
 
-                <div className='flex xl:justify-start xl:space-x-6 xl:my-5 2xl:my-6 2xl:space-x-8'>
+                <div className='flex lg:justify-start lg:space-x-6 lg:my-5 2xl:my-6 2xl:space-x-8'>
                     {/* Images */}
                     <div className='w-auto'>
                         <div className='flex justify-end absolute w-96 z-30 items-start px-4 py-4'>
@@ -222,7 +222,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                     {/* Product Details */}
                     <div className='h-full w-full flex-auto'>
                         <div className='flex flex-col space-y-2'>
-                            <div className='xl:text-xl xl:-mt-1 2xl:text-2xl 2xl:-mt-2 font-bold'>{product.name}</div>
+                            <div className='lg:text-xl lg:-mt-1 2xl:text-2xl 2xl:-mt-2 font-bold'>{product.name}</div>
                             <Badge text='Recommended' color='green' />
                             <div className='my-4 flex flex-col space-y-2 items-start'>
                                 <NumberFormat
@@ -230,7 +230,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                     displayType={'text'}
                                     thousandSeparator={true}
                                     prefix={'Rp. '}
-                                    className='xl:text-2xl 2xl:text-3xl font-extrabold text-orange-500'
+                                    className='lg:text-2xl 2xl:text-3xl font-extrabold text-orange-500'
                                 />
                                 {isDiscount && (
                                     <div className='flex space-x-2 items-center'>
@@ -239,21 +239,21 @@ const Product = ({ product, similarProducts, reviews }) => {
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'Rp. '}
-                                            className='xl:text-sm 2xl:text-base font-semibold line-through text-blueGray-500'
+                                            className='lg:text-sm 2xl:text-base font-semibold line-through text-blueGray-500'
                                         />
                                         <NumberFormat
                                             value={product.discount}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             suffix={'% off'}
-                                            className='xl:text-xs 2xl:text-sm font-semibold rounded px-1 py-0.5 text-red-500 bg-red-200'
+                                            className='lg:text-xs 2xl:text-sm font-semibold rounded px-1 py-0.5 text-red-500 bg-red-200'
                                         />
                                     </div>
                                 )}
                             </div>
                             <div className='flex flex-col'>
-                                <p className='2xl:text-lg xl:text-base font-semibold tracking-wide py-2 text-blueGray-600'>Description</p>
-                                <p className='2xl:text-base xl:text-sm font-medium text-justify xl:leading-relaxed'>{product.description}</p>
+                                <p className='2xl:text-lg lg:text-base font-semibold tracking-wide py-2 text-blueGray-600'>Description</p>
+                                <p className='2xl:text-base lg:text-sm font-medium text-justify lg:leading-relaxed'>{product.description}</p>
                             </div>
                         </div>
                     </div>
@@ -289,7 +289,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                         </div>
                         <div className='flex flex-col space-y-2'>
                             <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
-                            <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='xl:text-xl 2xl:text-2xl font-extrabold' />
+                            <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='lg:text-xl 2xl:text-2xl font-extrabold' />
                         </div>
                         <Button type='primary' displayType='flex' size='lg' width='full' href={() => addToCart()}>
                             <span>Add to Cart</span>
@@ -323,7 +323,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                 {/* Similar Products */}
                 <div className='flex flex-col space-y-4'>
                     <FancySectionTitle title='Similar Products' />
-                    <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-8'>
+                    <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-4 2xl:gap-8'>
                         {similarProducts
                             .map((item, index) => {
                                 return (

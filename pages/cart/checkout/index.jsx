@@ -493,8 +493,8 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                     </div>
                 </div>
             )}
-            <div className='container mx-auto'>
-                <div className='w-full flex space-x-2 items-center mt-4'>
+            <div className='container mx-auto lg:px-4 2xl:px-0 lg:my-5 2xl:my-6'>
+                <div className='w-full flex space-x-2 items-center lg:my-2 2xl:my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
                     </div>
@@ -505,9 +505,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                     <ChevronRightIcon className='w-5 h-5' />
                     <div className='text-blueGray-800'>Checkout</div>
                 </div>
-                <div className='py-6'>
-                    <h1 className='text-blueGray-800 font-extrabold text-3xl'>Payment</h1>
-                </div>
+                <h1 className='text-2xl font-semibold lg:my-2 2xl:my-3'>Payment</h1>
                 <div className='flex flex-col space-y-8 mb-12'>
                     <div className='flex justify-between space-x-5'>
                         <div className='w-9/12'>
@@ -614,7 +612,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                             <div className='relative'>
                                                                 <div className='rounded-md bg-white border border-blueGray-200 drop-shadow-sm text-blueGray-800 h-auto w-auto absolute'>
                                                                     <ul
-                                                                        className='w-96 bg-white max-h-32 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm'
+                                                                        className='w-96 bg-white max-h-32 rounded-md py-1 text-base overflow-auto focus:outline-none sm:text-sm'
                                                                         tabIndex='-1'
                                                                         role='listbox'
                                                                         aria-labelledby='listbox-label'
@@ -698,8 +696,8 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                 </div>
                                 <div className='p-4 border border-blueGray-200 bg-white text-blueGray-800 rounded-md drop-shadow-sm'>
                                     <h2 className='text-lg font-semibold mb-3'>Payment Methods</h2>
-                                    <div className='flex flex-col space-y-4'>
-                                        <div className='flex flex-col space-y-2'>
+                                    <div className='flex flex-col lg:space-y-2 2xl:space-y-4 font-semibold text-blueGray-500'>
+                                        <div className='flex flex-col lg:space-y-1 2xl:space-y-2'>
                                             <h3 className='text-semibold'>Virtual Accounts</h3>
                                             <div className='flex space-x-4 items-center'>
                                                 {paymentMethodCollection
@@ -734,7 +732,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                     })}
                                             </div>
                                         </div>
-                                        <div className='flex flex-col space-y-2'>
+                                        <div className='flex flex-col lg:space-y-1 2xl:space-y-2'>
                                             <h3 className='text-semibold'>E-Wallets</h3>
                                             <div className='flex space-x-4 items-center'>
                                                 {paymentMethodCollection
@@ -770,7 +768,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                             </div>
                                         </div>
 
-                                        <div className='flex flex-col space-y-2'>
+                                        <div className='flex flex-col lg:space-y-1 2xl:space-y-2'>
                                             <h3 className='text-semibold'>QRCodes</h3>
                                             <div className='flex space-x-4 items-center'>
                                                 {paymentMethodCollection
@@ -808,7 +806,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                     })}
                                             </div>
                                         </div>
-                                        <div className='flex flex-col space-y-2'>
+                                        <div className='flex flex-col lg:space-y-1 2xl:space-y-2'>
                                             <h3 className='text-semibold'>Retail Outlet</h3>
                                             <div className='flex space-x-4 items-center'>
                                                 {paymentMethodCollection
@@ -860,16 +858,16 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                             <div className='sticky top-28 p-4 bg-white border drop-shadow-sm border-blueGray-200 h-auto rounded-md flex flex-col space-y-4'>
                                 {/* Summary */}
                                 <div className='flex flex-col space-y-2'>
-                                    <div className='text-xl font-bold text-blueGray-800'>Summary</div>
+                                    <div className='lg:text-base 2xl:text-xl font-bold text-blueGray-800'>Summary</div>
                                     <div className='flex flex-col space-y-1'>
-                                        <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
-                                            <span>Product Price({order.totalQuantity})</span>
+                                        <div className='lg:text-sm 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                            <span>Total ({order.totalQuantity})</span>
                                             <NumberFormat value={order.totalPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
-                                        <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
+                                        <div className='lg:text-sm 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-baseline'>
                                                 <span>Shipping</span>
-                                                {shippingEtd && <span className='text-blueGray-400 text-sm'>{`(Etd ${shippingEtd} Days via JNE)`}</span>}
+                                                {shippingEtd && <span className='text-blueGray-400 lg:text-sm 2xl:text-sm'>{`(Etd ${shippingEtd} Days via JNE)`}</span>}
                                             </div>
                                             <NumberFormat value={shippingCost} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
@@ -878,8 +876,14 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                 <hr />
                                 {/* Total */}
                                 <div className='flex justify-between items-center'>
-                                    <div className='text-xl font-bold text-blueGray-800'>Total</div>
-                                    <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-xl font-bold text-blue-500' />
+                                    <div className='lg:text-lg 2xl:text-xl font-bold text-blueGray-800'>Total</div>
+                                    <NumberFormat
+                                        value={total}
+                                        displayType={'text'}
+                                        thousandSeparator={true}
+                                        prefix={'Rp. '}
+                                        className='lg:text-lg 2xl:text-xl font-bold text-blue-500'
+                                    />
                                 </div>
                                 <hr />
                                 {choosenPaymentMethod == 'ID_OVO' ? (

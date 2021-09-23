@@ -7,7 +7,7 @@ import Layout from '@/components/layout/Layout'
 const index = ({ promos }) => {
     return (
         <Layout title='Special Promo'>
-            <div className='xl:container xl:mx-auto xl:px-4 2xl:px-0 xl:my-5 2xl:my-6'>
+            <div className='container mx-auto lg:px-4 2xl:px-0 lg:my-5 2xl:my-6'>
                 <div className='w-full flex space-x-2 items-center my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
@@ -25,7 +25,7 @@ const index = ({ promos }) => {
                                 <div className='text-xl font-semibold text-blueGray-800'>Products not found</div>
                             </div>
                         )}
-                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-8 mt-4'>
+                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 lg:gap-4 xl:gap-8 mt-4'>
                             {promos.map((product, index) => (
                                 <ProductCard
                                     key={index}

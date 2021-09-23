@@ -29,8 +29,8 @@ const Home = ({ products, promo, recommended }) => {
                 <Hero />
 
                 {/* Category */}
-                <div className='lg:container lg:mx-auto xl:container xl:mx-auto my-10'>
-                    <div className='rounded bg-blueGray-200 p-6 h-72 flex justify-between space-x-6 items-center'>
+                <div className='md:container md:mx-auto my-10'>
+                    <div className='rounded bg-blueGray-200 lg:p-4 2xl:p-6 h-72 flex justify-between space-x-6 items-center'>
                         <div className='w-1/2 h-full bg-blueGray-600 rounded'></div>
                         <div className='w-1/2 h-full flex flex-col space-y-6 items-center justify-between'>
                             <div className='w-full h-full bg-blueGray-600 rounded'></div>

@@ -8,8 +8,8 @@ import { getSession } from 'next-auth/client'
 const index = ({ favorites }) => {
     return (
         <Layout title='Special Promo'>
-            <div className='xl:container xl:mx-auto xl:px-4 2xl:px-0 xl:my-5 2xl:my-6'>
-                <div className='w-full flex space-x-2 items-center xl:my-2 2xl:my-3'>
+            <div className='lg:container lg:mx-auto lg:px-4 2xl:px-0 lg:my-5 2xl:my-6'>
+                <div className='w-full flex space-x-2 items-center lg:my-2 2xl:my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
                     </div>
@@ -22,7 +22,7 @@ const index = ({ favorites }) => {
                         <span>Favorites</span>
                     </div>
                 </div>
-                <h1 className='text-2xl font-semibold xl:my-2 2xl:my-3'>Favorites</h1>
+                <h1 className='text-2xl font-semibold lg:my-2 2xl:my-3'>Favorites</h1>
                 <div className='flex space-x-8'>
                     <div className='w-full'>
                         {favorites.length == 0 && (
@@ -30,7 +30,7 @@ const index = ({ favorites }) => {
                                 <div className='text-xl font-semibold '>Products not found</div>
                             </div>
                         )}
-                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-8 mt-4'>
+                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-4 2xl:gap-8 mt-4'>
                             {favorites.map((product, index) => (
                                 <ProductCard
                                     key={index}
@@ -60,6 +60,16 @@ export const getServerSideProps = async (ctx) => {
         },
     })
 
+    const getProd = await axios.get(`${process.env.NEXT_URL}/api/products`)
+    const respProds = await getProd.data
+
+    const z = []
+
+    await data.favorites.forEach((f) => {
+        const x = respProds.find((p) => p.id == f.id)
+        z.push(x)
+    })
+
     if (!data.favorites) {
         return {
             props: {
@@ -70,7 +80,7 @@ export const getServerSideProps = async (ctx) => {
 
     return {
         props: {
-            favorites: data.favorites,
+            favorites: z,
         },
     }
 }

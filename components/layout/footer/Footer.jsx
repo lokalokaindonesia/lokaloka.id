@@ -8,7 +8,7 @@ const Footer = () => {
         <div className='text-blueGray-800'>
             <PaymentGatewayFooter />
             <div className='w-full h-auto bg-blueGray-200 py-12 '>
-                <div className='xl:container xl:mx-auto xl:px-4 2xl:container 2xl:mx-auto 2xl:px-0 xl:grid xl:grid-flow-col xl:grid-cols-4'>
+                <div className='container mx-auto px-4 2xl:container 2xl:mx-auto 2xl:px-0 grid lg:grid-flow-col lg:grid-cols-4'>
                     {/* 1 */}
                     <div className='flex flex-col space-y-4'>
                         <ColorSwatchIcon className='h-16 w-16 text-blueGray-800' />
