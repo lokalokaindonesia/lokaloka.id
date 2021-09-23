@@ -3,7 +3,7 @@ import FancySectionTitle from '@/components/ui/FancySectionTitle'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {
     return (
-        <div className='w-full flex space-y-6 py-8 flex-col lg:container lg:mx-auto lg:px-4 2xl:px-0 2xl:py-16'>
+        <div className='w-full flex space-y-4 py-8 flex-col lg:container lg:mx-auto lg:px-4 2xl:px-0'>
             {/* Section Title */}
             <div className='flex w-full justify-between items-center mb-4'>
                 <FancySectionTitle title={sectionTitle} />

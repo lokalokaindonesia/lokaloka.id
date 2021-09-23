@@ -45,9 +45,11 @@ const Product = ({ product, similarProducts, reviews }) => {
     const length = product.images.length
 
     useEffect(async () => {
-        const { data } = await axios.get(`/api/user`)
-        const isFavorited = await data.favorites.filter((f) => f.id.includes(product.id))
-        isFavorited.length > 0 ? setIsFavorited(true) : setIsFavorited(false)
+        if (!loading && session) {
+            const { data } = await axios.get(`/api/user`)
+            const isFavorited = await data.favorites.filter((f) => f.id.includes(product.id))
+            isFavorited.length > 0 ? setIsFavorited(true) : setIsFavorited(false)
+        }
         return () => {}
     }, [session])
 

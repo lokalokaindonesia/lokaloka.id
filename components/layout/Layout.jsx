@@ -20,7 +20,7 @@ const Layout = ({ title, children }) => {
 
             {/* Footer */}
             <Footer />
-            <Banner msg='This is Beta Version, You transaction only a simulation. Please leave a feedback on this email (kampungvector@gmail.com)' />
+            {/* <Banner msg='This is Beta Version, You transaction only a simulation. Please leave a feedback on this email (kampungvector@gmail.com)' /> */}
         </div>
     )
 }
