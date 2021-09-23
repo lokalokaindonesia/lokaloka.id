@@ -1,7 +1,8 @@
 import axios from 'axios'
 import Link from 'next/link'
 import { ChevronRightIcon, SelectorIcon } from '@heroicons/react/solid'
-import ProductCard from '@/components/product/ProductCard'
+import dynamic from 'next/dynamic'
+const ProductCard = dynamic(() => import('@/components/product/ProductCard'))
 import Layout from '@/components/layout/Layout'
 
 const index = ({ recommendeds }) => {

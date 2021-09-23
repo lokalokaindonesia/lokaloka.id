@@ -6,8 +6,8 @@ import { Fragment, useEffect, useState } from 'react'
 import { CheckIcon, ChevronRightIcon, SelectorIcon } from '@heroicons/react/solid'
 import { useSelector, useDispatch } from 'react-redux'
 import Layout from '@/components/layout/Layout'
-import ProductCard from '@/components/product/ProductCard'
-// import { setProducts } from '@/redux/productsSlice'
+import dynamic from 'next/dynamic'
+const ProductCard = dynamic(() => import('@/components/product/ProductCard'))
 
 const classNames = (...classes) => {
     return classes.filter(Boolean).join(' ')

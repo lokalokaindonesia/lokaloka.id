@@ -1,4 +1,5 @@
-import ProductCard from '@/components/product/ProductCard'
+import dynamic from 'next/dynamic'
+const ProductCard = dynamic(() => import('@/components/product/ProductCard'))
 import FancySectionTitle from '@/components/ui/FancySectionTitle'
 
 const HighlightedSection = ({ sectionTitle, href, data }) => {

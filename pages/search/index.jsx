@@ -2,7 +2,8 @@ import Layout from '@/components/layout/Layout'
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import axios from 'axios'
-import ProductCard from '@/components/product/ProductCard'
+import dynamic from 'next/dynamic'
+const ProductCard = dynamic(() => import('@/components/product/ProductCard'))
 import { useRouter } from 'next/router'
 
 const index = ({ searchedProducts }) => {
