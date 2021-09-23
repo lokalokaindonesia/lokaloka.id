@@ -8,8 +8,8 @@ import { getSession } from 'next-auth/client'
 const index = ({ favorites }) => {
     return (
         <Layout title='Special Promo'>
-            <div className='lg:container lg:mx-auto lg:px-4 2xl:px-0 lg:my-5 2xl:my-6'>
-                <div className='w-full flex space-x-2 items-center lg:my-2 2xl:my-3'>
+            <div className='container mx-auto px-4 2xl:px-0 md:my-5 2xl:my-6'>
+                <div className='w-full flex space-x-2 items-center md:my-2 2xl:my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
                     </div>
@@ -30,7 +30,7 @@ const index = ({ favorites }) => {
                                 <div className='text-xl font-semibold '>Products not found</div>
                             </div>
                         )}
-                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-4 2xl:gap-8 mt-4'>
+                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 md:gap-4 2xl:gap-8 mt-4'>
                             {favorites.map((product, index) => (
                                 <ProductCard
                                     key={index}

@@ -10,26 +10,39 @@ import Ovo from '@/components/payment/instruction/Ovo'
 import Qris from '@/components/payment/instruction/Qris'
 import RetailOutlet from '@/components/payment/instruction/RetailOutlet'
 import Gopay from '@/components/payment/instruction/Gopay'
+import { useState } from 'react'
 
 const index = ({ transaction }) => {
     const router = useRouter()
+    const [paid, setPaid] = useState(false)
 
     const getTransactionStatus = async () => {
         const { data } = await axios.get(`/api/transactions/check/${transaction.id}`)
 
-        if (data.paymentStatus == 'SETTLED' || data.paymentStatus == 'PAID' || data.paymentStatus == 'COMPLETED' || data.paymentStatus == 'SUCCESS') {
+        if (
+            data.paymentStatus == 'SETTLED' ||
+            data.paymentStatus == 'PAID' ||
+            data.paymentStatus == 'COMPLETED' ||
+            data.paymentStatus == 'SUCCESS' ||
+            data.paymentStatus == 'SUCEEDED'
+        ) {
+            setPaid(true)
             return router.push('/')
         }
+        setPaid(false)
+        return
     }
 
-    setInterval(() => {
-        getTransactionStatus()
-    }, 10000)
+    if (!paid) {
+        setInterval(() => {
+            getTransactionStatus()
+        }, 10000)
+    }
 
     return (
         <Layout title='Payment'>
-            <div className='container mx-auto px-4 2xl:px-0 lg:my-4 xl:my-5 2xl:my-6 flex flex-col lg:space-y-4 xl:space-y-5 2xl:space-y-6'>
-                <h1 className='text-blueGray-800 font-extrabold lg:text-xl xl:text-2xl 2xl:text-3xl'>Payment</h1>
+            <div className='container mx-auto px-4 2xl:px-0 md:my-4 xl:my-5 2xl:my-6 flex flex-col md:space-y-4 xl:space-y-5 2xl:space-y-6'>
+                <h1 className='text-blueGray-800 font-extrabold md:text-xl xl:text-2xl 2xl:text-3xl'>Payment</h1>
                 {transaction.paymentMethod == 'BNI' && <Bni transaction={transaction} />}
                 {transaction.paymentMethod == 'BRI' && <Bri transaction={transaction} />}
                 {transaction.paymentMethod == 'MANDIRI' && <Mandiri transaction={transaction} />}
@@ -53,7 +66,7 @@ export const getServerSideProps = async (context) => {
         },
     })
 
-    const transaction = getTransaction.data[0]
+    const transaction = await getTransaction.data[0]
 
     if (!transaction) return { redirect: { destination: '/', permanent: false } }
 

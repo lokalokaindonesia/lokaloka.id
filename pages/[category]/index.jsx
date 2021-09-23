@@ -65,7 +65,7 @@ const Category = ({ category }) => {
 
     return (
         <Layout title={category.name}>
-            <div className='container mx-auto lg:px-4 2xl:px-0 lg:my-5 2xl:my-6'>
+            <div className='container mx-auto md:px-4 2xl:px-0 md:my-5 2xl:my-6'>
                 <div className='w-full flex space-x-2 items-center my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
@@ -88,7 +88,7 @@ const Category = ({ category }) => {
                                 <div className='text-xl font-semibold text-blueGray-800'>Products not found</div>
                             </div>
                         )}
-                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 mt-4'>
+                        <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 md:gap-4 xl:gap-6 2xl:gap-8 mt-4'>
                             {products.map((product, index) => (
                                 <ProductCard
                                     key={index}
@@ -104,10 +104,10 @@ const Category = ({ category }) => {
                         </div>
                     </div>
                     {/* Filter */}
-                    <div className='mt-4 xl:w-96 2xl:w-full 2xl:max-w-xs drop-shadow-sm'>
-                        <div className='sticky top-28 flex flex-col lg:space-y-2 2xl:space-y-4 border border-blueGray-200 bg-white rounded-md p-4'>
+                    <div className='mt-4 md:w-1/4 lg:w-1/3 xl:w-1/4 2xl:w-1/4 drop-shadow-sm'>
+                        <div className='sticky top-28 flex flex-col md:space-y-2 2xl:space-y-4 border border-blueGray-200 bg-white rounded-md p-4'>
                             <div className='flex justify-between items-center'>
-                                <h1 className='lg:text-lg 2xl:text-xl font-semibold text-blueGray-700'>Filter</h1>
+                                <h1 className='md:text-lg 2xl:text-xl font-semibold text-blueGray-700'>Filter</h1>
                             </div>
                             <hr />
                             {/* Sort By */}
@@ -116,7 +116,7 @@ const Category = ({ category }) => {
                                     <div className='flex flex-col xl:space-y-1 2xl:space-y-2'>
                                         <Listbox.Label className='xl:text-sm 2xl:text-base block font-medium text-blueGray-800'>Sort by</Listbox.Label>
                                         <div className='mt-1 relative w-full'>
-                                            <Listbox.Button className='relative w-full bg-white border border-blueGray-300 rounded-md shadow-sm pl-3 pr-10 lg:py-1 2xl:py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'>
+                                            <Listbox.Button className='relative w-full bg-white border border-blueGray-300 rounded-md shadow-sm pl-3 pr-10 md:py-1 2xl:py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'>
                                                 <span className='flex items-center'>
                                                     <span className='block truncate'>{price.value}</span>
                                                 </span>
@@ -136,7 +136,7 @@ const Category = ({ category }) => {
                                                             className={({ active }) =>
                                                                 classNames(
                                                                     active ? 'text-white bg-blue-600' : 'text-blueGray-900',
-                                                                    'cursor-default select-none relative lg:py-1 2xl:py-2 pl-3 pr-9'
+                                                                    'cursor-default select-none relative md:py-1 2xl:py-2 pl-3 pr-9'
                                                                 )
                                                             }
                                                             value={filter}
@@ -171,7 +171,7 @@ const Category = ({ category }) => {
                             </Listbox>
                             <hr />
                             {/* Discount and Recommended */}
-                            <div className='flex lg:space-y-2 2xl:space-y-4 flex-col'>
+                            <div className='flex md:space-y-2 2xl:space-y-4 flex-col'>
                                 <div className='flex items-center'>
                                     <div className='flex items-center'>
                                         <input
@@ -182,7 +182,7 @@ const Category = ({ category }) => {
                                             className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-blueGray-300 rounded'
                                         />
                                     </div>
-                                    <div className='lg:ml-2 2xl:ml-3'>
+                                    <div className='md:ml-2 2xl:ml-3'>
                                         <label htmlFor='recommended' className='xl:text-sm 2xl:text-base font-medium text-blueGray-800'>
                                             Recommended
                                         </label>
@@ -198,7 +198,7 @@ const Category = ({ category }) => {
                                             className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-blueGray-300 rounded'
                                         />
                                     </div>
-                                    <div className='lg:ml-2 2xl:ml-3'>
+                                    <div className='md:ml-2 2xl:ml-3'>
                                         <label htmlFor='discount' className='xl:text-sm 2xl:text-base font-medium text-blueGray-800'>
                                             Discount
                                         </label>
@@ -218,7 +218,7 @@ const Category = ({ category }) => {
                                         name='min'
                                         placeholder='5.000'
                                         id='min'
-                                        className='mt-1 lg:py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
+                                        className='mt-1 md:text-xs md:py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
                                     />
                                 </div>
                                 <div className='w-full'>
@@ -231,7 +231,7 @@ const Category = ({ category }) => {
                                         placeholder='200.000'
                                         name='max'
                                         id='max'
-                                        className='mt-1 lg:py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
+                                        className='mt-1 md:text-xs md:py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
                                     />
                                 </div>
                             </div>

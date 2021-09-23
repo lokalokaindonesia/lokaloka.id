@@ -95,7 +95,7 @@ const paymentMethodCollection = [
     },
 ]
 
-const index = ({ orderData, cityData, provinceData, session }) => {
+const index = ({ orderData, cityData, carts, provinceData, session }) => {
     const router = useRouter()
     const dispatch = useDispatch()
     const order = orderData[0]
@@ -242,6 +242,14 @@ const index = ({ orderData, cityData, provinceData, session }) => {
 
             dispatch(setTransaction(transactionData))
 
+            await carts.forEach(async (c) => {
+                await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${session.jwt}`,
+                    },
+                })
+            })
+
             return await router.push('/cart/checkout/pay')
         }
 
@@ -271,6 +279,14 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                 return await router.push(`${gopayResponse.actions[1].url}`)
             }
 
+            await carts.forEach(async (c) => {
+                await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${session.jwt}`,
+                    },
+                })
+            })
+
             return await router.push(`/cart/checkout/pay`)
         }
 
@@ -298,6 +314,14 @@ const index = ({ orderData, cityData, provinceData, session }) => {
 
             dispatch(setTransaction(transactionResponse))
 
+            await carts.forEach(async (c) => {
+                await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${session.jwt}`,
+                    },
+                })
+            })
+
             return await router.push('/cart/checkout/pay')
         }
 
@@ -324,6 +348,14 @@ const index = ({ orderData, cityData, provinceData, session }) => {
 
             dispatch(setTransaction(transactionResponse))
 
+            await carts.forEach(async (c) => {
+                await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${session.jwt}`,
+                    },
+                })
+            })
+
             return await router.push(eWalletResponse.actions.desktop_web_checkout_url)
         }
 
@@ -348,6 +380,15 @@ const index = ({ orderData, cityData, provinceData, session }) => {
             const transactionResponse = await createTransaction.data
 
             dispatch(setTransaction(transactionResponse))
+
+            await carts.forEach(async (c) => {
+                await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${session.jwt}`,
+                    },
+                })
+            })
+
             return await router.push('/cart/checkout/pay')
         }
 
@@ -373,6 +414,15 @@ const index = ({ orderData, cityData, provinceData, session }) => {
             const transactionResponse = await createTransaction.data
 
             dispatch(setTransaction(transactionResponse))
+
+            await carts.forEach(async (c) => {
+                await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${session.jwt}`,
+                    },
+                })
+            })
+
             return await router.push('/cart/checkout/pay')
         }
     }
@@ -388,7 +438,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                             &#8203;
                         </span>
 
-                        <div className='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full 2xl:w-full 2xl:max-w-2xl'>
+                        <div className='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full 2xl:w-full 2xl:max-w-2xl'>
                             <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
                                 <div className='sm:flex sm:items-start'>
                                     <div className='mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 sm:mx-0 sm:h-10 sm:w-10'>
@@ -493,8 +543,8 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                     </div>
                 </div>
             )}
-            <div className='container mx-auto lg:px-4 2xl:px-0 lg:my-5 2xl:my-6'>
-                <div className='w-full flex space-x-2 items-center lg:my-2 2xl:my-3'>
+            <div className='container mx-auto px-4 2xl:px-0 md:my-5 2xl:my-6'>
+                <div className='w-full flex space-x-2 items-center md:my-2 2xl:my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
                     </div>
@@ -505,10 +555,10 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                     <ChevronRightIcon className='w-5 h-5' />
                     <div className='text-blueGray-800'>Checkout</div>
                 </div>
-                <h1 className='text-2xl font-semibold lg:my-2 2xl:my-3'>Payment</h1>
+                <h1 className='text-2xl font-semibold md:my-2 2xl:my-3'>Payment</h1>
                 <div className='flex flex-col space-y-8 mb-12'>
-                    <div className='flex justify-between space-x-5'>
-                        <div className='w-9/12'>
+                    <div className='flex md:flex-col md:space-y-4 md:space-x-0 lg:flex-row lg:justify-between lg:space-y-0 lg:space-x-5'>
+                        <div className='w-full lg:w-9/12'>
                             <div className='flex flex-col space-y-4'>
                                 <div className='p-4 border border-blueGray-200 bg-white text-blueGray-800 rounded-md drop-shadow-sm'>
                                     <h2 className='text-lg font-semibold mb-3'>Shipping Information</h2>
@@ -696,8 +746,8 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                 </div>
                                 <div className='p-4 border border-blueGray-200 bg-white text-blueGray-800 rounded-md drop-shadow-sm'>
                                     <h2 className='text-lg font-semibold mb-3'>Payment Methods</h2>
-                                    <div className='flex flex-col lg:space-y-2 2xl:space-y-4 font-semibold text-blueGray-500'>
-                                        <div className='flex flex-col lg:space-y-1 2xl:space-y-2'>
+                                    <div className='flex flex-col md:space-y-2 2xl:space-y-4 font-semibold text-blueGray-500'>
+                                        <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
                                             <h3 className='text-semibold'>Virtual Accounts</h3>
                                             <div className='flex space-x-4 items-center'>
                                                 {paymentMethodCollection
@@ -732,7 +782,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                     })}
                                             </div>
                                         </div>
-                                        <div className='flex flex-col lg:space-y-1 2xl:space-y-2'>
+                                        <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
                                             <h3 className='text-semibold'>E-Wallets</h3>
                                             <div className='flex space-x-4 items-center'>
                                                 {paymentMethodCollection
@@ -768,7 +818,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                             </div>
                                         </div>
 
-                                        <div className='flex flex-col lg:space-y-1 2xl:space-y-2'>
+                                        <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
                                             <h3 className='text-semibold'>QRCodes</h3>
                                             <div className='flex space-x-4 items-center'>
                                                 {paymentMethodCollection
@@ -806,7 +856,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                                     })}
                                             </div>
                                         </div>
-                                        <div className='flex flex-col lg:space-y-1 2xl:space-y-2'>
+                                        <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
                                             <h3 className='text-semibold'>Retail Outlet</h3>
                                             <div className='flex space-x-4 items-center'>
                                                 {paymentMethodCollection
@@ -854,7 +904,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className='w-3/12'>
+                        <div className='w-full lg:w-3/12'>
                             <div className='sticky top-28 p-4 bg-white border drop-shadow-sm border-blueGray-200 h-auto rounded-md flex flex-col space-y-4'>
                                 {/* Summary */}
                                 <div className='flex flex-col space-y-2'>
@@ -867,7 +917,7 @@ const index = ({ orderData, cityData, provinceData, session }) => {
                                         <div className='lg:text-sm 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-baseline'>
                                                 <span>Shipping</span>
-                                                {shippingEtd && <span className='text-blueGray-400 lg:text-sm 2xl:text-sm'>{`(Etd ${shippingEtd} Days via JNE)`}</span>}
+                                                {/* {shippingEtd && <span className='text-blueGray-400 lg:text-sm 2xl:text-sm'>{`(Etd ${shippingEtd} Days via JNE)`}</span>} */}
                                             </div>
                                             <NumberFormat value={shippingCost} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
@@ -929,6 +979,13 @@ export const getServerSideProps = async (contex) => {
         return { notFound: true }
     }
 
+    const getCart = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`, {
+        headers: {
+            Authorization: `Bearer ${session.jwt}`,
+        },
+    })
+    const carts = await getCart.data
+
     const getOrder = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders?user_eq=${session.id}`, {
         headers: {
             Authorization: 'Bearer ' + session.jwt,
@@ -947,6 +1004,7 @@ export const getServerSideProps = async (contex) => {
             session,
             orderData: order,
             cityData: city,
+            carts,
             provinceData: province,
         },
     }

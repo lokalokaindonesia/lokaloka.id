@@ -221,7 +221,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
     return (
         <Layout title='Lokaloka Cart'>
             {cart.length == 0 ? (
-                <div className='container lg:my-12 mx-auto lg:px-4 2xl:px-0 flex items-center lg:space-x-12 2xl:space-x-24 justify-center'>
+                <div className='container my-12 mx-auto lg:px-4 2xl:px-0 flex md:flex-col md:space-y-4 md:space-x-0 lg:flex-row items-center lg:space-x-12 lg:space-y-0 2xl:space-x-24 justify-center'>
                     <lottie-player
                         src='https://assets2.lottiefiles.com/private_files/lf30_x2lzmtdl.json'
                         id='verified'
@@ -240,18 +240,18 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                     </div>
                 </div>
             ) : (
-                <div className='container mx-auto lg:px-4 2xl:px-0 lg:my-5 2xl:my-6'>
-                    <div className='w-full flex space-x-2 items-center lg:my-2 2xl:my-3'>
+                <div className='container mx-auto px-4 2xl:px-0 md:my-5 2xl:my-6'>
+                    <div className='w-full flex space-x-2 items-center md:my-2 2xl:my-3'>
                         <div className='text-blue-700 hover:text-blue-800'>
                             <Link href='/'>Home</Link>
                         </div>
                         <ChevronRightIcon className='w-5 h-5' />
                         <div className='text-blueGray-800'>Cart</div>
                     </div>
-                    <h1 className='text-2xl font-semibold lg:my-2 2xl:my-3'>Cart</h1>
-                    <div className='flex flex-col lg:space-y-4 2xl:space-y-8 mb-12'>
-                        <div className='flex justify-between space-x-5'>
-                            <div className='lg:w-8/12 xl:w-9/12'>
+                    <h1 className='text-2xl font-semibold md:my-2 2xl:my-3'>Cart</h1>
+                    <div className='flex flex-col md:space-y-4 2xl:space-y-8 mb-12'>
+                        <div className='flex md:flex-col md:space-y-5 md:space-x-0 lg:flex-row lg:justify-between lg:space-y-0 lg:space-x-5'>
+                            <div className='md:w-full lg:w-8/12 xl:w-9/12'>
                                 <div className='w-full flex flex-col space-y-4'>
                                     {/* Product Cart Item */}
                                     <div className='w-full flex flex-col space-y-4'>
@@ -263,7 +263,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
                                             const category = productCategories.find((c) => c.id == product.product.product_category)
                                             return (
-                                                <div key={product._id} className='w-full lg:p-2 2xl:p-4 rounded-md border drop-shadow-sm bg-white border-blueGray-300'>
+                                                <div key={product._id} className='w-full md:p-2 2xl:p-4 rounded-md border drop-shadow-sm bg-white border-blueGray-300'>
                                                     <div className='flex space-y-4 flex-col'>
                                                         <div className='flex space-x-4 items-center'>
                                                             <div className='flex space-x-4 items-center w-full'>
@@ -344,7 +344,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='lg:w-4/12 xl:w-3/12'>
+                            <div className='md:w-full lg:w-4/12 xl:w-3/12'>
                                 <div className='sticky top-28 p-4 bg-white border drop-shadow-sm border-blueGray-300 h-auto rounded-md flex flex-col space-y-4'>
                                     {/* Coupon Form */}
                                     <form className='flex items-center' onSubmit={getCoupon} method='get'>

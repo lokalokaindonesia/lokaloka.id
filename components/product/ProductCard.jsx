@@ -12,7 +12,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                 {/* Product Image */}
                 <div className='w-full'>
                     <Image
-                        className='rounded-t-md transition ease-in-out duration-300'
+                        className='rounded-t-md transition ease-in-out duration-300 aspect-w-3 aspect-h-4'
                         title={productName}
                         alt={productName}
                         src={imgSrc}

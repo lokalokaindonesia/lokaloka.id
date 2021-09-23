@@ -53,7 +53,7 @@ const register = () => {
 
                     <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 lg:w-1/3 h-screen px-6 xl:px-6 lg:px-6 flex items-center justify-center overflow-y-scroll lg:py-6'>
                         <div className='w-full h-auto'>
-                            <h1 className='pt-12 lg:text-2xl 2xl:text-4xl font-bold leading-loose'>Register an Account</h1>
+                            <h1 className='pt-12 md:text-4xl lg:text-2xl 2xl:text-4xl font-bold leading-loose'>Register an Account</h1>
 
                             <form className='mt-6' method='POST' onSubmit={() => handleSubmit(event)}>
                                 <div>

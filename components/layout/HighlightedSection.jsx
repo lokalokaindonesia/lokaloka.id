@@ -8,7 +8,7 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
     const router = useRouter()
     return (
         <div className={`${bgColor} relative`}>
-            <div className='w-full flex space-y-4 py-8 flex-col lg:container lg:mx-auto lg:px-4 2xl:px-0'>
+            <div className='w-full flex space-y-4 py-8 flex-col container mx-auto px-4 2xl:px-0'>
                 {/* Section Title */}
                 <div className='flex w-full justify-between items-center'>
                     <FancySectionTitle title={sectionTitle} />
@@ -20,7 +20,7 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
                 </div>
 
                 {/* Product Item */}
-                <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 lg:gap-4 xl:gap-4 2xl:gap-8'>
+                <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 sm:gap-4 lg:gap-4 xl:gap-4 2xl:gap-8'>
                     {data.map((product, index) => (
                         <ProductCard
                             key={index}
