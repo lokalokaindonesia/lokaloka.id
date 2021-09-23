@@ -24,18 +24,33 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                         quality={75}
                     />
                 </div>
-                <div className='flex flex-col space-y-2 p-2'>
-                    <span className='line-clamp-2 text-sm font-medium text-left text-blueGray-900 leading-snug'>{productName}</span>
-                    <div className='flex justify-between items-center leading-snug'>
+                <div className='flex flex-col space-y-1 p-2'>
+                    <span className='line-clamp-2 text-base font-normal text-left leading-snug'>{productName}</span>
+                    <div className='flex flex-col items-start space-y-1 leading-snug pb-1'>
                         <NumberFormat
                             value={isDiscount ? sellingPrice : price}
                             displayType={'text'}
                             thousandSeparator={true}
                             prefix={'Rp. '}
-                            className='font-extrabold text-orange-500'
+                            className='text-sm xl:font-semibold 2xl:font-bold text-orange-500'
                         />
                         {isDiscount && (
-                            <NumberFormat value={price} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-xs font-normal text-red-500 line-through ' />
+                            <div className='flex space-x-4 items-center'>
+                                <NumberFormat
+                                    value={price}
+                                    displayType={'text'}
+                                    thousandSeparator={true}
+                                    prefix={'Rp. '}
+                                    className='text-xs font-normal text-blueGray-500 line-through'
+                                />
+                                <NumberFormat
+                                    value={discount}
+                                    displayType={'text'}
+                                    thousandSeparator={true}
+                                    suffix={'% off'}
+                                    className='text-xs font-normal px-1 rounded text-white bg-red-500'
+                                />
+                            </div>
                         )}
                     </div>
                     <div className={isRecommended ? 'px-2 py-1 bg-green-100 text-xs font-bold text-green-500 w-max rounded' : 'hidden'}>Recommended</div>

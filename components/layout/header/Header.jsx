@@ -54,7 +54,7 @@ const Header = () => {
     }
 
     return (
-        <header className='w-full px-4 xl:px-0 h-20 xl:container xl:mx-auto flex justify-between items-center'>
+        <header className='w-full xl:px-4 2xl:px-0 h-20 2xl:container 2xl:mx-auto flex justify-between items-center'>
             {/* Modal Section */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as='div' className='fixed z-50 inset-0 overflow-y-auto' initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -164,7 +164,7 @@ const Header = () => {
                 <ProfileDropdown />
             </div>
             {openFavorite && (
-                <div className='relative right-72 top-0 pt-10' onMouseEnter={() => setOpenFavorite(true)}>
+                <div className='relative xl:right-80 xl:top-0 xl:pt-10 2xl:right-72 2xl:top-0 2xl:pt-10' onMouseEnter={() => setOpenFavorite(true)}>
                     <div className='absolute flex flex-col space-y-2 p-2 rounded-md bg-white border border-blueGray-200 max-w-xs w-max'>
                         {favorite
                             .map((f, i) => {

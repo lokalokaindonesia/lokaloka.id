@@ -41,7 +41,7 @@ const register = () => {
     }
 
     return (
-        <div>
+        <div className='text-blueGray-800'>
             <Head>
                 <title>Register New Account - Lokaloka.id 😊</title>
             </Head>
@@ -51,9 +51,9 @@ const register = () => {
                         <img src='https://source.unsplash.com/collection/1808212' className='object-cover w-full h-full' />
                     </div>
 
-                    <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center'>
-                        <div className='w-full h-scsreen'>
-                            <h1 className='text-2xl md:text-4xl font-bold leading-loose'>Register an Account</h1>
+                    <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center overflow-y-scroll xl:py-6'>
+                        <div className='w-full h-auto'>
+                            <h1 className='pt-12 xl:text-2xl 2xl:text-4xl font-bold leading-loose'>Register an Account</h1>
 
                             <form className='mt-6' method='POST' onSubmit={() => handleSubmit(event)}>
                                 <div>

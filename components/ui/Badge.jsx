@@ -4,7 +4,7 @@ const Badge = ({ text, color }) => {
         blue: 'bg-blue-100 text-blue-500',
         red: 'bg-red-100 text-red-500',
     }
-    return <div className={`px-4 py-1 font-semibold w-max text-sm rounded ${colors[color]}`}>{text}</div>
+    return <div className={`xl:px-2 xl:py-1 xl:font-semibold xl:text-xs 2xl:px-3 2xl:py-1 2xl:font-semibold w-max 2xl:text-sm rounded ${colors[color]}`}>{text}</div>
 }
 
 export default Badge

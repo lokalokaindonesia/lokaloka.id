@@ -31,16 +31,18 @@ const index = ({ user }) => {
 
     return (
         <Layout title='Profile'>
-            <div className='container mx-auto my-6 flex flex-col space-y-6'>
+            <div className='xl:container xl:mx-auto xl:px-4 2xl:px-0 xl:my-5 2xl:my-6 flex flex-col xl:space-y-5 2xl:space-y-6'>
                 <div className='text-blueGray-800 font-extrabold leading-loose text-3xl'>My Account</div>
                 <div className='rounded-lg w-full'>
                     <div className='relative'>
                         <Image src='/images/account/member.png' className='rounded-lg shadow' layout='responsive' width={1680} height={295} priority objectFit='cover' />
-                        <div className='absolute top-12 left-12'>
+                        <div className='absolute xl:top-8 xl:left-8 2xl:top-12 2xl:left-12'>
                             <div className='flex items-center space-x-8'>
-                                {!session.user.image && <img src={`https://ui-avatars.com/api/?name=${session.user.name}`} className='rounded-full w-44 h-44 shadow' />}
-                                {session.user.image && <img src={session.user.image} className='rounded-full w-44 h-44 shadow' />}
-                                <div className='flex flex-col space-y-8 h-full'>
+                                {!session.user.image && (
+                                    <img src={`https://ui-avatars.com/api/?name=${session.user.name}`} className='rounded-full xl:w-40 2xl:w-44 xl:h-40 2xl:h-44 shadow' />
+                                )}
+                                {session.user.image && <img src={session.user.image} className='rounded-full xl:w-40 2xl:w-44 xl:h-40 2xl:h-44 shadow' />}
+                                <div className='flex flex-col xl:space-y-6 2xl:space-y-8 h-full'>
                                     <div className='flex space-x-4 items-center'>
                                         <span className='text-2xl font-bold text-white'>{user.name}</span>
                                         <div className='flex space-x-2 items-center px-2 py-1 rounded bg-blue-500 bg-opacity-50'>
@@ -67,9 +69,9 @@ const index = ({ user }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className='absolute top-14 right-12'>
+                        <div className='absolute xl:top-9 xl:right-8 2xl:top-14 2xl:right-12'>
                             <div className='flex flex-col space-y-8 justify-between items-center'>
-                                <div className='h-28 w-28'>
+                                <div className='h-24 w-24'>
                                     <lottie-player
                                         id='medal'
                                         ref={ref}

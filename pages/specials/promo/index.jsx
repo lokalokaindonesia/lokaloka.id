@@ -7,8 +7,8 @@ import Layout from '@/components/layout/Layout'
 const index = ({ promos }) => {
     return (
         <Layout title='Special Promo'>
-            <div className='container mx-auto my-6'>
-                <div className='w-full flex space-x-2 items-center my-4'>
+            <div className='xl:container xl:mx-auto xl:px-4 2xl:px-0 xl:my-5 2xl:my-6'>
+                <div className='w-full flex space-x-2 items-center my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
                     </div>
@@ -17,7 +17,7 @@ const index = ({ promos }) => {
                         <span>Promo 10.10</span>
                     </div>
                 </div>
-                <h1 className='text-2xl font-semibold text-blueGray-800 my-3'>Promo 10.10</h1>
+                <h1 className='text-2xl font-semibold text-blueGray-800 xl:my-2 2xl:my-3'>Promo 10.10</h1>
                 <div className='flex space-x-8'>
                     <div className='w-full'>
                         {promos.length == 0 && (

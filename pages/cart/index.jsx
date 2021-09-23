@@ -221,7 +221,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
     return (
         <Layout title='Lokaloka Cart'>
             {cart.length == 0 ? (
-                <div className='container my-12 mx-auto flex items-center space-x-24 justify-center'>
+                <div className='xl:container xl:my-12 xl:mx-auto xl:px-4 2xl:px-0 flex items-center space-x-24 justify-center'>
                     <lottie-player
                         src='https://assets2.lottiefiles.com/private_files/lf30_x2lzmtdl.json'
                         id='verified'
@@ -240,17 +240,15 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                     </div>
                 </div>
             ) : (
-                <div className='container mx-auto'>
-                    <div className='w-full flex space-x-2 items-center mt-6'>
+                <div className='xl:container xl:mx-auto xl:px-4 2xl:px-0 xl:my-5 2xl:my-6'>
+                    <div className='w-full flex space-x-2 items-center xl:my-2 2xl:my-3'>
                         <div className='text-blue-700 hover:text-blue-800'>
                             <Link href='/'>Home</Link>
                         </div>
                         <ChevronRightIcon className='w-5 h-5' />
                         <div className='text-blueGray-800'>Cart</div>
                     </div>
-                    <div className='py-6'>
-                        <h1 className='text-blueGray-800 font-extrabold text-3xl'>Cart</h1>
-                    </div>
+                    <h1 className='text-2xl font-semibold xl:my-2 2xl:my-3'>Cart</h1>
                     <div className='flex flex-col space-y-8 mb-12'>
                         <div className='flex justify-between space-x-5'>
                             <div className='w-9/12'>
@@ -265,7 +263,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
                                             const category = productCategories.find((c) => c.id == product.product.product_category)
                                             return (
-                                                <div key={product._id} className='p-4 rounded-md border drop-shadow-sm bg-white border-blueGray-300'>
+                                                <div key={product._id} className='xl:p-2 2xl:p-4 rounded-md border drop-shadow-sm bg-white border-blueGray-300'>
                                                     <div className='flex space-y-4 flex-col'>
                                                         <div className='flex space-x-4 items-center'>
                                                             <div className='flex space-x-4 items-center w-full'>

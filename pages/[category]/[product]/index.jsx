@@ -44,14 +44,12 @@ const Product = ({ product, similarProducts, reviews }) => {
 
     const length = product.images.length
 
-    if (session) {
-        useEffect(async () => {
-            const { data } = await axios.get(`/api/user`)
-            const isFavorited = await data.favorites.filter((f) => f.id.includes(product.id))
-            isFavorited.length > 0 ? setIsFavorited(true) : setIsFavorited(false)
-            return () => {}
-        })
-    }
+    useEffect(async () => {
+        const { data } = await axios.get(`/api/user`)
+        const isFavorited = await data.favorites.filter((f) => f.id.includes(product.id))
+        isFavorited.length > 0 ? setIsFavorited(true) : setIsFavorited(false)
+        return () => {}
+    }, [session])
 
     // * Carousel Func
     const nextSlide = () => {
@@ -175,7 +173,7 @@ const Product = ({ product, similarProducts, reviews }) => {
     return (
         <Layout title={product.name}>
             <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
-            <div className='container mx-auto my-6'>
+            <div className='xl:container xl:mx-auto xl:px-4 2xl:px-0 my-6'>
                 <div className='w-full flex space-x-2 items-center'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
@@ -190,7 +188,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                     </div>
                 </div>
 
-                <div className='flex justify-start space-x-8 my-6'>
+                <div className='flex xl:justify-start xl:space-x-6 xl:my-5 2xl:my-6 2xl:space-x-8'>
                     {/* Images */}
                     <div className='w-auto'>
                         <div className='flex justify-end absolute w-96 z-30 items-start px-4 py-4'>
@@ -224,47 +222,38 @@ const Product = ({ product, similarProducts, reviews }) => {
                     {/* Product Details */}
                     <div className='h-full w-full flex-auto'>
                         <div className='flex flex-col space-y-2'>
-                            <div className='text-2xl font-bold -mt-2'>{product.name}</div>
+                            <div className='xl:text-xl xl:-mt-1 2xl:text-2xl 2xl:-mt-2 font-bold'>{product.name}</div>
                             <Badge text='Recommended' color='green' />
-                            <div className='my-4 flex space-x-8 items-baseline'>
+                            <div className='my-4 flex flex-col space-y-2 items-start'>
                                 <NumberFormat
                                     value={isDiscount ? discountPrice : product.sellingPrice}
                                     displayType={'text'}
                                     thousandSeparator={true}
                                     prefix={'Rp. '}
-                                    className='text-3xl font-extrabold text-orange-500'
+                                    className='xl:text-2xl 2xl:text-3xl font-extrabold text-orange-500'
                                 />
                                 {isDiscount && (
-                                    <NumberFormat
-                                        value={product.sellingPrice}
-                                        displayType={'text'}
-                                        thousandSeparator={true}
-                                        prefix={'Rp. '}
-                                        className='font-semibold line-through text-red-500'
-                                    />
+                                    <div className='flex space-x-2 items-center'>
+                                        <NumberFormat
+                                            value={product.sellingPrice}
+                                            displayType={'text'}
+                                            thousandSeparator={true}
+                                            prefix={'Rp. '}
+                                            className='xl:text-sm 2xl:text-base font-semibold line-through text-blueGray-500'
+                                        />
+                                        <NumberFormat
+                                            value={product.discount}
+                                            displayType={'text'}
+                                            thousandSeparator={true}
+                                            suffix={'% off'}
+                                            className='xl:text-xs 2xl:text-sm font-semibold rounded px-1 py-0.5 text-red-500 bg-red-200'
+                                        />
+                                    </div>
                                 )}
                             </div>
-                            {/* <div className='flex flex-col space-y-2 mb-4'>
-                                <p className='text-lg font-semibold'>Sizes</p>
-                                <div className='flex space-x-2'>
-                                    <VariantBadge text='XL' />
-                                    <VariantBadge text='L' />
-                                    <VariantBadge text='M' />
-                                    <VariantBadge text='S' />
-                                </div>
-                            </div>
-                            <div className='flex flex-col space-y-2 mb-4'>
-                                <p className='text-lg font-semibold'>Colors</p>
-                                <div className='flex space-x-2'>
-                                    <VariantBadge text='Blue' />
-                                    <VariantBadge text='Red' />
-                                    <VariantBadge text='Green' />
-                                    <VariantBadge text='Purple' />
-                                </div>
-                            </div> */}
-                            <div className='flex flex-col space-y-1 mb-4 pt-4'>
-                                <p className='text-lg font-semibold tracking-wide py-2 text-blueGray-600'>Description</p>
-                                <p className='text-base font-medium text-justify leading-relaxed'>{product.description}</p>
+                            <div className='flex flex-col'>
+                                <p className='2xl:text-lg xl:text-base font-semibold tracking-wide py-2 text-blueGray-600'>Description</p>
+                                <p className='2xl:text-base xl:text-sm font-medium text-justify xl:leading-relaxed'>{product.description}</p>
                             </div>
                         </div>
                     </div>
@@ -300,7 +289,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                         </div>
                         <div className='flex flex-col space-y-2'>
                             <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
-                            <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-2xl font-extrabold' />
+                            <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='xl:text-xl 2xl:text-2xl font-extrabold' />
                         </div>
                         <Button type='primary' displayType='flex' size='lg' width='full' href={() => addToCart()}>
                             <span>Add to Cart</span>
@@ -308,10 +297,9 @@ const Product = ({ product, similarProducts, reviews }) => {
                     </div>
                 </div>
 
-                <br />
                 {/* Reviews */}
                 {reviews.length !== 0 && (
-                    <div className='flex flex-col space-y-10 my-12'>
+                    <div className='flex flex-col space-y-10 my-8'>
                         <FancySectionTitle title='Reviews' />
 
                         <div className='flex space-y-4 flex-col'>
@@ -332,9 +320,8 @@ const Product = ({ product, similarProducts, reviews }) => {
                         </div>
                     </div>
                 )}
-                <br />
                 {/* Similar Products */}
-                <div className='flex flex-col space-y-10 mb-8'>
+                <div className='flex flex-col space-y-4'>
                     <FancySectionTitle title='Similar Products' />
                     <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-8'>
                         {similarProducts

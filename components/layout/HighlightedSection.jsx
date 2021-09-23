@@ -8,7 +8,7 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
     const router = useRouter()
     return (
         <div className={`${bgColor} relative`}>
-            <div className='w-full flex space-y-6 py-8 flex-col xl:container xl:mx-auto xl:py-10'>
+            <div className='w-full flex space-y-6 py-8 flex-col xl:px-4 2xl:px-0 2xl:container 2xl:mx-auto'>
                 {/* Section Title */}
                 <div className='flex w-full justify-between items-center'>
                     <FancySectionTitle title={sectionTitle} />
@@ -21,21 +21,18 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
 
                 {/* Product Item */}
                 <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-8'>
-                    {data.map(
-                        (product, index) => (
-                            <ProductCard
-                                key={index}
-                                slug={product.slug}
-                                category={product.product_category.slug}
-                                imgSrc={product.images[0].url}
-                                productName={product.name}
-                                price={product.sellingPrice}
-                                discount={product.discount ? product.discount : null}
-                                isRecommended={product.isRecommended}
-                            />
-                        )
-                        // console.log(product.images[0].formats.thumbnail.url)
-                    )}
+                    {data.map((product, index) => (
+                        <ProductCard
+                            key={index}
+                            slug={product.slug}
+                            category={product.product_category.slug}
+                            imgSrc={product.images[0].url}
+                            productName={product.name}
+                            price={product.sellingPrice}
+                            discount={product.discount ? product.discount : null}
+                            isRecommended={product.isRecommended}
+                        />
+                    ))}
                 </div>
             </div>
         </div>

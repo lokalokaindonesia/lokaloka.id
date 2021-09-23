@@ -26,7 +26,7 @@ const HeaderNotSignIn = () => {
     }
 
     return (
-        <header className='w-full px-4 xl:px-0 h-20 xl:container xl:mx-auto flex justify-between items-center'>
+        <header className='w-full h-20 xl:container xl:mx-auto xl:px-4 2xl:px-0 flex justify-between items-center'>
             {/* Modal Section */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as='div' className='fixed z-50 inset-0 overflow-y-auto' initialFocus={cancelButtonRef} onClose={setOpen}>
