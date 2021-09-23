@@ -47,13 +47,13 @@ const register = () => {
             </Head>
             <div className=''>
                 <section className='flex flex-col md:flex-row h-screen items-center'>
-                    <div className='bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-screen'>
+                    <div className='bg-indigo-600 hidden lg:block w-full md:w-1/2 lg:w-2/3 h-screen'>
                         <img src='https://source.unsplash.com/collection/1808212' className='object-cover w-full h-full' />
                     </div>
 
-                    <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12 flex items-center justify-center overflow-y-scroll xl:py-6'>
+                    <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 lg:w-1/3 h-screen px-6 xl:px-6 lg:px-6 flex items-center justify-center overflow-y-scroll lg:py-6'>
                         <div className='w-full h-auto'>
-                            <h1 className='pt-12 xl:text-2xl 2xl:text-4xl font-bold leading-loose'>Register an Account</h1>
+                            <h1 className='pt-12 lg:text-2xl 2xl:text-4xl font-bold leading-loose'>Register an Account</h1>
 
                             <form className='mt-6' method='POST' onSubmit={() => handleSubmit(event)}>
                                 <div>
