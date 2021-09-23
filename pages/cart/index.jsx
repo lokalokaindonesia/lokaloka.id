@@ -273,7 +273,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                                     <div className='h-20 w-20 rounded-md'>
                                                                         <Image
                                                                             alt={product.product.name}
-                                                                            src={product.product.images[0].formats.medium.url}
+                                                                            src={product.product.images[0].url}
                                                                             layout='responsive'
                                                                             quality='75'
                                                                             className='rounded'
