@@ -28,8 +28,8 @@ const index = ({ transaction }) => {
 
     return (
         <Layout title='Payment'>
-            <div className='container mx-auto my-6 flex flex-col space-y-6'>
-                <h1 className='text-blueGray-800 font-extrabold text-3xl'>Payment</h1>
+            <div className='container mx-auto px-4 2xl:px-0 lg:my-4 xl:my-5 2xl:my-6 flex flex-col lg:space-y-4 xl:space-y-5 2xl:space-y-6'>
+                <h1 className='text-blueGray-800 font-extrabold lg:text-xl xl:text-2xl 2xl:text-3xl'>Payment</h1>
                 {transaction.paymentMethod == 'BNI' && <Bni transaction={transaction} />}
                 {transaction.paymentMethod == 'BRI' && <Bri transaction={transaction} />}
                 {transaction.paymentMethod == 'MANDIRI' && <Mandiri transaction={transaction} />}
