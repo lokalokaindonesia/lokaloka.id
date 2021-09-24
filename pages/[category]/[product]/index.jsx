@@ -133,7 +133,8 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
         setAddToCartLoading(true)
 
         if (!session) {
-            return addToCartFailedToast('You have to login')
+            setAddToCartLoading(false)
+            return addToCartFailedToast('Maaf, Kamu harus login dulu')
         }
         const getCartProducts = await axios.get(`/api/cart`)
         const cartProducts = await getCartProducts.data
