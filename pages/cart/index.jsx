@@ -15,9 +15,11 @@ import Button from '@/components/ui/Button'
 const Cart = ({ cartProducts, session, productCategories }) => {
     const router = useRouter()
     const ref = useRef(null)
+
     useEffect(() => {
         import('@lottiefiles/lottie-player')
-    })
+        return () => {}
+    }, [])
 
     const [cart, setCart] = useState(cartProducts)
     const [summaryTotal, setSummaryTotal] = useState(0)
@@ -28,6 +30,8 @@ const Cart = ({ cartProducts, session, productCategories }) => {
     const [coupon, setCoupon] = useState(null)
     const [couponInput, setCouponInput] = useState(null)
     const [totalWeight, setTotalWeight] = useState(0)
+
+    const [checkoutLoading, setCheckoutLoading] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -174,6 +178,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
     // * SET ORDER DATA AND CHECKOUT
     const checkout = async () => {
+        setCheckoutLoading(true)
         const productsOrigin = cart.map((p) => p._id)
         const totalQuantity = cart.reduce((a, b) => +a + +b.quantity, 0)
 
@@ -213,6 +218,8 @@ const Cart = ({ cartProducts, session, productCategories }) => {
         const updatedOrder = updateOrder.data
 
         dispatch(setOrder(updatedOrder))
+
+        setCheckoutLoading(false)
 
         return router.push('/cart/checkout')
     }
@@ -414,10 +421,16 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                     </div>
                                     <hr />
                                     {/* Checkout Button */}
-                                    <Button href={() => checkout()} type='primary' size='lg' width='full' display='flex'>
-                                        <span>Checkout</span>
-                                        <FaChevronRight className='w-6' />
-                                    </Button>
+                                    {checkoutLoading ? (
+                                        <Button href={() => {}} type='secondary' size='lg' width='full' display='flex'>
+                                            Memproses...
+                                        </Button>
+                                    ) : (
+                                        <Button href={() => checkout()} type='primary' size='lg' width='full' display='flex'>
+                                            <span>Checkout</span>
+                                            <FaChevronRight className='w-6' />
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
                         </div>

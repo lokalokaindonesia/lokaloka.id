@@ -10,6 +10,7 @@ const index = ({ user }) => {
     const [session, loading] = useSession()
 
     const ref = useRef(null)
+
     useEffect(() => {
         import('@lottiefiles/lottie-player')
     })

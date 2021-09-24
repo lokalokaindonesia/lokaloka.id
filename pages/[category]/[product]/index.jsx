@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { ChevronRightIcon, ChevronLeftIcon, LinkIcon } from '@heroicons/react/solid'
 import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart, FaCheckCircle } from 'react-icons/fa'
 import moment from 'moment'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import NumberFormat from 'react-number-format'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify'
@@ -34,6 +34,8 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
     const xPrice = product.discount ? discountPrice : product.sellingPrice
 
     const router = useRouter()
+
+    const [addToCartLoading, setAddToCartLoading] = useState(false)
 
     // Slider Image
     const [current, setCurrent] = useState(0)
@@ -128,6 +130,8 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
 
     // Add to Cart Handler
     const addToCart = async () => {
+        setAddToCartLoading(true)
+
         if (!session) {
             return addToCartFailedToast('You have to login')
         }
@@ -150,8 +154,11 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
             }
 
             const cart = await axios.get('/api/cart')
+
             dispatch(setOrder(cart.data))
-            // return
+
+            setAddToCartLoading(false)
+
             return addToCartSuccessToast('Produk ditambahkan ke Keranjang')
         }
 
@@ -165,13 +172,16 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
             { headers: { Authorization: 'Bearer ' + session.jwt } }
         )
         if (!res.data) {
+            setAddToCartLoading(false)
             return addToCartFailedToast('Gagal menambah Keranjang')
         }
 
         const cart = await axios.get('/api/cart')
 
         dispatch(setOrder(cart.data))
-        // return
+
+        setAddToCartLoading(false)
+
         return addToCartSuccessToast('Produk ditambahkan ke Keranjang')
     }
 
@@ -302,9 +312,15 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                             className='md:text-xl 2xl:text-2xl font-extrabold'
                                         />
                                     </div>
-                                    <Button type='primary' displayType='flex' size='md' width='full' href={() => addToCart()}>
-                                        <span>Add to Cart</span>
-                                    </Button>
+                                    {addToCartLoading ? (
+                                        <Button type='secondary' displayType='flex' size='lg' width='full' href={() => {}}>
+                                            Menambahkan...
+                                        </Button>
+                                    ) : (
+                                        <Button type='primary' displayType='flex' size='lg' width='full' href={() => addToCart()}>
+                                            <span>Tambah Keranjang</span>
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -385,7 +401,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
 
                     {/* Navigation */}
-                    <div className='hidden lg:flex flex-col space-y-4'>
+                    <div className='hidden lg:w-4/12 lg:flex lg:flex-col lg:space-y-4'>
                         <div className='flex flex-col space-y-2'>
                             <div className='text-sm font-semibold text-blueGray-600'>Bagikan</div>
                             <div className='flex space-x-8 items-center'>
@@ -420,9 +436,15 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                             <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
                             <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='md:text-xl 2xl:text-2xl font-extrabold' />
                         </div>
-                        <Button type='primary' displayType='flex' size='lg' width='full' href={() => addToCart()}>
-                            <span>Add to Cart</span>
-                        </Button>
+                        {addToCartLoading ? (
+                            <Button type='secondary' displayType='flex' size='lg' width='full' href={() => {}}>
+                                Menambahkan...
+                            </Button>
+                        ) : (
+                            <Button type='primary' displayType='flex' size='lg' width='full' href={() => addToCart()}>
+                                <span>Tambah Keranjang</span>
+                            </Button>
+                        )}
                     </div>
                 </div>
 

@@ -116,6 +116,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     const [openModalConfirmation, setOpenModalConfirmation] = useState(false)
     const [ovoNumber, setOvoNumber] = useState('')
 
+    const [payLoading, setPayLoading] = useState(false)
+
     useEffect(() => {
         selectArea, selectPaymentMethod, countTotal()
         return () => {}
@@ -219,6 +221,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
     // pay Handle
     const pay = async () => {
+        setPayLoading(true)
         if (choosenPaymentMethod == 'BNI' || choosenPaymentMethod == 'BRI' || choosenPaymentMethod == 'MANDIRI' || choosenPaymentMethod == 'PERMATA') {
             const createInvoice = await axios.post(`/api/payment/invoice`, {
                 amount: total,
@@ -249,6 +252,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                     },
                 })
             })
+
+            setPayLoading(false)
 
             return await router.push('/cart/checkout/pay')
         }
@@ -287,6 +292,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                 })
             })
 
+            setPayLoading(false)
+
             return await router.push(`/cart/checkout/pay`)
         }
 
@@ -322,6 +329,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                 })
             })
 
+            setPayLoading(false)
+
             return await router.push('/cart/checkout/pay')
         }
 
@@ -356,6 +365,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                 })
             })
 
+            setPayLoading(false)
+
             return await router.push(eWalletResponse.actions.desktop_web_checkout_url)
         }
 
@@ -388,6 +399,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                     },
                 })
             })
+
+            setPayLoading(false)
 
             return await router.push('/cart/checkout/pay')
         }
@@ -423,6 +436,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                 })
             })
 
+            setPayLoading(false)
+
             return await router.push('/cart/checkout/pay')
         }
     }
@@ -438,13 +453,13 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                             &#8203;
                         </span>
 
-                        <div className='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full 2xl:w-full 2xl:max-w-2xl'>
+                        <div className='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full 2xl:w-full 2xl:max-w-4xl'>
                             <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
                                 <div className='sm:flex sm:items-start'>
                                     <div className='mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 sm:mx-0 sm:h-10 sm:w-10'>
                                         <ExclamationIcon className='w-7 h-7 text-orange-500' />
                                     </div>
-                                    <div className='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
+                                    <div className='mt-3 w-full text-center sm:mt-0 sm:ml-4 sm:text-left'>
                                         <h3 className='text-lg leading-none font-medium text-blueGray-800' id='modal-title'>
                                             Konfirmasi pesanan
                                         </h3>
@@ -520,15 +535,25 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                 </div>
                             </div>
                             <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
-                                <button
-                                    type='button'
-                                    onClick={() => {
-                                        pay()
-                                    }}
-                                    className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm'
-                                >
-                                    Bayar
-                                </button>
+                                {!payLoading ? (
+                                    <button
+                                        type='button'
+                                        onClick={() => {}}
+                                        className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blueGray-200 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm'
+                                    >
+                                        Memproses...
+                                    </button>
+                                ) : (
+                                    <button
+                                        type='button'
+                                        onClick={() => {
+                                            pay()
+                                        }}
+                                        className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm'
+                                    >
+                                        Bayar
+                                    </button>
+                                )}
                                 <button
                                     type='button'
                                     onClick={() => {

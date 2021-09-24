@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Layout from '@/components/layout/Layout'
-import { setTransaction } from '@/redux/transactionSlice'
-import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import NumberFormat from 'react-number-format'
 
