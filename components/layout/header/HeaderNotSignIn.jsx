@@ -35,7 +35,7 @@ const HeaderNotSignIn = () => {
     }
 
     return (
-        <header className='w-full h-20 container mx-auto px-4 2xl:px-0 flex justify-between items-center'>
+        <header className='w-full h-16 lg:h-20 container mx-auto px-4 2xl:px-0 flex justify-between items-center'>
             {/* Modal Section */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as='div' className='fixed z-50 inset-0 overflow-y-auto' initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -90,9 +90,12 @@ const HeaderNotSignIn = () => {
 
             <div className='w-2/12 text-2xl font-extrabold text-blue-500 tracking-wide'>
                 <Link href='/'>
-                    <button type='button' name='home' aria-label='Home'>
-                        <ColorSwatchIcon className='cursor-pointer h-10 w-10 text-blue-800' />
-                    </button>
+                    <div>
+                        <h1 className='hidden lg:block text-4xl font-bold text-blue-500'>Lokaloka</h1>
+                        <div className='block lg:hidden md:w-10 md:h-10'>
+                            <Image src={Logo} layout='responsive' placeholder='blur' quality={100} width={1} height={1} priority />
+                        </div>
+                    </div>
                 </Link>
             </div>
 
