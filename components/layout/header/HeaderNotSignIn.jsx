@@ -1,17 +1,13 @@
 import Link from 'next/link'
-import { SearchIcon, ColorSwatchIcon, ShoppingCartIcon, HeartIcon } from '@heroicons/react/outline'
+import { SearchIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
-import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import Button from '@/components/ui/Button'
 import HeaderActiveLink from '@/components/layout/header/HeaderActiveLink'
-import ProfileDropdown from '@/components/navbar/ProfileDropdown'
 import { useEffect, useState, Fragment, useRef } from 'react'
 import axios from 'axios'
-import NumberFormat from 'react-number-format'
-import { useDispatch, useSelector } from 'react-redux'
-import { setFavorite } from '@/redux/favoriteSlice'
 import { Dialog, Transition } from '@headlessui/react'
+import Logo from '../../../public/logo.png'
 
 const HeaderNotSignIn = () => {
     const router = useRouter()

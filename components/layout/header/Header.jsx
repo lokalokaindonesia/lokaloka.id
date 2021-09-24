@@ -3,7 +3,6 @@ import { SearchIcon, ColorSwatchIcon, ShoppingCartIcon, HeartIcon } from '@heroi
 import Image from 'next/image'
 import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
-import Button from '@/components/ui/Button'
 import HeaderActiveLink from '@/components/layout/header/HeaderActiveLink'
 import ProfileDropdown from '@/components/navbar/ProfileDropdown'
 import { useEffect, useState, Fragment, useRef } from 'react'
