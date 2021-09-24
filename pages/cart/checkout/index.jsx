@@ -535,7 +535,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                 </div>
                             </div>
                             <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
-                                {!payLoading ? (
+                                {payLoading ? (
                                     <button
                                         type='button'
                                         onClick={() => {}}
