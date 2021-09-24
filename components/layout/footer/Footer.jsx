@@ -2,6 +2,7 @@ import { ColorSwatchIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import Link from 'next/link'
 import PaymentGatewayFooter from './PaymentGatewayFooter'
+import Logo from '../../../public/logo.png'
 
 const Footer = () => {
     return (
@@ -11,17 +12,22 @@ const Footer = () => {
                 <div className='container mx-auto px-4 2xl:container 2xl:mx-auto 2xl:px-0 grid lg:grid-flow-col lg:grid-cols-4 md:grid-flow-col md:grid-cols-4'>
                     {/* 1 */}
                     <div className='flex flex-col space-y-4'>
-                        <ColorSwatchIcon className='h-16 w-16 text-blueGray-800' />
-                        <div className='flex space-x-2 items-center'>
-                            <a href='https://instagram.com/lokaloka.official' rel='noopener' target='_blank'>
-                                <div className='h-8 w-8'>
+                        <h1 className='hidden lg:block text-4xl font-bold text-blue-500'>Lokaloka</h1>
+                        <div className='block lg:hidden md:w-10 md:h-10'>
+                            <Image src={Logo} layout='responsive' quality={100} width={1} height={1} priority />
+                        </div>
+                        <div className='flex flex-col space-y-2 items-start'>
+                            <a href='https://instagram.com/lokaloka.official' className='flex space-x-2' rel='noopener' target='_blank'>
+                                <div className='h-5 w-5'>
                                     <Image alt='Instagram Account' src='/images/social-media/instagram.png' layout='responsive' width={38} height={38} />
                                 </div>
+                                <span>@lokaloka.official</span>
                             </a>
-                            <a href='https://facebook.com/lokaloka.id' rel='noopener' target='_blank'>
-                                <div className='h-8 w-8'>
+                            <a href='https://facebook.com/lokaloka.id' className='flex space-x-2' rel='noopener' target='_blank'>
+                                <div className='h-5 w-5'>
                                     <Image alt='Facebook Account' src='/images/social-media/facebook.png' layout='responsive' width={38} height={38} />
                                 </div>
+                                <span>Lokaloka.id</span>
                             </a>
                         </div>
                     </div>

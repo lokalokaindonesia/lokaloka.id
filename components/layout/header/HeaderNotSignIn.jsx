@@ -80,7 +80,7 @@ const HeaderNotSignIn = () => {
                     <div>
                         <h1 className='hidden lg:block text-4xl font-bold text-blue-500'>Lokaloka</h1>
                         <div className='block lg:hidden md:w-10 md:h-10'>
-                            <Image src={Logo} layout='responsive' placeholder='blur' quality={100} width={1} height={1} priority />
+                            <Image src={Logo} layout='responsive' quality={100} width={1} height={1} priority />
                         </div>
                     </div>
                 </Link>

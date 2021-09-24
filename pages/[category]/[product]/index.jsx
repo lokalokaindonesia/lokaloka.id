@@ -20,7 +20,7 @@ import { setOrder } from '@/redux/orderSlice'
 import { useDispatch } from 'react-redux'
 import { setFavorite } from '@/redux/favoriteSlice'
 
-const Product = ({ product, similarProducts, reviews }) => {
+const Product = ({ product, similarProducts, reviews, baseLink }) => {
     const dispatch = useDispatch()
 
     const addToCartSuccessToast = (msg) => toast.success(msg)
@@ -42,10 +42,12 @@ const Product = ({ product, similarProducts, reviews }) => {
     const [quantity, setQuantity] = useState(1)
     const [subtotal, setSubtotal] = useState(xPrice)
     const [isFavorited, setIsFavorited] = useState(false)
+    const [shareLink, setShareLink] = useState('')
 
     const length = product.images.length
 
     useEffect(async () => {
+        setShareLink(baseLink + router.asPath)
         if (!loading && session) {
             const { data } = await axios.get(`/api/user`)
             const isFavorited = await data.favorites.filter((f) => f.id.includes(product.id))
@@ -150,7 +152,7 @@ const Product = ({ product, similarProducts, reviews }) => {
             const cart = await axios.get('/api/cart')
             dispatch(setOrder(cart.data))
             // return
-            return addToCartSuccessToast('Product added to cart')
+            return addToCartSuccessToast('Produk ditambahkan ke Keranjang')
         }
 
         const res = await axios.post(
@@ -163,14 +165,14 @@ const Product = ({ product, similarProducts, reviews }) => {
             { headers: { Authorization: 'Bearer ' + session.jwt } }
         )
         if (!res.data) {
-            return addToCartFailedToast('Failed, try again')
+            return addToCartFailedToast('Gagal menambah Keranjang')
         }
 
         const cart = await axios.get('/api/cart')
 
         dispatch(setOrder(cart.data))
         // return
-        return addToCartSuccessToast('Product added to cart')
+        return addToCartSuccessToast('Produk ditambahkan ke Keranjang')
     }
 
     return (
@@ -263,10 +265,13 @@ const Product = ({ product, similarProducts, reviews }) => {
                                     <div className='flex flex-col space-y-1'>
                                         <div className='text-sm font-semibold text-blueGray-600'>Bagikan</div>
                                         <div className='flex space-x-8 items-center'>
-                                            <FaInstagram className='cursor-pointer text-indigo-400 w-6 h-6' />
-                                            <FaFacebookSquare className='cursor-pointer text-blue-500 w-6 h-6' />
-                                            <FaWhatsapp className='cursor-pointer text-green-500 w-6 h-6' />
-                                            <LinkIcon className='cursor-pointer w-6 h-6' />
+                                            <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} target='_blank' rel='noopener noreferrer'>
+                                                <FaFacebookSquare className='cursor-pointer text-blue-500 w-6 h-6' />
+                                            </a>
+                                            <a href={`whatsapp://send?text=${shareLink}`} target='_blank' rel='noopener noreferrer'>
+                                                <FaWhatsapp className='cursor-pointer text-green-500 w-6 h-6' />
+                                            </a>
+                                            <LinkIcon onClick={() => navigator.clipboard.writeText(shareLink)} className='cursor-pointer w-6 h-6' />
                                         </div>
                                     </div>
                                     <div className='flex flex-col space-y-1'>
@@ -384,10 +389,13 @@ const Product = ({ product, similarProducts, reviews }) => {
                         <div className='flex flex-col space-y-2'>
                             <div className='text-sm font-semibold text-blueGray-600'>Bagikan</div>
                             <div className='flex space-x-8 items-center'>
-                                <FaInstagram className='cursor-pointer text-indigo-400 w-6 h-6' />
-                                <FaFacebookSquare className='cursor-pointer text-blue-500 w-6 h-6' />
-                                <FaWhatsapp className='cursor-pointer text-green-500 w-6 h-6' />
-                                <LinkIcon className='cursor-pointer w-6 h-6' />
+                                <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} target='_blank' rel='noopener noreferrer'>
+                                    <FaFacebookSquare className='cursor-pointer text-blue-500 w-6 h-6' />
+                                </a>
+                                <a href={`whatsapp://send?text=${shareLink}`} target='_blank' rel='noopener noreferrer'>
+                                    <FaWhatsapp className='cursor-pointer text-green-500 w-6 h-6' />
+                                </a>
+                                <LinkIcon onClick={() => navigator.clipboard.writeText(shareLink)} className='cursor-pointer w-6 h-6' />
                             </div>
                         </div>
                         <div className='flex flex-col space-y-2'>
@@ -486,6 +494,7 @@ export const getStaticProps = async ({ params }) => {
     const getProduct = await axios.get(`${process.env.NEXT_URL}/api/products/${params.product}`)
     const data = await getProduct.data
 
+    const baseLink = await process.env.NEXT_URL
     if (!data) {
         return {
             notFound: true,
@@ -502,6 +511,7 @@ export const getStaticProps = async ({ params }) => {
         props: {
             product: data,
             similarProducts,
+            baseLink,
             reviews,
             revalidate: 1,
         },
