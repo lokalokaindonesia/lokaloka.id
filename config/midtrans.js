@@ -1,7 +1,7 @@
-const midtransClient = require('midtrans-client')
+import Midtrans from 'midtrans-client'
 
-let core = new midtransClient.CoreApi({
-    isProduction: false,
+let core = new Midtrans.CoreApi({
+    isProduction: true,
     serverKey: process.env.MIDTRANS_SERVER_KEY,
     clientKey: process.env.MIDTRANS_CLIENT_KEY
 });

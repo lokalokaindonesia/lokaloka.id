@@ -2,6 +2,10 @@ import core from "@/config/midtrans"
 import axios from "axios"
 
 export default async (req, res) => {
+    if (req.method != 'POST') {
+        return res.status(405).json('METHOD NOT ALLOWED')
+    }
+
     try {
         const getExternalID = await axios.get(`${process.env.NEXT_URL}/api/generatePaymentID`)
         const externalID = getExternalID.data
