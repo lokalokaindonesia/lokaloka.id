@@ -43,7 +43,7 @@ const register = () => {
     return (
         <div className='text-blueGray-800'>
             <Head>
-                <title>Register New Account - Lokaloka.id 😊</title>
+                <title>Daftar akun baru - Lokaloka.id 😊</title>
             </Head>
             <div className=''>
                 <section className='flex flex-col md:flex-row h-screen items-center'>
@@ -53,7 +53,7 @@ const register = () => {
 
                     <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 lg:w-1/3 h-screen px-6 xl:px-6 lg:px-6 flex items-center justify-center overflow-y-scroll lg:py-6'>
                         <div className='w-full h-auto'>
-                            <h1 className='pt-12 md:text-4xl lg:text-2xl 2xl:text-4xl font-bold leading-loose'>Register an Account</h1>
+                            <h1 className='pt-12 md:text-4xl lg:text-2xl 2xl:text-4xl font-bold leading-loose'>Daftarkan dirimu, baru belanja</h1>
 
                             <form className='mt-6' method='POST' onSubmit={() => handleSubmit(event)}>
                                 <div>
@@ -65,7 +65,7 @@ const register = () => {
                                         value={username}
                                         id='username'
                                         onChange={(e) => setUsername(e.target.value)}
-                                        placeholder='Enter Username'
+                                        placeholder='sukaJajan_99'
                                         className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
@@ -75,14 +75,14 @@ const register = () => {
 
                                 <div className='mt-4'>
                                     <label htmlFor='name' className='block text-gray-700'>
-                                        Name
+                                        Nama
                                     </label>
                                     <input
                                         type='name'
                                         value={name}
                                         id='name'
                                         onChange={(e) => setName(e.target.value)}
-                                        placeholder='Full Name'
+                                        placeholder='Nama Lengkap'
                                         className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
@@ -92,14 +92,14 @@ const register = () => {
 
                                 <div className='mt-4'>
                                     <label htmlFor='email' className='block text-gray-700'>
-                                        Email Address
+                                        Email
                                     </label>
                                     <input
                                         type='email'
                                         value={email}
                                         id='email'
                                         onChange={(e) => setEmail(e.target.value)}
-                                        placeholder='Enter Email Address'
+                                        placeholder='jajanin_pacar@gmail.com'
                                         className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
@@ -116,7 +116,7 @@ const register = () => {
                                         value={password}
                                         id='password'
                                         onChange={(e) => setPassword(e.target.value)}
-                                        placeholder='Enter Password'
+                                        placeholder='****'
                                         minLength={6}
                                         className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         required
@@ -125,14 +125,14 @@ const register = () => {
 
                                 <div className='mt-4'>
                                     <label htmlFor='password-confirm' className='block text-gray-700'>
-                                        Confirm Password
+                                        Konfirmasi Password
                                     </label>
                                     <input
                                         type='password'
                                         value={passwordConfirm}
                                         id='password-confirm'
                                         onChange={(e) => setPasswordConfirm(e.target.value)}
-                                        placeholder='Enter Password'
+                                        placeholder='****'
                                         minLength={6}
                                         className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         required
@@ -143,7 +143,7 @@ const register = () => {
                                     type='submit'
                                     className='rounded-md w-full block bg-blue-500 transition duration-300 ease-in-out hover:bg-blue-600 focus:bg-blue-600 text-white font-semibold  px-4 py-3 mt-6'
                                 >
-                                    Register
+                                    Mendaftar
                                 </button>
                             </form>
 
@@ -158,12 +158,12 @@ const register = () => {
                                     <div className='w-5 h-5'>
                                         <Image src='/google.svg' layout='responsive' width={1} height={1} />
                                     </div>
-                                    <span className='ml-4'> Register with Google</span>
+                                    <span className='ml-4'> Mendaftar dengan Google</span>
                                 </div>
                             </button>
 
                             <p className='mt-8'>
-                                Already Have an Account? &nbsp;
+                                Sudah punya akun? &nbsp;
                                 <Link href='/account/login'>
                                     <span className='text-blue-500 transition duration-300 ease-in-out hover:text-blue-700 font-semibold cursor-pointer'>Sign In</span>
                                 </Link>

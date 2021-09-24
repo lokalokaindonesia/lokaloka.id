@@ -36,9 +36,9 @@ const index = ({ user, session }) => {
     }
 
     return (
-        <Layout title='My order'>
+        <Layout title='Pesanan Saya'>
             <div className='container mx-auto px-4 2xl:px-0 md:my-4 xl:my-5 2xl:my-6 flex flex-col md:space-y-4 xl:space-y-5 2xl:space-y-6'>
-                <div className='text-blueGray-800 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>My Orders</div>
+                <div className='text-blueGray-800 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>Pesanan saya</div>
                 <div className='rounded-lg w-full'>
                     <div className='relative'>
                         <Image src='/images/account/member.png' className='rounded-lg shadow' layout='responsive' width={1680} height={295} priority objectFit='cover' />
@@ -55,7 +55,7 @@ const index = ({ user, session }) => {
                                     <div className='flex space-x-4 items-center'>
                                         <span className='lg:text-xl xl:text-2xl font-bold text-white'>{user.name}</span>
                                         <div className='flex space-x-2 items-center px-2 py-1 rounded bg-blue-500 bg-opacity-50'>
-                                            <span className='text-white text-xs'>Verified</span>
+                                            <span className='text-white text-xs'>Terverifikasi</span>
                                             <lottie-player
                                                 src='https://assets2.lottiefiles.com/packages/lf20_bvjhz66u.json'
                                                 id='verified'
@@ -67,11 +67,11 @@ const index = ({ user, session }) => {
                                         </div>
                                     </div>
                                     <div className='flex flex-col md:space-y-1 xl:space-y-2'>
-                                        <div className='text-sm text-blueGray-200'>Weekly Benefit</div>
+                                        <div className='text-sm text-blueGray-200'>Keuntungan</div>
                                         <div className='flex space-x-4'>
                                             <div className='rounded md:p-1 xl:p-2 bg-gradient-to-tr from-blue-500 to-indigo-500'>
                                                 <h3 className='md:text-sm lg:text-lg xl:text-xl font-bold text-white'>SELECTA20</h3>
-                                                <span className='hidden lg:block text-blueGray-200 text-xs'>Free Shipping Fee</span>
+                                                <span className='hidden lg:block text-blueGray-200 text-xs'>Gratis biaya pengiriman</span>
                                             </div>
                                         </div>
                                     </div>
@@ -90,7 +90,7 @@ const index = ({ user, session }) => {
                                         style={{ width: 'auto', height: 'auto' }}
                                     ></lottie-player>
                                 </div>
-                                <h2 className='md:hidden lg:block lg:text-lg xl:text-xl font-bold text-orange-500'>Gold Member</h2>
+                                <h2 className='md:hidden lg:block lg:text-lg xl:text-xl font-bold text-orange-500'>Member Gold</h2>
                             </div>
                         </div>
                     </div>
@@ -99,47 +99,41 @@ const index = ({ user, session }) => {
                     <div className='w-2/12'>
                         <ul className='flex flex-col space-y-2'>
                             <li className='p-2 bg-blueGray-100 rounded text-blueGray-500'>
-                                <Link href='/profile/my-account'>My Account</Link>
+                                <Link href='/profile/my-account'>Akun</Link>
                             </li>
                             <li className='p-2 bg-blueGray-100 rounded font-semibold text-blueGray-500'>
-                                <Link href='/profile/my-orders'>My Order</Link>
+                                <Link href='/profile/my-orders'>Pesanan saya</Link>
                             </li>
                         </ul>
                     </div>
                     <div className='w-10/12 flex flex-col space-y-2'>
                         <div className='flex space-x-4 items-center'>
                             <div onClick={() => setStatus('')} className={`cursor-pointer rounded px-8 py-2 text-sm text-blueGray-600 border border-blueGray-200`}>
-                                All
+                                Semua
                             </div>
                             <div
                                 onClick={() => setStatus('&paymentStatus_in=UNPAID&paymentStatus_in=ACTIVE&paymentStatus_in=PENDING')}
                                 className={`cursor-pointer rounded px-8 py-2 text-sm text-blueGray-600 border border-blueGray-200`}
                             >
-                                Unpaid
-                            </div>
-                            <div
-                                onClick={() => setStatus('&paymentStatus=PACKED')}
-                                className={`cursor-pointer rounded px-8 py-2 text-sm text-blueGray-600 border border-blueGray-200`}
-                            >
-                                Packed
+                                Belum dibayar
                             </div>
                             <div
                                 onClick={() => setStatus('&paymentStatus=SENT')}
                                 className={`cursor-pointer rounded px-8 py-2 text-sm text-blueGray-600 border border-blueGray-200`}
                             >
-                                Sent
+                                Diproses
                             </div>
                             <div
                                 onClick={() => setStatus('&paymentStatus_in=SUCCESS&paymentStatus_in=SUCCEEDED&paymentStatus_in=PAID&paymentStatus_in=COMPLETED')}
                                 className={`cursor-pointer rounded px-8 py-2 text-sm text-blueGray-600 border border-blueGray-200`}
                             >
-                                Finished
+                                Selesai
                             </div>
                             <div
                                 onClick={() => setStatus('&paymentStatus=CANCELED')}
                                 className={`cursor-pointer rounded px-8 py-2 text-sm text-blueGray-600 border border-blueGray-200`}
                             >
-                                Canceled
+                                Dibatalkan
                             </div>
                         </div>
                         <input
@@ -147,7 +141,7 @@ const index = ({ user, session }) => {
                             name='transaction-code'
                             id='transaction-code'
                             onChange={handleInputSearch}
-                            placeholder='Search by Transaction Code'
+                            placeholder='Cari berdasarkan Kode Transaksi'
                             className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-200 rounded-md'
                         />
                         {filtered.map((transaction, i) => {
@@ -168,12 +162,12 @@ const index = ({ user, session }) => {
                                                 (transaction.paymentStatus == 'PAID' && 'bg-green-400')
                                             }`}
                                         >
-                                            {(transaction.paymentStatus == 'SUCCESS' && 'PAID') ||
-                                                (transaction.paymentStatus == 'SUCCEEDED' && 'PAID') ||
-                                                (transaction.paymentStatus == 'COMPLETED' && 'PAID') ||
-                                                (transaction.paymentStatus == 'PAID' && 'PAID') ||
-                                                (transaction.paymentStatus == 'PENDING' && 'PENDING') ||
-                                                (transaction.paymentStatus == 'ACTIVE' && 'PENDING')}
+                                            {(transaction.paymentStatus == 'SUCCESS' && 'LUNAS') ||
+                                                (transaction.paymentStatus == 'SUCCEEDED' && 'LUNAS') ||
+                                                (transaction.paymentStatus == 'COMPLETED' && 'LUNAS') ||
+                                                (transaction.paymentStatus == 'PAID' && 'LUNAS') ||
+                                                (transaction.paymentStatus == 'PENDING' && 'MENUNGGU PEMBAYARAN') ||
+                                                (transaction.paymentStatus == 'ACTIVE' && 'MENUNGGU PEMBAYARAN')}
                                         </span>
                                         <p className={`text-base p-2 rounded w-max text-blueGray-800 font-bold`}>{transaction.paymentMethod.toUpperCase().replace('ID_', '')}</p>
                                     </div>
@@ -193,12 +187,12 @@ const index = ({ user, session }) => {
                                             <div className='flex flex-col space-y-2'>
                                                 <span className='md:text-base xl:text-lg font-semibold'>{transaction.products[0].product.name}</span>
                                                 <span className='text-sm text-blue-400 cursor-pointer'>
-                                                    {transaction.productsOrigin.length > 1 && <span>{transaction.productsOrigin.length - 1} more item(s)</span>}
+                                                    {transaction.productsOrigin.length > 1 && <span>{transaction.productsOrigin.length - 1} produk lainnya</span>}
                                                 </span>
                                             </div>
                                         </div>
                                         <div className='md:w-4/12 xl:w-full flex items-end flex-col space-y-2'>
-                                            <span className='text-sm text-blueGray-400'>Total Price</span>
+                                            <span className='text-sm text-blueGray-400'>Total Harga</span>
                                             <NumberFormat
                                                 value={transaction.totalPrice}
                                                 displayType={'text'}

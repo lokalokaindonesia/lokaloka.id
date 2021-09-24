@@ -45,7 +45,7 @@ const ProfileDropdown = () => {
                                 <div className='cursor-pointer w-full'>
                                     <Link href='/profile/my-account'>
                                         <div className={classNames(active ? 'bg-gray-100 text-blueGray-800' : 'text-blueGray-700', 'block w-full text-left px-4 py-2 text-sm')}>
-                                            Account
+                                            Akun
                                         </div>
                                     </Link>
                                 </div>
@@ -56,7 +56,7 @@ const ProfileDropdown = () => {
                                 <div className='cursor-pointer w-full'>
                                     <Link href='/profile/my-orders'>
                                         <div className={classNames(active ? 'bg-gray-100 text-blueGray-800' : 'text-blueGray-700', 'block w-full text-left px-4 py-2 text-sm')}>
-                                            My orders
+                                            Pesanan Saya
                                         </div>
                                     </Link>
                                 </div>
@@ -68,7 +68,7 @@ const ProfileDropdown = () => {
                                 <div className='cursor-pointer w-full'>
                                     <Link href='#'>
                                         <div className={classNames(active ? 'bg-gray-100 text-blueGray-800' : 'text-blueGray-700', 'block w-full text-left px-4 py-2 text-sm')}>
-                                            Support
+                                            Bantuan
                                         </div>
                                     </Link>
                                 </div>
@@ -82,7 +82,7 @@ const ProfileDropdown = () => {
                                     type='submit'
                                     className={classNames(active ? 'bg-gray-100 text-blueGray-800' : 'text-blueGray-700', 'block w-full text-left px-4 py-2 text-sm')}
                                 >
-                                    Sign out
+                                    Keluar
                                 </button>
                             )}
                         </Menu.Item>

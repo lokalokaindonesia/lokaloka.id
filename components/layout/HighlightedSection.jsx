@@ -15,7 +15,7 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
                     <FancySectionTitle title={sectionTitle} />
 
                     <Button href={() => router.push(`/specials/${sectionTitle.toLowerCase()}`)} type='secondary' display='flex' width='max'>
-                        <span>Show More</span>
+                        <span>Lihat semua</span>
                         <ArrowRightIcon className='h-5' />
                     </Button>
                 </div>

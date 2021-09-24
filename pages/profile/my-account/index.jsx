@@ -30,9 +30,9 @@ const index = ({ user }) => {
     }
 
     return (
-        <Layout title='Profile'>
+        <Layout title='Profil'>
             <div className='container mx-auto px-4 2xl:px-0 md:my-4 xl:my-5 2xl:my-6 flex flex-col md:space-y-4 xl:space-y-5 2xl:space-y-6'>
-                <div className='text-blueGray-800 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>My Account</div>
+                <div className='text-blueGray-800 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>Akun</div>
                 <div className='rounded-lg w-full'>
                     <div className='relative'>
                         <Image src='/images/account/member.png' className='rounded-lg shadow' layout='responsive' width={1680} height={295} priority objectFit='cover' />
@@ -61,11 +61,11 @@ const index = ({ user }) => {
                                         </div>
                                     </div>
                                     <div className='flex flex-col md:space-y-1 xl:space-y-2'>
-                                        <div className='text-sm text-blueGray-200'>Weekly Benefit</div>
+                                        <div className='text-sm text-blueGray-200'>Keuntungan</div>
                                         <div className='flex space-x-4'>
                                             <div className='rounded md:p-1 xl:p-2 bg-gradient-to-tr from-blue-500 to-indigo-500'>
                                                 <h3 className='md:text-sm lg:text-lg xl:text-xl font-bold text-white'>SELECTA20</h3>
-                                                <span className='hidden lg:block text-blueGray-200 text-xs'>Free Shipping Fee</span>
+                                                <span className='hidden lg:block text-blueGray-200 text-xs'>Gratis biaya pengiriman</span>
                                             </div>
                                         </div>
                                     </div>
@@ -84,7 +84,7 @@ const index = ({ user }) => {
                                         style={{ width: 'auto', height: 'auto' }}
                                     ></lottie-player>
                                 </div>
-                                <h2 className='md:hidden lg:block lg:text-lg xl:text-xl font-bold text-orange-500'>Gold Member</h2>
+                                <h2 className='md:hidden lg:block lg:text-lg xl:text-xl font-bold text-orange-500'>Member Gold</h2>
                             </div>
                         </div>
                     </div>
@@ -93,17 +93,16 @@ const index = ({ user }) => {
                     <div className='w-2/12'>
                         <ul className='flex flex-col space-y-2'>
                             <li className='p-2 bg-blueGray-100 rounded font-semibold text-blueGray-500'>
-                                <Link href='/profile/my-account'>My Account</Link>
+                                <Link href='/profile/my-account'>Akun</Link>
                             </li>
                             <li className='p-2 bg-blueGray-100 rounded text-blueGray-500'>
-                                <Link href='/profile/my-orders'>My Order</Link>
+                                <Link href='/profile/my-orders'>Pesanan saya</Link>
                             </li>
                         </ul>
                     </div>
                     <div className='w-10/12'>
                         <div className='w-full h-full bg-blueGray-50 border border-blueGray-200 p-4 rounded-md flex flex-col'>
-                            <span className='text-xl font-bold'>My Profile</span>
-                            <span className='text-base font-normal text-blueGray-400'>Manage your account to control, protect, and secure your credentials</span>
+                            <span className='text-xl font-bold'>Profil</span>
                             <br />
                             <hr className='border border-blueGray-200' />
                             <br />
@@ -115,7 +114,7 @@ const index = ({ user }) => {
                                             <div className='md:w-8/12 xl:w-10/12'>{user.username}</div>
                                         </div>
                                         <div className='flex items-center'>
-                                            <div className='md:w-4/12 xl:w-2/12'>Name</div>
+                                            <div className='md:w-4/12 xl:w-2/12'>Nama</div>
                                             <div className='md:w-8/12 xl:w-10/12'>
                                                 <input
                                                     type='text'
@@ -133,7 +132,7 @@ const index = ({ user }) => {
                                             <div className='md:w-8/12 xl:w-10/12'>{user.email}</div>
                                         </div>
                                         <div className='flex items-center'>
-                                            <div className='md:w-4/12 xl:w-2/12'>Phone</div>
+                                            <div className='md:w-4/12 xl:w-2/12'>Nomor Telepon</div>
                                             <div className='md:w-8/12 xl:w-10/12'>
                                                 {/* {user.phone} */}
                                                 <input
@@ -147,19 +146,19 @@ const index = ({ user }) => {
                                             </div>
                                         </div>
                                         <div className='flex items-center'>
-                                            <div className='md:w-4/12 xl:w-2/12'>Gender</div>
+                                            <div className='md:w-4/12 xl:w-2/12'>Jenis Kelamin</div>
                                             {user.gender || <div>-</div>}
                                             {user.gender && <div className='md:w-8/12 xl:w-10/12'>{user.gender.charAt(0).toUpperCase() + user.gender.substring(1)}</div>}
                                         </div>
                                         <div className='flex items-center'>
-                                            <div className='md:w-4/12 xl:w-2/12'>Date of Birth</div>
+                                            <div className='md:w-4/12 xl:w-2/12'>Tanggal Lahir</div>
                                             <div className='md:w-8/12 xl:w-10/12'>{user.dateOfBirth}</div>
                                         </div>
                                         <div className='flex items-center'>
                                             <div className='md:w-4/12 xl:w-2/12'></div>
                                             <div className='md:w-4/12 xl:w-2/12'>
                                                 <Button size='base' width='max' display='flex' type='primary' href={() => {}}>
-                                                    Update Profile
+                                                    Perbarui
                                                 </Button>
                                             </div>
                                         </div>

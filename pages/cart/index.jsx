@@ -219,7 +219,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
     // * END SET ORDER DATA AND CHECKOUT
 
     return (
-        <Layout title='Lokaloka Cart'>
+        <Layout title='Keranjang Belanja'>
             {cart.length == 0 ? (
                 <div className='container my-12 mx-auto lg:px-4 2xl:px-0 flex md:flex-col md:space-y-4 md:space-x-0 lg:flex-row items-center lg:space-x-12 lg:space-y-0 2xl:space-x-24 justify-center'>
                     <lottie-player
@@ -232,9 +232,9 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                         style={{ width: '32rem', height: '32rem' }}
                     ></lottie-player>
                     <div className='flex space-y-8 flex-col justify-center items-center'>
-                        <h1 className='text-4xl font-bold text-blueGray-800'>Your cart is empty</h1>
+                        <h1 className='text-4xl font-bold text-blueGray-800'>Ooops, Keranjangmu kosong</h1>
                         <Button size='xl' width='max' display='flex' type='primary' href={() => router.push('/')}>
-                            <span>Buy Something</span>
+                            <span>Beli sesuatu</span>
                             <ChevronRightIcon className='text-white w-7 h-7' />
                         </Button>
                     </div>
@@ -246,9 +246,9 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                             <Link href='/'>Home</Link>
                         </div>
                         <ChevronRightIcon className='w-5 h-5' />
-                        <div className='text-blueGray-800'>Cart</div>
+                        <div className='text-blueGray-800'>Keranjang</div>
                     </div>
-                    <h1 className='text-2xl font-semibold md:my-2 2xl:my-3'>Cart</h1>
+                    <h1 className='text-2xl font-semibold md:my-2 2xl:my-3'>Keranjang</h1>
                     <div className='flex flex-col md:space-y-4 2xl:space-y-8 mb-12'>
                         <div className='flex md:flex-col md:space-y-5 md:space-x-0 lg:flex-row lg:justify-between lg:space-y-0 lg:space-x-5'>
                             <div className='md:w-full lg:w-8/12 xl:w-9/12'>
@@ -354,7 +354,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                     ? 'px-3 py-2 rounded-l w-full border-2 focus:border-green-500 focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-blueGray-400'
                                                     : 'px-3 py-2 rounded-l w-full border-2 focus:border-blueGray-500 focus:border-2 focus:ring-0 border-blueGray-500 transition ease-in-out duration-300 font-bold text-blueGray-800'
                                             }
-                                            placeholder='Coupon Code'
+                                            placeholder='Kode Kupon'
                                             disabled={coupon && 'disabled'}
                                             onChange={handleCouponInput}
                                             type='text'
@@ -367,20 +367,20 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                     : 'rounded-r px-3 py-2 text-white font-bold border-2 border-blueGray-500 bg-blueGray-500'
                                             }
                                         >
-                                            Apply
+                                            Terapkan
                                         </button>
                                     </form>
                                     <hr />
                                     {/* Summary */}
                                     <div className='flex flex-col space-y-2'>
-                                        <div className='text-xl font-bold text-blueGray-800'>Summary</div>
+                                        <div className='text-xl font-bold text-blueGray-800'>Rincian</div>
                                         <div className='flex flex-col space-y-1'>
                                             <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
-                                                <span>Total Price</span>
+                                                <span>Total Harga</span>
                                                 <NumberFormat value={summaryTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                             </div>
                                             <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
-                                                <span>Total Discount</span>
+                                                <span>Total Diskon</span>
                                                 <NumberFormat value={discountTotal} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
                                             </div>
                                         </div>
@@ -394,7 +394,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                     {coupon && (
                                         <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-center'>
-                                                <span>Coupon {coupon.discount}%</span>
+                                                <span>Kupon {coupon.discount}%</span>
                                                 <button type='button' onClick={() => deleteCoupon()}>
                                                     <TrashIcon className='text-red-500 w-4 h-4' />
                                                 </button>

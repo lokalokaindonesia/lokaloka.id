@@ -174,7 +174,7 @@ const Product = ({ product, similarProducts, reviews }) => {
     }
 
     return (
-        <Layout title={product.name}>
+        <Layout title={`${product.name} - Lokaloka`}>
             <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div className='container mx-auto px-4 2xl:px-0 md:my-5 2xl:my-6'>
                 <div className='w-full flex space-x-2 items-center'>
@@ -230,7 +230,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                         <div className='h-full w-full flex-auto'>
                             <div className='flex flex-col space-y-2'>
                                 <div className='md:text-xl md:-mt-1 2xl:text-2xl 2xl:-mt-2 font-bold'>{product.name}</div>
-                                <Badge text='Recommended' color='green' />
+                                <Badge text='Rekomendasi' color='green' />
                                 <div className='my-4 flex flex-col space-y-2 items-start'>
                                     <NumberFormat
                                         value={isDiscount ? discountPrice : product.sellingPrice}
@@ -252,7 +252,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                                 value={product.discount}
                                                 displayType={'text'}
                                                 thousandSeparator={true}
-                                                suffix={'% off'}
+                                                suffix={'%'}
                                                 className='md:text-xs 2xl:text-sm font-semibold rounded px-1 py-0.5 text-red-500 bg-red-200'
                                             />
                                         </div>
@@ -261,7 +261,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                 {/* Navigation */}
                                 <div className='flex flex-col space-y-2'>
                                     <div className='flex flex-col space-y-1'>
-                                        <div className='text-sm font-semibold text-blueGray-600'>Share Me</div>
+                                        <div className='text-sm font-semibold text-blueGray-600'>Bagikan</div>
                                         <div className='flex space-x-8 items-center'>
                                             <FaInstagram className='cursor-pointer text-indigo-400 w-6 h-6' />
                                             <FaFacebookSquare className='cursor-pointer text-blue-500 w-6 h-6' />
@@ -270,7 +270,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                         </div>
                                     </div>
                                     <div className='flex flex-col space-y-1'>
-                                        <div className='text-sm font-semibold text-blueGray-600'>Quantity</div>
+                                        <div className='text-sm font-semibold text-blueGray-600'>Kuantitas</div>
                                         <div className='flex items-center border border-blueGray-300 bg-white rounded'>
                                             <div
                                                 onClick={reduceQty}
@@ -305,7 +305,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                         </div>
                     </div>
                     <div className='lg:hidden flex flex-col'>
-                        <p className='2xl:text-lg md:text-base font-semibold tracking-wide py-2 text-blueGray-600'>Description</p>
+                        <p className='2xl:text-lg md:text-base font-semibold tracking-wide py-2 text-blueGray-600'>Deskripsi</p>
                         <p className='2xl:text-base md:text-sm font-medium text-justify md:leading-relaxed'>{product.description}</p>
                     </div>
                 </div>
@@ -366,7 +366,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                                             value={product.discount}
                                             displayType={'text'}
                                             thousandSeparator={true}
-                                            suffix={'% off'}
+                                            suffix={'%'}
                                             className='md:text-xs 2xl:text-sm font-semibold rounded px-1 py-0.5 text-red-500 bg-red-200'
                                         />
                                     </div>
@@ -382,7 +382,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                     {/* Navigation */}
                     <div className='hidden lg:flex flex-col space-y-4'>
                         <div className='flex flex-col space-y-2'>
-                            <div className='text-sm font-semibold text-blueGray-600'>Share Me</div>
+                            <div className='text-sm font-semibold text-blueGray-600'>Bagikan</div>
                             <div className='flex space-x-8 items-center'>
                                 <FaInstagram className='cursor-pointer text-indigo-400 w-6 h-6' />
                                 <FaFacebookSquare className='cursor-pointer text-blue-500 w-6 h-6' />
@@ -391,7 +391,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                             </div>
                         </div>
                         <div className='flex flex-col space-y-2'>
-                            <div className='text-sm font-semibold text-blueGray-600'>Quantity</div>
+                            <div className='text-sm font-semibold text-blueGray-600'>Kuantitas</div>
                             <div className='flex items-center border border-blueGray-300 bg-white rounded'>
                                 <div
                                     onClick={reduceQty}
@@ -443,7 +443,7 @@ const Product = ({ product, similarProducts, reviews }) => {
                 )}
                 {/* Similar Products */}
                 <div className='flex flex-col space-y-4'>
-                    <FancySectionTitle title='Similar Products' />
+                    <FancySectionTitle title='Produk serupa' />
                     <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 md:gap-4 2xl:gap-8'>
                         {similarProducts
                             .map((item, index) => {

@@ -64,7 +64,7 @@ const Category = ({ category }) => {
     }
 
     return (
-        <Layout title={category.name}>
+        <Layout title={`${category.name} - Lokaloka`}>
             <div className='container mx-auto md:px-4 2xl:px-0 md:my-5 2xl:my-6'>
                 <div className='w-full flex space-x-2 items-center my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
@@ -78,7 +78,7 @@ const Category = ({ category }) => {
                 <h1 className='text-2xl font-semibold text-blueGray-800 my-3'>{category.name}</h1>
                 <div className='flex justify-between items-center'>
                     <p className='text-sm'>
-                        <span>Found {products.length} items from </span> <span className='font-semibold'>"{category.name} Category"</span>
+                        <span>{products.length} produk dari </span> <span className='font-semibold'>"Kategori {category.name}"</span>
                     </p>
                 </div>
                 <div className='flex space-x-8'>
@@ -114,7 +114,7 @@ const Category = ({ category }) => {
                             <Listbox value={price} onChange={setPrice}>
                                 {({ open }) => (
                                     <div className='flex flex-col xl:space-y-1 2xl:space-y-2'>
-                                        <Listbox.Label className='xl:text-sm 2xl:text-base block font-medium text-blueGray-800'>Sort by</Listbox.Label>
+                                        <Listbox.Label className='xl:text-sm 2xl:text-base block font-medium text-blueGray-800'>Urutkan</Listbox.Label>
                                         <div className='mt-1 relative w-full'>
                                             <Listbox.Button className='relative w-full bg-white border border-blueGray-300 rounded-md shadow-sm pl-3 pr-10 md:py-1 2xl:py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'>
                                                 <span className='flex items-center'>
@@ -184,7 +184,7 @@ const Category = ({ category }) => {
                                     </div>
                                     <div className='md:ml-2 2xl:ml-3'>
                                         <label htmlFor='recommended' className='xl:text-sm 2xl:text-base font-medium text-blueGray-800'>
-                                            Recommended
+                                            Rekomendasi
                                         </label>
                                     </div>
                                 </div>
@@ -200,7 +200,7 @@ const Category = ({ category }) => {
                                     </div>
                                     <div className='md:ml-2 2xl:ml-3'>
                                         <label htmlFor='discount' className='xl:text-sm 2xl:text-base font-medium text-blueGray-800'>
-                                            Discount
+                                            Promo
                                         </label>
                                     </div>
                                 </div>

@@ -38,7 +38,7 @@ const login = () => {
         <div className='text-blueGray-800'>
             <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <Head>
-                <title>Sign In to Give your Ex an Souvenirs 😊</title>
+                <title>Login buat beliin pacar oleh-oleh 😊</title>
             </Head>
             <div className=''>
                 <section className='flex flex-col md:flex-row h-screen items-center'>
@@ -48,19 +48,19 @@ const login = () => {
 
                     <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 lg:w-1/3 h-screen px-6 xl:px-6 lg:px-6 flex items-center justify-center'>
                         <div className='w-full h-sceen'>
-                            <h1 className='md:text-4xl lg:text-2xl 2xl:text-4xl font-bold leading-loose text-blueGray-800'>Sign In First Boy </h1>
+                            <h1 className='md:text-4xl lg:text-2xl 2xl:text-4xl font-bold leading-loose text-blueGray-800'>Login biar bisa belanja</h1>
 
                             <form className='mt-6' method='POST' onSubmit={handleSubmit}>
                                 <div>
                                     <label htmlFor='email' className='block text-gray-700'>
-                                        Email Address
+                                        Email
                                     </label>
                                     <input
                                         type='email'
                                         value={email}
                                         id='email'
                                         onChange={(e) => setEmail(e.target.value)}
-                                        placeholder='Enter Email Address'
+                                        placeholder='belanjain_teman@gmail.com'
                                         className='rounded-md w-full px-4 py-3 transition ease-in-out duration-300 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
@@ -77,7 +77,7 @@ const login = () => {
                                         value={password}
                                         id='password'
                                         onChange={(e) => setPassword(e.target.value)}
-                                        placeholder='Enter Password'
+                                        placeholder='*****'
                                         minLength={6}
                                         className='rounded-md w-full px-4 py-3 transition ease-in-out duration-300 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         required
@@ -87,13 +87,13 @@ const login = () => {
                                 <div className='text-right my-2'>
                                     <Link href='/forgot-password'>
                                         <span className='cursor-pointer text-sm font-semibold text-blue-500 transition duration-300 ease-in-out hover:text-blue-700 focus:text-blue-700'>
-                                            Forgot Password?
+                                            Lupa Password?
                                         </span>
                                     </Link>
                                 </div>
 
                                 <Button type='primary' width='full' size='ghostSize' buttonType='submit'>
-                                    Sign In
+                                    Login
                                 </Button>
                             </form>
 
@@ -105,7 +105,7 @@ const login = () => {
                                         <div className='w-5 h-5'>
                                             <Image src='/google.svg' layout='responsive' width={1} height={1} />
                                         </div>
-                                        <span className='ml-4'> Sign In with Google</span>
+                                        <span className='ml-4'> Login dengan Google</span>
                                     </div>
                                 </Button>
 
@@ -123,7 +123,7 @@ const login = () => {
                             </div>
 
                             <p className='mt-8'>
-                                Don't Have an Account? &nbsp;
+                                Belum punya akun? &nbsp;
                                 <Link href='/account/register'>
                                     <span className='cursor-pointer text-blue-500 transition duration-300 ease-in-out hover:text-blue-700 font-semibold'>Create New</span>
                                 </Link>

@@ -47,13 +47,13 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                                     value={discount}
                                     displayType={'text'}
                                     thousandSeparator={true}
-                                    suffix={'% off'}
+                                    suffix={'%'}
                                     className='text-xs font-normal px-1 rounded text-white bg-red-500'
                                 />
                             </div>
                         )}
                     </div>
-                    <div className={isRecommended ? 'px-2 py-1 bg-green-100 text-xs font-bold text-green-500 w-max rounded' : 'hidden'}>Recommended</div>
+                    <div className={isRecommended ? 'px-2 py-1 bg-green-100 text-xs font-bold text-green-500 w-max rounded' : 'hidden'}>Rekomendasi</div>
                 </div>
             </button>
         </Link>

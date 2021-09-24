@@ -28,10 +28,10 @@ const Footer = () => {
 
                     {/* 2 */}
                     <ul className='flex flex-col space-y-4'>
-                        <li className='text-xl font-bold mb-2'>Useful Links</li>
+                        <li className='text-xl font-bold mb-2'>Lokaloka</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
-                                About
+                                Tentang
                             </Link>
                         </li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
@@ -43,35 +43,35 @@ const Footer = () => {
 
                     {/* 3 */}
                     <ul className='flex flex-col space-y-4'>
-                        <li className='text-xl font-bold mb-2'>Services</li>
+                        <li className='text-xl font-bold mb-2'>Pelayanan</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
-                                Affiliate City
+                                Kota Afiliasi
                             </Link>
                         </li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
-                                Expedition
+                                Ekspedisi
                             </Link>
                         </li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <a className='underline lg:no-underline cursor-pointer' href='https://kuloaja.com' rel='noopener' target='_blank'>
-                                Courier by KULO
+                                Kurir by KULO
                             </a>
                         </li>
                     </ul>
 
                     {/* 4 */}
                     <ul className='flex flex-col space-y-4'>
-                        <li className='text-xl font-bold mb-2'>Help and Guide</li>
+                        <li className='text-xl font-bold mb-2'>Bantuan dan Panduan</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
-                                Privacy Policy
+                                Kebijakan Pribadi
                             </Link>
                         </li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
-                                Terms and Condition
+                                Syarat dan Ketentuan
                             </Link>
                         </li>
                     </ul>

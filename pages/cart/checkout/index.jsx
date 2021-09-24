@@ -17,11 +17,11 @@ import { setTransaction } from '@/redux/transactionSlice'
 const areaCollection = [
     {
         value: 'malang-batu',
-        label: 'Malang - Batu City',
+        label: 'Kota Malang - Batu',
     },
     {
         value: 'anotherCity',
-        label: 'Another City',
+        label: 'Kota Lainnya',
     },
 ]
 
@@ -428,7 +428,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     }
 
     return (
-        <Layout title='Checkout'>
+        <Layout title='Pembayaran'>
             {openModalConfirmation && (
                 <div className='fixed z-50 inset-0 overflow-y-auto text-blueGray-800' aria-labelledby='modal-title' role='dialog' aria-modal='true'>
                     <div className='flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
@@ -446,12 +446,12 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     </div>
                                     <div className='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
                                         <h3 className='text-lg leading-none font-medium text-blueGray-800' id='modal-title'>
-                                            Order confirmation
+                                            Konfirmasi pesanan
                                         </h3>
                                         <div className='mt-2 flex flex-col space-y-2'>
-                                            <p className='text-sm text-gray-500'>Confirm order with the following details?</p>
+                                            <p className='text-sm text-gray-500'>Pesanan yang kamu inginkan sudah sesuai?</p>
                                             <br />
-                                            <div className='font-medium tracking-wide text-sm text-blueGray-500'>Products</div>
+                                            <div className='font-medium tracking-wide text-sm text-blueGray-500'>Produk</div>
                                             {orderData[0].products.map((product, index) => {
                                                 return (
                                                     <div className='flex justify-between space-x-2 ' key={index}>
@@ -476,7 +476,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 <NumberFormat className='font-bold ' value={orderData[0].subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                             </div>
                                             <div className='flex justify-between space-x-4 font-medium'>
-                                                <span className='truncate font-bold w-1/2'>Discount</span>
+                                                <span className='truncate font-bold w-1/2'>Diskon</span>
                                                 <NumberFormat
                                                     className='font-bold text-red-500'
                                                     value={orderData[0].discount}
@@ -494,7 +494,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         <br />
                                         <div className='flex flex-col space-y-2'>
                                             <div>
-                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Location</div>
+                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Lokasi</div>
                                                 {area != 'anotherCity' ? (
                                                     <>
                                                         <div className='font-medium text-blueGray-800'>{`${location}`}</div>
@@ -508,11 +508,11 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 )}
                                             </div>
                                             <div>
-                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Payment Method</div>
+                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Metode Pembayaran</div>
                                                 <div className='font-medium text-blueGray-800'>{`${choosenPaymentMethod.replace('ID_', '')} ${ovoNumber}`}</div>
                                             </div>
                                             <div>
-                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Notes</div>
+                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Catatan</div>
                                                 <div className='font-medium text-blueGray-800'>{`${note}`}</div>
                                             </div>
                                         </div>
@@ -527,7 +527,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     }}
                                     className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm'
                                 >
-                                    Confirm
+                                    Bayar
                                 </button>
                                 <button
                                     type='button'
@@ -536,7 +536,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     }}
                                     className='mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
                                 >
-                                    Check order
+                                    Batal
                                 </button>
                             </div>
                         </div>
@@ -550,18 +550,18 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
                     <div className='text-blue-700 hover:text-blue-800'>
-                        <Link href='/cart'>Cart</Link>
+                        <Link href='/cart'>Keranjang</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
                     <div className='text-blueGray-800'>Checkout</div>
                 </div>
-                <h1 className='text-2xl font-semibold md:my-2 2xl:my-3'>Payment</h1>
+                <h1 className='text-2xl font-semibold md:my-2 2xl:my-3'>Pembayaran</h1>
                 <div className='flex flex-col space-y-8 mb-12'>
                     <div className='flex md:flex-col md:space-y-4 md:space-x-0 lg:flex-row lg:justify-between lg:space-y-0 lg:space-x-5'>
                         <div className='w-full lg:w-9/12'>
                             <div className='flex flex-col space-y-4'>
                                 <div className='p-4 border border-blueGray-200 bg-white text-blueGray-800 rounded-md drop-shadow-sm'>
-                                    <h2 className='text-lg font-semibold mb-3'>Shipping Information</h2>
+                                    <h2 className='text-lg font-semibold mb-3'>Informasi Pengiriman</h2>
                                     <div className='flex flex-col space-y-4'>
                                         {/* Area */}
                                         <div className='flex flex-col space-y-1'>
@@ -594,7 +594,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             <>
                                                 <div className='flex space-x-4 items-center'>
                                                     <div className='flex flex-col flex-initial space-y-1'>
-                                                        <label htmlFor='location'>Location</label>
+                                                        <label htmlFor='location'>Lokasi</label>
                                                         <input
                                                             type='text'
                                                             name='location'
@@ -602,11 +602,11 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             onChange={handleLocation}
                                                             required
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
-                                                            placeholder='Massachusetts Institute of Technology'
+                                                            placeholder='Fakultas Kedokteran ITB'
                                                         />
                                                     </div>
                                                     <div className='flex flex-col flex-1 space-y-1'>
-                                                        <label htmlFor='address'>Address</label>
+                                                        <label htmlFor='address'>Alamat</label>
                                                         <input
                                                             type='text'
                                                             onChange={handleAddress}
@@ -614,17 +614,17 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             required
                                                             id='address'
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
-                                                            placeholder='77 Massachusetts Ave, Cambridge, MA 02139, United States'
+                                                            placeholder='Jl. Ganesa No.10, Lb. Siliwangi, Kecamatan Coblong, Kota Bandung, Jawa Barat 40132'
                                                         />
                                                     </div>
                                                 </div>
                                                 <div className='flex flex-col space-y-1'>
-                                                    <label htmlFor='notes'>Notes</label>
+                                                    <label htmlFor='notes'>Catatan</label>
                                                     <textarea
                                                         name='notes'
                                                         id='notes'
                                                         onChange={handleNote}
-                                                        placeholder='Notes'
+                                                        placeholder=''
                                                         className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
                                                     ></textarea>
                                                 </div>
@@ -634,7 +634,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             <>
                                                 <div className='flex space-x-4 items-center'>
                                                     <div className='flex flex-col flex-1 space-y-1'>
-                                                        <label htmlFor='address'>Address</label>
+                                                        <label htmlFor='address'>Alamat</label>
                                                         <input
                                                             type='text'
                                                             name='address'
@@ -642,18 +642,18 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             required
                                                             id='address'
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
-                                                            placeholder='77 Massachusetts Ave, Cambridge, MA 02139, United States'
+                                                            placeholder='Jl. Ganesa No.10, Lb. Siliwangi, Kecamatan Coblong, Kota Bandung, Jawa Barat 40132'
                                                         />
                                                     </div>
                                                 </div>
                                                 <div className='flex space-x-4 items-center'>
                                                     <div className='flex flex-col flex-1 space-y-1'>
-                                                        <label htmlFor='city'>City</label>
+                                                        <label htmlFor='city'>Kota</label>
                                                         <button
                                                             onClick={() => setCityToggle(!cityToggle)}
                                                             className='rounded-md border flex items-center justify-between text-sm px-2 text-blueGray-500 w-full py-2 border-blueGray-200'
                                                         >
-                                                            <span>{city ? city.type + ' ' + city.city_name : 'Select City'}</span>
+                                                            <span>{city ? city.type + ' ' + city.city_name : 'Pilih Kota'}</span>
                                                             <span>
                                                                 <SelectorIcon className='w-4 h-4 text-blueGray-500' />
                                                             </span>
@@ -677,7 +677,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                                 id='city'
                                                                                 onChange={handleCityInput}
                                                                                 className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border border-blueGray-200'
-                                                                                placeholder='Massachusetts'
+                                                                                placeholder='Cari Kota...'
                                                                             />
                                                                         </div>
                                                                         {filteredCity.map((c) => {
@@ -705,7 +705,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                         )}
                                                     </div>
                                                     <div className='flex flex-col flex-1 space-y-1'>
-                                                        <label htmlFor='province'>Province</label>
+                                                        <label htmlFor='province'>Provinsi</label>
                                                         <input
                                                             type='text'
                                                             name='province'
@@ -714,11 +714,11 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             id='province'
                                                             required
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
-                                                            placeholder='Massachusetts'
+                                                            placeholder='Jawa Barat'
                                                         />
                                                     </div>
                                                     <div className='flex flex-col flex-1 space-y-1'>
-                                                        <label htmlFor='postalCode'>Postal Code</label>
+                                                        <label htmlFor='postalCode'>Kode Pos</label>
                                                         <input
                                                             type='text'
                                                             name='postalCode'
@@ -726,17 +726,16 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             onChange={handlePostalCode}
                                                             required
                                                             className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
-                                                            placeholder='MA 02139'
+                                                            placeholder='64983'
                                                         />
                                                     </div>
                                                 </div>
                                                 <div className='flex flex-col space-y-1'>
-                                                    <label htmlFor='notes'>Notes</label>
+                                                    <label htmlFor='notes'>Catatan</label>
                                                     <textarea
                                                         name='notes'
                                                         onChange={handleNote}
                                                         id='notes'
-                                                        placeholder='Notes'
                                                         className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
                                                     ></textarea>
                                                 </div>
@@ -745,10 +744,10 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     </div>
                                 </div>
                                 <div className='p-4 border border-blueGray-200 bg-white text-blueGray-800 rounded-md drop-shadow-sm'>
-                                    <h2 className='text-lg font-semibold mb-3'>Payment Methods</h2>
+                                    <h2 className='text-lg font-semibold mb-3'>Metode Pembayaran</h2>
                                     <div className='flex flex-col md:space-y-2 2xl:space-y-4 font-semibold text-blueGray-500'>
                                         <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-semibold'>Virtual Accounts</h3>
+                                            <h3 className='text-semibold'>Virtual Account</h3>
                                             <div className='flex space-x-4 items-center'>
                                                 {paymentMethodCollection
                                                     .filter((pm) => pm.type == 'va')
@@ -783,7 +782,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             </div>
                                         </div>
                                         <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-semibold'>E-Wallets</h3>
+                                            <h3 className='text-semibold'>E-Wallet</h3>
                                             <div className='flex space-x-4 items-center'>
                                                 {paymentMethodCollection
                                                     .filter((pm) => pm.type == 'ewallet')
@@ -819,7 +818,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         </div>
 
                                         <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-semibold'>QRCodes</h3>
+                                            <h3 className='text-semibold'>QRCode</h3>
                                             <div className='flex space-x-4 items-center'>
                                                 {paymentMethodCollection
                                                     .filter((pm) => pm.type == 'qrcode')
@@ -908,7 +907,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                             <div className='sticky top-28 p-4 bg-white border drop-shadow-sm border-blueGray-200 h-auto rounded-md flex flex-col space-y-4'>
                                 {/* Summary */}
                                 <div className='flex flex-col space-y-2'>
-                                    <div className='lg:text-base 2xl:text-xl font-bold text-blueGray-800'>Summary</div>
+                                    <div className='lg:text-base 2xl:text-xl font-bold text-blueGray-800'>Rincian</div>
                                     <div className='flex flex-col space-y-1'>
                                         <div className='lg:text-sm 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <span>Total ({order.totalQuantity})</span>
@@ -916,7 +915,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         </div>
                                         <div className='lg:text-sm 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-baseline'>
-                                                <span>Shipping</span>
+                                                <span>Pengiriman</span>
                                                 {/* {shippingEtd && <span className='text-blueGray-400 lg:text-sm 2xl:text-sm'>{`(Etd ${shippingEtd} Days via JNE)`}</span>} */}
                                             </div>
                                             <NumberFormat value={shippingCost} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
@@ -939,7 +938,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                 {choosenPaymentMethod == 'ID_OVO' ? (
                                     <div className='flex flex-col space-y-1'>
                                         <label htmlFor='ovo_number' className='block text-sm font-medium text-blueGray-500'>
-                                            OVO Number
+                                            Nomor OVO
                                         </label>
                                         <div className='mt-1 flex rounded-md shadow-sm'>
                                             <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-blueGray-300 bg-blueGray-50 text-blueGray-500 text-sm'>
@@ -961,7 +960,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                 )}
                                 {/* Checkout Button */}
                                 <Button href={() => openModal()} type='primary' size='lg' width='full' display='flex'>
-                                    <span>Pay</span>
+                                    <span>Bayar</span>
                                     <FaWallet className='w-6' />
                                 </Button>
                             </div>

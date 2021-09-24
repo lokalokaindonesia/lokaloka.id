@@ -26,6 +26,7 @@ const Header = () => {
     const [cartLength, setCartLength] = useState(0)
     const [openFavorite, setOpenFavorite] = useState(false)
     const [inputText, setInputText] = useState('')
+    const [productCategory, setProductCategory] = useState([])
 
     useEffect(async () => {
         const getCart = await axios.get(`/api/cart`)
@@ -38,6 +39,11 @@ const Header = () => {
 
         const getProds = await axios.get(`/api/products`)
         const prods = await getProds.data
+
+        const getProductCategory = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/product-categories`)
+        const productCategories = await getProductCategory.data
+
+        setProductCategory(productCategories)
 
         const z = []
         const filtered = await userData.favorites.forEach((f) => {
@@ -110,18 +116,19 @@ const Header = () => {
 
             <div className='w-2/12 text-2xl font-extrabold text-blue-500 tracking-wide'>
                 <Link href='/'>
-                    <button type='button' name='home' aria-label='Home'>
+                    LOKALOKA
+                    {/* <button type='button' name='home' aria-label='Home'>
                         <ColorSwatchIcon className='cursor-pointer h-10 w-10 text-blue-800' />
-                    </button>
+                    </button> */}
                 </Link>
             </div>
 
             <div className='w-8/12 flex justify-center '>
                 <div className='hidden md:flex md:space-x-3 lg:space-x-4 xl:space-x-8 flex-initial font-medium text-blueGray-600'>
                     <HeaderActiveLink href='/'>Home</HeaderActiveLink>
-                    <HeaderActiveLink href='/food-and-beverage'>Food & Beverages</HeaderActiveLink>
-                    <HeaderActiveLink href='/craft'>Craft</HeaderActiveLink>
-                    <HeaderActiveLink href='/fashion'>Fashion</HeaderActiveLink>
+                    {productCategory.map((pc) => {
+                        return <HeaderActiveLink href={`/${pc.slug}`}>{pc.name}</HeaderActiveLink>
+                    })}
                 </div>
                 <input type='text' className='block md:hidden px-3 py-2 border border-gray-400 focus:outline-none text-blueGray-600 bg-blueGray-200 w-full' />
             </div>
@@ -191,9 +198,9 @@ const Header = () => {
                                 )
                             })
                             .splice(0, 3)}
-                        {favorite.length == 0 && <div className='w-full flex p-6'>No favorites here, Get Now!</div>}
+                        {favorite.length == 0 && <div className='w-full flex p-6'>Tidak ada produk favorit</div>}
                         <Link href='/profile/favorites'>
-                            <div className='w-full text-sm cursor-pointer text-blue-400 text-center'>View All</div>
+                            <div className='w-full text-sm cursor-pointer text-blue-400 text-center'>Lihat semua</div>
                         </Link>
                     </div>
                 </div>
