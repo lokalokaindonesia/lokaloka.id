@@ -152,8 +152,8 @@ const index = ({ user, session }) => {
                                     <div className='flex space-x-2 w-full items-center'>
                                         <span
                                             className={`text-xs px-2 py-1 rounded w-max text-white ${
-                                                (transaction.paymentStatus == 'PENDING' && 'bg-red-400') || (transaction.paymentStatus == 'ACTIVE' && 'bg-red-400')
-                                            } ${
+                                                (transaction.paymentStatus == 'FAILED' && 'bg-red-500') || (transaction.paymentStatus == 'EXPIRED' && 'bg-red-500')
+                                            } ${(transaction.paymentStatus == 'PENDING' && 'bg-orange-400') || (transaction.paymentStatus == 'ACTIVE' && 'bg-orange-400')} ${
                                                 (transaction.paymentStatus == 'SUCCESS' && 'bg-green-400') ||
                                                 (transaction.paymentStatus == 'SUCCEEDED' && 'bg-green-400') ||
                                                 (transaction.paymentStatus == 'COMPLETED' && 'bg-green-400') ||
@@ -165,7 +165,9 @@ const index = ({ user, session }) => {
                                                 (transaction.paymentStatus == 'COMPLETED' && 'LUNAS') ||
                                                 (transaction.paymentStatus == 'PAID' && 'LUNAS') ||
                                                 (transaction.paymentStatus == 'PENDING' && 'MENUNGGU PEMBAYARAN') ||
-                                                (transaction.paymentStatus == 'ACTIVE' && 'MENUNGGU PEMBAYARAN')}
+                                                (transaction.paymentStatus == 'ACTIVE' && 'MENUNGGU PEMBAYARAN') ||
+                                                (transaction.paymentStatus == 'EXPIRED' && 'KADALUARSA') ||
+                                                (transaction.paymentStatus == 'FAILED' && 'GAGAL')}
                                         </span>
                                         <p className={`text-base p-2 rounded w-max text-blueGray-800 font-bold`}>{transaction.paymentMethod.toUpperCase().replace('ID_', '')}</p>
                                     </div>
