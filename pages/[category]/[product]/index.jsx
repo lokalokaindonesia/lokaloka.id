@@ -433,7 +433,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className='sticky bottom-6 bg-white py-4 flex flex-col space-y-1 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
+                        <div className='sticky bottom-10 bg-white py-4 flex flex-col space-y-1 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
                             <div className='flex flex-col space-y-1'>
                                 <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
                                 <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='md:text-xl 2xl:text-2xl font-extrabold' />

@@ -163,6 +163,7 @@ const Header = () => {
                     </button>
                 </Link>
                 <ProfileDropdown />
+                {/* ! TODO: Configure dropdown hamburger menu */}
                 <MobileDropdown />
             </div>
             {openFavorite && (
