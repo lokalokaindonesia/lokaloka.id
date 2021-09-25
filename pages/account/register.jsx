@@ -45,17 +45,17 @@ const register = () => {
             <Head>
                 <title>Daftar akun baru - Lokaloka.id 😊</title>
             </Head>
-            <div className=''>
+            <div className='py-24 md:py-0'>
                 <section className='flex flex-col md:flex-row h-screen items-center'>
                     <div className='bg-indigo-600 hidden lg:block w-full md:w-1/2 lg:w-2/3 h-screen'>
                         <img src='https://source.unsplash.com/collection/1808212' className='object-cover w-full h-full' />
                     </div>
 
-                    <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 lg:w-1/3 h-screen px-6 xl:px-6 lg:px-6 flex items-center justify-center overflow-y-scroll lg:py-6'>
+                    <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 lg:w-1/3 h-screen px-4 md:px-6 xl:px-6 lg:px-6 flex items-center justify-center md:overflow-y-auto lg:py-6'>
                         <div className='w-full h-auto'>
-                            <h1 className='pt-12 md:text-4xl lg:text-2xl 2xl:text-4xl font-bold leading-loose'>Daftarkan dirimu, baru belanja</h1>
+                            <h1 className='pt-12 text-2xl md:text-4xl lg:text-2xl 2xl:text-4xl font-bold leading-tight md:leading-loose'>Daftarkan dirimu, baru belanja</h1>
 
-                            <form className='mt-6' method='POST' onSubmit={() => handleSubmit(event)}>
+                            <form method='POST' className='flex flex-col space-y-4 mt-6' onSubmit={() => handleSubmit(event)}>
                                 <div>
                                     <label htmlFor='username' className='block text-gray-700'>
                                         Username
@@ -66,14 +66,14 @@ const register = () => {
                                         id='username'
                                         onChange={(e) => setUsername(e.target.value)}
                                         placeholder='sukaJajan_99'
-                                        className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full text-sm md:text-base px-2 py-2 md:px-4 md:py-3 transition duration-300 ease-in-out bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
                                         required
                                     />
                                 </div>
 
-                                <div className='mt-4'>
+                                <div className=''>
                                     <label htmlFor='name' className='block text-gray-700'>
                                         Nama
                                     </label>
@@ -83,14 +83,14 @@ const register = () => {
                                         id='name'
                                         onChange={(e) => setName(e.target.value)}
                                         placeholder='Nama Lengkap'
-                                        className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
                                         required
                                     />
                                 </div>
 
-                                <div className='mt-4'>
+                                <div className=''>
                                     <label htmlFor='email' className='block text-gray-700'>
                                         Email
                                     </label>
@@ -100,14 +100,14 @@ const register = () => {
                                         id='email'
                                         onChange={(e) => setEmail(e.target.value)}
                                         placeholder='jajanin_pacar@gmail.com'
-                                        className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
                                         required
                                     />
                                 </div>
 
-                                <div className='mt-4'>
+                                <div className=''>
                                     <label htmlFor='password' className='block text-gray-700'>
                                         Password
                                     </label>
@@ -118,12 +118,12 @@ const register = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                         placeholder='****'
                                         minLength={6}
-                                        className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         required
                                     />
                                 </div>
 
-                                <div className='mt-4'>
+                                <div className=''>
                                     <label htmlFor='password-confirm' className='block text-gray-700'>
                                         Konfirmasi Password
                                     </label>
@@ -134,14 +134,14 @@ const register = () => {
                                         onChange={(e) => setPasswordConfirm(e.target.value)}
                                         placeholder='****'
                                         minLength={6}
-                                        className='rounded-md w-full px-4 transition duration-300 ease-in-out py-3  bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         required
                                     />
                                 </div>
 
                                 <button
                                     type='submit'
-                                    className='rounded-md w-full block bg-blue-500 transition duration-300 ease-in-out hover:bg-blue-600 focus:bg-blue-600 text-white font-semibold  px-4 py-3 mt-6'
+                                    className='rounded-md w-full text-sm md:text-base block bg-blue-500 transition duration-300 ease-in-out hover:bg-blue-600 focus:bg-blue-600 text-white font-semibold px-2 py-2 md:px-4 md:py-3 '
                                 >
                                     Mendaftar
                                 </button>
@@ -152,7 +152,7 @@ const register = () => {
                             <button
                                 type='button'
                                 onClick={() => signIn('google', { callbackUrl: process.env.NEXTAUTH_URL })}
-                                className='rounded-md w-full block bg-white transition duration-300 ease-in-out hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold  px-4 py-3 border border-gray-300'
+                                className='rounded-md w-full block bg-white transition duration-300 ease-in-out hover:bg-gray-100 focus:bg-gray-100 text-gray-900 font-semibold px-2 py-2 text-sm md:text-base md:px-4 md:py-3 border border-gray-300'
                             >
                                 <div className='flex items-center justify-center'>
                                     <div className='w-5 h-5'>

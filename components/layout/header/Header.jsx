@@ -152,8 +152,8 @@ const Header = () => {
                     )}
                 </button>
                 <Link href='/cart'>
-                    <button className='relative hidden md:block' type='button' name='cart' aria-label='Cart'>
-                        <ShoppingCartIcon className='hidden md:block h-6 w-6 text-blueGray-600 cursor-pointer' />
+                    <button className='relative ' type='button' name='cart' aria-label='Cart'>
+                        <ShoppingCartIcon className=' h-6 w-6 text-blueGray-600 cursor-pointer' />
                         {cartLength > 0 && (
                             <span className='hidden md:flex h-3 w-3 absolute top-0 right-0'>
                                 <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
