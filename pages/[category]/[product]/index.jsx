@@ -203,7 +203,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                         <div className='line-clamp-1'>{product.name}</div>
                     </div>
                 </div>
-
+                {/* Tablet Only */}
                 <div className='hidden md:flex md:flex-col md:space-y-4 md:justify-start lg:hidden md:my-5'>
                     {/* Images */}
                     <div className='lg:hidden flex space-x-4'>
@@ -332,6 +332,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
                 </div>
 
+                {/* Mobile and Desktop */}
                 <div className='flex flex-col space-y-2 md:hidden lg:flex lg:flex-row lg:justify-start lg:space-x-6 my-4 md:my-5 2xl:my-6 2xl:space-x-8'>
                     <div className='block md:hidden lg:block w-auto'>
                         <div className='flex justify-end absolute w-96 z-30 items-start px-4 py-4'>
@@ -344,7 +345,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 <FaHeart className={`${isFavorited ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
                             </div>
                         </div>
-                        <div className='flex justify-between w-96 lg:w-96 lg:h-96 absolute'>
+                        <div className='flex justify-between w-[92%] lg:w-96 lg:h-96 absolute'>
                             {product.images.map((img, index) => {
                                 return (
                                     <div key={index} className={index === current ? 'block w-full h-full ease-in-out duration-300 transition-all select-none' : 'block md:hidden'}>
@@ -433,7 +434,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className='sticky bottom-10 bg-white py-4 flex flex-col space-y-1 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
+                        <div className='sticky bottom-4 bg-blueGray-50 py-4 flex flex-col space-y-1 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
                             <div className='flex flex-col space-y-1'>
                                 <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
                                 <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='md:text-xl 2xl:text-2xl font-extrabold' />
