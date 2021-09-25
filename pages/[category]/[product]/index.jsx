@@ -190,7 +190,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
         <Layout title={`${product.name} - Lokaloka`}>
             <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div className='container mx-auto px-4 2xl:px-0 md:my-5 2xl:my-6'>
-                <div className='w-full flex space-x-2 items-center'>
+                <div className='w-full hidden md:text-sm md:space-x-1 md:flex space-x-2 items-center'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
                     </div>
@@ -200,11 +200,11 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
                     <div>
-                        <div>{product.name}</div>
+                        <div className='line-clamp-1'>{product.name}</div>
                     </div>
                 </div>
 
-                <div className='flex md:flex-col md:space-y-4 md:justify-start lg:hidden md:my-5'>
+                <div className='hidden md:flex md:flex-col md:space-y-4 md:justify-start lg:hidden md:my-5'>
                     {/* Images */}
                     <div className='lg:hidden flex space-x-4'>
                         <div className='w-auto'>
@@ -277,12 +277,12 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                         <div className='text-sm font-semibold text-blueGray-600'>Bagikan</div>
                                         <div className='flex space-x-8 items-center'>
                                             <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} target='_blank' rel='noopener noreferrer'>
-                                                <FaFacebookSquare className='cursor-pointer text-blue-500 w-6 h-6' />
+                                                <FaFacebookSquare className='cursor-pointer text-blue-500 w-5 h-5 lg:w-6 lg:h-6' />
                                             </a>
                                             <a href={`whatsapp://send?text=${shareLink}`} target='_blank' rel='noopener noreferrer'>
-                                                <FaWhatsapp className='cursor-pointer text-green-500 w-6 h-6' />
+                                                <FaWhatsapp className='cursor-pointer text-green-500 w-5 h-5 lg:w-6 lg:h-6' />
                                             </a>
-                                            <LinkIcon onClick={() => navigator.clipboard.writeText(shareLink)} className='cursor-pointer w-6 h-6' />
+                                            <LinkIcon onClick={() => navigator.clipboard.writeText(shareLink)} className='cursor-pointer w-5 h-5 lg:w-6 lg:h-6' />
                                         </div>
                                     </div>
                                     <div className='flex flex-col space-y-1'>
@@ -315,11 +315,11 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                     </div>
                                     {addToCartLoading ? (
                                         <Button type='secondary' displayType='flex' size='lg' width='full' href={() => {}}>
-                                            Menambahkan...
+                                            <span className=''>Menambahkan...</span>
                                         </Button>
                                     ) : (
                                         <Button type='primary' displayType='flex' size='lg' width='full' href={() => addToCart()}>
-                                            <span>Tambah Keranjang</span>
+                                            <span className=''>Tambah Keranjang</span>
                                         </Button>
                                     )}
                                 </div>
@@ -332,8 +332,8 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
                 </div>
 
-                <div className='hidden lg:flex lg:flex-row lg:justify-start lg:space-x-6 md:my-5 2xl:my-6 2xl:space-x-8'>
-                    <div className='hidden lg:block w-auto'>
+                <div className='flex flex-col space-y-2 md:hidden lg:flex lg:flex-row lg:justify-start lg:space-x-6 my-4 md:my-5 2xl:my-6 2xl:space-x-8'>
+                    <div className='block md:hidden lg:block w-auto'>
                         <div className='flex justify-end absolute w-96 z-30 items-start px-4 py-4'>
                             <div
                                 className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50'
@@ -344,10 +344,10 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 <FaHeart className={`${isFavorited ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
                             </div>
                         </div>
-                        <div className='flex justify-between md:w-96 lg:w-96 lg:h-96 absolute'>
+                        <div className='flex justify-between w-96 lg:w-96 lg:h-96 absolute'>
                             {product.images.map((img, index) => {
                                 return (
-                                    <div key={index} className={index === current ? 'block w-full h-full ease-in-out duration-300 transition-all select-none' : 'hidden'}>
+                                    <div key={index} className={index === current ? 'block w-full h-full ease-in-out duration-300 transition-all select-none' : 'block md:hidden'}>
                                         <Image alt={product.name} src={img.url} className='rounded-lg' layout='responsive' width={1} height={1} objectFit='cover' />
                                     </div>
                                 )
@@ -363,17 +363,17 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
 
                     {/* Product Details */}
-                    <div className='hidden lg:block h-full w-full flex-auto'>
-                        <div className='flex flex-col space-y-2'>
-                            <div className='md:text-xl md:-mt-1 2xl:text-2xl 2xl:-mt-2 font-bold'>{product.name}</div>
-                            <Badge text='Recommended' color='green' />
+                    <div className='block md:hidden lg:block h-full w-full flex-auto'>
+                        <div className='flex flex-col space-y-2 md:space-y-2'>
+                            <div className='text-lg md:text-xl md:-mt-1 2xl:text-2xl 2xl:-mt-2 font-bold'>{product.name}</div>
+                            <Badge text='Rekomendasi' color='green' />
                             <div className='my-4 flex flex-col space-y-2 items-start'>
                                 <NumberFormat
                                     value={isDiscount ? discountPrice : product.sellingPrice}
                                     displayType={'text'}
                                     thousandSeparator={true}
                                     prefix={'Rp. '}
-                                    className='md:text-2xl 2xl:text-3xl font-extrabold text-orange-500'
+                                    className='text-lg md:text-2xl 2xl:text-3xl font-extrabold text-orange-500'
                                 />
                                 {isDiscount && (
                                     <div className='flex space-x-2 items-center'>
@@ -382,40 +382,40 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'Rp. '}
-                                            className='md:text-sm 2xl:text-base font-semibold line-through text-blueGray-500'
+                                            className='text-sm md:text-sm 2xl:text-base font-semibold line-through text-blueGray-500'
                                         />
                                         <NumberFormat
                                             value={product.discount}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             suffix={'%'}
-                                            className='md:text-xs 2xl:text-sm font-semibold rounded px-1 py-0.5 text-red-500 bg-red-200'
+                                            className='text-xs 2xl:text-sm font-semibold rounded px-1 py-0.5 text-red-500 bg-red-200'
                                         />
                                     </div>
                                 )}
                             </div>
                             <div className='flex flex-col'>
-                                <p className='2xl:text-lg md:text-base font-semibold tracking-wide py-2 text-blueGray-600'>Description</p>
-                                <p className='2xl:text-base md:text-sm font-medium text-justify md:leading-relaxed'>{product.description}</p>
+                                <div className='2xl:text-lg md:text-base text-sm font-semibold tracking-wide py-2 text-blueGray-600'>Description</div>
+                                <div className='2xl:text-base md:text-sm text-xs font-medium text-justify md:leading-relaxed'>{product.description}</div>
                             </div>
                         </div>
                     </div>
 
                     {/* Navigation */}
-                    <div className='hidden lg:w-4/12 lg:flex lg:flex-col lg:space-y-4'>
-                        <div className='flex flex-col space-y-2'>
+                    <div className='block md:hidden lg:w-4/12 lg:flex lg:flex-col space-y-2 md:space-y-4'>
+                        <div className='flex flex-col space-y-1 md:space-y-2'>
                             <div className='text-sm font-semibold text-blueGray-600'>Bagikan</div>
                             <div className='flex space-x-8 items-center'>
                                 <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} target='_blank' rel='noopener noreferrer'>
-                                    <FaFacebookSquare className='cursor-pointer text-blue-500 w-6 h-6' />
+                                    <FaFacebookSquare className='cursor-pointer text-blue-500 w-5 h-5 lg:w-6 lg:h-6' />
                                 </a>
                                 <a href={`whatsapp://send?text=${shareLink}`} target='_blank' rel='noopener noreferrer'>
-                                    <FaWhatsapp className='cursor-pointer text-green-500 w-6 h-6' />
+                                    <FaWhatsapp className='cursor-pointer text-green-500 w-5 h-5 lg:w-6 lg:h-6' />
                                 </a>
-                                <LinkIcon onClick={() => navigator.clipboard.writeText(shareLink)} className='cursor-pointer w-6 h-6' />
+                                <LinkIcon onClick={() => navigator.clipboard.writeText(shareLink)} className='cursor-pointer w-5 h-5 lg:w-6 lg:h-6' />
                             </div>
                         </div>
-                        <div className='flex flex-col space-y-2'>
+                        <div className='flex flex-col space-y-1 md:space-y-2'>
                             <div className='text-sm font-semibold text-blueGray-600'>Kuantitas</div>
                             <div className='flex items-center border border-blueGray-300 bg-white rounded'>
                                 <div
@@ -433,19 +433,34 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className='flex flex-col space-y-2'>
-                            <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
-                            <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='md:text-xl 2xl:text-2xl font-extrabold' />
+                        <div className='sticky bottom-6 bg-white py-4 flex flex-col space-y-1 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
+                            <div className='flex flex-col space-y-1'>
+                                <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
+                                <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='md:text-xl 2xl:text-2xl font-extrabold' />
+                            </div>
+                            <div className='hidden md:flex'>
+                                {addToCartLoading ? (
+                                    <Button type='secondary' displayType='flex' size='base' width='full' href={() => {}}>
+                                        <span className='text-sm'>Menambahkan...</span>
+                                    </Button>
+                                ) : (
+                                    <Button type='primary' displayType='flex' size='base' width='full' href={() => addToCart()}>
+                                        <span className='text-sm'>Tambah Keranjang</span>
+                                    </Button>
+                                )}
+                            </div>
+                            <div className='flex md:hidden'>
+                                {addToCartLoading ? (
+                                    <Button type='secondary' displayType='flex' size='base' width='full' href={() => {}}>
+                                        <span className='text-sm'>Menambahkan...</span>
+                                    </Button>
+                                ) : (
+                                    <Button type='primary' displayType='flex' size='base' width='full' href={() => addToCart()}>
+                                        <span className='text-sm'>Tambah Keranjang</span>
+                                    </Button>
+                                )}
+                            </div>
                         </div>
-                        {addToCartLoading ? (
-                            <Button type='secondary' displayType='flex' size='lg' width='full' href={() => {}}>
-                                Menambahkan...
-                            </Button>
-                        ) : (
-                            <Button type='primary' displayType='flex' size='lg' width='full' href={() => addToCart()}>
-                                <span>Tambah Keranjang</span>
-                            </Button>
-                        )}
                     </div>
                 </div>
 
@@ -475,7 +490,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                 {/* Similar Products */}
                 <div className='flex flex-col space-y-4'>
                     <FancySectionTitle title='Produk serupa' />
-                    <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 md:gap-4 2xl:gap-8'>
+                    <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 2xl:gap-8'>
                         {similarProducts
                             .map((item, index) => {
                                 return (

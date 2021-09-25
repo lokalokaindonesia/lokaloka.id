@@ -445,7 +445,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     return (
         <Layout title='Pembayaran'>
             {openModalConfirmation && (
-                <div className='fixed z-50 inset-0 overflow-y-auto text-blueGray-800' aria-labelledby='modal-title' role='dialog' aria-modal='true'>
+                <div className='fixed z-50 inset-0 overflow-y-auto ' aria-labelledby='modal-title' role='dialog' aria-modal='true'>
                     <div className='flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
                         <div className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity' aria-hidden='true'></div>
 
@@ -453,23 +453,23 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                             &#8203;
                         </span>
 
-                        <div className='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full 2xl:w-full 2xl:max-w-4xl'>
+                        <div className='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all my-8 md:align-middle max-w-2xl w-full 2xl:w-full 2xl:max-w-4xl'>
                             <div className='bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4'>
                                 <div className='sm:flex sm:items-start'>
-                                    <div className='mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 sm:mx-0 sm:h-10 sm:w-10'>
+                                    <div className='hidden mx-auto flex-shrink-0 md:flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 sm:mx-0 sm:h-10 sm:w-10'>
                                         <ExclamationIcon className='w-7 h-7 text-orange-500' />
                                     </div>
-                                    <div className='mt-3 w-full text-center sm:mt-0 sm:ml-4 sm:text-left'>
-                                        <h3 className='text-lg leading-none font-medium text-blueGray-800' id='modal-title'>
+                                    <div className='w-full text-left md:text-center sm:mt-0 sm:ml-4 sm:text-left'>
+                                        <h3 className='text-base md:text-lg leading-none font-medium ' id='modal-title'>
                                             Konfirmasi pesanan
                                         </h3>
                                         <div className='mt-2 flex flex-col space-y-2'>
-                                            <p className='text-sm text-gray-500'>Pesanan yang kamu inginkan sudah sesuai?</p>
+                                            <p className='text-xs md:text-sm text-gray-500'>Pesanan yang kamu inginkan sudah sesuai?</p>
                                             <br />
-                                            <div className='font-medium tracking-wide text-sm text-blueGray-500'>Produk</div>
+                                            <div className='font-medium tracking-wide text-xs md:text-sm text-blueGray-500'>Produk</div>
                                             {orderData[0].products.map((product, index) => {
                                                 return (
-                                                    <div className='flex justify-between space-x-2 ' key={index}>
+                                                    <div className='flex justify-between space-x-2 text-sm md:text-base' key={index}>
                                                         <div className='flex space-x-1'>
                                                             <span className='w-10'>x {product.quantity}</span>
                                                             <span className='w-10/12 line-clamp-1 flex-initial max-w-sm'>{product.product.name}</span>
@@ -485,15 +485,21 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             })}
                                         </div>
                                         <br />
-                                        <div className='flex flex-col space-y-2'>
-                                            <div className='flex justify-between space-x-4 font-medium'>
+                                        <div className='flex text-xs md:text-base flex-col space-y-2'>
+                                            <div className='flex justify-between space-x-2 md:space-x-4 font-medium'>
                                                 <span className='truncate font-bold w-1/2'>Sub Total</span>
-                                                <NumberFormat className='font-bold ' value={orderData[0].subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
+                                                <NumberFormat
+                                                    className='font-bold text-xs md:text-base'
+                                                    value={orderData[0].subTotal}
+                                                    displayType={'text'}
+                                                    thousandSeparator={true}
+                                                    prefix={'Rp. '}
+                                                />
                                             </div>
-                                            <div className='flex justify-between space-x-4 font-medium'>
+                                            <div className='flex justify-between space-x-2 md:space-x-4 font-medium'>
                                                 <span className='truncate font-bold w-1/2'>Diskon</span>
                                                 <NumberFormat
-                                                    className='font-bold text-red-500'
+                                                    className='font-bold text-xs md:text-base text-red-500'
                                                     value={orderData[0].discount}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
@@ -501,45 +507,60 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 />
                                             </div>
                                             <hr className='border border-dashed' />
-                                            <div className='flex justify-between space-x-4 font-medium'>
+                                            <div className='flex justify-between space-x-2 md:space-x-4 font-medium'>
                                                 <span className='truncate font-bold w-1/2'>Total</span>
-                                                <NumberFormat className='font-bold' value={orderData[0].totalPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
+                                                <NumberFormat
+                                                    className='font-bold text-xs md:text-base'
+                                                    value={orderData[0].totalPrice}
+                                                    displayType={'text'}
+                                                    thousandSeparator={true}
+                                                    prefix={'Rp. '}
+                                                />
                                             </div>
                                         </div>
                                         <br />
-                                        <div className='flex flex-col space-y-2'>
+                                        <div className='flex text-sm md:text-base flex-col space-y-2'>
                                             <div>
                                                 <div className='font-medium tracking-wide text-sm text-blueGray-500'>Lokasi</div>
                                                 {area != 'anotherCity' ? (
                                                     <>
-                                                        <div className='font-medium text-blueGray-800'>{`${location}`}</div>
-                                                        <div className='font-medium text-blueGray-800'>{`${address}`}</div>
+                                                        <div className='font-medium '>{`${location}`}</div>
+                                                        <div className='font-medium '>{`${address}`}</div>
                                                     </>
                                                 ) : (
                                                     <>
-                                                        <div className='font-medium text-blueGray-800'>{`${address}`}</div>
-                                                        <div className='font-medium text-blueGray-800'>{`${postalCode}, ${city.type} ${city.city_name}, ${province.province}`}</div>
+                                                        <div className='font-medium '>{`${address}`}</div>
+                                                        <div className='font-medium '>{`${postalCode}, ${city.type} ${city.city_name}, ${province.province}`}</div>
                                                     </>
                                                 )}
                                             </div>
                                             <div>
                                                 <div className='font-medium tracking-wide text-sm text-blueGray-500'>Metode Pembayaran</div>
-                                                <div className='font-medium text-blueGray-800'>{`${choosenPaymentMethod.replace('ID_', '')} ${ovoNumber}`}</div>
+                                                <div className='font-medium '>{`${choosenPaymentMethod.replace('ID_', '')} ${ovoNumber}`}</div>
                                             </div>
                                             <div>
                                                 <div className='font-medium tracking-wide text-sm text-blueGray-500'>Catatan</div>
-                                                <div className='font-medium text-blueGray-800'>{`${note}`}</div>
+                                                <div className='font-medium '>{`${note}`}</div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse'>
+                            <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row'>
+                                <button
+                                    type='button'
+                                    onClick={() => {
+                                        openModal()
+                                    }}
+                                    className='w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
+                                >
+                                    Batal
+                                </button>
                                 {payLoading ? (
                                     <button
                                         type='button'
                                         onClick={() => {}}
-                                        className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blueGray-200 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm'
+                                        className='mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blueGray-200 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm'
                                     >
                                         Memproses...
                                     </button>
@@ -549,27 +570,18 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         onClick={() => {
                                             pay()
                                         }}
-                                        className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm'
+                                        className='mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm'
                                     >
                                         Bayar
                                     </button>
                                 )}
-                                <button
-                                    type='button'
-                                    onClick={() => {
-                                        openModal()
-                                    }}
-                                    className='mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
-                                >
-                                    Batal
-                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             )}
-            <div className='container mx-auto px-4 2xl:px-0 md:my-5 2xl:my-6'>
-                <div className='w-full flex space-x-2 items-center md:my-2 2xl:my-3'>
+            <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 2xl:my-6'>
+                <div className='w-full hidden md:flex space-x-2 items-center md:my-2 2xl:my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
                     </div>
@@ -578,20 +590,20 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                         <Link href='/cart'>Keranjang</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
-                    <div className='text-blueGray-800'>Checkout</div>
+                    <div className=''>Checkout</div>
                 </div>
-                <h1 className='text-2xl font-semibold md:my-2 2xl:my-3'>Pembayaran</h1>
-                <div className='flex flex-col space-y-8 mb-12'>
-                    <div className='flex md:flex-col md:space-y-4 md:space-x-0 lg:flex-row lg:justify-between lg:space-y-0 lg:space-x-5'>
+                <h1 className='text-lg md:text-2xl font-semibold my-2 2xl:my-3'>Pembayaran</h1>
+                <div className='flex flex-col space-y-4 md:space-y-8 mb-12'>
+                    <div className='flex flex-col space-y-4 space-x-0 lg:flex-row lg:justify-between lg:space-y-0 lg:space-x-5'>
                         <div className='w-full lg:w-9/12'>
-                            <div className='flex flex-col space-y-4'>
-                                <div className='p-4 border border-blueGray-200 bg-white text-blueGray-800 rounded-md drop-shadow-sm'>
-                                    <h2 className='text-lg font-semibold mb-3'>Informasi Pengiriman</h2>
+                            <div className='flex flex-col space-y-2 md:space-y-4'>
+                                <div className='p-2 md:p-4 border border-blueGray-200 bg-white  rounded-md drop-shadow-sm'>
+                                    <h2 className='text-base md:text-lg font-semibold mb-3'>Informasi Pengiriman</h2>
                                     <div className='flex flex-col space-y-4'>
                                         {/* Area */}
-                                        <div className='flex flex-col space-y-1'>
+                                        <div className='flex flex-col space-y-1 text-sm md:text-base'>
                                             <label htmlFor='area'>Area</label>
-                                            <div className='flex items-center space-x-4'>
+                                            <div className='flex items-center space-x-2 md:space-x-4 text-sm md:text-base'>
                                                 {areaCollection.map((n, index) => {
                                                     return (
                                                         <button
@@ -603,7 +615,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             className={
                                                                 area == n.value
                                                                     ? 'py-1 px-2 flex items-center space-x-2 rounded-md border border-blue-500 bg-blue-500 text-white transition ease-in-out duration-300'
-                                                                    : 'py-1 px-2 flex items-center space-x-2 rounded-md border border-blueGray-200 bg-blueGray-300 text-blueGray-800 transition ease-in-out duration-300'
+                                                                    : 'py-1 px-2 flex items-center space-x-2 rounded-md border border-blueGray-200 bg-blueGray-300  transition ease-in-out duration-300'
                                                             }
                                                         >
                                                             {area != n.value && <div className='border border-blueGray-800 rounded-full w-4 h-4'></div>}
@@ -617,7 +629,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         {/* Address */}
                                         {area == 'malang-batu' && (
                                             <>
-                                                <div className='flex space-x-4 items-center'>
+                                                <div className='flex flex-col text-sm md:text-base space-y-2 md:flex-row md:space-y-0 md:space-x-4 md:items-center'>
                                                     <div className='flex flex-col flex-initial space-y-1'>
                                                         <label htmlFor='location'>Lokasi</label>
                                                         <input
@@ -626,7 +638,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             id='location'
                                                             onChange={handleLocation}
                                                             required
-                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
+                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
                                                             placeholder='Fakultas Kedokteran ITB'
                                                         />
                                                     </div>
@@ -638,26 +650,26 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             name='address'
                                                             required
                                                             id='address'
-                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
+                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
                                                             placeholder='Jl. Ganesa No.10, Lb. Siliwangi, Kecamatan Coblong, Kota Bandung, Jawa Barat 40132'
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className='flex flex-col space-y-1'>
+                                                <div className='flex flex-col space-y-1  text-sm md:text-base'>
                                                     <label htmlFor='notes'>Catatan</label>
                                                     <textarea
                                                         name='notes'
                                                         id='notes'
                                                         onChange={handleNote}
                                                         placeholder=''
-                                                        className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
+                                                        className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
                                                     ></textarea>
                                                 </div>
                                             </>
                                         )}
                                         {area == 'anotherCity' && (
                                             <>
-                                                <div className='flex space-x-4 items-center'>
+                                                <div className='text-sm md:text-base flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-4 md:items-center'>
                                                     <div className='flex flex-col flex-1 space-y-1'>
                                                         <label htmlFor='address'>Alamat</label>
                                                         <input
@@ -666,12 +678,12 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             onChange={handleAddress}
                                                             required
                                                             id='address'
-                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
+                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
                                                             placeholder='Jl. Ganesa No.10, Lb. Siliwangi, Kecamatan Coblong, Kota Bandung, Jawa Barat 40132'
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className='flex space-x-4 items-center'>
+                                                <div className='flex flex-col space-y-2 text-sm md:text-base md:flex-row md:space-y-0 md:space-x-4 md:items-center'>
                                                     <div className='flex flex-col flex-1 space-y-1'>
                                                         <label htmlFor='city'>Kota</label>
                                                         <button
@@ -685,9 +697,9 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                         </button>
                                                         {cityToggle && (
                                                             <div className='relative'>
-                                                                <div className='rounded-md bg-white border border-blueGray-200 drop-shadow-sm text-blueGray-800 h-auto w-auto absolute'>
+                                                                <div className='rounded-md bg-white border border-blueGray-200 drop-shadow-sm  h-auto w-auto absolute'>
                                                                     <ul
-                                                                        className='w-96 bg-white max-h-32 rounded-md py-1 text-base overflow-auto focus:outline-none sm:text-sm'
+                                                                        className='w-96 bg-white max-h-32 rounded-md py-1 overflow-auto focus:outline-none text-sm'
                                                                         tabIndex='-1'
                                                                         role='listbox'
                                                                         aria-labelledby='listbox-label'
@@ -701,7 +713,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                                 name='city'
                                                                                 id='city'
                                                                                 onChange={handleCityInput}
-                                                                                className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border border-blueGray-200'
+                                                                                className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border border-blueGray-200'
                                                                                 placeholder='Cari Kota...'
                                                                             />
                                                                         </div>
@@ -712,7 +724,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                                     onClick={() => {
                                                                                         selectCity(c)
                                                                                     }}
-                                                                                    className='text-blueGray-800 w-full cursor-pointer hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out select-none relative py-2'
+                                                                                    className=' w-full cursor-pointer hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out select-none relative py-2'
                                                                                     id='listbox-option-0'
                                                                                     role='option'
                                                                                 >
@@ -738,7 +750,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             readOnly={true}
                                                             id='province'
                                                             required
-                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
+                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
                                                             placeholder='Jawa Barat'
                                                         />
                                                     </div>
@@ -750,30 +762,30 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             id='postalCode'
                                                             onChange={handlePostalCode}
                                                             required
-                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
+                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
                                                             placeholder='64983'
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className='flex flex-col space-y-1'>
+                                                <div className='flex flex-col space-y-1 text-sm md:text-base'>
                                                     <label htmlFor='notes'>Catatan</label>
                                                     <textarea
                                                         name='notes'
                                                         onChange={handleNote}
                                                         id='notes'
-                                                        className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm border-blueGray-200'
+                                                        className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
                                                     ></textarea>
                                                 </div>
                                             </>
                                         )}
                                     </div>
                                 </div>
-                                <div className='p-4 border border-blueGray-200 bg-white text-blueGray-800 rounded-md drop-shadow-sm'>
-                                    <h2 className='text-lg font-semibold mb-3'>Metode Pembayaran</h2>
-                                    <div className='flex flex-col md:space-y-2 2xl:space-y-4 font-semibold text-blueGray-500'>
-                                        <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-semibold'>Virtual Account</h3>
-                                            <div className='flex space-x-4 items-center'>
+                                <div className='p-2 md:p-4 border border-blueGray-200 bg-white rounded-md drop-shadow-sm'>
+                                    <h2 className='text-base md:text-lg font-semibold mb-3'>Metode Pembayaran</h2>
+                                    <div className='flex flex-col space-y-2 2xl:space-y-4 font-semibold text-blueGray-500'>
+                                        <div className='flex flex-col space-y-1 2xl:space-y-2'>
+                                            <h3 className='text-sm md:text-base text-semibold'>Virtual Account</h3>
+                                            <div className='flex space-x-2 md:space-x-4 items-center'>
                                                 {paymentMethodCollection
                                                     .filter((pm) => pm.type == 'va')
                                                     .map((paymentMethod, index) => {
@@ -786,8 +798,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md ring-4 ring-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-2 md:ring-4 ring-blue-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border md:border-2 border-blueGray-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
                                                                 <Image
@@ -807,8 +819,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             </div>
                                         </div>
                                         <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-semibold'>E-Wallet</h3>
-                                            <div className='flex space-x-4 items-center'>
+                                            <h3 className='text-sm md:text-base text-semibold'>E-Wallet</h3>
+                                            <div className='flex space-x-2 md:space-x-4 items-center'>
                                                 {paymentMethodCollection
                                                     .filter((pm) => pm.type == 'ewallet')
                                                     .map((paymentMethod, index) => {
@@ -821,8 +833,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md ring-4 ring-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-2 md:ring-4 ring-blue-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border md:border-2 border-blueGray-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
                                                                 <Image
@@ -843,8 +855,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         </div>
 
                                         <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-semibold'>QRCode</h3>
-                                            <div className='flex space-x-4 items-center'>
+                                            <h3 className='text-sm md:text-base text-semibold'>QRCode</h3>
+                                            <div className='flex space-x-2 md:space-x-4 items-center'>
                                                 {paymentMethodCollection
                                                     .filter((pm) => pm.type == 'qrcode')
                                                     .map((paymentMethod, index) => {
@@ -858,10 +870,10 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md ring-4 ring-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-2 md:ring-4 ring-blue-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : orderData[0].totalPrice > 5000000
-                                                                        ? 'rounded-md border-2 border-blueGray-200 bg-blueGray-200 filter grayscale h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md border-2 border-md:blueGray-200 bg-blueGray-200 filter grayscale h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border md:border-2 border-blueGray-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
                                                                 <Image
@@ -881,8 +893,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             </div>
                                         </div>
                                         <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-semibold'>Retail Outlet</h3>
-                                            <div className='flex space-x-4 items-center'>
+                                            <h3 className='text-sm md:text-base text-semibold'>Retail Outlet</h3>
+                                            <div className='flex space-x-2 md:space-x-4 items-center'>
                                                 {paymentMethodCollection
                                                     .filter((pm) => pm.type == 'retail-outlet')
                                                     .map((paymentMethod, index) => {
@@ -901,11 +913,11 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md ring-4 ring-blue-500 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-2 md:ring-4 ring-blue-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : (orderData[0].totalPrice > 2500000 && paymentMethod.id == 'ALFAMART') ||
                                                                           (orderData[0].totalPrice > 5000000 && paymentMethod.id == 'INDOMARET')
-                                                                        ? 'rounded-md border-2 border-blueGray-200 bg-blueGray-200 filter grayscale h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border-2 border-blueGray-200 bg-white h-16 w-40 px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md border-2 border-md:blueGray-200 bg-blueGray-200 filter grayscale h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border md:border-2 border-blueGray-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
                                                                 <Image
@@ -932,13 +944,13 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                             <div className='sticky top-28 p-4 bg-white border drop-shadow-sm border-blueGray-200 h-auto rounded-md flex flex-col space-y-4'>
                                 {/* Summary */}
                                 <div className='flex flex-col space-y-2'>
-                                    <div className='lg:text-base 2xl:text-xl font-bold text-blueGray-800'>Rincian</div>
-                                    <div className='flex flex-col space-y-1'>
-                                        <div className='lg:text-sm 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                    <div className='text-lg md:text-xl font-bold '>Rincian</div>
+                                    <div className='flex flex-col space-y-1  text-sm md:text-base'>
+                                        <div className='text-sm 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <span>Total ({order.totalQuantity})</span>
                                             <NumberFormat value={order.totalPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
-                                        <div className='lg:text-sm 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                        <div className='text-sm 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-baseline'>
                                                 <span>Pengiriman</span>
                                                 {/* {shippingEtd && <span className='text-blueGray-400 lg:text-sm 2xl:text-sm'>{`(Etd ${shippingEtd} Days via JNE)`}</span>} */}
@@ -950,18 +962,18 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                 <hr />
                                 {/* Total */}
                                 <div className='flex justify-between items-center'>
-                                    <div className='lg:text-lg 2xl:text-xl font-bold text-blueGray-800'>Total</div>
+                                    <div className='text-lg 2xl:text-xl font-bold '>Total</div>
                                     <NumberFormat
                                         value={total}
                                         displayType={'text'}
                                         thousandSeparator={true}
                                         prefix={'Rp. '}
-                                        className='lg:text-lg 2xl:text-xl font-bold text-blue-500'
+                                        className='text-lg 2xl:text-xl font-bold text-blue-500'
                                     />
                                 </div>
                                 <hr />
                                 {choosenPaymentMethod == 'ID_OVO' ? (
-                                    <div className='flex flex-col space-y-1'>
+                                    <div className='flex flex-col space-y-1  text-sm md:text-base'>
                                         <label htmlFor='ovo_number' className='block text-sm font-medium text-blueGray-500'>
                                             Nomor OVO
                                         </label>
@@ -975,7 +987,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 id='ovo_number'
                                                 onChange={handleOvoNumber}
                                                 required
-                                                className='rounded-r-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full sm:text-sm placeholder-gray-300 border-blueGray-300'
+                                                className='rounded-r-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm placeholder-gray-300 border-blueGray-300'
                                                 placeholder='85199992222'
                                             />
                                         </div>
@@ -984,10 +996,18 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     ''
                                 )}
                                 {/* Checkout Button */}
-                                <Button href={() => openModal()} type='primary' size='lg' width='full' display='flex'>
-                                    <span>Bayar</span>
-                                    <FaWallet className='w-6' />
-                                </Button>
+                                <div className='hidden md:block'>
+                                    <Button href={() => openModal()} type='primary' size='lg' width='full' display='flex'>
+                                        <span>Bayar</span>
+                                        <FaWallet className='w-6' />
+                                    </Button>
+                                </div>
+                                <div className='md:hidden'>
+                                    <Button href={() => openModal()} type='primary' size='base' width='full' display='flex'>
+                                        <span>Bayar</span>
+                                        <FaWallet className='w-6' />
+                                    </Button>
+                                </div>
                             </div>
                         </div>
                     </div>

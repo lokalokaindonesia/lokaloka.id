@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setFavorite } from '@/redux/favoriteSlice'
 import { Dialog, Transition } from '@headlessui/react'
 import Logo from '../../../public/logo.png'
+import { MenuAlt3Icon } from '@heroicons/react/solid'
+import MobileDropdown from '@/components/navbar/MobileDropdown'
 
 const Header = () => {
     const router = useRouter()
@@ -58,7 +60,7 @@ const Header = () => {
             {/* Modal Section */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as='div' className='fixed z-50 inset-0 overflow-y-auto' initialFocus={cancelButtonRef} onClose={setOpen}>
-                    <div className='flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
+                    <div className='flex items-start md:items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
                         <Transition.Child
                             as={Fragment}
                             enter='ease-out duration-300'
@@ -84,7 +86,7 @@ const Header = () => {
                             leaveFrom='opacity-100 translate-y-0 sm:scale-100'
                             leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
                         >
-                            <div className='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl lg:max-w-4xl sm:w-full'>
+                            <div className='inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full max-w-screen-sm sm:my-8 sm:align-middle sm:max-w-3xl lg:max-w-4xl sm:w-full'>
                                 <form method='post' action={`/search?s=${inputText}`}>
                                     <div className='flex rounded-md shadow-sm'>
                                         <span className='inline-flex items-center px-3 rounded-l-md border-none'>
@@ -96,7 +98,7 @@ const Header = () => {
                                             name='search'
                                             onChange={handleInputSearch}
                                             id='search'
-                                            className='block w-full text-lg px-6 py-4 shadow-sm sm:text-sm ring-0 border-none rounded-l-0 rounded-r-md'
+                                            className='block w-full text-lg md:px-6 md:py-4 shadow-sm sm:text-sm ring-0 border-none rounded-l-0 rounded-r-md'
                                             placeholder='Apel Celup'
                                         />
                                     </div>
@@ -112,7 +114,7 @@ const Header = () => {
                 <Link href='/'>
                     <div>
                         <h1 className='hidden lg:block text-4xl font-bold text-blue-500'>Lokaloka</h1>
-                        <div className='block lg:hidden md:w-10 md:h-10'>
+                        <div className='block lg:hidden w-8 h-8 md:w-10 md:h-10'>
                             <Image src={Logo} layout='responsive' quality={100} width={1} height={1} priority />
                         </div>
                     </div>
@@ -122,21 +124,20 @@ const Header = () => {
             <div className='w-8/12 flex justify-center '>
                 <div className='hidden md:flex md:space-x-3 lg:space-x-4 xl:space-x-8 flex-initial font-medium text-blueGray-600'>
                     <HeaderActiveLink href='/'>Home</HeaderActiveLink>
-                    <HeaderActiveLink href='/makanan-dan-minuman'>Makanan dan Minuman</HeaderActiveLink>
+                    <HeaderActiveLink href='/makanan-dan-minuman'>Makanan & Minuman</HeaderActiveLink>
                     <HeaderActiveLink href='/kerajinan'>Kerajinan</HeaderActiveLink>
                     <HeaderActiveLink href='/fashion'>Fashion</HeaderActiveLink>
                 </div>
-                <input type='text' className='block md:hidden px-3 py-2 border border-gray-400 focus:outline-none text-blueGray-600 bg-blueGray-200 w-full' />
             </div>
 
-            <div className='w-2/12 flex items-center justify-end md:space-x-3 lg:space-x-4 xl:space-x-6'>
-                <button type='button' name='search' aria-label='Search' onClick={() => setOpen(true)}>
-                    <SearchIcon className='hidden md:block h-6 w-6 text-blueGray-600 cursor-pointer' />
+            <div className='w-2/12 flex items-center justify-end space-x-2 md:space-x-2 lg:space-x-4 xl:space-x-6'>
+                <button type='button' className='' name='search' aria-label='Search' onClick={() => setOpen(true)}>
+                    <SearchIcon className='h-6 w-6 text-blueGray-600 cursor-pointer' />
                 </button>
                 <button
                     type='button'
                     name='search'
-                    className='relative'
+                    className='hidden md:block relative'
                     aria-label='Favorites'
                     onClick={() => {
                         setOpenFavorite(!openFavorite)
@@ -144,17 +145,17 @@ const Header = () => {
                 >
                     <HeartIcon className='hidden md:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                     {favorite.length > 0 && (
-                        <span className='flex h-3 w-3 absolute top-0 right-0'>
+                        <span className='hidden md:flex h-3 w-3 absolute top-0 right-0'>
                             <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
                             <span className='relative inline-flex rounded-full h-3 w-3 bg-blue-500'></span>
                         </span>
                     )}
                 </button>
                 <Link href='/cart'>
-                    <button className='relative' type='button' name='cart' aria-label='Cart'>
+                    <button className='relative hidden md:block' type='button' name='cart' aria-label='Cart'>
                         <ShoppingCartIcon className='hidden md:block h-6 w-6 text-blueGray-600 cursor-pointer' />
                         {cartLength > 0 && (
-                            <span className='flex h-3 w-3 absolute top-0 right-0'>
+                            <span className='hidden md:flex h-3 w-3 absolute top-0 right-0'>
                                 <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
                                 <span className='relative inline-flex rounded-full h-3 w-3 bg-blue-500'></span>
                             </span>
@@ -162,6 +163,7 @@ const Header = () => {
                     </button>
                 </Link>
                 <ProfileDropdown />
+                <MobileDropdown />
             </div>
             {openFavorite && (
                 <div

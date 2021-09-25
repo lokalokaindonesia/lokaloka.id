@@ -228,7 +228,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
     return (
         <Layout title='Keranjang Belanja'>
             {cart.length == 0 ? (
-                <div className='container my-12 mx-auto lg:px-4 2xl:px-0 flex md:flex-col md:space-y-4 md:space-x-0 lg:flex-row items-center lg:space-x-12 lg:space-y-0 2xl:space-x-24 justify-center'>
+                <div className='container my-12 mx-auto px-4 2xl:px-0 flex flex-col space-y-4 space-x-0 lg:flex-row items-center lg:space-x-12 lg:space-y-0 2xl:space-x-24 justify-center'>
                     <lottie-player
                         src='https://assets2.lottiefiles.com/private_files/lf30_x2lzmtdl.json'
                         id='verified'
@@ -239,7 +239,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                         style={{ width: '32rem', height: '32rem' }}
                     ></lottie-player>
                     <div className='flex space-y-8 flex-col justify-center items-center'>
-                        <h1 className='text-4xl font-bold text-blueGray-800'>Ooops, Keranjangmu kosong</h1>
+                        <h1 className='text-4xl font-bold '>Ooops, Keranjangmu kosong</h1>
                         <Button size='xl' width='max' display='flex' type='primary' href={() => router.push('/')}>
                             <span>Beli sesuatu</span>
                             <ChevronRightIcon className='text-white w-7 h-7' />
@@ -247,21 +247,21 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                     </div>
                 </div>
             ) : (
-                <div className='container mx-auto px-4 2xl:px-0 md:my-5 2xl:my-6'>
-                    <div className='w-full flex space-x-2 items-center md:my-2 2xl:my-3'>
+                <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 2xl:my-6'>
+                    <div className='w-full hidden md:flex space-x-2 items-center my-2 2xl:my-3'>
                         <div className='text-blue-700 hover:text-blue-800'>
                             <Link href='/'>Home</Link>
                         </div>
                         <ChevronRightIcon className='w-5 h-5' />
-                        <div className='text-blueGray-800'>Keranjang</div>
+                        <div className=''>Keranjang</div>
                     </div>
-                    <h1 className='text-2xl font-semibold md:my-2 2xl:my-3'>Keranjang</h1>
-                    <div className='flex flex-col md:space-y-4 2xl:space-y-8 mb-12'>
-                        <div className='flex md:flex-col md:space-y-5 md:space-x-0 lg:flex-row lg:justify-between lg:space-y-0 lg:space-x-5'>
-                            <div className='md:w-full lg:w-8/12 xl:w-9/12'>
+                    <h1 className='text-xl md:text-2xl font-semibold my-2 2xl:my-3'>Keranjang</h1>
+                    <div className='flex flex-col space-y-4 2xl:space-y-8 mb-12'>
+                        <div className='flex flex-col space-y-5 space-x-0 lg:flex-row lg:justify-between lg:space-y-0 lg:space-x-5'>
+                            <div className='w-full lg:w-8/12 xl:w-9/12'>
                                 <div className='w-full flex flex-col space-y-4'>
                                     {/* Product Cart Item */}
-                                    <div className='w-full flex flex-col space-y-4'>
+                                    <div className='w-full flex flex-col space-y-2 md:space-y-4'>
                                         {cart.map((product) => {
                                             // Count Price
                                             const discountPrice = product.product.sellingPrice - (product.product.sellingPrice * product.product.discount) / 100
@@ -270,14 +270,14 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
                                             const category = productCategories.find((c) => c.id == product.product.product_category)
                                             return (
-                                                <div key={product._id} className='w-full md:p-2 2xl:p-4 rounded-md border drop-shadow-sm bg-white border-blueGray-300'>
-                                                    <div className='flex space-y-4 flex-col'>
-                                                        <div className='flex space-x-4 items-center'>
+                                                <div key={product._id} className='w-full p-1 md:p-2 2xl:p-4 rounded-md border drop-shadow-sm bg-white border-blueGray-300'>
+                                                    <div className='flex space-y-2 md:space-y-4 flex-col'>
+                                                        <div className='flex space-x-2 md:space-x-4 items-center'>
                                                             <div className='flex space-x-4 items-center w-full'>
                                                                 {/* Checkbox */}
-                                                                <div className='flex items-center space-x-4'>
+                                                                <div className='flex items-center space-x-2 md:space-x-4'>
                                                                     {/* Image */}
-                                                                    <div className='h-20 w-20 rounded-md'>
+                                                                    <div className='w-16 h-16 md:h-20 md:w-20 rounded-md'>
                                                                         <Image
                                                                             alt={product.product.name}
                                                                             src={product.product.images[0].url}
@@ -294,7 +294,9 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                                     {/* Title */}
                                                                     <div className='flex justify-between items-start'>
                                                                         <Link href={`/${category.slug}/${product.product.slug}`}>
-                                                                            <a className='text-lg font-semibold text-blueGray-600 line-clamp-1'>{product.product.name}</a>
+                                                                            <a className='text-sm md:text-lg font-semibold text-blueGray-600 line-clamp-1'>
+                                                                                {product.product.name}
+                                                                            </a>
                                                                         </Link>
                                                                         <button
                                                                             onClick={() => deleteItem(product)}
@@ -312,7 +314,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                                                 displayType={'text'}
                                                                                 thousandSeparator={true}
                                                                                 prefix={'Rp. '}
-                                                                                className='text-xl font-black text-blue-500'
+                                                                                className='text-xs md:text-xl font-black text-blue-500'
                                                                             />
                                                                             {isDiscount && (
                                                                                 <NumberFormat
@@ -325,7 +327,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                                             )}
                                                                         </div>
                                                                         {/* Qty */}
-                                                                        <div className='flex items-center border h-8 w-max rounded ml-[8.7rem] border-blueGray-300'>
+                                                                        <div className='flex items-center border h-6 md:h-8 w-max rounded ml-6 md:ml-[8.7rem] border-blueGray-300'>
                                                                             <div
                                                                                 onClick={() => reduceQty(product)}
                                                                                 className='select-none rounded-l cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r border-blueGray-300 text-blue-gray-800'
@@ -351,15 +353,15 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='md:w-full lg:w-4/12 xl:w-3/12'>
-                                <div className='sticky top-28 p-4 bg-white border drop-shadow-sm border-blueGray-300 h-auto rounded-md flex flex-col space-y-4'>
+                            <div className='w-full lg:w-4/12 xl:w-3/12'>
+                                <div className='sticky top-28 p-2 md:p-4 bg-white border drop-shadow-sm border-blueGray-300 h-auto rounded-md flex flex-col space-y-2 md:space-y-4'>
                                     {/* Coupon Form */}
                                     <form className='flex items-center' onSubmit={getCoupon} method='get'>
                                         <input
                                             className={
                                                 coupon
-                                                    ? 'px-3 py-2 rounded-l w-full border-2 focus:border-green-500 focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-blueGray-400'
-                                                    : 'px-3 py-2 rounded-l w-full border-2 focus:border-blueGray-500 focus:border-2 focus:ring-0 border-blueGray-500 transition ease-in-out duration-300 font-bold text-blueGray-800'
+                                                    ? 'px-2 py-1 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border-2 focus:border-green-500 focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-blueGray-400'
+                                                    : 'px-2 py-1 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border-2 focus:border-blueGray-500 focus:border-2 focus:ring-0 border-blueGray-500 transition ease-in-out duration-300 font-bold '
                                             }
                                             placeholder='Kode Kupon'
                                             disabled={coupon && 'disabled'}
@@ -370,8 +372,8 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                             type='submit'
                                             className={
                                                 coupon
-                                                    ? 'rounded-r px-3 py-2 text-white font-bold border-2 border-green-300 bg-green-300'
-                                                    : 'rounded-r px-3 py-2 text-white font-bold border-2 border-blueGray-500 bg-blueGray-500'
+                                                    ? 'text-sm md:text-base rounded-r px-2 py-1 md:px-3 md:py-2 text-white font-bold border-2 border-green-300 bg-green-300'
+                                                    : 'text-sm md:text-base rounded-r px-2 py-1 md:px-3 md:py-2 text-white font-bold border-2 border-blueGray-500 bg-blueGray-500'
                                             }
                                         >
                                             Terapkan
@@ -380,13 +382,13 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                     <hr />
                                     {/* Summary */}
                                     <div className='flex flex-col space-y-2'>
-                                        <div className='text-xl font-bold text-blueGray-800'>Rincian</div>
+                                        <div className='text-lg md:text-xl font-bold '>Rincian</div>
                                         <div className='flex flex-col space-y-1'>
-                                            <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
+                                            <div className='text-sm md:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                                 <span>Total Harga</span>
                                                 <NumberFormat value={summaryTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                             </div>
-                                            <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
+                                            <div className='text-sm md:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                                 <span>Total Diskon</span>
                                                 <NumberFormat value={discountTotal} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
                                             </div>
@@ -394,12 +396,12 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                     </div>
                                     <hr />
                                     {/* Total */}
-                                    <div className='flex justify-between items-center'>
+                                    <div className='text-sm md:text-base flex justify-between items-center'>
                                         <div className='text-blueGray-500 font-semibold flex justify-between items-center'>Sub Total</div>
                                         <NumberFormat className='text-blueGray-500 font-semibold' value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                     </div>
                                     {coupon && (
-                                        <div className='text-blueGray-500 font-semibold flex justify-between items-center'>
+                                        <div className='text-sm md:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-center'>
                                                 <span>Kupon {coupon.discount}%</span>
                                                 <button type='button' onClick={() => deleteCoupon()}>
@@ -410,27 +412,41 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                         </div>
                                     )}
                                     <div className='flex justify-between items-center'>
-                                        <div className='text-xl font-bold text-blueGray-800'>Total</div>
+                                        <div className='text-lg md:text-xl font-bold '>Total</div>
                                         <NumberFormat
                                             value={grandTotal}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'Rp. '}
-                                            className='text-xl font-bold text-blue-500'
+                                            className='text-lg md:text-xl font-bold text-blue-500'
                                         />
                                     </div>
                                     <hr />
                                     {/* Checkout Button */}
-                                    {checkoutLoading ? (
-                                        <Button href={() => {}} type='secondary' size='lg' width='full' display='flex'>
-                                            Memproses...
-                                        </Button>
-                                    ) : (
-                                        <Button href={() => checkout()} type='primary' size='lg' width='full' display='flex'>
-                                            <span>Checkout</span>
-                                            <FaChevronRight className='w-6' />
-                                        </Button>
-                                    )}
+                                    <div className='hidden md:block'>
+                                        {checkoutLoading ? (
+                                            <Button href={() => {}} type='secondary' size='lg' width='full' display='flex'>
+                                                Memproses...
+                                            </Button>
+                                        ) : (
+                                            <Button href={() => checkout()} type='primary' size='lg' width='full' display='flex'>
+                                                <span>Checkout</span>
+                                                <FaChevronRight className='w-6' />
+                                            </Button>
+                                        )}
+                                    </div>
+                                    <div className='block md:hidden'>
+                                        {checkoutLoading ? (
+                                            <Button href={() => {}} type='secondary' size='base' width='full' display='flex'>
+                                                Memproses...
+                                            </Button>
+                                        ) : (
+                                            <Button href={() => checkout()} type='primary' size='base' width='full' display='flex'>
+                                                <span>Checkout</span>
+                                                <FaChevronRight className='w-6' />
+                                            </Button>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>

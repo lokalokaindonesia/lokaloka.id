@@ -16,22 +16,23 @@ const Hero = () => {
                 <div className='w-full flex flex-col space-y-12 md:space-y-10 lg:space-y-12 xl:space-y-16'>
                     <div className='flex space-x-2 items-center'>
                         <SparklesIcon className='h-5 w-5 md:h-6 md:w-6 xl:h-8 xl:w-8 text-red-500' />
-                        <span className='text-lg md:text-lg xl:text-2xl font-bold text-red-500'>New Semester 2021/2022</span>
+                        <span className='text-lg md:text-lg xl:text-2xl font-bold text-red-500'>Promo 10.10</span>
                     </div>
                     <div className='flex flex-col space-y-4'>
-                        <h1 className='text-4xl md:text-4xl xl:text-6xl font-extrabold text-blue-600 font-display filter drop-shadow'>Don't Waste Your</h1>
-                        <h1 className='text-4xl md:text-4xl xl:text-6xl font-extrabold text-blue-600 font-display filter drop-shadow'>Holiday Moment</h1>
+                        <h1 className='text-4xl md:text-4xl xl:text-6xl font-extrabold text-blue-500 font-display filter drop-shadow capitalize'>
+                            Jangan lewatkan promo spesial 10.10
+                        </h1>
                     </div>
                     <div className='flex flex-col space-y-2'>
                         <p className='text-base md:text-base xl:text-xl font-normal text-blueGray-700 filter drop-shadow'>
-                            Buy souvenirs <b>with ease !!!</b>
+                            Beli oleh-oleh <b>secara mudah dan cepat !!!</b>
                         </p>
                         <p className='text-base md:text-base xl:text-xl font-normal text-blueGray-700 filter drop-shadow'>
-                            Order at <b>Lokaloka</b>, take the <b>advantages</b> for your holiday.
+                            Pesan <b>Sekarang</b>, dapatkan <b>keuntungan</b> untuk liburanmu.
                         </p>
                     </div>
                     <Button size='lg' type='primary' display='flex' width='max' href={() => router.push(`/`)}>
-                        <span className=''>Get your package</span>
+                        <span className=''>Beli oleh-oleh</span>
                         <ArrowRightIcon className='h-5' />
                     </Button>
                 </div>

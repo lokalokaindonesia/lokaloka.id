@@ -11,7 +11,15 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
         <div className={`${bgColor} relative`}>
             <div className='w-full flex space-y-4 py-8 flex-col container mx-auto px-4 2xl:px-0'>
                 {/* Section Title */}
-                <div className='flex w-full justify-between items-center'>
+                <div className='flex lg:hidden w-full justify-between items-center'>
+                    <FancySectionTitle title={sectionTitle} />
+
+                    <Button size='sm' href={() => router.push(`/specials/${sectionTitle.toLowerCase()}`)} type='secondary' display='flex' width='max'>
+                        <span className='text-xs'>Lihat semua</span>
+                        <ArrowRightIcon className='h-4' />
+                    </Button>
+                </div>
+                <div className='hidden lg:flex w-full justify-between items-center'>
                     <FancySectionTitle title={sectionTitle} />
 
                     <Button href={() => router.push(`/specials/${sectionTitle.toLowerCase()}`)} type='secondary' display='flex' width='max'>
@@ -21,7 +29,7 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
                 </div>
 
                 {/* Product Item */}
-                <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 sm:gap-4 lg:gap-4 xl:gap-4 2xl:gap-8'>
+                <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 2xl:gap-8'>
                     {data.map((product, index) => (
                         <ProductCard
                             key={index}

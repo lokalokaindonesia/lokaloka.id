@@ -65,8 +65,8 @@ const Category = ({ category }) => {
 
     return (
         <Layout title={`${category.name} - Lokaloka`}>
-            <div className='container mx-auto md:px-4 2xl:px-0 md:my-5 2xl:my-6'>
-                <div className='w-full flex space-x-2 items-center my-3'>
+            <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 2xl:my-6'>
+                <div className='w-full hidden md:flex space-x-2 items-center my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
                     </div>
@@ -75,20 +75,20 @@ const Category = ({ category }) => {
                         <span>{category.name}</span>
                     </div>
                 </div>
-                <h1 className='text-2xl font-semibold text-blueGray-800 my-3'>{category.name}</h1>
+                <h1 className='text-lg md:text-2xl font-semibold text-blueGray-800 my-3'>{category.name}</h1>
                 <div className='flex justify-between items-center'>
-                    <p className='text-sm'>
+                    <p className='text-xs md:text-sm'>
                         <span>{products.length} produk dari </span> <span className='font-semibold'>"Kategori {category.name}"</span>
                     </p>
                 </div>
-                <div className='flex space-x-8'>
+                <div className='flex flex-col-reverse space-y-4 md:flex-row md:space-y-0 md:space-x-8'>
                     <div className='w-full'>
                         {products.length == 0 && (
                             <div className='flex justify-center items-center h-full'>
                                 <div className='text-xl font-semibold text-blueGray-800'>Products not found</div>
                             </div>
                         )}
-                        <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 md:gap-4 xl:gap-6 2xl:gap-8 mt-4'>
+                        <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-6 2xl:gap-8 mt-4'>
                             {products.map((product, index) => (
                                 <ProductCard
                                     key={index}
@@ -105,134 +105,136 @@ const Category = ({ category }) => {
                     </div>
                     {/* Filter */}
                     <div className='mt-4 md:w-1/4 lg:w-1/3 xl:w-1/4 2xl:w-1/4 drop-shadow-sm'>
-                        <div className='sticky top-28 flex flex-col md:space-y-2 2xl:space-y-4 border border-blueGray-200 bg-white rounded-md p-4'>
+                        <div className='sticky top-28 flex flex-col space-y-2 2xl:space-y-4 border border-blueGray-200 bg-white rounded-md p-2 md:p-4'>
                             <div className='flex justify-between items-center'>
-                                <h1 className='md:text-lg 2xl:text-xl font-semibold text-blueGray-700'>Filter</h1>
+                                <h1 className='text-base md:text-lg 2xl:text-xl font-semibold text-blueGray-700'>Filter</h1>
                             </div>
-                            <hr />
-                            {/* Sort By */}
-                            <Listbox value={price} onChange={setPrice}>
-                                {({ open }) => (
-                                    <div className='flex flex-col xl:space-y-1 2xl:space-y-2'>
-                                        <Listbox.Label className='xl:text-sm 2xl:text-base block font-medium text-blueGray-800'>Urutkan</Listbox.Label>
-                                        <div className='mt-1 relative w-full'>
-                                            <Listbox.Button className='relative w-full bg-white border border-blueGray-300 rounded-md shadow-sm pl-3 pr-10 md:py-1 2xl:py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'>
-                                                <span className='flex items-center'>
-                                                    <span className='block truncate'>{price.value}</span>
-                                                </span>
-                                                <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
-                                                    <SelectorIcon className='h-5 w-5 text-blueGray-400' aria-hidden='true' />
-                                                </span>
-                                            </Listbox.Button>
+                            <div className='flex flex-col space-y-2 2xl:space-y-4'>
+                                <hr />
+                                {/* Sort By */}
+                                <Listbox value={price} onChange={setPrice}>
+                                    {({ open }) => (
+                                        <div className='flex flex-col xl:space-y-1 2xl:space-y-2'>
+                                            <Listbox.Label className='text-sm 2xl:text-base block font-medium text-blueGray-800'>Urutkan</Listbox.Label>
+                                            <div className='mt-1 relative w-full'>
+                                                <Listbox.Button className='relative w-full bg-white border border-blueGray-300 rounded-md shadow-sm pl-3 pr-10 py-1 2xl:py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'>
+                                                    <span className='flex items-center'>
+                                                        <span className='block truncate text-sm md:text-base'>{price.value}</span>
+                                                    </span>
+                                                    <span className='absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none'>
+                                                        <SelectorIcon className='h-5 w-5 text-blueGray-400' aria-hidden='true' />
+                                                    </span>
+                                                </Listbox.Button>
 
-                                            <Transition show={open} as={Fragment} leave='transition ease-in duration-100' leaveFrom='opacity-100' leaveTo='opacity-0'>
-                                                <Listbox.Options
-                                                    static
-                                                    className='absolute z-10 mt-1 w-full bg-white shadow-lg rounded-md py-1 text-base ring-1 ring-blueGray-800 ring-opacity-5 overflow-auto focus:outline-none sm:text-sm'
-                                                >
-                                                    {filter.map((filter) => (
-                                                        <Listbox.Option
-                                                            key={filter.id}
-                                                            className={({ active }) =>
-                                                                classNames(
-                                                                    active ? 'text-white bg-blue-600' : 'text-blueGray-900',
-                                                                    'cursor-default select-none relative md:py-1 2xl:py-2 pl-3 pr-9'
-                                                                )
-                                                            }
-                                                            value={filter}
-                                                        >
-                                                            {({ price, active }) => (
-                                                                <>
-                                                                    <div className='flex items-center'>
-                                                                        <span className={classNames(price ? 'font-semibold' : 'font-normal', 'block truncate')}>
-                                                                            {filter.value}
-                                                                        </span>
-                                                                    </div>
+                                                <Transition show={open} as={Fragment} leave='transition ease-in duration-100' leaveFrom='opacity-100' leaveTo='opacity-0'>
+                                                    <Listbox.Options
+                                                        static
+                                                        className='absolute md:text-base z-10 mt-1 w-full bg-white shadow-lg rounded-md py-1 text-sm ring-1 ring-blueGray-800 ring-opacity-5 overflow-auto focus:outline-none sm:text-sm'
+                                                    >
+                                                        {filter.map((filter) => (
+                                                            <Listbox.Option
+                                                                key={filter.id}
+                                                                className={({ active }) =>
+                                                                    classNames(
+                                                                        active ? 'text-white bg-blue-600' : 'text-blueGray-900',
+                                                                        'cursor-default select-none relative md:py-1 2xl:py-2 pl-3 pr-9'
+                                                                    )
+                                                                }
+                                                                value={filter}
+                                                            >
+                                                                {({ price, active }) => (
+                                                                    <>
+                                                                        <div className='flex items-center'>
+                                                                            <span className={classNames(price ? 'font-semibold' : 'font-normal', 'block truncate')}>
+                                                                                {filter.value}
+                                                                            </span>
+                                                                        </div>
 
-                                                                    {price ? (
-                                                                        <span
-                                                                            className={classNames(
-                                                                                active ? 'text-white' : 'text-blue-600',
-                                                                                'absolute inset-y-0 right-0 flex items-center pr-4'
-                                                                            )}
-                                                                        >
-                                                                            <CheckIcon className='h-5 w-5' aria-hidden='true' />
-                                                                        </span>
-                                                                    ) : null}
-                                                                </>
-                                                            )}
-                                                        </Listbox.Option>
-                                                    ))}
-                                                </Listbox.Options>
-                                            </Transition>
+                                                                        {price ? (
+                                                                            <span
+                                                                                className={classNames(
+                                                                                    active ? 'text-white' : 'text-blue-600',
+                                                                                    'absolute inset-y-0 right-0 flex items-center pr-4'
+                                                                                )}
+                                                                            >
+                                                                                <CheckIcon className='h-5 w-5' aria-hidden='true' />
+                                                                            </span>
+                                                                        ) : null}
+                                                                    </>
+                                                                )}
+                                                            </Listbox.Option>
+                                                        ))}
+                                                    </Listbox.Options>
+                                                </Transition>
+                                            </div>
+                                        </div>
+                                    )}
+                                </Listbox>
+                                <hr />
+                                {/* Discount and Recommended */}
+                                <div className='flex md:space-y-2 2xl:space-y-4 flex-col text-sm md:text-base'>
+                                    <div className='flex items-center'>
+                                        <div className='flex items-center'>
+                                            <input
+                                                onChange={recommendedHandle}
+                                                id='recommended'
+                                                name='recommended'
+                                                type='checkbox'
+                                                className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-blueGray-300 rounded'
+                                            />
+                                        </div>
+                                        <div className='ml-2 2xl:ml-3'>
+                                            <label htmlFor='recommended' className='xl:text-sm 2xl:text-base font-medium text-blueGray-800'>
+                                                Rekomendasi
+                                            </label>
                                         </div>
                                     </div>
-                                )}
-                            </Listbox>
-                            <hr />
-                            {/* Discount and Recommended */}
-                            <div className='flex md:space-y-2 2xl:space-y-4 flex-col'>
-                                <div className='flex items-center'>
                                     <div className='flex items-center'>
+                                        <div className='flex items-center'>
+                                            <input
+                                                onChange={discountHandle}
+                                                id='discount'
+                                                name='discount'
+                                                type='checkbox'
+                                                className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-blueGray-300 rounded'
+                                            />
+                                        </div>
+                                        <div className='ml-2 2xl:ml-3'>
+                                            <label htmlFor='discount' className='xl:text-sm 2xl:text-base font-medium text-blueGray-800'>
+                                                Promo
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                {/* Price Range */}
+                                <div className='flex space-x-4 items-center text-sm md:text-base'>
+                                    <div className='w-full'>
+                                        <label htmlFor='min' className='block text-sm font-medium text-blueGray-800'>
+                                            Min
+                                        </label>
                                         <input
-                                            onChange={recommendedHandle}
-                                            id='recommended'
-                                            name='recommended'
-                                            type='checkbox'
-                                            className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-blueGray-300 rounded'
+                                            type='text'
+                                            onChange={minPriceHandle}
+                                            name='min'
+                                            placeholder='5.000'
+                                            id='min'
+                                            className='mt-1 text-xs py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
                                         />
                                     </div>
-                                    <div className='md:ml-2 2xl:ml-3'>
-                                        <label htmlFor='recommended' className='xl:text-sm 2xl:text-base font-medium text-blueGray-800'>
-                                            Rekomendasi
+                                    <div className='w-full'>
+                                        <label htmlFor='max' className='block text-sm font-medium text-blueGray-800'>
+                                            Max
                                         </label>
-                                    </div>
-                                </div>
-                                <div className='flex items-center'>
-                                    <div className='flex items-center'>
                                         <input
-                                            onChange={discountHandle}
-                                            id='discount'
-                                            name='discount'
-                                            type='checkbox'
-                                            className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-blueGray-300 rounded'
+                                            onChange={maxPriceHandle}
+                                            type='text'
+                                            placeholder='200.000'
+                                            name='max'
+                                            id='max'
+                                            className='mt-1 text-xs py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
                                         />
                                     </div>
-                                    <div className='md:ml-2 2xl:ml-3'>
-                                        <label htmlFor='discount' className='xl:text-sm 2xl:text-base font-medium text-blueGray-800'>
-                                            Promo
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr />
-                            {/* Price Range */}
-                            <div className='flex space-x-4 items-center'>
-                                <div className='w-full'>
-                                    <label htmlFor='min' className='block text-sm font-medium text-blueGray-800'>
-                                        Min
-                                    </label>
-                                    <input
-                                        type='text'
-                                        onChange={minPriceHandle}
-                                        name='min'
-                                        placeholder='5.000'
-                                        id='min'
-                                        className='mt-1 md:text-xs md:py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
-                                    />
-                                </div>
-                                <div className='w-full'>
-                                    <label htmlFor='max' className='block text-sm font-medium text-blueGray-800'>
-                                        Max
-                                    </label>
-                                    <input
-                                        onChange={maxPriceHandle}
-                                        type='text'
-                                        placeholder='200.000'
-                                        name='max'
-                                        id='max'
-                                        className='mt-1 md:text-xs md:py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
-                                    />
                                 </div>
                             </div>
                         </div>

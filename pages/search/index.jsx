@@ -11,8 +11,8 @@ const index = ({ searchedProducts }) => {
     const query = router.query.s
     return (
         <Layout title={`Pencarian produk ${query}`}>
-            <div className='container mx-auto px-4 2xl:px-0 md:my-5 2xl:my-6'>
-                <div className='w-full flex space-x-2 items-center md:my-2 2xl:my-3'>
+            <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 2xl:my-6'>
+                <div className='w-full flex space-x-2 items-center my-2 2xl:my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
                     </div>
@@ -21,7 +21,7 @@ const index = ({ searchedProducts }) => {
                         <span>Pencarian</span>
                     </div>
                 </div>
-                <h1 className='text-2xl font-semibold text-blueGray-800 md:my-2 2xl:my-3 capitalize'>Pencarian {query}</h1>
+                <h1 className='text-2xl font-semibold text-blueGray-800 my-2 2xl:my-3 capitalize'>Pencarian {query}</h1>
                 <div className='flex justify-between items-center'>
                     <p className='text-sm'>
                         <span>Ditemukan {searchedProducts.length} produk dari </span> <span className='font-semibold'>"{query}"</span>
@@ -31,10 +31,10 @@ const index = ({ searchedProducts }) => {
                     <div className='w-full'>
                         {searchedProducts.length == 0 && (
                             <div className='flex justify-center items-center h-full'>
-                                <div className='text-xl font-semibold text-blueGray-800'>Produk tidak ditemukan</div>
+                                <div className='text-base md:text-xl font-semibold'>Produk tidak ditemukan</div>
                             </div>
                         )}
-                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 md:gap-4 2xl:gap-8 mt-4'>
+                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 2xl:gap-8 mt-4'>
                             {searchedProducts.map((product, index) => (
                                 <ProductCard
                                     key={index}

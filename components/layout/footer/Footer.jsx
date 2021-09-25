@@ -8,23 +8,23 @@ const Footer = () => {
     return (
         <div className='text-blueGray-800'>
             <PaymentGatewayFooter />
-            <div className='w-full h-auto bg-blueGray-200 py-12 '>
-                <div className='container mx-auto px-4 2xl:container 2xl:mx-auto 2xl:px-0 grid lg:grid-flow-col lg:grid-cols-4 md:grid-flow-col md:grid-cols-4'>
+            <div className='w-full h-auto bg-blueGray-200 py-8 md:py-12 '>
+                <div className='container mx-auto px-4 2xl:px-0 grid lg:grid-flow-col lg:grid-cols-4 md:grid-flow-col md:grid-cols-4 gap-4 grid-cols-2'>
                     {/* 1 */}
                     <div className='flex flex-col space-y-4'>
-                        <h1 className='hidden lg:block text-4xl font-bold text-blue-500'>Lokaloka</h1>
-                        <div className='block lg:hidden md:w-10 md:h-10'>
+                        <h1 className='block md:hidden lg:block text-xl md:text-2xl lg:text-4xl font-bold text-blue-500'>Lokaloka</h1>
+                        <div className='hidden md:block lg:hidden md:w-10 md:h-10'>
                             <Image src={Logo} layout='responsive' quality={100} width={1} height={1} priority />
                         </div>
-                        <div className='flex flex-col space-y-2 items-start'>
-                            <a href='https://instagram.com/lokaloka.official' className='flex space-x-2' rel='noopener' target='_blank'>
-                                <div className='h-5 w-5'>
+                        <div className='flex flex-col space-y-2 items-start text-sm md:text-base'>
+                            <a href='https://instagram.com/lokaloka.official' className='flex space-x-2 items-center' rel='noopener' target='_blank'>
+                                <div className='h-4 w-4 lg:h-5 lg:w-5'>
                                     <Image alt='Instagram Account' src='/images/social-media/instagram.png' layout='responsive' width={38} height={38} />
                                 </div>
                                 <span>@lokaloka.official</span>
                             </a>
-                            <a href='https://facebook.com/lokaloka.id' className='flex space-x-2' rel='noopener' target='_blank'>
-                                <div className='h-5 w-5'>
+                            <a href='https://facebook.com/lokaloka.id' className='flex space-x-2 items-center' rel='noopener' target='_blank'>
+                                <div className='h-4 w-4 lg:h-5 lg:w-5'>
                                     <Image alt='Facebook Account' src='/images/social-media/facebook.png' layout='responsive' width={38} height={38} />
                                 </div>
                                 <span>Lokaloka.id</span>
@@ -33,8 +33,8 @@ const Footer = () => {
                     </div>
 
                     {/* 2 */}
-                    <ul className='flex flex-col space-y-4'>
-                        <li className='text-xl font-bold mb-2'>Lokaloka</li>
+                    <ul className='text-sm md:text-base flex flex-col space-y-2 md:space-y-4'>
+                        <li className='font-bold md:mb-2'>Lokaloka</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
                                 Tentang
@@ -48,8 +48,8 @@ const Footer = () => {
                     </ul>
 
                     {/* 3 */}
-                    <ul className='flex flex-col space-y-4'>
-                        <li className='text-xl font-bold mb-2'>Pelayanan</li>
+                    <ul className='text-sm md:text-base flex flex-col space-y-2 md:space-y-4'>
+                        <li className='font-bold md:mb-2'>Pelayanan</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
                                 Kota Afiliasi
@@ -68,8 +68,8 @@ const Footer = () => {
                     </ul>
 
                     {/* 4 */}
-                    <ul className='flex flex-col space-y-4'>
-                        <li className='text-xl font-bold mb-2'>Bantuan dan Panduan</li>
+                    <ul className='text-sm md:text-base flex flex-col space-y-2 md:space-y-4'>
+                        <li className='font-bold md:mb-2'>Bantuan dan Panduan</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
                                 Kebijakan Pribadi

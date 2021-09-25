@@ -8,8 +8,8 @@ import Layout from '@/components/layout/Layout'
 const index = ({ promos }) => {
     return (
         <Layout title='Promo Spesial'>
-            <div className='container mx-auto px-4 2xl:px-0 md:my-5 2xl:my-6'>
-                <div className='w-full flex space-x-2 items-center my-3'>
+            <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 2xl:my-6'>
+                <div className='w-full hidden md:flex space-x-2 items-center my-3'>
                     <div className='text-blue-700 hover:text-blue-800'>
                         <Link href='/'>Home</Link>
                     </div>
@@ -18,15 +18,15 @@ const index = ({ promos }) => {
                         <span>Promo 10.10</span>
                     </div>
                 </div>
-                <h1 className='text-2xl font-semibold text-blueGray-800 xl:my-2 2xl:my-3'>Promo 10.10</h1>
+                <h1 className='text-lg md:text-2xl font-semibold text-blueGray-800 xl:my-2 2xl:my-3'>Promo 10.10</h1>
                 <div className='flex space-x-8'>
                     <div className='w-full'>
                         {promos.length == 0 && (
                             <div className='flex justify-center items-center h-full'>
-                                <div className='text-xl font-semibold text-blueGray-800'>Produk tidak ditemukan</div>
+                                <div className='text-base md:text-xl font-semibold'>Produk tidak ditemukan</div>
                             </div>
                         )}
-                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 sm:gap-4 xl:gap-8 mt-4'>
+                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 xl:gap-8 mt-4'>
                             {promos.map((product, index) => (
                                 <ProductCard
                                     key={index}

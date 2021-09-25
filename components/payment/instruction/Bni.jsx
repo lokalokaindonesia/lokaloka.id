@@ -5,17 +5,17 @@ const Bni = ({ transaction }) => {
     const [via, setVia] = useState('mBanking')
 
     return (
-        <div className='flex flex-col md:space-y-2 xl:space-y-4'>
-            <div className='shadow-md p-4 rounded-md bg-gradient-to-tr from-teal-500 to-teal-600 text-white flex flex-col md:space-y-2 xl:space-y-4'>
-                <div className='flex justify-between items-center'>
+        <div className='flex flex-col space-y-2 xl:space-y-4'>
+            <div className='shadow-md p-2 md:p-4 rounded-md bg-gradient-to-tr from-teal-500 to-teal-600 text-white flex flex-col space-y-2 xl:space-y-4'>
+                <div className='flex md:flex-row md:justify-between md:items-center flex-col space-y-2'>
                     <div className='flex flex-col'>
-                        <span className='text-blueGray-200'>{transaction.code}</span>
-                        <h1 className='md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold'>{transaction.paymentMethod}</h1>
+                        <span className='text-xs md:text-base text-blueGray-200'>{transaction.code}</span>
+                        <h1 className='text-sm md:text-lg lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold'>{transaction.paymentMethod}</h1>
                     </div>
                     <div className='flex flex-col'>
-                        <span className='text-blueGray-200'>Total Pembayaran</span>
+                        <span className='text-xs md:text-base text-blueGray-200'>Total Pembayaran</span>
                         <NumberFormat
-                            className='md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold'
+                            className='text-sm md:text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold'
                             value={transaction.totalPrice}
                             displayType={'text'}
                             thousandSeparator={true}
@@ -23,24 +23,24 @@ const Bni = ({ transaction }) => {
                         />
                     </div>
                 </div>
-                <div className='flex justify-between items-center'>
+                <div className='flex flex-col space-y-2 md:flex-row md:justify-between md:items-center'>
                     <div>
-                        <span className='text-blueGray-200'>No Rekening</span>
-                        <div className='font-semibold md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl'>{transaction.bankNumber} / Lokaloka</div>
+                        <span className='text-xs md:text-base text-blueGray-200'>No Rekening</span>
+                        <div className='font-semibold text-sm md:text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl'>{transaction.bankNumber} / Lokaloka</div>
                     </div>
                     <div>
-                        <span className='text-blueGray-200'>Bayar tagihan sebelum </span>
-                        <div className='font-medium md:text-lg xl:text-xl'>08:00 | 10 September 2021</div>
+                        <span className='text-xs md:text-base text-blueGray-200'>Bayar tagihan sebelum </span>
+                        <div className='font-medium text-sm md:text-lg xl:text-xl'>08:00 | 10 September 2021</div>
                     </div>
                 </div>
             </div>
             <br />
-            <h1 className='text-lg text-blueGray-500'>Instruksi Pembayaran</h1>
-            <div className='flex space-x-4'>
-                <div className='flex flex-col space-y-2 w-2/12'>
+            <h1 className='text-base md:text-lg text-blueGray-500'>Instruksi Pembayaran</h1>
+            <div className='flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 lg:space-x-4'>
+                <div className='flex w-full flex-row space-x-2 md:flex-col md:space-x-0 md:space-y-2 md:w-2/12'>
                     <h3
                         onClick={() => setVia('mBanking')}
-                        className={`cursor-pointer shadow-sm text-sm md:px-2 xl:px-4 py-1 border border-blueGray-300 rounded-md ${
+                        className={`cursor-pointer shadow-sm text-sm px-2 xl:px-4 py-1 border border-blueGray-300 rounded-md ${
                             via == 'mBanking' && 'bg-blue-500 text-white border-blue-500'
                         }`}
                     >
@@ -48,7 +48,7 @@ const Bni = ({ transaction }) => {
                     </h3>
                     <h3
                         onClick={() => setVia('iBanking')}
-                        className={`cursor-pointer shadow-sm text-sm md:px-2 xl:px-4 py-1 border border-blueGray-300 rounded-md ${
+                        className={`cursor-pointer shadow-sm text-sm px-2 xl:px-4 py-1 border border-blueGray-300 rounded-md ${
                             via == 'iBanking' && 'bg-blue-500 text-white border-blue-500'
                         }`}
                     >
@@ -56,7 +56,7 @@ const Bni = ({ transaction }) => {
                     </h3>
                     <h3
                         onClick={() => setVia('atm')}
-                        className={`cursor-pointer shadow-sm text-sm md:px-2 xl:px-4 py-1 border border-blueGray-300 rounded-md ${
+                        className={`cursor-pointer shadow-sm text-sm px-2 xl:px-4 py-1 border border-blueGray-300 rounded-md ${
                             via == 'atm' && 'bg-blue-500 text-white border-blue-500'
                         }`}
                     >

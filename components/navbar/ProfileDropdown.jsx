@@ -23,7 +23,7 @@ const ProfileDropdown = () => {
     }
 
     return (
-        <Menu as='div' className='relative inline-block text-left'>
+        <Menu as='div' className='hidden relative md:inline-block text-left'>
             <Menu.Button className='w-10 h-10'>
                 {!session.user.image && <img alt='Profile Image' src={`https://ui-avatars.com/api/?name=${session.user.name}`} className='rounded-full' />}
                 {session.user.image && <Image src={session.user.image} alt='Profile Image' className='rounded-full' width={1} height={1} priority layout='responsive' />}

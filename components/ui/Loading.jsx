@@ -7,7 +7,7 @@ const Loading = () => {
     })
     return (
         <div className='w-screen h-screen flex items-center justify-center'>
-            <div className='w-96 h-96'>
+            <div className='w-full md:w-96 h-full md:h-96'>
                 <lottie-player
                     src='https://assets1.lottiefiles.com/packages/lf20_dci867n1.json'
                     id='verified'
