@@ -416,28 +416,36 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 <LinkIcon onClick={() => navigator.clipboard.writeText(shareLink)} className='cursor-pointer w-5 h-5 lg:w-6 lg:h-6' />
                             </div>
                         </div>
-                        <div className='flex flex-col space-y-1 md:space-y-2'>
-                            <div className='text-sm font-semibold text-blueGray-600'>Kuantitas</div>
-                            <div className='flex items-center border border-blueGray-300 bg-white rounded'>
-                                <div
-                                    onClick={reduceQty}
-                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r border-blueGray-300'
-                                >
-                                    -
+                        <div className='sticky bottom-4 bg-blueGray-50 py-4 flex flex-col space-y-2 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
+                            <div className='flex justify-between items-center'>
+                                <div className='flex flex-col space-y-1'>
+                                    <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
+                                    <NumberFormat
+                                        value={subtotal}
+                                        displayType={'text'}
+                                        thousandSeparator={true}
+                                        prefix={'Rp. '}
+                                        className='md:text-xl 2xl:text-2xl font-extrabold'
+                                    />
                                 </div>
-                                <div className='px-4 py-1 flex-1 text-center '>{quantity}</div>
-                                <div
-                                    onClick={addQty}
-                                    className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l border-blueGray-300'
-                                >
-                                    +
+                                <div className='flex flex-col space-y-1 md:space-y-2'>
+                                    <div className='text-sm font-semibold text-blueGray-600'>Kuantitas</div>
+                                    <div className='flex items-center border border-blueGray-300 bg-white rounded'>
+                                        <div
+                                            onClick={reduceQty}
+                                            className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 md:py-1 font-bold text-center border-r border-blueGray-300'
+                                        >
+                                            -
+                                        </div>
+                                        <div className='px-4 md:py-1 flex-1 text-center '>{quantity}</div>
+                                        <div
+                                            onClick={addQty}
+                                            className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 md:py-1 font-bold text-center border-l border-blueGray-300'
+                                        >
+                                            +
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className='sticky bottom-4 bg-blueGray-50 py-4 flex flex-col space-y-1 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
-                            <div className='flex flex-col space-y-1'>
-                                <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
-                                <NumberFormat value={subtotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='md:text-xl 2xl:text-2xl font-extrabold' />
                             </div>
                             <div className='hidden md:flex'>
                                 {addToCartLoading ? (
