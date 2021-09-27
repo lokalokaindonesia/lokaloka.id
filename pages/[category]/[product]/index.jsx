@@ -314,11 +314,11 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                         />
                                     </div>
                                     {addToCartLoading ? (
-                                        <Button type='secondary' displayType='flex' size='lg' width='full' href={() => {}}>
+                                        <Button type='secondary' displayType='flex' size='base' width='full' href={() => {}}>
                                             <span className=''>Menambahkan...</span>
                                         </Button>
                                     ) : (
-                                        <Button type='primary' displayType='flex' size='lg' width='full' href={() => addToCart()}>
+                                        <Button type='primary' displayType='flex' size='base' width='full' href={() => addToCart()}>
                                             <span className=''>Tambah Keranjang</span>
                                         </Button>
                                     )}
@@ -333,9 +333,9 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                 </div>
 
                 {/* Mobile and Desktop */}
-                <div className='flex flex-col space-y-2 md:hidden lg:flex lg:flex-row lg:justify-start lg:space-x-6 my-4 md:my-5 2xl:my-6 2xl:space-x-8'>
-                    <div className='block md:hidden lg:block w-auto'>
-                        <div className='flex justify-end absolute w-[20.5rem] h-[20.5rem] lg:w-96 z-20 items-start px-4 py-4'>
+                <div className='flex flex-col space-y-2 space-x-0 md:hidden lg:space-y-0 lg:flex lg:flex-row lg:justify-start my-4 md:my-5 2xl:my-6'>
+                    <div className='aspect-w-1 aspect-h-1 lg:hidden w-full'>
+                        <div className='flex justify-end absolute w-full h-full lg:w-96 z-20 items-start px-4 py-4'>
                             <div
                                 className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50'
                                 onClick={() => {
@@ -345,7 +345,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 <FaHeart className={`${isFavorited ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
                             </div>
                         </div>
-                        <div className='flex justify-between w-[20.5rem] h-[20.5rem] lg:w-96 lg:h-96 absolute'>
+                        <div className='flex justify-between w-full h-full lg:w-96 lg:h-96 absolute'>
                             {product.images.map((img, index) => {
                                 return (
                                     <div key={index} className={index === current ? 'w-full h-full ease-in-out duration-300 transition-all select-none' : 'hidden'}>
@@ -354,7 +354,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 )
                             })}
                         </div>
-                        <div className='w-[20.5rem] h-[20.5rem] lg:w-96 lg:h-96 flex justify-between items-center'>
+                        <div className='w-full h-full lg:w-96 lg:h-96 flex justify-between items-center'>
                             <ChevronLeftIcon className='w-8 h-8 rounded-r-md bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-20 cursor-pointer' onClick={prevSlide} />
                             <ChevronRightIcon
                                 className='w-8 h-8 rounded-l-md bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-20 cursor-pointer'
@@ -362,9 +362,36 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                             />
                         </div>
                     </div>
-
+                    <div className='hidden lg:flex flex-1 w-96 h-96'>
+                        <div className='flex justify-end absolute w-96 z-20 items-start px-4 py-4'>
+                            <div
+                                className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50'
+                                onClick={() => {
+                                    favoriteHandle()
+                                }}
+                            >
+                                <FaHeart className={`${isFavorited ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
+                            </div>
+                        </div>
+                        <div className='flex w-96 h-96 absolute'>
+                            {product.images.map((img, index) => {
+                                return (
+                                    <div key={index} className={index === current ? 'w-96 h-96 ease-in-out duration-300 transition-all select-none' : 'hidden'}>
+                                        <Image alt={product.name} src={img.url} className='rounded-lg' layout='responsive' width={1} height={1} objectFit='cover' />
+                                    </div>
+                                )
+                            })}
+                        </div>
+                        <div className='w-96 h-96 flex justify-between items-center'>
+                            <ChevronLeftIcon className='w-8 h-8 rounded-r-md bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-20 cursor-pointer' onClick={prevSlide} />
+                            <ChevronRightIcon
+                                className='w-8 h-8 rounded-l-md bg-gray-100 bg-opacity-50 text-gray-400 hover:text-gray-600 z-20 cursor-pointer'
+                                onClick={nextSlide}
+                            />
+                        </div>
+                    </div>
                     {/* Product Details */}
-                    <div className='block md:hidden lg:block h-full w-full flex-auto'>
+                    <div className='block md:hidden lg:block h-full w-full lg:px-6 flex-initial'>
                         <div className='flex flex-col space-y-2 md:space-y-2'>
                             <div className='text-lg md:text-xl md:-mt-1 2xl:text-2xl 2xl:-mt-2 font-bold'>{product.name}</div>
                             <Badge text='Rekomendasi' color='green' />
@@ -417,7 +444,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                             </div>
                         </div>
                         <div className='sticky bottom-4 bg-blueGray-50 flex flex-col space-y-2 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
-                            <div className='flex justify-between items-center lg:flex-col lg:space-y-2 lg:items-start py-2'>
+                            <div className='flex justify-between items-center lg:flex-col lg:space-y-4 lg:items-start py-2'>
                                 <div className='flex flex-col space-y-1'>
                                     <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
                                     <NumberFormat
