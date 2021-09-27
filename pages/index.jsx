@@ -64,6 +64,7 @@ export const getStaticProps = async () => {
 
     const getPromo = await products.filter((item) => item.discount != 0)
     const promo = await getPromo.splice(0, 12)
+
     const getRecommended = await products.filter((item) => item.isRecommended == true)
     const recommended = await getRecommended.splice(0, 12)
 

@@ -19,13 +19,13 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                         width={4}
                         height={5}
                         layout='responsive'
-                        priority
                         objectFit='cover'
                         quality={75}
                     />
                 </div>
                 <div className='flex flex-col space-y-1 p-2'>
-                    <span className='line-clamp-2 text-base font-normal text-left leading-snug'>{productName}</span>
+                    <div className={isRecommended ? 'px-1 md:px-2 md:py-1 bg-green-100 text-xs md:font-bold text-green-500 w-max rounded' : 'hidden'}>Rekomendasi</div>
+                    <span className='line-clamp-2 text-sm md:text-base font-normal text-left leading-snug'>{productName}</span>
                     <div className='flex flex-col items-start space-y-1 leading-snug pb-1'>
                         <NumberFormat
                             value={isDiscount ? sellingPrice : price}
@@ -53,7 +53,6 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                             </div>
                         )}
                     </div>
-                    <div className={isRecommended ? 'px-2 py-1 bg-green-100 text-xs font-bold text-green-500 w-max rounded' : 'hidden'}>Rekomendasi</div>
                 </div>
             </button>
         </Link>

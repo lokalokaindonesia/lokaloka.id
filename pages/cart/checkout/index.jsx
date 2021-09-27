@@ -234,6 +234,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
             const transactionData = {
                 ...orderData[0],
+                shouldPayAmount: total,
                 code: invoiceResponse.external_id,
                 paymentStatus: invoiceResponse.status,
                 paymentMethod: choosenPaymentMethod,
@@ -269,6 +270,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
             const transactionData = {
                 ...orderData[0],
+                shouldPayAmount: total,
                 code: gopayResponse.order_id,
                 paymentStatus: gopayResponse.transaction_status.toUpperCase(),
                 qrCodeString: gopayResponse.actions[0].url,
@@ -310,6 +312,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
             const transactionData = {
                 ...orderData[0],
+                shouldPayAmount: total,
                 code: eWalletResponse.reference_id,
                 paymentStatus: eWalletResponse.status,
                 paymentMethod: choosenPaymentMethod,
@@ -347,6 +350,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
             const transactionData = {
                 ...orderData[0],
+                shouldPayAmount: total,
                 code: eWalletResponse.reference_id,
                 paymentStatus: eWalletResponse.status,
                 paymentMethod: choosenPaymentMethod,
@@ -381,6 +385,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
             const transactionData = {
                 ...orderData[0],
+                shouldPayAmount: total,
                 code: qrCodeResponse.external_id,
                 paymentStatus: qrCodeResponse.status,
                 paymentMethod: choosenPaymentMethod,
@@ -417,6 +422,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             // return console.log(retailOutletInvoiceResponse)
             const transactionData = {
                 ...orderData[0],
+                shouldPayAmount: total,
                 code: retailOutletInvoiceResponse.external_id,
                 paymentStatus: retailOutletInvoiceResponse.status,
                 paymentMethod: choosenPaymentMethod,

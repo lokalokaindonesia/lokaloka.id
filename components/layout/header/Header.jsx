@@ -112,7 +112,7 @@ const Header = () => {
 
             <div className='w-2/12 text-2xl font-extrabold text-blue-500 tracking-wide'>
                 <Link href='/'>
-                    <div>
+                    <div className='cursor-pointer'>
                         <h1 className='hidden lg:block text-4xl font-bold text-blue-500'>Lokaloka</h1>
                         <div className='block lg:hidden w-8 h-8 md:w-10 md:h-10'>
                             <Image src={Logo} layout='responsive' quality={100} width={1} height={1} priority />
