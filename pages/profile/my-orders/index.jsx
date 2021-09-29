@@ -210,7 +210,7 @@ const index = ({ user, session }) => {
                                             </p>
                                         </div>
                                         <NumberFormat
-                                            value={transaction.totalPrice}
+                                            value={transaction.shouldPayAmount || transaction.totalPrice}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'Rp. '}
@@ -240,7 +240,7 @@ const index = ({ user, session }) => {
                                         <div className='hidden w-full md:w-4/12 xl:w-full md:flex items-end flex-col space-y-2'>
                                             <span className='text-sm text-blueGray-400'>Total</span>
                                             <NumberFormat
-                                                value={transaction.totalPrice}
+                                                value={transaction.shouldPayAmount || transaction.totalPrice}
                                                 displayType={'text'}
                                                 thousandSeparator={true}
                                                 prefix={'Rp. '}
