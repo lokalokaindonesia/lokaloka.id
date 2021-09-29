@@ -268,21 +268,19 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
 
-            const transactionData = {
-                ...orderData[0],
-                shouldPayAmount: total,
-                code: gopayResponse.data.transaction_details.order_id,
-                paymentStatus: 'PENDING',
-                // qrCodeString: gopayResponse.actions[0].url,
-                paymentMethod: choosenPaymentMethod,
-            }
-
             setPayLoading(false)
             setOpenModalConfirmation(false)
 
             return window.snap.pay(gopayResponse.resp.token, {
                 onSuccess: async () => {
-                    const createTransaction = await axios.post(`/api/transactions`, transactionData)
+                    const createTransaction = await axios.post(`/api/transactions`, {
+                        ...orderData[0],
+                        shouldPayAmount: total,
+                        code: gopayResponse.data.transaction_details.order_id,
+                        paymentStatus: 'PAID',
+                        // qrCodeString: gopayResponse.actions[0].url,
+                        paymentMethod: choosenPaymentMethod,
+                    })
                     const transactionResponse = await createTransaction.data
 
                     dispatch(setTransaction(transactionResponse))
@@ -296,7 +294,14 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                     })
                 },
                 onPending: async () => {
-                    const createTransaction = await axios.post(`/api/transactions`, transactionData)
+                    const createTransaction = await axios.post(`/api/transactions`, {
+                        ...orderData[0],
+                        shouldPayAmount: total,
+                        code: gopayResponse.data.transaction_details.order_id,
+                        paymentStatus: 'PENDING',
+                        // qrCodeString: gopayResponse.actions[0].url,
+                        paymentMethod: choosenPaymentMethod,
+                    })
                     const transactionResponse = await createTransaction.data
 
                     dispatch(setTransaction(transactionResponse))
