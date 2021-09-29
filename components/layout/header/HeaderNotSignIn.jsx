@@ -79,14 +79,27 @@ const HeaderNotSignIn = () => {
                 <Link href='/'>
                     <div>
                         <h1 className='hidden lg:block text-4xl font-bold text-blue-500'>Lokaloka</h1>
-                        <div className='block lg:hidden w-8 h-8 md:w-10 md:h-10'>
-                            <Image src={Logo} layout='responsive' quality={100} width={1} height={1} priority />
-                        </div>
                     </div>
                 </Link>
             </div>
 
-            <div className='w-8/12 flex justify-center '>
+            <div className='w-10/12 md:w-8/12 flex justify-start md:justify-center'>
+                <form method='post' className='block md:hidden' action={`/search?s=${inputText}`}>
+                    <div className='flex rounded-md shadow-sm'>
+                        <span className='inline-flex bg-white bg-opacity-50 border border-r-0 border-blueGray-200 items-center px-3 rounded-l-md'>
+                            <SearchIcon className='w-4 h-4 text-blueGray-400' />
+                        </span>
+                        <input
+                            type='text'
+                            required={true}
+                            name='search'
+                            onChange={handleInputSearch}
+                            id='search'
+                            className='block w-full bg-white bg-opacity-50 text-blueGray-700 border-l-0 placeholder-gray-400 border-blueGray-200 px-2 py-2 shadow-sm text-xs focus:border-blueGray-200 focus:ring-0 rounded-l-0 rounded-r-md'
+                            placeholder='Cari produk disini...'
+                        />
+                    </div>
+                </form>
                 <div className='hidden md:flex md:space-x-3 lg:space-x-4 xl:space-x-8 flex-initial font-medium text-blueGray-600'>
                     <HeaderActiveLink href='/'>Home</HeaderActiveLink>
                     <HeaderActiveLink href='/makanan-dan-minuman'>Makanan dan Minuman</HeaderActiveLink>
@@ -96,9 +109,6 @@ const HeaderNotSignIn = () => {
             </div>
 
             <div className='w-4/12 md:w-2/12 flex items-center justify-end space-x-2 md:space-x-3 lg:space-x-4 xl:space-x-6'>
-                <button type='button' name='search' aria-label='Search' onClick={() => setOpen(true)}>
-                    <SearchIcon className='h-6 w-6 text-blueGray-600 cursor-pointer' />
-                </button>
                 <Button href={() => router.push('/account/login')} size='base' width='max' display='block' type='secondary'>
                     <span>Sign In</span>
                 </Button>
