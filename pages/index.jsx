@@ -2,12 +2,16 @@ import Image from 'next/image'
 import axios from 'axios'
 import { useSession } from 'next-auth/client'
 import { useDispatch } from 'react-redux'
+import Link from 'next/link'
 import Hero from '@/components/layout/Hero'
 import HighlightedSection from '@/components/layout/HighlightedSection'
 import JustForYou from '@/components/layout/JustForYou'
 import Layout from '@/components/layout/Layout'
 import kaldera from '../public/images/banner/kaldera.jpg'
 import banner from '../public/images/banner/banner.png'
+import food from '../public/images/category/food.jpg'
+import fashion from '../public/images/category/fashion.jpg'
+import craft from '../public/images/category/craft.jpg'
 import { setOrder } from '@/redux/orderSlice'
 
 const Home = ({ products, promo, recommended }) => {
@@ -29,6 +33,35 @@ const Home = ({ products, promo, recommended }) => {
             <Layout title='Liburan seru bareng Lokaloka.id'>
                 {/* Hero */}
                 <Hero />
+
+                {/* Category */}
+                <div className='container mx-auto px-4 md:hidden flex space-x-4 py-4 bg-blue-100 justify-between items-center'>
+                    <Link href='/makanan-dan-minuman'>
+                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-blue-400 h-auto rounded-md relative'>
+                            <Image src={food} priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
+                            <span className='absolute bottom-0 text-xs bg-gradient-to-t from-blueGray-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
+                                Makanan & Minuman
+                            </span>
+                        </div>
+                    </Link>
+                    <Link href='/kerajinan'>
+                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-blue-400 h-auto rounded-md relative'>
+                            <Image src={craft} priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
+                            <span className='absolute bottom-0 text-xs bg-gradient-to-t from-blueGray-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
+                                Kerajinan
+                            </span>
+                        </div>
+                    </Link>
+                    <Link href='/fashion'>
+                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-blue-400 h-auto rounded-md relative'>
+                            <Image src={fashion} priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
+                            <span className='absolute bottom-0 text-xs bg-gradient-to-t from-blueGray-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
+                                Fashion
+                            </span>
+                        </div>
+                    </Link>
+                </div>
+                {/* End Category */}
 
                 {/* Product Section */}
                 {promo.length != 0 && <HighlightedSection sectionTitle='Promo' href='#' data={promo} bgColor='bg-white' />}
