@@ -330,14 +330,14 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                                         <div className='flex items-center border h-6 md:h-8 w-max rounded ml-6 md:ml-[8.7rem] border-blueGray-300'>
                                                                             <div
                                                                                 onClick={() => reduceQty(product)}
-                                                                                className='select-none rounded-l cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r border-blueGray-300 text-blue-gray-800'
+                                                                                className='select-none rounded-l cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-2 md:px-3 md:py-1 font-bold text-center border-r border-blueGray-300 text-blue-gray-800'
                                                                             >
                                                                                 -
                                                                             </div>
                                                                             <div className='px-4 py-1 w-12 flex-1 text-center text-blue-gray-800 '>{product.quantity}</div>
                                                                             <div
                                                                                 onClick={() => addQty(product)}
-                                                                                className='select-none rounded-r cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l border-blueGray-300 text-blue-gray-800'
+                                                                                className='select-none rounded-r cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-2 md:px-3 md:py-1 font-bold text-center border-l border-blueGray-300 text-blue-gray-800'
                                                                             >
                                                                                 +
                                                                             </div>
@@ -360,8 +360,8 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                         <input
                                             className={
                                                 coupon
-                                                    ? 'px-2 py-1 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border-2 focus:border-green-500 focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-blueGray-400'
-                                                    : 'px-2 py-1 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border-2 focus:border-blueGray-500 focus:border-2 focus:ring-0 border-blueGray-500 transition ease-in-out duration-300 font-bold '
+                                                    ? 'px-2 py-1 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border md:border-2 focus:border-green-500 focus:border md:focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-blueGray-400'
+                                                    : 'px-2 py-1 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border md:border-2 focus:border-blueGray-500 focus:border md:focus:border-2 focus:ring-0 border-blueGray-500 transition ease-in-out duration-300 font-bold '
                                             }
                                             placeholder='Kode Kupon'
                                             disabled={coupon && 'disabled'}
@@ -372,8 +372,8 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                             type='submit'
                                             className={
                                                 coupon
-                                                    ? 'text-sm md:text-base rounded-r px-2 py-1 md:px-3 md:py-2 text-white font-bold border-2 border-green-300 bg-green-300'
-                                                    : 'text-sm md:text-base rounded-r px-2 py-1 md:px-3 md:py-2 text-white font-bold border-2 border-blueGray-500 bg-blueGray-500'
+                                                    ? 'text-sm md:text-base rounded-r px-2 py-1 md:px-3 md:py-2 text-white font-bold border md:border-2 border-green-300 bg-green-300'
+                                                    : 'text-sm md:text-base rounded-r px-2 py-1 md:px-3 md:py-2 text-white font-bold border md:border-2 border-blueGray-500 bg-blueGray-500'
                                             }
                                         >
                                             Terapkan
@@ -382,13 +382,13 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                     <hr />
                                     {/* Summary */}
                                     <div className='flex flex-col space-y-2'>
-                                        <div className='text-lg md:text-xl font-bold '>Rincian</div>
+                                        <div className='text-base md:text-xl font-bold '>Rincian</div>
                                         <div className='flex flex-col space-y-1'>
-                                            <div className='text-sm md:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                            <div className='text-xs md:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                                 <span>Total Harga</span>
                                                 <NumberFormat value={summaryTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                             </div>
-                                            <div className='text-sm md:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                            <div className='text-xs md:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                                 <span>Total Diskon</span>
                                                 <NumberFormat value={discountTotal} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
                                             </div>
@@ -396,7 +396,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                     </div>
                                     <hr />
                                     {/* Total */}
-                                    <div className='text-sm md:text-base flex justify-between items-center'>
+                                    <div className='text-xs md:text-base flex justify-between items-center'>
                                         <div className='text-blueGray-500 font-semibold flex justify-between items-center'>Sub Total</div>
                                         <NumberFormat className='text-blueGray-500 font-semibold' value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                     </div>
@@ -412,13 +412,13 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                         </div>
                                     )}
                                     <div className='flex justify-between items-center'>
-                                        <div className='text-lg md:text-xl font-bold '>Total</div>
+                                        <div className='text-base md:text-xl font-bold '>Total</div>
                                         <NumberFormat
                                             value={grandTotal}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'Rp. '}
-                                            className='text-lg md:text-xl font-bold text-blue-500'
+                                            className='text-base md:text-xl font-bold text-blue-500'
                                         />
                                     </div>
                                     <hr />

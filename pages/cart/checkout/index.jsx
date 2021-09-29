@@ -808,7 +808,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     <h2 className='text-base md:text-lg font-semibold mb-3'>Metode Pembayaran</h2>
                                     <div className='flex flex-col space-y-2 2xl:space-y-4 font-semibold text-blueGray-500'>
                                         <div className='flex flex-col space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-sm md:text-base text-semibold'>Virtual Account</h3>
+                                            <h3 className='text-sm md:text-base font-normal'>Virtual Account</h3>
                                             <div className='flex space-x-2 md:space-x-4 items-center'>
                                                 {paymentMethodCollection
                                                     .filter((pm) => pm.type == 'va')
@@ -843,7 +843,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             </div>
                                         </div>
                                         <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-sm md:text-base text-semibold'>E-Wallet</h3>
+                                            <h3 className='text-sm md:text-base font-normal'>E-Wallet</h3>
                                             <div className='flex space-x-2 md:space-x-4 items-center'>
                                                 {paymentMethodCollection
                                                     .filter((pm) => pm.type == 'ewallet')
@@ -879,7 +879,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         </div>
 
                                         <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-sm md:text-base text-semibold'>QRCode</h3>
+                                            <h3 className='text-sm md:text-base font-normal'>QRCode</h3>
                                             <div className='flex space-x-2 md:space-x-4 items-center'>
                                                 {paymentMethodCollection
                                                     .filter((pm) => pm.type == 'qrcode')
@@ -917,7 +917,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             </div>
                                         </div>
                                         <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-sm md:text-base text-semibold'>Retail Outlet</h3>
+                                            <h3 className='text-sm md:text-base font-normal'>Retail Outlet</h3>
                                             <div className='flex space-x-2 md:space-x-4 items-center'>
                                                 {paymentMethodCollection
                                                     .filter((pm) => pm.type == 'retail-outlet')
@@ -968,13 +968,13 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                             <div className='sticky top-28 p-4 bg-white border drop-shadow-sm border-blueGray-200 h-auto rounded-md flex flex-col space-y-4'>
                                 {/* Summary */}
                                 <div className='flex flex-col space-y-2'>
-                                    <div className='text-lg md:text-xl font-bold '>Rincian</div>
-                                    <div className='flex flex-col space-y-1  text-sm md:text-base'>
-                                        <div className='text-sm 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                    <div className='text-base md:text-xl font-bold '>Rincian</div>
+                                    <div className='flex flex-col space-y-xs text-sm md:text-base'>
+                                        <div className='text-xs 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <span>Total ({order.totalQuantity})</span>
                                             <NumberFormat value={order.totalPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
-                                        <div className='text-sm 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                        <div className='text-xs 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-baseline'>
                                                 <span>Pengiriman</span>
                                                 {/* {shippingEtd && <span className='text-blueGray-400 lg:text-sm 2xl:text-sm'>{`(Etd ${shippingEtd} Days via JNE)`}</span>} */}
@@ -986,13 +986,13 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                 <hr />
                                 {/* Total */}
                                 <div className='flex justify-between items-center'>
-                                    <div className='text-lg 2xl:text-xl font-bold '>Total</div>
+                                    <div className='text-base 2xl:text-xl font-bold '>Total</div>
                                     <NumberFormat
                                         value={total}
                                         displayType={'text'}
                                         thousandSeparator={true}
                                         prefix={'Rp. '}
-                                        className='text-lg 2xl:text-xl font-bold text-blue-500'
+                                        className='text-base 2xl:text-xl font-bold text-blue-500'
                                     />
                                 </div>
                                 <hr />

@@ -83,7 +83,7 @@ const Footer = () => {
                     </ul>
                 </div>
             </div>
-            <div className='w-full h-auto bg-blueGray-100 py-4 flex items-center justify-center'>
+            <div className='w-full h-auto text-sm md:text-base bg-blueGray-100 py-4 flex items-center justify-center'>
                 &copy; Lokaloka, With ❤️ from &nbsp; <b>Lokaloka Group</b>
             </div>
         </div>

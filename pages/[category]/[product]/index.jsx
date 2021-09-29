@@ -443,7 +443,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 <LinkIcon onClick={() => navigator.clipboard.writeText(shareLink)} className='cursor-pointer w-5 h-5 lg:w-6 lg:h-6' />
                             </div>
                         </div>
-                        <div className='sticky bottom-4 bg-blueGray-50 flex flex-col space-y-2 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
+                        <div className='bg-blueGray-50 flex flex-col space-y-2 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
                             <div className='flex justify-between items-center lg:flex-col lg:space-y-4 lg:items-start py-2'>
                                 <div className='flex flex-col space-y-1'>
                                     <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>

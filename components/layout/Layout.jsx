@@ -4,6 +4,7 @@ import Header from '@/components/layout/header/Header'
 import HeaderNotSignIn from '@/components/layout/header/HeaderNotSignIn'
 import Banner from '@/components/ui/Banner'
 import { useSession } from 'next-auth/client'
+import BottomMenuBar from '../bottomBar/BottomMenuBar'
 
 const Layout = ({ title, children }) => {
     const [session, loading] = useSession()
@@ -22,6 +23,10 @@ const Layout = ({ title, children }) => {
 
             {/* Footer */}
             <Footer />
+
+            {/* Bottom Mobile Menu */}
+            <BottomMenuBar />
+            {/* End Bottom Mobile Menu */}
             {/* <Banner msg='This is Beta Version, You transaction only a simulation. Please leave a feedback on this email (kampungvector@gmail.com)' /> */}
         </div>
     )
