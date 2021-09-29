@@ -46,7 +46,7 @@ const index = ({ user, session }) => {
                         <div className='static px-4 md:hidden'>
                             <Image src='/images/account/member.png' className='rounded-lg shadow' layout='responsive' width={5} height={2} priority objectFit='cover' />
                         </div>
-                        <div className='absolute top-4 left-8 md:top-5 md:left-8 xl:top-8 xl:left-8 2xl:top-12 2xl:left-12'>
+                        <div className='absolute top-5 left-8 md:top-5 md:left-8 xl:top-8 xl:left-8 2xl:top-12 2xl:left-12'>
                             <div className='flex items-center space-x-2 md:space-x-8'>
                                 {!session.user.image && (
                                     <img
@@ -58,8 +58,8 @@ const index = ({ user, session }) => {
                                 <div className='flex flex-col space-y-2 md:space-y-2 xl:space-y-6 2xl:space-y-8 h-full'>
                                     <div className='flex space-x-4 items-center'>
                                         <span className='lg:text-xl xl:text-2xl font-bold text-white'>{user.name}</span>
-                                        <div className='flex space-x-2 items-center px-1 md:px-2 md:py-1 rounded bg-blue-500 bg-opacity-50'>
-                                            <span className='text-white text-xs'>Verified</span>
+                                        <div className='flex md:space-x-2 items-center px-1 md:px-2 md:py-1 rounded bg-blue-500 bg-opacity-50'>
+                                            <span className='hidden md:block text-white text-xs'>Verified</span>
                                             <lottie-player
                                                 src='https://assets2.lottiefiles.com/packages/lf20_bvjhz66u.json'
                                                 id='verified'
