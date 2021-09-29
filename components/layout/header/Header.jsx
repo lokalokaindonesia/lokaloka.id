@@ -121,7 +121,7 @@ const Header = () => {
             <div className='w-10/12 md:w-8/12 flex justify-start md:justify-center'>
                 <form method='post' className='block md:hidden' action={`/search?s=${inputText}`}>
                     <div className='flex rounded-md shadow-sm'>
-                        <span className='inline-flex bg-white bg-opacity-50 border border-r-0 border-blueGray-500 items-center px-3 rounded-l-md'>
+                        <span className='inline-flex bg-white bg-opacity-50 border border-r-0 border-blueGray-200 items-center px-3 rounded-l-md'>
                             <SearchIcon className='w-4 h-4 text-blueGray-400' />
                         </span>
                         <input
@@ -130,7 +130,7 @@ const Header = () => {
                             name='search'
                             onChange={handleInputSearch}
                             id='search'
-                            className='block w-full bg-white bg-opacity-50 text-blueGray-700 border-l-0 placeholder-gray-400 border-blueGray-500 px-2 py-1 shadow-sm text-xs focus:border-blueGray-200 focus:ring-0 rounded-l-0 rounded-r-md'
+                            className='block w-full bg-white bg-opacity-50 text-blueGray-700 border-l-0 placeholder-gray-400 border-blueGray-200 px-2 py-2 shadow-sm text-xs focus:border-blueGray-200 focus:ring-0 rounded-l-0 rounded-r-md'
                             placeholder='Cari produk disini...'
                         />
                     </div>
