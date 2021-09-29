@@ -135,7 +135,7 @@ const Header = () => {
                         />
                     </div>
                 </form>
-                <div className='hidden md:flex md:w-full md:space-x-3 lg:space-x-4 xl:space-x-8 flex-initial font-medium text-blueGray-500'>
+                <div className='hidden md:flex md:items-center md:justify-center md:w-full md:space-x-3 lg:space-x-4 xl:space-x-8 flex-initial font-medium text-blueGray-500'>
                     <HeaderActiveLink href='/'>Home</HeaderActiveLink>
                     <HeaderActiveLink href='/makanan-dan-minuman'>Makanan & Minuman</HeaderActiveLink>
                     <HeaderActiveLink href='/kerajinan'>Kerajinan</HeaderActiveLink>
