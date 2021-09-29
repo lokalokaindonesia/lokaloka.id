@@ -7,11 +7,13 @@ import { useSession } from 'next-auth/client'
 
 const Layout = ({ title, children }) => {
     const [session, loading] = useSession()
+    const clientKey = process.env.MIDTRANS_CLIENT_KEY
     return (
         <div className='bg-blueGray-50 text-blueGray-800'>
             <Head>
                 <title>{title}</title>
                 <meta name='description' content='Lokaloka Indonesia - Belanja oleh-oleh dengan mudah !!!' />
+                <script type='text/javascript' src='https://app.midtrans.com/snap/snap.js' data-client-key={clientKey}></script>
             </Head>
             {/* Header - Navbar */}
             <div className='sticky top-0 z-30 backdrop-filter backdrop-blur-sm bg-opacity-75 shadow bg-white'>{session ? <Header /> : <HeaderNotSignIn />}</div>

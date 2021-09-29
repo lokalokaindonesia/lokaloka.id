@@ -236,11 +236,11 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                         autoplay
                         mode='normal'
                         loop
-                        style={{ width: '32rem', height: '32rem' }}
+                        style={{ width: 'auto', height: 'auto' }}
                     ></lottie-player>
                     <div className='flex space-y-8 flex-col justify-center items-center'>
-                        <h1 className='text-4xl font-bold '>Ooops, Keranjangmu kosong</h1>
-                        <Button size='xl' width='max' display='flex' type='primary' href={() => router.push('/')}>
+                        <h1 className='text-2xl md:text-4xl font-bold'>Ooops, Keranjangmu kosong</h1>
+                        <Button size='lg' width='max' display='flex' type='primary' href={() => router.push('/')}>
                             <span>Beli sesuatu</span>
                             <ChevronRightIcon className='text-white w-7 h-7' />
                         </Button>

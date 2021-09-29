@@ -271,32 +271,45 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             const transactionData = {
                 ...orderData[0],
                 shouldPayAmount: total,
-                code: gopayResponse.order_id,
-                paymentStatus: gopayResponse.transaction_status.toUpperCase(),
-                qrCodeString: gopayResponse.actions[0].url,
+                code: gopayResponse.data.transaction_details.order_id,
+                paymentStatus: 'PENDING',
+                // qrCodeString: gopayResponse.actions[0].url,
                 paymentMethod: choosenPaymentMethod,
             }
 
-            const createTransaction = await axios.post(`/api/transactions`, transactionData)
-            const transactionResponse = await createTransaction.data
-
-            dispatch(setTransaction(transactionResponse))
-
-            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                return await router.push(`${gopayResponse.actions[1].url}`)
-            }
-
-            await carts.forEach(async (c) => {
-                await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
-                    headers: {
-                        Authorization: `Bearer ${session.jwt}`,
-                    },
-                })
-            })
-
             setPayLoading(false)
+            setOpenModalConfirmation(false)
 
-            return await router.push(`/cart/checkout/pay`)
+            return window.snap.pay(gopayResponse.resp.token, {
+                onSuccess: async () => {
+                    const createTransaction = await axios.post(`/api/transactions`, transactionData)
+                    const transactionResponse = await createTransaction.data
+
+                    dispatch(setTransaction(transactionResponse))
+
+                    await carts.forEach(async (c) => {
+                        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
+                            headers: {
+                                Authorization: `Bearer ${session.jwt}`,
+                            },
+                        })
+                    })
+                },
+                onPending: async () => {
+                    const createTransaction = await axios.post(`/api/transactions`, transactionData)
+                    const transactionResponse = await createTransaction.data
+
+                    dispatch(setTransaction(transactionResponse))
+
+                    await carts.forEach(async (c) => {
+                        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
+                            headers: {
+                                Authorization: `Bearer ${session.jwt}`,
+                            },
+                        })
+                    })
+                },
+            })
         }
 
         if (choosenPaymentMethod == 'ID_OVO') {
@@ -465,7 +478,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     <div className='hidden mx-auto flex-shrink-0 md:flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 sm:mx-0 sm:h-10 sm:w-10'>
                                         <ExclamationIcon className='w-7 h-7 text-orange-500' />
                                     </div>
-                                    <div className='w-full text-left md:text-center sm:mt-0 sm:ml-4 sm:text-left'>
+                                    <div className='w-full text-left md:text-left sm:mt-0 sm:ml-4 sm:text-left'>
                                         <h3 className='text-base md:text-lg leading-none font-medium ' id='modal-title'>
                                             Konfirmasi pesanan
                                         </h3>
@@ -552,13 +565,13 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row'>
+                            <div className='bg-gray-50 px-4 py-3 flex flex-col space-y-3 md:px-6 md:space-y-0 md:flex md:flex-row md:space-x-2 md:justify-end md:items-center'>
                                 <button
                                     type='button'
                                     onClick={() => {
                                         openModal()
                                     }}
-                                    className='w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm'
+                                    className='w-max inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                 >
                                     Batal
                                 </button>
@@ -566,7 +579,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     <button
                                         type='button'
                                         onClick={() => {}}
-                                        className='mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blueGray-200 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm'
+                                        className='w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blueGray-200 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                                     >
                                         Memproses...
                                     </button>
@@ -576,7 +589,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         onClick={() => {
                                             pay()
                                         }}
-                                        className='mt-3 w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm'
+                                        className='w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                                     >
                                         Bayar
                                     </button>

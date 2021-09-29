@@ -23,7 +23,7 @@ const Footer = () => {
                                 </div>
                                 <span>@lokaloka.official</span>
                             </a>
-                            <a href='https://facebook.com/lokaloka.id' className='flex space-x-2 items-center' rel='noopener' target='_blank'>
+                            <a href='https://facebook.com/lokalokaid.id' className='flex space-x-2 items-center' rel='noopener' target='_blank'>
                                 <div className='h-4 w-4 lg:h-5 lg:w-5'>
                                     <Image alt='Facebook Account' src='/images/social-media/facebook.png' layout='responsive' width={38} height={38} />
                                 </div>
