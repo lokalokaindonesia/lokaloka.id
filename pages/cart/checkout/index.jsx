@@ -579,7 +579,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     <button
                                         type='button'
                                         onClick={() => {}}
-                                        className='w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blueGray-200 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+                                        className='w-full md:w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blueGray-200 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                                     >
                                         Memproses...
                                     </button>
@@ -589,7 +589,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         onClick={() => {
                                             pay()
                                         }}
-                                        className='w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+                                        className='w-full md:w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
                                     >
                                         Bayar
                                     </button>
