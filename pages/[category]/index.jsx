@@ -245,18 +245,18 @@ const Category = ({ category }) => {
     )
 }
 
-export const getStaticPaths = async () => {
-    const res = await axios.get(`${process.env.NEXT_URL}/api/product-categories`)
-    const categories = await res.data
+// export const getStaticPaths = async () => {
+//     const res = await axios.get(`${process.env.NEXT_URL}/api/product-categories`)
+//     const categories = await res.data
 
-    const paths = categories.map((category) => {
-        return { params: { category: category.slug } }
-    })
+//     const paths = categories.map((category) => {
+//         return { params: { category: category.slug } }
+//     })
 
-    return { paths, fallback: false }
-}
+//     return { paths, fallback: false }
+// }
 
-export const getStaticProps = async ({ params }) => {
+export const getServerSideProps = async ({ params }) => {
     const res = await axios.get(`${process.env.NEXT_URL}/api/product-categories/${params.category}`)
     const data = await res.data
 
@@ -267,7 +267,7 @@ export const getStaticProps = async ({ params }) => {
     }
 
     return {
-        props: { category: data, revaldate: 1 },
+        props: { category: data },
     }
 }
 

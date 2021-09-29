@@ -550,21 +550,21 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
     )
 }
 
-export const getStaticPaths = async () => {
-    const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
-    const data = await getProducts.data
+// export const getStaticPaths = async () => {
+//     const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
+//     const data = await getProducts.data
 
-    const paths = data.map((product) => {
-        return { params: { category: product.product_category.slug, product: product.slug } }
-    })
+//     const paths = data.map((product) => {
+//         return { params: { category: product.product_category.slug, product: product.slug } }
+//     })
 
-    return {
-        paths,
-        fallback: false,
-    }
-}
+//     return {
+//         paths,
+//         fallback: false,
+//     }
+// }
 
-export const getStaticProps = async ({ params }) => {
+export const getServerSideProps = async ({ params }) => {
     const getProduct = await axios.get(`${process.env.NEXT_URL}/api/products/${params.product}`)
     const data = await getProduct.data
 
@@ -587,7 +587,6 @@ export const getStaticProps = async ({ params }) => {
             similarProducts,
             baseLink,
             reviews,
-            revalidate: 1,
         },
     }
 }

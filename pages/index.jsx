@@ -91,7 +91,7 @@ const Home = ({ products, promo, recommended }) => {
     )
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
     const products = await getProducts.data.splice(0, 42)
 
@@ -108,7 +108,7 @@ export const getStaticProps = async () => {
     }
 
     return {
-        props: { products, promo, recommended, revalidate: 1 },
+        props: { products, promo, recommended },
     }
 }
 
