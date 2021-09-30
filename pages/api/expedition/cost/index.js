@@ -1,5 +1,4 @@
 import axios from "axios"
-import request from 'request'
 
 export default async (req, res) => {
     if (req.method != 'POST') return res.status(405).json('METHOD NOT ALLOWED')
