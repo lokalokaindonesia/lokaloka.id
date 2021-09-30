@@ -115,7 +115,6 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     const [note, setNote] = useState('')
     const [openModalConfirmation, setOpenModalConfirmation] = useState(false)
     const [ovoNumber, setOvoNumber] = useState('')
-
     const [payLoading, setPayLoading] = useState(false)
 
     useEffect(() => {
@@ -179,7 +178,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
         const destinationInfo = {
             destination: c.city_id,
-            weight: 2000,
+            weight: orderData[0].totalWeight,
             origin: process.env.NEXT_PUBLIC_RAJA_ONGKIR_ORIGIN,
             courier: process.env.NEXT_PUBLIC_RAJA_ONGKIR_COURIER,
         }
@@ -235,6 +234,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             const transactionData = {
                 ...orderData[0],
                 shouldPayAmount: total,
+                shippingLocation: toShipping,
                 code: invoiceResponse.external_id,
                 paymentStatus: invoiceResponse.status,
                 paymentMethod: choosenPaymentMethod,
@@ -267,6 +267,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             const gopayResponse = await createGopayCharge.data
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
+
+            const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
 
             setPayLoading(false)
             setOpenModalConfirmation(false)
@@ -328,9 +330,12 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
 
+            const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
+
             const transactionData = {
                 ...orderData[0],
                 shouldPayAmount: total,
+                shippingLocation: toShipping,
                 code: eWalletResponse.reference_id,
                 paymentStatus: eWalletResponse.status,
                 paymentMethod: choosenPaymentMethod,
@@ -366,9 +371,12 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
 
+            const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
+
             const transactionData = {
                 ...orderData[0],
                 shouldPayAmount: total,
+                shippingLocation: toShipping,
                 code: eWalletResponse.reference_id,
                 paymentStatus: eWalletResponse.status,
                 paymentMethod: choosenPaymentMethod,
@@ -401,9 +409,12 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
 
+            const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
+
             const transactionData = {
                 ...orderData[0],
                 shouldPayAmount: total,
+                shippingLocation: toShipping,
                 code: qrCodeResponse.external_id,
                 paymentStatus: qrCodeResponse.status,
                 paymentMethod: choosenPaymentMethod,
@@ -437,10 +448,13 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             const retailOutletInvoiceResponse = await createRetailOutletInvoice.data
 
             dispatch(setPaymentMethod(choosenPaymentMethod))
+
+            const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
             // return console.log(retailOutletInvoiceResponse)
             const transactionData = {
                 ...orderData[0],
                 shouldPayAmount: total,
+                shippingLocation: toShipping,
                 code: retailOutletInvoiceResponse.external_id,
                 paymentStatus: retailOutletInvoiceResponse.status,
                 paymentMethod: choosenPaymentMethod,
