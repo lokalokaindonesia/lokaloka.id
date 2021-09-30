@@ -184,7 +184,11 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             courier: process.env.NEXT_PUBLIC_RAJA_ONGKIR_COURIER,
         }
 
-        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/expedition/cost/`, destinationInfo)
+        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/expedition/cost/`, destinationInfo, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            },
+        })
 
         setShippingCost(data.value)
         setShippingEtd(data.etd)

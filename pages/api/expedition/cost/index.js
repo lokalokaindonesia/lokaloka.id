@@ -8,6 +8,7 @@ export default async (req, res) => {
         const { data } = await axios.post(`${process.env.NEXT_PUBLIC_RAJA_ONGKIR_URL}/cost/`, req.body, {
             headers: {
                 key: process.env.NEXT_PUBLIC_RAJA_ONGKIR_API_KEY,
+                "Access-Control-Allow-Origin": "*"
             },
         })
 
