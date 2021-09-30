@@ -188,6 +188,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             headers: {
                 key: process.env.NEXT_PUBLIC_RAJA_ONGKIR_KEY,
                 'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
             },
         })
 
