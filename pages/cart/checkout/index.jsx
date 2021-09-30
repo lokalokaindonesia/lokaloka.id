@@ -184,7 +184,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             courier: process.env.NEXT_PUBLIC_RAJA_ONGKIR_COURIER,
         }
 
-        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/expedition/cost`, destinationInfo)
+        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/expedition/cost/`, destinationInfo)
 
         setShippingCost(data.value)
         setShippingEtd(data.etd)
@@ -1072,10 +1072,10 @@ export const getServerSideProps = async (contex) => {
     })
     const order = getOrder.data
 
-    const getCity = await axios.get(`${process.env.NEXT_URL}/api/expedition/cities`)
+    const getCity = await axios.get(`${process.env.NEXT_URL}/api/expedition/cities/`)
     const city = getCity.data
 
-    const getProvince = await axios.get(`${process.env.NEXT_URL}/api/expedition/provinces`)
+    const getProvince = await axios.get(`${process.env.NEXT_URL}/api/expedition/provinces/`)
     const province = getProvince.data
 
     return {
