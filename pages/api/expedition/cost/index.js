@@ -1,21 +1,16 @@
 import axios from "axios"
-import Cors from 'cors'
-import initMiddleware from '../../../../lib/init-middleware'
-
-// Initialize the cors middleware
-const cors = initMiddleware(
-    // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
-    Cors({
-        origin: '*',
-        // Only allow requests with GET, POST and OPTIONS
-        methods: ['GET', 'POST', 'OPTIONS'],
-    })
-)
+import NextCors from "nextjs-cors";
 
 export default async (req, res) => {
     try {
-        // Run cors
-        await cors(req, res)
+        // Run the cors middleware
+        // nextjs-cors uses the cors package, so we invite you to check the documentation https://github.com/expressjs/cors
+        await NextCors(req, res, {
+            // Options
+            methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+            origin: '*',
+            optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+        });
 
         const { data } = await axios.post(`${process.env.NEXT_PUBLIC_RAJA_ONGKIR_URL}/cost`, req.body, {
             headers: {
