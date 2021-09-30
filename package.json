@@ -31,7 +31,6 @@
     "react-number-format": "^4.7.3",
     "react-redux": "^7.2.5",
     "react-toastify": "^7.0.4",
-    "request": "^2.88.2",
     "xendit-node": "^1.17.0"
   },
   "devDependencies": {
