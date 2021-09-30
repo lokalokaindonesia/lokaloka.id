@@ -12,7 +12,7 @@ export default async (req, res) => {
             optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
         });
 
-        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_RAJA_ONGKIR_URL}/cost`, req.body, {
+        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_RAJA_ONGKIR_URL}/cost/`, req.body, {
             headers: {
                 key: process.env.NEXT_PUBLIC_RAJA_ONGKIR_API_KEY
             }
