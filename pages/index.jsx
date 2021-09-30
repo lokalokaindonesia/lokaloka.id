@@ -64,23 +64,37 @@ const Home = ({ products, promo, recommended }) => {
                 {/* End Category */}
 
                 {/* Product Section */}
-                {promo.length != 0 && <HighlightedSection sectionTitle='Promo' href='#' data={promo} bgColor='bg-white' />}
+                {promo.length != 0 && <HighlightedSection sectionTitle='Promo' href='/specials/promo' data={promo} bgColor='bg-white' />}
                 {/* Promo Campaign */}
-                <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 xl:my-6'>
+                <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 xl:my-6' id='scrollToHere'>
                     <div className='rounded-md bg-blueGray-200 lg:p-4 2xl:p-6 h-auto flex justify-between space-x-6 items-center'>
-                        <div className='w-full h-full bg-blueGray-600 rounded-md'>
-                            <Image src={banner} alt='Promo' placeholder='blur' layout='responsive' width={1319} priority quality={100} height={250} />
-                        </div>
+                        <Link href='/specials/promo'>
+                            <div className='w-full h-full cursor-pointer bg-blueGray-600 rounded-md'>
+                                <Image src={banner} alt='Promo' placeholder='blur' layout='responsive' width={1319} priority quality={100} height={250} />
+                            </div>
+                        </Link>
                     </div>
                 </div>
 
-                <HighlightedSection sectionTitle='Rekomendasi' href='#' data={recommended} />
+                <HighlightedSection sectionTitle='Rekomendasi' href='/specials/recommended' data={recommended} />
 
                 <div className='container mx-auto px-4 2xl:px-0 md:my-5 xl:my-6'>
                     <div className='rounded-md bg-blueGray-200 h-auto flex justify-between space-x-6 items-center'>
-                        <div className='w-full h-full bg-blueGray-600 rounded-md'>
-                            <Image src={kaldera} alt='campaign' placeholder='blur' className='rounded-md' layout='responsive' width={3000} height={1500} priority quality={100} />
-                        </div>
+                        <a target='_blank' href='https://kalderaadventure.com/'>
+                            <div className='w-full h-full bg-blueGray-600 rounded-md'>
+                                <Image
+                                    src={kaldera}
+                                    alt='campaign'
+                                    placeholder='blur'
+                                    className='rounded-md'
+                                    layout='responsive'
+                                    width={3000}
+                                    height={1500}
+                                    priority
+                                    quality={100}
+                                />
+                            </div>
+                        </a>
                     </div>
                 </div>
 

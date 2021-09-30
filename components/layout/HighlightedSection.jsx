@@ -22,7 +22,7 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
                 <div className='hidden lg:flex w-full justify-between items-center'>
                     <FancySectionTitle title={sectionTitle} />
 
-                    <Button href={() => router.push(`/specials/${sectionTitle.toLowerCase()}`)} type='secondary' display='flex' width='max'>
+                    <Button href={() => router.push(href)} type='secondary' display='flex' width='max'>
                         <span>Lihat semua</span>
                         <ArrowRightIcon className='h-5' />
                     </Button>

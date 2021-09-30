@@ -26,7 +26,7 @@ const index = ({ promos }) => {
                                 <div className='text-base md:text-xl font-semibold'>Produk tidak ditemukan</div>
                             </div>
                         )}
-                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 xl:gap-8 mt-4'>
+                        <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 xl:gap-8 mt-4'>
                             {promos.map((product, index) => (
                                 <ProductCard
                                     key={index}

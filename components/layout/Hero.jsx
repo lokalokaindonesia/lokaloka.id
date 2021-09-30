@@ -1,6 +1,7 @@
 import { SparklesIcon, ArrowRightIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import Link from 'next/link'
 import Button from '@/components/ui/Button'
 import heroImage from '../../public/images/hero-images-min.jpg'
 
@@ -32,13 +33,13 @@ const Hero = () => {
                         </p>
                     </div>
                     <div className='hidden md:block'>
-                        <Button size='lg' type='primary' display='flex' width='max' href={() => router.push(`/`)}>
+                        <Button size='lg' type='primary' display='flex' width='max' href={() => router.push(`#scrollToHere`)}>
                             <span className=''>Beli oleh-oleh</span>
                             <ArrowRightIcon className='h-5' />
                         </Button>
                     </div>
                     <div className='block md:hidden'>
-                        <Button size='base' type='primary' display='flex' width='max' href={() => router.push(`/`)}>
+                        <Button size='base' type='primary' display='flex' width='max' href={() => router.push(`#scrollToHere`)}>
                             <span className=''>Beli oleh-oleh</span>
                             <ArrowRightIcon className='h-5' />
                         </Button>

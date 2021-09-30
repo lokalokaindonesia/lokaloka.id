@@ -542,7 +542,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                     />
                                 )
                             })
-                            .splice(0, 12)}
+                            .splice(0, 6)}
                     </div>
                 </div>
             </div>

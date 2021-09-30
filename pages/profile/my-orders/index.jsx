@@ -37,7 +37,7 @@ const index = ({ user, session }) => {
     return (
         <Layout title='Pesanan Saya'>
             <div className='container mx-auto 2xl:px-0 my-3 md:my-4 xl:my-5 2xl:my-6 flex flex-col md:space-y-4 xl:space-y-5 2xl:space-y-6'>
-                <div className='text-blueGray-800 px-4 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>Akun</div>
+                <div className='px-4 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>Akun</div>
                 <div className='rounded-lg w-full'>
                     <div className='relative'>
                         <div className='hidden md:block'>
@@ -102,16 +102,16 @@ const index = ({ user, session }) => {
                 <div className='flex flex-col mt-4 md:mt-0 space-y-2 space-x-0 md:space-y-0 md:flex-row md:space-x-4 px-4'>
                     <div className='w-full md:w-2/12'>
                         <ul className='flex space-x-2 space-y-0 md:flex-col md:space-x-0 md:space-y-2'>
-                            <li className='p-1 md:p-2 bg-blueGray-200 rounded text-sm md:text-base font-semibold text-blueGray-500'>
+                            <li className='p-1 md:p-2 bg-blueGray-200 rounded text-sm md:text-base text-blueGray-500'>
                                 <Link href='/profile/my-account'>Akun</Link>
                             </li>
-                            <li className='p-1 md:p-2 bg-blueGray-200 rounded text-sm md:text-base text-blueGray-500'>
+                            <li className='p-1 md:p-2 bg-blueGray-200 font-extrabold rounded text-sm md:text-base text-blueGray-500'>
                                 <Link href='/profile/my-orders'>Pesanan saya</Link>
                             </li>
                         </ul>
                     </div>
                     <div className='w-full md:w-10/12 flex flex-col space-y-2'>
-                        <div className='flex space-x-1 md:space-x-4 items-center overflow-x-scroll'>
+                        <div className='flex space-x-1 md:space-x-2 items-center overflow-x-scroll'>
                             <div
                                 onClick={() => {
                                     setStatus('')
@@ -205,16 +205,14 @@ const index = ({ user, session }) => {
                                                     (transaction.paymentStatus == 'EXPIRED' && 'KADALUARSA') ||
                                                     (transaction.paymentStatus == 'FAILED' && 'GAGAL')}
                                             </span>
-                                            <p className={`text-sm md:text-base p-2 rounded w-max text-blueGray-800 font-bold`}>
-                                                {transaction.paymentMethod.toUpperCase().replace('ID_', '')}
-                                            </p>
+                                            <p className={`text-sm md:text-base p-2 rounded w-max font-bold`}>{transaction.paymentMethod.toUpperCase().replace('ID_', '')}</p>
                                         </div>
                                         <NumberFormat
                                             value={transaction.shouldPayAmount || transaction.totalPrice}
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'Rp. '}
-                                            className='text-xs md:text-lg xl:text-2xl 2xl:text-3xl font-extrabold text-blue-500'
+                                            className='text-xs md:hidden md:text-lg xl:text-2xl 2xl:text-3xl font-extrabold text-blue-500'
                                         />
                                     </div>
                                     <div className='flex justify-between items-start'>
@@ -244,7 +242,7 @@ const index = ({ user, session }) => {
                                                 displayType={'text'}
                                                 thousandSeparator={true}
                                                 prefix={'Rp. '}
-                                                className='text-xs md:text-lg xl:text-2xl 2xl:text-3xl font-extrabold text-blue-500'
+                                                className='text-xs md:text-lg xl:text-2xl font-extrabold text-blue-500'
                                             />
                                         </div>
                                     </div>

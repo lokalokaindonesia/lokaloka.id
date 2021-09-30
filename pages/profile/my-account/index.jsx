@@ -36,7 +36,7 @@ const index = ({ user }) => {
                 <div className='text-blueGray-800 px-4 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>Akun</div>
                 <div className='rounded-lg w-full'>
                     <div className='relative'>
-                        <div className='hidden md:block'>
+                        <div className='hidden px-4 md:block'>
                             <Image src='/images/account/member.png' className='rounded-lg shadow' layout='responsive' width={1680} height={295} priority objectFit='cover' />
                         </div>
                         <div className='static px-4 md:hidden'>
@@ -54,8 +54,8 @@ const index = ({ user }) => {
                                 <div className='flex flex-col space-y-2 md:space-y-2 xl:space-y-6 2xl:space-y-8 h-full'>
                                     <div className='flex space-x-4 items-center'>
                                         <span className='lg:text-xl xl:text-2xl font-bold text-white'>{user.name}</span>
-                                        <div className='flex md:space-x-2 items-center px-1 md:px-2 md:py-1 rounded bg-blue-500 bg-opacity-50'>
-                                            <span className='hidden md:block text-white text-xs'>Verified</span>
+                                        <div className='flex md:space-x-2 items-center px-1 md:px-2 md:py-1 rounded bg-opacity-50'>
+                                            <span className='hidden md:block text-white text-xs'>Terverifikasi</span>
                                             <lottie-player
                                                 src='https://assets2.lottiefiles.com/packages/lf20_bvjhz66u.json'
                                                 id='verified'
@@ -111,13 +111,13 @@ const index = ({ user }) => {
                             <span className='text-base md:text-xl font-bold'>Profil</span>
                             <hr className='border border-blueGray-200' />
                             <div className='flex space-x-2 md:space-x-8 w-full items-center'>
-                                <div className='w-full xl:w-9/12'>
-                                    <div className='flex flex-col space-y-2 md:flex-row w-full'>
-                                        <div className='text-sm md:text-base flex flex-col space-y-1 md:space-y-0 md:items-center'>
+                                <div className='w-full xl:w-10/12'>
+                                    <div className='flex flex-col space-y-2 w-full'>
+                                        <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
                                             <div className='md:w-4/12 xl:w-2/12'>Username</div>
                                             <div className='md:w-8/12 xl:w-10/12'>{user.username}</div>
                                         </div>
-                                        <div className='text-sm md:text-base flex flex-col space-y-1 md:space-y-0 md:items-center'>
+                                        <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
                                             <div className='md:w-4/12 xl:w-2/12'>Nama</div>
                                             <div className='md:w-8/12 xl:w-10/12'>
                                                 <input
@@ -131,11 +131,11 @@ const index = ({ user }) => {
                                                 {/* {user.name} */}
                                             </div>
                                         </div>
-                                        <div className='text-sm md:text-base flex flex-col space-y-1 md:space-y-0 md:items-center'>
+                                        <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
                                             <div className='md:w-4/12 xl:w-2/12'>Email</div>
                                             <div className='md:w-8/12 xl:w-10/12'>{user.email}</div>
                                         </div>
-                                        <div className='text-sm md:text-base flex flex-col space-y-1 md:space-y-0 md:items-center'>
+                                        <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
                                             <div className='md:w-4/12 xl:w-2/12'>Nomor Telepon</div>
                                             <div className='md:w-8/12 xl:w-10/12'>
                                                 {/* {user.phone} */}
@@ -149,16 +149,16 @@ const index = ({ user }) => {
                                                 />
                                             </div>
                                         </div>
-                                        <div className='text-sm md:text-base flex flex-col space-y-1 md:space-y-0 md:items-center'>
+                                        <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
                                             <div className='md:w-4/12 xl:w-2/12'>Jenis Kelamin</div>
                                             {user.gender || <div>-</div>}
                                             {user.gender && <div className='md:w-8/12 xl:w-10/12'>{user.gender.charAt(0).toUpperCase() + user.gender.substring(1)}</div>}
                                         </div>
-                                        <div className='text-sm md:text-base flex flex-col space-y-1 md:space-y-0 md:items-center'>
+                                        <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
                                             <div className='md:w-4/12 xl:w-2/12'>Tanggal Lahir</div>
                                             <div className='md:w-8/12 xl:w-10/12'>{user.dateOfBirth}</div>
                                         </div>
-                                        <div className='text-sm md:text-base flex flex-col space-y-1 md:space-y-0 md:items-center'>
+                                        <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
                                             <div className='md:w-4/12 xl:w-2/12'></div>
                                             <div className='hidden md:block md:w-4/12 xl:w-2/12'>
                                                 <Button size='base' width='max' display='flex' type='primary' href={() => {}}>
@@ -173,7 +173,7 @@ const index = ({ user }) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='hidden xl:w-3/12 xl:flex items-center justify-center'>
+                                <div className='hidden xl:w-2/12 xl:flex items-center justify-center'>
                                     <div className='w-40 h-40'>
                                         <Image
                                             src={user?.avatar || session.user.image || `https://ui-avatars.com/api/?name=${session.user.name}`}

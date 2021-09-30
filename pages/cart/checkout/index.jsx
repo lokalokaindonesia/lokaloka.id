@@ -493,9 +493,9 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             <div className='font-medium tracking-wide text-xs md:text-sm text-blueGray-500'>Produk</div>
                                             {orderData[0].products.map((product, index) => {
                                                 return (
-                                                    <div className='flex justify-between space-x-2 text-sm md:text-base' key={index}>
+                                                    <div className='flex justify-between space-x-2 text-xs md:text-base' key={index}>
                                                         <div className='flex space-x-1'>
-                                                            <span className='w-10'>x {product.quantity}</span>
+                                                            <span className='w-2/12'>x {product.quantity}</span>
                                                             <span className='w-10/12 line-clamp-1 flex-initial max-w-sm'>{product.product.name}</span>
                                                         </div>
                                                         <NumberFormat
@@ -521,6 +521,16 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 />
                                             </div>
                                             <div className='flex justify-between space-x-2 md:space-x-4 font-medium'>
+                                                <span className='truncate font-bold w-1/2'>Biaya Pengiriman</span>
+                                                <NumberFormat
+                                                    className='font-bold text-xs md:text-base'
+                                                    value={shippingCost}
+                                                    displayType={'text'}
+                                                    thousandSeparator={true}
+                                                    prefix={'Rp. '}
+                                                />
+                                            </div>
+                                            <div className='flex justify-between space-x-2 md:space-x-4 font-medium'>
                                                 <span className='truncate font-bold w-1/2'>Diskon</span>
                                                 <NumberFormat
                                                     className='font-bold text-xs md:text-base text-red-500'
@@ -535,7 +545,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 <span className='truncate font-bold w-1/2'>Total</span>
                                                 <NumberFormat
                                                     className='font-bold text-xs md:text-base'
-                                                    value={orderData[0].totalPrice}
+                                                    value={total}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
                                                     prefix={'Rp. '}
@@ -560,12 +570,14 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             </div>
                                             <div>
                                                 <div className='font-medium tracking-wide text-sm text-blueGray-500'>Metode Pembayaran</div>
-                                                <div className='font-medium '>{`${choosenPaymentMethod.replace('ID_', '')} ${ovoNumber}`}</div>
+                                                <div className='font-medium'>{`${choosenPaymentMethod.replace('ID_', '')} ${ovoNumber && `(${ovoNumber})`}`}</div>
                                             </div>
-                                            <div>
-                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Catatan</div>
-                                                <div className='font-medium '>{`${note}`}</div>
-                                            </div>
+                                            {note != '' && (
+                                                <div>
+                                                    <div className='font-medium tracking-wide text-sm text-blueGray-500'>Catatan</div>
+                                                    <div className='font-medium '>{`${note}`}</div>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
@@ -576,7 +588,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     onClick={() => {
                                         openModal()
                                     }}
-                                    className='w-max inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                    className='w-full md:w-max inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                 >
                                     Batal
                                 </button>
@@ -977,7 +989,6 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         <div className='text-xs 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-baseline'>
                                                 <span>Pengiriman</span>
-                                                {/* {shippingEtd && <span className='text-blueGray-400 lg:text-sm 2xl:text-sm'>{`(Etd ${shippingEtd} Days via JNE)`}</span>} */}
                                             </div>
                                             <NumberFormat value={shippingCost} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
