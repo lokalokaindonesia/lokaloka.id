@@ -40,7 +40,7 @@ const index = ({ user, session }) => {
                 <div className='px-4 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>Akun</div>
                 <div className='rounded-lg w-full'>
                     <div className='relative'>
-                        <div className='hidden md:block'>
+                        <div className='hidden px-4 md:block'>
                             <Image src='/images/account/member.png' className='rounded-lg shadow' layout='responsive' width={1680} height={295} priority objectFit='cover' />
                         </div>
                         <div className='static px-4 md:hidden'>
@@ -59,7 +59,7 @@ const index = ({ user, session }) => {
                                     <div className='flex space-x-4 items-center'>
                                         <span className='lg:text-xl xl:text-2xl font-bold text-white'>{user.name}</span>
                                         <div className='flex md:space-x-2 items-center px-1 md:px-2 md:py-1 rounded bg-blue-500 bg-opacity-50'>
-                                            <span className='hidden md:block text-white text-xs'>Verified</span>
+                                            <span className='hidden md:block text-white text-xs'>Terverifikasi</span>
                                             <lottie-player
                                                 src='https://assets2.lottiefiles.com/packages/lf20_bvjhz66u.json'
                                                 id='verified'
@@ -82,7 +82,7 @@ const index = ({ user, session }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className='hidden md:absolute md:top-4 md:right-8 xl:top-9 xl:right-8 2xl:top-14 2xl:right-12'>
+                        <div className='hidden md:absolute md:block md:top-4 md:right-8 xl:top-9 xl:right-8 2xl:top-14 2xl:right-12'>
                             <div className='flex flex-col md:space-y-5 lg:space-y-6 xl:space-y-7 2xl:space-y-8 justify-between items-center'>
                                 <div className='md:w-20 md:h-20 xl:h-24 xl:w-24'>
                                     <lottie-player
