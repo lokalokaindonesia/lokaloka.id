@@ -5,7 +5,8 @@ export default async (req, res) => {
     try {
         const { data } = await axios.post(`${process.env.NEXT_PUBLIC_RAJA_ONGKIR_URL}/cost/`, req.body, {
             headers: {
-                key: process.env.NEXT_PUBLIC_RAJA_ONGKIR_API_KEY
+                key: process.env.NEXT_PUBLIC_RAJA_ONGKIR_API_KEY,
+                "Content-Type": "application/x-www-form-urlencoded"
             },
         })
 
