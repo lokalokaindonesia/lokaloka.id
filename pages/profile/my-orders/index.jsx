@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Layout from '@/components/layout/Layout'
 import moment from 'moment'
 import NumberFormat from 'react-number-format'
+import MemberCard from '@/components/ui/MemberCard'
 
 const index = ({ user, session }) => {
     const [input, setInput] = useState('')
@@ -37,80 +38,20 @@ const index = ({ user, session }) => {
     return (
         <Layout title='Pesanan Saya'>
             <div className='container mx-auto 2xl:px-0 my-3 md:my-4 xl:my-5 2xl:my-6 flex flex-col md:space-y-4 xl:space-y-5 2xl:space-y-6'>
-                <div className='px-4 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>Akun</div>
-                <div className='rounded-lg w-full'>
-                    <div className='relative'>
-                        <div className='hidden px-4 md:block'>
-                            <Image src='/images/account/member.png' className='rounded-lg shadow' layout='responsive' width={1680} height={295} priority objectFit='cover' />
-                        </div>
-                        <div className='static px-4 md:hidden'>
-                            <Image src='/images/account/member.png' className='rounded-lg shadow' layout='responsive' width={5} height={2} priority objectFit='cover' />
-                        </div>
-                        <div className='absolute top-5 left-8 md:top-5 md:left-8 xl:top-8 xl:left-8 2xl:top-12 2xl:left-12'>
-                            <div className='flex items-center space-x-2 md:space-x-8'>
-                                {!session.user.image && (
-                                    <img
-                                        src={`https://ui-avatars.com/api/?name=${session.user.name}`}
-                                        className='rounded-full w-16 h-16 md:w-20 xl:w-40 2xl:w-44 md:h-20 xl:h-40 2xl:h-44 shadow'
-                                    />
-                                )}
-                                {session.user.image && <img src={session.user.image} className='rounded-full md:w-20 xl:w-40 2xl:w-44 md:h-20 xl:h-40 2xl:h-44 shadow' />}
-                                <div className='flex flex-col space-y-2 md:space-y-2 xl:space-y-6 2xl:space-y-8 h-full'>
-                                    <div className='flex space-x-4 items-center'>
-                                        <span className='lg:text-xl xl:text-2xl font-bold text-white'>{user.name}</span>
-                                        <div className='flex md:space-x-2 items-center px-1 md:px-2 md:py-1 rounded bg-blue-500 bg-opacity-50'>
-                                            <span className='hidden md:block text-white text-xs'>Terverifikasi</span>
-                                            <lottie-player
-                                                src='https://assets2.lottiefiles.com/packages/lf20_bvjhz66u.json'
-                                                id='verified'
-                                                ref={ref}
-                                                autoplay
-                                                mode='normal'
-                                                style={{ width: '1.25rem', height: '1.25rem' }}
-                                            ></lottie-player>
-                                        </div>
-                                    </div>
-                                    <div className='flex flex-col space-y-1 md:space-y-1 xl:space-y-2'>
-                                        <div className='text-sm text-blueGray-200'>Keuntungan</div>
-                                        <div className='flex space-x-4'>
-                                            <div className='rounded md:p-1 xl:p-2 bg-gradient-to-tr from-blue-500 to-indigo-500'>
-                                                <h3 className='p-1 md:text-sm lg:text-lg xl:text-xl font-bold text-white'>SELECTA20</h3>
-                                                <span className='hidden lg:block text-blueGray-200 text-xs'>Gratis biaya pengiriman</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='hidden md:absolute md:block md:top-4 md:right-8 xl:top-9 xl:right-8 2xl:top-14 2xl:right-12'>
-                            <div className='flex flex-col md:space-y-5 lg:space-y-6 xl:space-y-7 2xl:space-y-8 justify-between items-center'>
-                                <div className='md:w-20 md:h-20 xl:h-24 xl:w-24'>
-                                    <lottie-player
-                                        id='medal'
-                                        ref={ref}
-                                        autoplay
-                                        mode='normal'
-                                        src='https://assets1.lottiefiles.com/packages/lf20_BCXrjU.json'
-                                        style={{ width: 'auto', height: 'auto' }}
-                                    ></lottie-player>
-                                </div>
-                                <h2 className='md:hidden lg:block lg:text-lg xl:text-xl font-bold text-orange-500'>Member Gold</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className='flex flex-col mt-4 md:mt-0 space-y-2 space-x-0 md:space-y-0 md:flex-row md:space-x-4 px-4'>
+                <div className='px-4 md:px-0 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>Akun</div>
+                <MemberCard user={user} />
+                <div className='flex flex-col mt-4 md:mt-0 space-y-2 space-x-0 md:space-y-0 md:flex-row md:space-x-4 px-4 md:px-0'>
                     <div className='w-full md:w-2/12'>
                         <ul className='flex space-x-2 space-y-0 md:flex-col md:space-x-0 md:space-y-2'>
-                            <li className='p-1 md:p-2 bg-blueGray-200 rounded text-sm md:text-base text-blueGray-500'>
+                            <li className='rounded text-sm md:text-base text-blueGray-500'>
                                 <Link href='/profile/my-account'>Akun</Link>
                             </li>
-                            <li className='p-1 md:p-2 bg-blueGray-200 font-extrabold rounded text-sm md:text-base text-blueGray-500'>
+                            <li className='font-extrabold rounded text-sm md:text-base text-blueGray-500'>
                                 <Link href='/profile/my-orders'>Pesanan saya</Link>
                             </li>
                         </ul>
                     </div>
-                    <div className='w-full md:w-10/12 flex flex-col space-y-2'>
+                    <div className='w-full md:w-10/12 flex flex-col space-y-2 bg-white'>
                         <div className='flex space-x-1 md:space-x-2 items-center overflow-x-scroll'>
                             <div
                                 onClick={() => {
@@ -246,6 +187,12 @@ const index = ({ user, session }) => {
                                             />
                                         </div>
                                     </div>
+                                    {transaction.shippingLocation && (
+                                        <div className='flex flex-col'>
+                                            <span className='text-blueGray-400 text-sm'>Alamat</span>
+                                            <span className='text-blueGray-600'>{transaction.shippingLocation}</span>
+                                        </div>
+                                    )}
                                 </div>
                             )
                         })}
