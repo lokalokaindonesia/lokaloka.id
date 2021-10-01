@@ -270,7 +270,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
                                             const category = productCategories.find((c) => c.id == product.product.product_category)
                                             return (
-                                                <div key={product._id} className='w-full p-1 md:p-2 2xl:p-4 rounded-md border drop-shadow-sm bg-white border-blueGray-300'>
+                                                <div key={product._id} className='w-full p-3 md:p-2 2xl:p-4 rounded-md border drop-shadow-sm bg-white border-blueGray-300'>
                                                     <div className='flex space-y-2 md:space-y-4 flex-col'>
                                                         <div className='flex space-x-2 md:space-x-4 items-center'>
                                                             <div className='flex space-x-4 items-center w-full'>
@@ -354,14 +354,14 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                 </div>
                             </div>
                             <div className='w-full lg:w-4/12 xl:w-3/12'>
-                                <div className='sticky top-28 p-2 md:p-4 bg-white border drop-shadow-sm border-blueGray-300 h-auto rounded-md flex flex-col space-y-2 md:space-y-4'>
+                                <div className='sticky top-28 p-3 md:p-4 bg-white border drop-shadow-sm border-blueGray-300 h-auto rounded-md flex flex-col space-y-3 md:space-y-4'>
                                     {/* Coupon Form */}
                                     <form className='flex items-center' onSubmit={getCoupon} method='get'>
                                         <input
                                             className={
                                                 coupon
-                                                    ? 'px-2 py-1 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border md:border-2 focus:border-green-500 focus:border md:focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-blueGray-400'
-                                                    : 'px-2 py-1 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border md:border-2 focus:border-blueGray-500 focus:border md:focus:border-2 focus:ring-0 border-blueGray-500 transition ease-in-out duration-300 font-bold '
+                                                    ? 'px-2 py-2 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border md:border-2 focus:border-green-500 focus:border md:focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-blueGray-400'
+                                                    : 'px-2 py-2 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border md:border-2 focus:border-blueGray-500 focus:border md:focus:border-2 focus:ring-0 border-blueGray-500 transition ease-in-out duration-300 font-bold '
                                             }
                                             placeholder='Kode Kupon'
                                             disabled={coupon && 'disabled'}
@@ -372,8 +372,8 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                             type='submit'
                                             className={
                                                 coupon
-                                                    ? 'text-sm md:text-base rounded-r px-2 py-1 md:px-3 md:py-2 text-white font-bold border md:border-2 border-green-300 bg-green-300'
-                                                    : 'text-sm md:text-base rounded-r px-2 py-1 md:px-3 md:py-2 text-white font-bold border md:border-2 border-blueGray-500 bg-blueGray-500'
+                                                    ? 'text-sm md:text-base rounded-r px-2 py-2 md:px-3 md:py-2 text-white font-bold border md:border-2 border-green-300 bg-green-300'
+                                                    : 'text-sm md:text-base rounded-r px-2 py-2 md:px-3 md:py-2 text-white font-bold border md:border-2 border-blueGray-500 bg-blueGray-500'
                                             }
                                         >
                                             Terapkan
@@ -382,7 +382,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                     <hr />
                                     {/* Summary */}
                                     <div className='flex flex-col space-y-2'>
-                                        <div className='text-base md:text-xl font-bold '>Rincian</div>
+                                        <div className='text-base md:text-xl font-bold'>Rincian</div>
                                         <div className='flex flex-col space-y-1'>
                                             <div className='text-xs md:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
                                                 <span>Total Harga</span>
