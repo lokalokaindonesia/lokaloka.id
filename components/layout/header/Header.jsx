@@ -5,15 +5,13 @@ import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import HeaderActiveLink from '@/components/layout/header/HeaderActiveLink'
 import ProfileDropdown from '@/components/navbar/ProfileDropdown'
+import FavoritesDropdown from '@/components/navbar/FavoritesDropdown'
 import { useEffect, useState, Fragment, useRef } from 'react'
 import axios from 'axios'
 import NumberFormat from 'react-number-format'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFavorite } from '@/redux/favoriteSlice'
 import { Dialog, Transition } from '@headlessui/react'
-import Logo from '../../../public/logo.png'
-import { MenuAlt3Icon } from '@heroicons/react/solid'
-import MobileDropdown from '@/components/navbar/MobileDropdown'
 
 const Header = () => {
     const router = useRouter()
@@ -147,23 +145,7 @@ const Header = () => {
                 <button type='button' className='hidden md:block' name='search' aria-label='Search' onClick={() => setOpen(true)}>
                     <SearchIcon className='md:h-6 md:w-6 text-blueGray-500 cursor-pointer' />
                 </button>
-                <button
-                    type='button'
-                    name='search'
-                    className='block relative'
-                    aria-label='Favorites'
-                    onClick={() => {
-                        setOpenFavorite(!openFavorite)
-                    }}
-                >
-                    <HeartIcon className='block h-6 w-6 md:h-6 md:w-6 text-blueGray-500 cursor-pointer' />
-                    {favorite.length > 0 && (
-                        <span className='flex h-3 w-3 absolute top-0 right-0'>
-                            <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>
-                            <span className='relative inline-flex rounded-full h-3 w-3 bg-blue-500'></span>
-                        </span>
-                    )}
-                </button>
+                <FavoritesDropdown favorite={favorite} />
                 <Link href='/cart'>
                     <button className='relative ' type='button' name='cart' aria-label='Cart'>
                         <ShoppingCartIcon className='h-6 w-6 md:h-6 md:w-6 text-blueGray-500 cursor-pointer' />
@@ -177,44 +159,6 @@ const Header = () => {
                 </Link>
                 <ProfileDropdown />
             </div>
-            {openFavorite && (
-                <div
-                    className='relative md:right-[20rem] md:top-0 md:pt-10 lg:right-80 lg:top-0 lg:pt-10 2xl:right-72 2xl:top-0 2xl:pt-10'
-                    onMouseEnter={() => setOpenFavorite(true)}
-                >
-                    <div className='absolute flex flex-col space-y-2 p-2 rounded-md bg-white border border-blueGray-200 max-w-xs w-max'>
-                        {favorite
-                            .map((f, i) => {
-                                return (
-                                    <Link href={`/${f.product_category.slug}/${f.slug}`} key={i} className=''>
-                                        <div className='w-full flex cursor-pointer'>
-                                            <div className='w-3/12'>
-                                                <div className='w-14 h-14'>
-                                                    <Image src={f.images[0].url} priority layout='responsive' width={1} height={1} />
-                                                </div>
-                                            </div>
-                                            <div className='w-9/12 flex flex-col space-y-1'>
-                                                <span className='line-clamp-1 font-semibold text-blueGray-700 text-sm'>{f.name}</span>
-                                                <NumberFormat
-                                                    value={f.sellingPrice}
-                                                    displayType={'text'}
-                                                    thousandSeparator={true}
-                                                    prefix={'Rp. '}
-                                                    className='line-clamp-1 text-sm'
-                                                />
-                                            </div>
-                                        </div>
-                                    </Link>
-                                )
-                            })
-                            .splice(0, 3)}
-                        {favorite.length == 0 && <div className='w-full flex p-6'>Tidak ada produk favorit</div>}
-                        <Link href='/profile/favorites'>
-                            <div className='w-full text-sm cursor-pointer text-blue-400 text-center'>Lihat semua</div>
-                        </Link>
-                    </div>
-                </div>
-            )}
         </header>
     )
 }

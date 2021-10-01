@@ -109,6 +109,9 @@ const HeaderNotSignIn = () => {
             </div>
 
             <div className='w-4/12 md:w-2/12 flex items-center justify-end space-x-2 md:space-x-3 lg:space-x-4 xl:space-x-6'>
+                <button type='button' className='hidden md:block' name='search' aria-label='Search' onClick={() => setOpen(true)}>
+                    <SearchIcon className='md:h-6 md:w-6 text-blueGray-500 cursor-pointer' />
+                </button>
                 <Button href={() => router.push('/account/login')} size='base' width='max' display='block' type='secondary'>
                     <span>Sign In</span>
                 </Button>

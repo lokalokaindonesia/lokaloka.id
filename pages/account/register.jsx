@@ -5,13 +5,18 @@ import { useEffect, useState, useContext } from 'react'
 import { useSession, signIn, getProviders } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import 'react-toastify/dist/ReactToastify.css'
+import { toast, ToastContainer } from 'react-toastify'
 
 const register = () => {
+    const errorToast = (msg) => toast.error(msg)
+
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [error, setError] = useState(false)
 
     const router = useRouter()
 
@@ -21,6 +26,33 @@ const register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        if (username == '') {
+            setError(true)
+            errorToast('Username tidak boleh kosong')
+            return
+        }
+        if (name == '') {
+            setError(true)
+            errorToast('Nama tidak boleh kosong')
+            return
+        }
+        if (email == '') {
+            setError(true)
+            errorToast('Email tidak boleh kosong')
+            return
+        }
+        if (password == '') {
+            setError(true)
+            errorToast('Password tidak boleh kosong')
+            return
+        }
+        if (passwordConfirm == '') {
+            setError(true)
+            errorToast('Konfirmasi Password tidak boleh kosong')
+            return
+        }
+
         const register = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/local/register`, {
             email,
             password,
@@ -37,7 +69,6 @@ const register = () => {
         console.log(registerRes)
 
         return router.push('/account/login')
-        // console.log(e)
     }
 
     return (
@@ -45,6 +76,7 @@ const register = () => {
             <Head>
                 <title>Daftar akun baru - Lokaloka.id 😊</title>
             </Head>
+            <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div className='py-24 md:py-0'>
                 <section className='flex flex-col md:flex-row h-screen items-center'>
                     <div className='bg-indigo-600 hidden lg:block w-full md:w-1/2 lg:w-2/3 h-screen'>
@@ -69,7 +101,6 @@ const register = () => {
                                         className='rounded-md w-full text-sm md:text-base px-2 py-2 md:px-4 md:py-3 transition duration-300 ease-in-out bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
-                                        required
                                     />
                                 </div>
 
@@ -86,7 +117,6 @@ const register = () => {
                                         className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
-                                        required
                                     />
                                 </div>
 
@@ -103,7 +133,6 @@ const register = () => {
                                         className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
-                                        required
                                     />
                                 </div>
 
@@ -119,7 +148,6 @@ const register = () => {
                                         placeholder='****'
                                         minLength={6}
                                         className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
-                                        required
                                     />
                                 </div>
 
@@ -135,7 +163,6 @@ const register = () => {
                                         placeholder='****'
                                         minLength={6}
                                         className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
-                                        required
                                     />
                                 </div>
 
@@ -143,7 +170,7 @@ const register = () => {
                                     type='submit'
                                     className='rounded-md w-full text-sm md:text-base block bg-blue-500 transition duration-300 ease-in-out hover:bg-blue-600 focus:bg-blue-600 text-white font-semibold px-2 py-2 md:px-4 md:py-3 '
                                 >
-                                    Mendaftar
+                                    Daftar
                                 </button>
                             </form>
 
@@ -158,14 +185,14 @@ const register = () => {
                                     <div className='w-5 h-5'>
                                         <Image src='/google.svg' layout='responsive' width={1} height={1} />
                                     </div>
-                                    <span className='ml-4'> Mendaftar dengan Google</span>
+                                    <span className='ml-4'> Daftar dengan Google</span>
                                 </div>
                             </button>
 
                             <p className='mt-8'>
                                 Sudah punya akun? &nbsp;
                                 <Link href='/account/login'>
-                                    <span className='text-blue-500 transition duration-300 ease-in-out hover:text-blue-700 font-semibold cursor-pointer'>Sign In</span>
+                                    <span className='text-blue-500 transition duration-300 ease-in-out hover:text-blue-700 font-semibold cursor-pointer'>Masuk</span>
                                 </Link>
                             </p>
                         </div>

@@ -49,8 +49,8 @@ const Footer = () => {
 
                     {/* 3 */}
                     <ul className='text-sm md:text-base flex flex-col space-y-2 md:space-y-4'>
-                        <li className='font-bold md:mb-2'>Pelayanan</li>
-                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
+                        <li className='font-bold md:mb-2'>Layanan</li>
+                        {/* <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
                                 Kota Afiliasi
                             </Link>
@@ -59,7 +59,7 @@ const Footer = () => {
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
                                 Ekspedisi
                             </Link>
-                        </li>
+                        </li> */}
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
                             <a className='underline lg:no-underline cursor-pointer' href='https://kuloaja.com' rel='noopener' target='_blank'>
                                 Kurir by KULO
@@ -71,12 +71,12 @@ const Footer = () => {
                     <ul className='text-sm md:text-base flex flex-col space-y-2 md:space-y-4'>
                         <li className='font-bold md:mb-2'>Bantuan dan Panduan</li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
-                            <Link className='underline lg:no-underline cursor-pointer' href='#'>
+                            <Link className='underline lg:no-underline cursor-pointer' href='/help/privacy-and-policy'>
                                 Kebijakan Pribadi
                             </Link>
                         </li>
                         <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
-                            <Link className='underline lg:no-underline cursor-pointer' href='#'>
+                            <Link className='underline lg:no-underline cursor-pointer' href='/help/terms-and-conditions'>
                                 Syarat dan Ketentuan
                             </Link>
                         </li>

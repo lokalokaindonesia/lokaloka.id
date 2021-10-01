@@ -4,7 +4,6 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSession, signIn, getProviders } from 'next-auth/client'
-import Button from '@/components/ui/Button'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast, ToastContainer } from 'react-toastify'
 
@@ -85,7 +84,7 @@ const login = () => {
                                 </div>
 
                                 <div className='text-right my-2'>
-                                    <Link href='/forgot-password'>
+                                    <Link href='/account/forgot-password'>
                                         <span className='cursor-pointer text-sm font-semibold text-blue-500 transition duration-300 ease-in-out hover:text-blue-700 focus:text-blue-700'>
                                             Lupa Password?
                                         </span>
@@ -121,7 +120,7 @@ const login = () => {
                                 Belum punya akun? &nbsp;
                                 <Link href='/account/register'>
                                     <span className='cursor-pointer text-sm md:text-base text-blue-500 transition duration-300 ease-in-out hover:text-blue-700 font-semibold'>
-                                        Create New
+                                        Buat sekarang
                                     </span>
                                 </Link>
                             </p>

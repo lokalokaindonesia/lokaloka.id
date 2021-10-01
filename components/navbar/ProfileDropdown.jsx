@@ -62,7 +62,7 @@ const ProfileDropdown = () => {
                                 </div>
                             )}
                         </Menu.Item>
-                        <hr className='border border-blueGray-200' />
+                        {/* <hr className='border border-blueGray-200' />
                         <Menu.Item>
                             {({ active }) => (
                                 <div className='cursor-pointer w-full'>
@@ -73,8 +73,8 @@ const ProfileDropdown = () => {
                                     </Link>
                                 </div>
                             )}
-                        </Menu.Item>
-                        <hr className='border border-blueGray-200' />
+                        </Menu.Item> */}
+                        <hr className='' />
                         <Menu.Item>
                             {({ active }) => (
                                 <button
