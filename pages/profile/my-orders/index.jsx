@@ -134,12 +134,16 @@ const index = ({ user, session }) => {
                                                     (transaction.paymentStatus == 'SUCCESS' && 'bg-green-400') ||
                                                     (transaction.paymentStatus == 'SUCCEEDED' && 'bg-green-400') ||
                                                     (transaction.paymentStatus == 'COMPLETED' && 'bg-green-400') ||
+                                                    (transaction.paymentStatus == 'SETTLED' && 'bg-green-400') ||
+                                                    (transaction.paymentStatus == 'SETTLEMENT' && 'bg-green-400') ||
                                                     (transaction.paymentStatus == 'PAID' && 'bg-green-400')
                                                 }`}
                                             >
                                                 {(transaction.paymentStatus == 'SUCCESS' && 'LUNAS') ||
                                                     (transaction.paymentStatus == 'SUCCEEDED' && 'LUNAS') ||
                                                     (transaction.paymentStatus == 'COMPLETED' && 'LUNAS') ||
+                                                    (transaction.paymentStatus == 'SETTLED' && 'LUNAS') ||
+                                                    (transaction.paymentStatus == 'SETTLEMENT' && 'LUNAS') ||
                                                     (transaction.paymentStatus == 'PAID' && 'LUNAS') ||
                                                     (transaction.paymentStatus == 'PENDING' && 'MENUNGGU PEMBAYARAN') ||
                                                     (transaction.paymentStatus == 'ACTIVE' && 'MENUNGGU PEMBAYARAN') ||
