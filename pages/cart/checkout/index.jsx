@@ -102,7 +102,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
     const [area, setArea] = useState('malang-batu')
     const [choosenPaymentMethod, setChoosenPaymentMethod] = useState(undefined)
-    const [shippingCost, setShippingCost] = useState(3000)
+    const [shippingCost, setShippingCost] = useState(15000)
     const [shippingEtd, setShippingEtd] = useState(null)
     const [total, setTotal] = useState(0)
     const [filteredCity, setFilteredCity] = useState(cityData)
@@ -126,7 +126,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     const selectArea = (value) => {
         const data = areaCollection.find((area) => area.value == value)
         setArea(data.value)
-        if (data.value == 'malang-batu') return setShippingCost(3000)
+        if (data.value == 'malang-batu') return setShippingCost(15000)
         if (data.value == 'anotherCity') {
             return setShippingCost(0)
         }
@@ -273,48 +273,35 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             setPayLoading(false)
             setOpenModalConfirmation(false)
 
+            const createTransaction = await axios.post(`/api/transactions`, {
+                ...orderData[0],
+                shouldPayAmount: total,
+                code: gopayResponse.data.transaction_details.order_id,
+                shippingLocation: toShipping,
+                paymentStatus: 'PAID',
+                // qrCodeString: gopayResponse.actions[0].url,
+                paymentMethod: choosenPaymentMethod,
+            })
+            const transactionResponse = await createTransaction.data
+
+            dispatch(setTransaction(transactionResponse))
+
+            await carts.forEach(async (c) => {
+                await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${session.jwt}`,
+                    },
+                })
+            })
+
             return window.snap.pay(gopayResponse.resp.token, {
                 onSuccess: async () => {
-                    const createTransaction = await axios.post(`/api/transactions`, {
-                        ...orderData[0],
-                        shouldPayAmount: total,
-                        code: gopayResponse.data.transaction_details.order_id,
+                    const createTransaction = await axios.put(`${processs.env.NEXT_PUBLIC_API_URL}/transactions/${transactionResponse.id}`, {
                         paymentStatus: 'PAID',
-                        // qrCodeString: gopayResponse.actions[0].url,
-                        paymentMethod: choosenPaymentMethod,
                     })
                     const transactionResponse = await createTransaction.data
 
                     dispatch(setTransaction(transactionResponse))
-
-                    await carts.forEach(async (c) => {
-                        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
-                            headers: {
-                                Authorization: `Bearer ${session.jwt}`,
-                            },
-                        })
-                    })
-                },
-                onPending: async () => {
-                    const createTransaction = await axios.post(`/api/transactions`, {
-                        ...orderData[0],
-                        shouldPayAmount: total,
-                        code: gopayResponse.data.transaction_details.order_id,
-                        paymentStatus: 'PENDING',
-                        // qrCodeString: gopayResponse.actions[0].url,
-                        paymentMethod: choosenPaymentMethod,
-                    })
-                    const transactionResponse = await createTransaction.data
-
-                    dispatch(setTransaction(transactionResponse))
-
-                    await carts.forEach(async (c) => {
-                        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
-                            headers: {
-                                Authorization: `Bearer ${session.jwt}`,
-                            },
-                        })
-                    })
                 },
             })
         }

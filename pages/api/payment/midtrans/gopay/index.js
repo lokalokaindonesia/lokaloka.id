@@ -3,7 +3,6 @@ import axios from "axios"
 import { getSession } from "next-auth/client"
 
 export default async (req, res) => {
-    const session = await getSession({ req })
     if (req.method != 'POST') {
         return res.status(405).json('METHOD NOT ALLOWED')
     }
@@ -19,15 +18,9 @@ export default async (req, res) => {
         },
         gopay: {
             enable_callback: true,
-            callback_url: `${process.env.NEXT_PUBLIC_API_CALLBACK}/api/wh/payment/gopay`
-        },
-        customer_details: {
-            first_name: session.user.name,
-            email: session.user.email,
+            callback_url: `${process.env.NEXT_URL}/api/wh/payment/gopay`
         }
     }
-
-    // const resp = await core.charge(data)
 
     const resp = await snap.createTransaction(data)
 
