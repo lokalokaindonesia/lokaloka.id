@@ -3,7 +3,7 @@ import Image from 'next/image'
 const PaymentGateway = () => {
     return (
         <div className='bg-white'>
-            <div className='grid grid-flow-row container mx-auto px-4 xl:px-4 2xl:px-0 grid-rows-3 grid-cols-4 md:grid-rows-2 md:grid-cols-6 gap-4 items-center py-4 md:py-8'>
+            <div className='grid grid-flow-row container mx-auto px-4 xl:px-4 2xl:px-0 grid-rows-2 grid-cols-5 md:grid-rows-2 md:grid-cols-5 lg:grid-cols-10 lg:grid-rows-1 gap-4 items-center py-4 md:py-8'>
                 <div className='w-full flex justify-center'>
                     <div className='h-42 w-24 filter hover:grayscale-0 transition ease-in-out duration-300 hover:scale-110 grayscale'>
                         <Image alt='BNI Virtual Account' src='/images/payment-gateway/bni.png' layout='responsive' objectFit='contain' width={3} height={1} quality={75} priority />
@@ -70,11 +70,6 @@ const PaymentGateway = () => {
                 <div className='w-full flex justify-center'>
                     <div className='h-42 w-24 filter hover:grayscale-0 transition ease-in-out duration-300 hover:scale-110 grayscale'>
                         <Image alt='ALFAMART' src='/images/payment-gateway/alfamart.png' layout='responsive' objectFit='contain' width={127} height={40} quality={75} priority />
-                    </div>
-                </div>
-                <div className='w-full flex justify-center'>
-                    <div className='h-42 w-24 filter hover:grayscale-0 transition ease-in-out duration-300 hover:scale-110 grayscale'>
-                        <Image alt='INDOMARET' src='/images/payment-gateway/indomaret.png' layout='responsive' objectFit='contain' width={127} height={40} quality={75} priority />
                     </div>
                 </div>
             </div>

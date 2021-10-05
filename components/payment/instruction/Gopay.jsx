@@ -14,7 +14,7 @@ const Gopay = ({ transaction }) => {
                         <span className='text-xs md:text-base text-blueGray-200'>Total Pembayaran</span>
                         <NumberFormat
                             className='text-sm md:text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl font-bold'
-                            value={transaction.totalPrice}
+                            value={transaction.shouldPayAmount}
                             displayType={'text'}
                             thousandSeparator={true}
                             prefix={'Rp. '}

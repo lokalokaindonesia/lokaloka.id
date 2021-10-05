@@ -132,6 +132,7 @@ const index = ({ user, session }) => {
                                                     (transaction.paymentStatus == 'FAILED' && 'bg-red-500') || (transaction.paymentStatus == 'EXPIRED' && 'bg-red-500')
                                                 } ${(transaction.paymentStatus == 'PENDING' && 'bg-orange-400') || (transaction.paymentStatus == 'ACTIVE' && 'bg-orange-400')} ${
                                                     (transaction.paymentStatus == 'SUCCESS' && 'bg-green-400') ||
+                                                    (transaction.paymentStatus == 'INACTIVE' && 'bg-green-400') ||
                                                     (transaction.paymentStatus == 'SUCCEEDED' && 'bg-green-400') ||
                                                     (transaction.paymentStatus == 'COMPLETED' && 'bg-green-400') ||
                                                     (transaction.paymentStatus == 'SETTLED' && 'bg-green-400') ||
@@ -144,6 +145,7 @@ const index = ({ user, session }) => {
                                                     (transaction.paymentStatus == 'COMPLETED' && 'LUNAS') ||
                                                     (transaction.paymentStatus == 'SETTLED' && 'LUNAS') ||
                                                     (transaction.paymentStatus == 'SETTLEMENT' && 'LUNAS') ||
+                                                    (transaction.paymentStatus == 'INACTIVE' && 'LUNAS') ||
                                                     (transaction.paymentStatus == 'PAID' && 'LUNAS') ||
                                                     (transaction.paymentStatus == 'PENDING' && 'MENUNGGU PEMBAYARAN') ||
                                                     (transaction.paymentStatus == 'ACTIVE' && 'MENUNGGU PEMBAYARAN') ||

@@ -87,12 +87,6 @@ const paymentMethodCollection = [
         id: 'ALFAMART',
         label: 'ALFAMART',
     },
-    {
-        src: '/images/payment-gateway-small/indomaret.png',
-        type: 'retail-outlet',
-        id: 'INDOMARET',
-        label: 'INDOMARET',
-    },
 ]
 
 const index = ({ orderData, cityData, carts, provinceData, session }) => {
@@ -429,6 +423,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
         if (choosenPaymentMethod == 'ALFAMART' || choosenPaymentMethod == 'INDOMARET') {
             const createRetailOutletInvoice = await axios.post(`/api/payment/retail-outlet`, {
                 amount: total,
+                name: session.user.name,
                 retail: choosenPaymentMethod,
             })
 
@@ -496,7 +491,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 return (
                                                     <div className='flex justify-between space-x-2 text-xs md:text-base' key={index}>
                                                         <div className='flex space-x-1'>
-                                                            <span className='w-2/12'>x {product.quantity}</span>
+                                                            <span className='w-2/12 md:w-10'>x {product.quantity}</span>
                                                             <span className='w-10/12 line-clamp-1 flex-initial max-w-sm'>{product.product.name}</span>
                                                         </div>
                                                         <NumberFormat
