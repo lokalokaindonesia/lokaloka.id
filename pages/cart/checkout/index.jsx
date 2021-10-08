@@ -225,6 +225,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
             dispatch(setPaymentMethod(selectedPaymentMethod))
 
+            const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
+
             const transactionData = {
                 ...orderData[0],
                 shouldPayAmount: total,
