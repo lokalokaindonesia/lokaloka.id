@@ -111,7 +111,7 @@ const Header = () => {
             <div className='hidden md:block md:w-2/12 text-2xl font-extrabold text-blue-500 tracking-wide'>
                 <Link href='/'>
                     <div className='cursor-pointer'>
-                        <h1 className='hidden md:block text-4xl font-bold text-blue-500'>Lokaloka</h1>
+                        <h1 className='hidden md:block cursor-pointer text-4xl font-bold text-blue-500'>Lokaloka</h1>
                     </div>
                 </Link>
             </div>
