@@ -77,11 +77,11 @@ const index = ({ user, session }) => {
                             </div>
                             <div
                                 onClick={() => {
-                                    setStatus('&paymentStatus=SENT')
-                                    setType('processing')
+                                    setStatus('&paymentStatus=PROCESSED')
+                                    setType('processed')
                                 }}
                                 className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
-                                    type == 'processing' && 'bg-blue-400 text-white'
+                                    type == 'processed' && 'bg-blue-400 text-white'
                                 }`}
                             >
                                 Diproses
@@ -130,7 +130,11 @@ const index = ({ user, session }) => {
                                             <span
                                                 className={`text-xs px-1 md:px-2 md:py-1 rounded w-max text-white ${
                                                     (transaction.paymentStatus == 'FAILED' && 'bg-red-500') || (transaction.paymentStatus == 'EXPIRED' && 'bg-red-500')
-                                                } ${(transaction.paymentStatus == 'PENDING' && 'bg-orange-400') || (transaction.paymentStatus == 'ACTIVE' && 'bg-orange-400')} ${
+                                                } ${
+                                                    (transaction.paymentStatus == 'PENDING' && 'bg-orange-400') ||
+                                                    (transaction.paymentStatus == 'ACTIVE' && 'bg-orange-400') ||
+                                                    (transaction.paymentStatus == 'PROCESSED' && 'bg-orange-400')
+                                                } ${
                                                     (transaction.paymentStatus == 'SUCCESS' && 'bg-green-400') ||
                                                     (transaction.paymentStatus == 'INACTIVE' && 'bg-green-400') ||
                                                     (transaction.paymentStatus == 'SUCCEEDED' && 'bg-green-400') ||
@@ -147,6 +151,7 @@ const index = ({ user, session }) => {
                                                     (transaction.paymentStatus == 'SETTLEMENT' && 'LUNAS') ||
                                                     (transaction.paymentStatus == 'INACTIVE' && 'LUNAS') ||
                                                     (transaction.paymentStatus == 'PAID' && 'LUNAS') ||
+                                                    (transaction.paymentStatus == 'PROCESSED' && 'DIPROSES') ||
                                                     (transaction.paymentStatus == 'PENDING' && 'MENUNGGU PEMBAYARAN') ||
                                                     (transaction.paymentStatus == 'ACTIVE' && 'MENUNGGU PEMBAYARAN') ||
                                                     (transaction.paymentStatus == 'EXPIRED' && 'KADALUARSA') ||

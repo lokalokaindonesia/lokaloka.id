@@ -48,17 +48,19 @@ const MemberCard = ({ user }) => {
                             <div className='flex flex-col space-y-2 md:space-y-2 xl:space-y-6 2xl:space-y-8 h-full'>
                                 <div className='flex space-x-4 items-center'>
                                     <span className='lg:text-xl xl:text-2xl font-bold text-white'>{user.name}</span>
-                                    <div className='flex md:space-x-2 items-center px-1 md:px-2 md:py-1 md:bg-blue-500 rounded bg-opacity-50'>
-                                        <span className='hidden md:block text-white text-xs'>Terverifikasi</span>
-                                        <lottie-player
-                                            src='https://assets2.lottiefiles.com/packages/lf20_bvjhz66u.json'
-                                            id='verified'
-                                            ref={ref}
-                                            autoplay
-                                            mode='normal'
-                                            style={{ width: '1.25rem', height: '1.25rem' }}
-                                        ></lottie-player>
-                                    </div>
+                                    {user.confirmed && (
+                                        <div className='flex md:space-x-2 items-center px-1 md:px-2 md:py-1 md:bg-blue-500 rounded bg-opacity-50'>
+                                            <span className='hidden md:block text-white text-xs'>Terverifikasi</span>
+                                            <lottie-player
+                                                src='https://assets2.lottiefiles.com/packages/lf20_bvjhz66u.json'
+                                                id='verified'
+                                                ref={ref}
+                                                autoplay
+                                                mode='normal'
+                                                style={{ width: '1.25rem', height: '1.25rem' }}
+                                            ></lottie-player>
+                                        </div>
+                                    )}
                                 </div>
                                 <div className='flex flex-col space-y-1 md:space-y-1 xl:space-y-2'>
                                     <div className='text-sm text-blueGray-200'>Keuntungan</div>

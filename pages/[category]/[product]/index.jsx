@@ -328,7 +328,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
                     <div className='lg:hidden flex flex-col'>
                         <p className='2xl:text-lg md:text-base font-semibold tracking-wide py-2 text-blueGray-600'>Deskripsi</p>
-                        <p className='2xl:text-base md:text-sm font-medium text-justify md:leading-relaxed'>{product.description}</p>
+                        <p className='2xl:text-base md:text-sm font-medium text-justify md:leading-relaxed prose'>{product.description}</p>
                     </div>
                 </div>
 
@@ -424,7 +424,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                             </div>
                             <div className='flex flex-col'>
                                 <div className='2xl:text-lg md:text-base text-sm font-semibold tracking-wide py-2 text-blueGray-600'>Description</div>
-                                <div className='2xl:text-base md:text-sm text-xs font-medium text-justify md:leading-relaxed'>{product.description}</div>
+                                <div className='2xl:text-base md:text-sm text-xs font-medium text-justify md:leading-relaxed prose'>{product.description}</div>
                             </div>
                         </div>
                     </div>

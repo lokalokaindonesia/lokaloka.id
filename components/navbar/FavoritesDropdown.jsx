@@ -42,11 +42,11 @@ const FavoritesDropdown = ({ favorite }) => {
                                     <Link href={`/${f.product_category.slug}/${f.slug}`} className=''>
                                         <div className='w-full flex cursor-pointer'>
                                             <div className='w-3/12'>
-                                                <div className='w-14 h-14'>
-                                                    <Image src={f.images[0].url} priority layout='responsive' width={1} height={1} />
+                                                <div className='w-14 h-14 rounded'>
+                                                    <Image src={f.images[0].url} priority className='rounded' layout='responsive' width={1} height={1} />
                                                 </div>
                                             </div>
-                                            <div className='w-9/12 flex flex-col space-y-1'>
+                                            <div className='w-9/12 flex flex-col space-y-2'>
                                                 <span className='line-clamp-1 font-semibold text-blueGray-700 text-sm'>{f.name}</span>
                                                 <NumberFormat
                                                     value={f.sellingPrice}
@@ -63,7 +63,9 @@ const FavoritesDropdown = ({ favorite }) => {
                         })}
                         {favorite.length == 0 && <div className='w-full flex p-6'>Tidak ada produk favorit</div>}
                         <Link href='/profile/favorites'>
-                            <div className='w-full text-sm cursor-pointer text-blue-400 text-center'>Lihat semua</div>
+                            <div className='w-full text-sm cursor-pointer hover:bg-blueGray-200 py-2 transition ease-in-out duration-150 text-blue-400 text-center'>
+                                Lihat semua
+                            </div>
                         </Link>
                     </div>
                 </Menu.Items>
