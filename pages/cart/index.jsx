@@ -178,6 +178,16 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
     // * SET ORDER DATA AND CHECKOUT
     const checkout = async () => {
+        const getUser = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
+            headers: {
+                Authorization: `Bearer ${session.jwt}`,
+            },
+        })
+
+        const user = getUser.data
+
+        if (user.name == '' || user.gender == '' || user.phone == '' || user.dateOfBirth == '') return alert('Lengkapi Data Diri Kamu')
+
         setCheckoutLoading(true)
         const productsOrigin = cart.map((p) => p._id)
         const totalQuantity = cart.reduce((a, b) => +a + +b.quantity, 0)
