@@ -35,9 +35,9 @@ const Home = ({ products, promo, recommended }) => {
                 <Hero />
 
                 {/* Category */}
-                <div className='container mx-auto px-4 md:hidden flex space-x-4 py-4 bg-blue-100 justify-between items-center'>
+                <div className='container mx-auto px-4 md:hidden flex space-x-4 py-4 bg-orange-100 justify-between items-center'>
                     <Link href='/makanan-dan-minuman'>
-                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-blue-400 h-auto rounded-md relative'>
+                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
                             <Image src={food} alt='kategori makanan dan minuman' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
                             <span className='absolute bottom-0 text-xs bg-gradient-to-t from-blueGray-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
                                 Makanan & Minuman
@@ -45,7 +45,7 @@ const Home = ({ products, promo, recommended }) => {
                         </div>
                     </Link>
                     <Link href='/kerajinan'>
-                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-blue-400 h-auto rounded-md relative'>
+                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
                             <Image src={craft} alt='kategori kerajinan' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
                             <span className='absolute bottom-0 text-xs bg-gradient-to-t from-blueGray-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
                                 Kerajinan
@@ -53,7 +53,7 @@ const Home = ({ products, promo, recommended }) => {
                         </div>
                     </Link>
                     <Link href='/fashion'>
-                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-blue-400 h-auto rounded-md relative'>
+                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
                             <Image src={fashion} alt='kategori fashion' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
                             <span className='absolute bottom-0 text-xs bg-gradient-to-t from-blueGray-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
                                 Fashion

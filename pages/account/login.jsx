@@ -60,7 +60,7 @@ const login = () => {
                                         id='email'
                                         onChange={(e) => setEmail(e.target.value)}
                                         placeholder='belanjain_teman@gmail.com'
-                                        className='rounded-md w-full px-2 py-2 text-sm md:text-base md:px-4 md:py-3 transition ease-in-out duration-300 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full px-2 py-2 text-sm md:text-base md:px-4 md:py-3 transition ease-in-out duration-300 bg-gray-100 mt-2 border border-gray-300 focus:border-orange-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
                                         required
@@ -78,14 +78,14 @@ const login = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                         placeholder='*****'
                                         minLength={6}
-                                        className='rounded-md w-full px-2 py-2 text-sm md:text-base md:px-4 md:py-3 transition ease-in-out duration-300 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full px-2 py-2 text-sm md:text-base md:px-4 md:py-3 transition ease-in-out duration-300 bg-gray-100 mt-2 border border-gray-300 focus:border-orange-600 focus:bg-white focus:outline-none'
                                         required
                                     />
                                 </div>
 
                                 <div className='text-right my-2'>
                                     <Link href='/account/forgot-password'>
-                                        <span className='cursor-pointer text-sm font-semibold text-blue-500 transition duration-300 ease-in-out hover:text-blue-700 focus:text-blue-700'>
+                                        <span className='cursor-pointer text-sm font-semibold text-orange-500 transition duration-300 ease-in-out hover:text-orange-700 focus:text-orange-700'>
                                             Lupa Password?
                                         </span>
                                     </Link>
@@ -93,7 +93,7 @@ const login = () => {
 
                                 <button
                                     type='submit'
-                                    className='rounded-md w-full text-sm md:text-base block bg-blue-500 transition duration-300 ease-in-out hover:bg-blue-600 focus:bg-blue-600 text-white font-semibold px-2 py-2 md:px-4 md:py-3 '
+                                    className='rounded-md w-full text-sm md:text-base block bg-orange-500 transition duration-300 ease-in-out hover:bg-orange-600 focus:bg-orange-600 text-white font-semibold px-2 py-2 md:px-4 md:py-3 '
                                 >
                                     Login
                                 </button>
@@ -119,7 +119,7 @@ const login = () => {
                             <p className='mt-8'>
                                 Belum punya akun? &nbsp;
                                 <Link href='/account/register'>
-                                    <span className='cursor-pointer text-sm md:text-base text-blue-500 transition duration-300 ease-in-out hover:text-blue-700 font-semibold'>
+                                    <span className='cursor-pointer text-sm md:text-base text-orange-500 transition duration-300 ease-in-out hover:text-orange-700 font-semibold'>
                                         Buat sekarang
                                     </span>
                                 </Link>

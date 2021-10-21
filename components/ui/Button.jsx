@@ -9,8 +9,8 @@ const Button = ({ children, type = 'primary', size = 'base', href, width = 'max'
         ghostSize: 'px-4 py-3',
     }
     const types = {
-        primary: `rounded-md drop-shadow-sm bg-blue-500 text-white font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-blue-600`,
-        secondary: `rounded-md drop-shadow-sm bg-blue-100 text-blue-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-blue-200`,
+        primary: `rounded-md drop-shadow-sm bg-orange-500 text-white font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-600`,
+        secondary: `rounded-md drop-shadow-sm bg-orange-100 text-orange-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-200`,
         tertiary: `rounded-md drop-shadow-sm bg-orange-500 text-white font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-600`,
         tertiaryAccent: `rounded-md drop-shadow-sm bg-orange-100 text-orange-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-200`,
         logout: `rounded-md drop-shadow-sm bg-red-100 text-red-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-red-200`,

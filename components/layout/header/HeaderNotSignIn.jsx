@@ -75,10 +75,10 @@ const HeaderNotSignIn = () => {
             </Transition.Root>
             {/* End Modal Section */}
 
-            <div className='w-2/12 text-2xl font-extrabold text-blue-500 tracking-wide'>
+            <div className='w-2/12 text-2xl font-extrabold text-orange-500 tracking-wide'>
                 <Link href='/'>
                     <div>
-                        <h1 className='hidden lg:block text-4xl font-bold text-blue-500'>Lokaloka</h1>
+                        <h1 className='hidden lg:block text-4xl font-bold text-orange-500'>Lokaloka</h1>
                     </div>
                 </Link>
             </div>

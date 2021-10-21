@@ -14,7 +14,7 @@ const Toast = ({ status, content, icon }) => {
             <div className='flex space-x-4 justify-start'>
                 {icon}
                 <div>
-                    <h6 className='text-base font-bold text-blue-500 capitalize'>{status}</h6>
+                    <h6 className='text-base font-bold text-orange-500 capitalize'>{status}</h6>
                     <span className='text-sm text-blueGray-600'>{content}</span>
                 </div>
                 <XIcon className='w-6 h-6 text-blueGray-700' onClick={() => close()} />

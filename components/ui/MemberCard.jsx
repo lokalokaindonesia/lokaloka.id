@@ -49,7 +49,7 @@ const MemberCard = ({ user }) => {
                                 <div className='flex space-x-4 items-center'>
                                     <span className='lg:text-xl xl:text-2xl font-bold text-white'>{user.name}</span>
                                     {user.confirmed && (
-                                        <div className='flex md:space-x-2 items-center px-1 md:px-2 md:py-1 md:bg-blue-500 rounded bg-opacity-50'>
+                                        <div className='flex md:space-x-2 items-center px-1 md:px-2 md:py-1 md:bg-orange-500 rounded bg-opacity-50'>
                                             <span className='hidden md:block text-white text-xs'>Terverifikasi</span>
                                             <lottie-player
                                                 src='https://assets2.lottiefiles.com/packages/lf20_bvjhz66u.json'
@@ -65,7 +65,7 @@ const MemberCard = ({ user }) => {
                                 <div className='flex flex-col space-y-1 md:space-y-1 xl:space-y-2'>
                                     <div className='text-sm text-blueGray-200'>Keuntungan</div>
                                     <div className='flex space-x-4'>
-                                        <div className='rounded md:p-1 xl:p-2 bg-gradient-to-tr from-blue-500 to-indigo-500'>
+                                        <div className='rounded md:p-1 xl:p-2 bg-gradient-to-tr from-orange-500 to-indigo-500'>
                                             <h3 className='p-1 md:text-sm lg:text-lg xl:text-xl font-bold text-white'>SELECTA20</h3>
                                             <span className='hidden lg:block text-blueGray-200 text-xs'>Gratis biaya pengiriman</span>
                                         </div>

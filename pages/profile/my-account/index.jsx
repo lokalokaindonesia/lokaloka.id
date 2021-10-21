@@ -109,7 +109,7 @@ const index = ({ user }) => {
                                                     onChange={handleName}
                                                     id='name'
                                                     autoComplete='given-name'
-                                                    className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm text-xs md:text-sm border-blueGray-200 rounded-md'
+                                                    className='mt-1 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm text-xs md:text-sm border-blueGray-200 rounded-md'
                                                 />
                                                 {/* {user.name} */}
                                             </div>
@@ -129,7 +129,7 @@ const index = ({ user }) => {
                                                     onChange={handlePhone}
                                                     defaultValue={phone}
                                                     autoComplete='phone'
-                                                    className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm text-xs md:text-sm border-blueGray-200 rounded-md'
+                                                    className='mt-1 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm text-xs md:text-sm border-blueGray-200 rounded-md'
                                                 />
                                             </div>
                                         </div>
@@ -145,7 +145,7 @@ const index = ({ user }) => {
                                                             type='radio'
                                                             onChange={() => setGender('laki-laki')}
                                                             defaultValue='laki-laki'
-                                                            className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300'
+                                                            className='focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300'
                                                         />
                                                         <label htmlFor='gender-male' className='ml-3 block text-sm md:text-base font-medium text-gray-700'>
                                                             Laki-laki
@@ -159,7 +159,7 @@ const index = ({ user }) => {
                                                             defaultValue='perempuan'
                                                             checked={gender == 'perempuan' ? true : false}
                                                             type='radio'
-                                                            className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300'
+                                                            className='focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300'
                                                         />
                                                         <label htmlFor='gender-female' className='ml-3 block text-sm md:text-base font-medium text-gray-700'>
                                                             Perempuan
@@ -177,7 +177,7 @@ const index = ({ user }) => {
                                                     type='date'
                                                     onChange={handleDateOfBirth}
                                                     defaultValue={dateOfBirth}
-                                                    className='focus:ring-blue-500 px-2 py-1 rounded text-xs md:text-sm shadow-sm border-blueGray-200'
+                                                    className='focus:ring-orange-500 px-2 py-1 rounded text-xs md:text-sm shadow-sm border-blueGray-200'
                                                 />
                                             </div>
                                         </div>

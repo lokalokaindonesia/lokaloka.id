@@ -63,7 +63,7 @@ const FavoritesDropdown = ({ favorite }) => {
                         })}
                         {favorite.length == 0 && <div className='w-full flex p-6'>Tidak ada produk favorit</div>}
                         <Link href='/profile/favorites'>
-                            <div className='w-full text-sm cursor-pointer hover:bg-blueGray-200 py-2 transition ease-in-out duration-150 text-blue-400 text-center'>
+                            <div className='w-full text-sm cursor-pointer hover:bg-blueGray-200 py-2 transition ease-in-out duration-150 text-orange-400 text-center'>
                                 Lihat semua
                             </div>
                         </Link>

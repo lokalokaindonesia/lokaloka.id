@@ -67,7 +67,7 @@ const Category = ({ category }) => {
         <Layout title={`${category.name} - Lokaloka`}>
             <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 2xl:my-6'>
                 <div className='w-full hidden md:flex space-x-2 items-center my-3'>
-                    <div className='text-blue-700 hover:text-blue-800'>
+                    <div className='text-orange-700 hover:text-orange-800'>
                         <Link href='/'>Home</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
@@ -117,7 +117,7 @@ const Category = ({ category }) => {
                                         <div className='flex flex-col xl:space-y-1 2xl:space-y-2'>
                                             <Listbox.Label className='text-sm 2xl:text-base block font-medium text-blueGray-800'>Urutkan</Listbox.Label>
                                             <div className='mt-1 relative w-full'>
-                                                <Listbox.Button className='relative w-full bg-white border border-blueGray-300 rounded-md shadow-sm pl-3 pr-10 py-1 2xl:py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm'>
+                                                <Listbox.Button className='relative w-full bg-white border border-blueGray-300 rounded-md shadow-sm pl-3 pr-10 py-1 2xl:py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 sm:text-sm'>
                                                     <span className='flex items-center'>
                                                         <span className='block truncate text-sm md:text-base'>{price.value}</span>
                                                     </span>
@@ -136,7 +136,7 @@ const Category = ({ category }) => {
                                                                 key={filter.id}
                                                                 className={({ active }) =>
                                                                     classNames(
-                                                                        active ? 'text-white bg-blue-600' : 'text-blueGray-900',
+                                                                        active ? 'text-white bg-orange-600' : 'text-blueGray-900',
                                                                         'cursor-default select-none relative md:py-1 2xl:py-2 pl-3 pr-9'
                                                                     )
                                                                 }
@@ -153,7 +153,7 @@ const Category = ({ category }) => {
                                                                         {price ? (
                                                                             <span
                                                                                 className={classNames(
-                                                                                    active ? 'text-white' : 'text-blue-600',
+                                                                                    active ? 'text-white' : 'text-orange-600',
                                                                                     'absolute inset-y-0 right-0 flex items-center pr-4'
                                                                                 )}
                                                                             >
@@ -180,7 +180,7 @@ const Category = ({ category }) => {
                                                 id='recommended'
                                                 name='recommended'
                                                 type='checkbox'
-                                                className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-blueGray-300 rounded'
+                                                className='focus:ring-orange-500 h-4 w-4 text-orange-600 border-blueGray-300 rounded'
                                             />
                                         </div>
                                         <div className='ml-2 2xl:ml-3'>
@@ -196,7 +196,7 @@ const Category = ({ category }) => {
                                                 id='discount'
                                                 name='discount'
                                                 type='checkbox'
-                                                className='focus:ring-blue-500 h-4 w-4 text-blue-600 border-blueGray-300 rounded'
+                                                className='focus:ring-orange-500 h-4 w-4 text-orange-600 border-blueGray-300 rounded'
                                             />
                                         </div>
                                         <div className='ml-2 2xl:ml-3'>
@@ -219,7 +219,7 @@ const Category = ({ category }) => {
                                             name='min'
                                             placeholder='5.000'
                                             id='min'
-                                            className='mt-1 text-xs py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
+                                            className='mt-1 text-xs py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
                                         />
                                     </div>
                                     <div className='w-full'>
@@ -232,7 +232,7 @@ const Category = ({ category }) => {
                                             placeholder='200.000'
                                             name='max'
                                             id='max'
-                                            className='mt-1 text-xs py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
+                                            className='mt-1 text-xs py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
                                         />
                                     </div>
                                 </div>

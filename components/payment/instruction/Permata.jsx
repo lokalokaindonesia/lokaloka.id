@@ -41,7 +41,7 @@ const Permata = ({ transaction }) => {
                     <h3
                         onClick={() => setVia('mBanking')}
                         className={`cursor-pointer shadow-sm text-sm px-2 xl:px-4 py-1 border border-blueGray-300 rounded-md ${
-                            via == 'mBanking' && 'bg-blue-500 text-white border-blue-500'
+                            via == 'mBanking' && 'bg-orange-500 text-white border-orange-500'
                         }`}
                     >
                         M-Banking
@@ -49,7 +49,7 @@ const Permata = ({ transaction }) => {
                     <h3
                         onClick={() => setVia('iBanking')}
                         className={`cursor-pointer shadow-sm text-sm px-2 xl:px-4 py-1 border border-blueGray-300 rounded-md ${
-                            via == 'iBanking' && 'bg-blue-500 text-white border-blue-500'
+                            via == 'iBanking' && 'bg-orange-500 text-white border-orange-500'
                         }`}
                     >
                         ATM
@@ -57,7 +57,7 @@ const Permata = ({ transaction }) => {
                     <h3
                         onClick={() => setVia('atm')}
                         className={`cursor-pointer shadow-sm text-sm px-2 xl:px-4 py-1 border border-blueGray-300 rounded-md ${
-                            via == 'atm' && 'bg-blue-500 text-white border-blue-500'
+                            via == 'atm' && 'bg-orange-500 text-white border-orange-500'
                         }`}
                     >
                         Internet Banking

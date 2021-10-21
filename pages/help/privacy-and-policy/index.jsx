@@ -13,21 +13,21 @@ const index = () => {
                     </p>
                     <p>
                         Kami hanya akan mengumpulkan informasi yang kami perlukan dan relevan dengan transaksi di dalam platform{' '}
-                        <a href='https://lokaloka.id' className='underline text-blue-500' target='_blank'>
+                        <a href='https://lokaloka.id' className='underline text-orange-500' target='_blank'>
                             lokaloka.id
                         </a>
                         . Anda dapat mengunjungi situs kami dan menjelajahinya tanpa harus memberikan informasi bersifat pribadi.
                     </p>
                     <p className='font-bold'>Pengumpulan Informasi Pribadi</p>
                     <p>
-                        <a href='https://lokaloka.id' className='underline text-blue-500' target='_blank'>
+                        <a href='https://lokaloka.id' className='underline text-orange-500' target='_blank'>
                             lokaloka.id
                         </a>{' '}
                         tidak menjual, membagi atau memperjualbelikan informasi pribadi pelanggan yang dikumpulkan secara online melalui pihak manapun.
                     </p>
                     <p>
                         Informasi pribadi yang kami kumpulkan, ketika Anda membuat akun di{' '}
-                        <a href='https://lokaloka.id' className='underline text-blue-500' target='_blank'>
+                        <a href='https://lokaloka.id' className='underline text-orange-500' target='_blank'>
                             lokaloka.id
                         </a>
                     </p>
@@ -41,7 +41,7 @@ const index = () => {
                     <ul className='font-medium ml-10 list-disc'>
                         <li>
                             Untuk mengirimkan produk yang telah Anda beli di{' '}
-                            <a href='https://lokaloka.id' className='underline text-blue-500' target='_blank'>
+                            <a href='https://lokaloka.id' className='underline text-orange-500' target='_blank'>
                                 lokaloka.id
                             </a>
                         </li>
@@ -49,7 +49,7 @@ const index = () => {
                         <li>Untuk memberikan informasi produk kami.</li>
                         <li>
                             Untuk memproses pesanan dan memberikan layanan maupun informasi yang kami tawarkan di{' '}
-                            <a href='https://lokaloka.id' className='underline text-blue-500' target='_blank'>
+                            <a href='https://lokaloka.id' className='underline text-orange-500' target='_blank'>
                                 lokaloka.id
                             </a>
                             .

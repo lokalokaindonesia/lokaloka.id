@@ -14,7 +14,7 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
                 <div className='flex lg:hidden w-full justify-between items-center'>
                     <FancySectionTitle title={sectionTitle} />
 
-                    <Button size='sm' href={() => router.push(`/specials/${sectionTitle.toLowerCase()}`)} type='secondary' display='flex' width='max'>
+                    <Button size='sm' href={() => router.push(`/specials/${sectionTitle.toLowerCase()}`)} type='primary' display='flex' width='max'>
                         <span className='text-xs'>Lihat semua</span>
                         <ArrowRightIcon className='h-4' />
                     </Button>
@@ -22,7 +22,7 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
                 <div className='hidden lg:flex w-full justify-between items-center'>
                     <FancySectionTitle title={sectionTitle} />
 
-                    <Button href={() => router.push(href)} type='secondary' display='flex' width='max'>
+                    <Button href={() => router.push(href)} type='primary' display='flex' width='max'>
                         <span>Lihat semua</span>
                         <ArrowRightIcon className='h-5' />
                     </Button>

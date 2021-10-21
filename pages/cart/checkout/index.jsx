@@ -594,7 +594,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     <button
                                         type='button'
                                         onClick={() => {}}
-                                        className='w-full md:w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blueGray-200 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+                                        className='w-full md:w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blueGray-200 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500'
                                     >
                                         Memproses...
                                     </button>
@@ -604,7 +604,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         onClick={() => {
                                             pay()
                                         }}
-                                        className='w-full md:w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+                                        className='w-full md:w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-orange-600 text-base font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500'
                                     >
                                         Bayar
                                     </button>
@@ -616,11 +616,11 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             )}
             <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 2xl:my-6'>
                 <div className='w-full hidden md:flex space-x-2 items-center md:my-2 2xl:my-3'>
-                    <div className='text-blue-700 hover:text-blue-800'>
+                    <div className='text-orange-700 hover:text-orange-800'>
                         <Link href='/'>Home</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
-                    <div className='text-blue-700 hover:text-blue-800'>
+                    <div className='text-orange-700 hover:text-orange-800'>
                         <Link href='/cart'>Keranjang</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
@@ -648,7 +648,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             }}
                                                             className={
                                                                 area == n.value
-                                                                    ? 'py-1 px-2 flex items-center space-x-2 rounded-md border border-blue-500 bg-blue-500 text-white transition ease-in-out duration-300'
+                                                                    ? 'py-1 px-2 flex items-center space-x-2 rounded-md border border-orange-500 bg-orange-500 text-white transition ease-in-out duration-300'
                                                                     : 'py-1 px-2 flex items-center space-x-2 rounded-md border border-blueGray-200 bg-blueGray-300  transition ease-in-out duration-300'
                                                             }
                                                         >
@@ -672,7 +672,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             id='location'
                                                             onChange={handleLocation}
                                                             required
-                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                            className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
                                                             placeholder='Fakultas Kedokteran ITB'
                                                         />
                                                     </div>
@@ -684,7 +684,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             name='address'
                                                             required
                                                             id='address'
-                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                            className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
                                                             placeholder='Jl. Ganesa No.10, Lb. Siliwangi, Kecamatan Coblong, Kota Bandung, Jawa Barat 40132'
                                                         />
                                                     </div>
@@ -696,7 +696,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                         id='notes'
                                                         onChange={handleNote}
                                                         placeholder=''
-                                                        className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                        className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
                                                     ></textarea>
                                                 </div>
                                             </>
@@ -712,7 +712,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             onChange={handleAddress}
                                                             required
                                                             id='address'
-                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                            className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
                                                             placeholder='Jl. Ganesa No.10, Lb. Siliwangi, Kecamatan Coblong, Kota Bandung, Jawa Barat 40132'
                                                         />
                                                     </div>
@@ -747,7 +747,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                                 name='city'
                                                                                 id='city'
                                                                                 onChange={handleCityInput}
-                                                                                className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border border-blueGray-200'
+                                                                                className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border border-blueGray-200'
                                                                                 placeholder='Cari Kota...'
                                                                             />
                                                                         </div>
@@ -758,7 +758,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                                     onClick={() => {
                                                                                         selectCity(c)
                                                                                     }}
-                                                                                    className=' w-full cursor-pointer hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out select-none relative py-2'
+                                                                                    className=' w-full cursor-pointer hover:bg-orange-500 hover:text-white transition duration-300 ease-in-out select-none relative py-2'
                                                                                     id='listbox-option-0'
                                                                                     role='option'
                                                                                 >
@@ -784,7 +784,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             readOnly={true}
                                                             id='province'
                                                             required
-                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                            className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
                                                             placeholder='Jawa Barat'
                                                         />
                                                     </div>
@@ -796,7 +796,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             id='postalCode'
                                                             onChange={handlePostalCode}
                                                             required
-                                                            className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                            className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
                                                             placeholder='64983'
                                                         />
                                                     </div>
@@ -807,7 +807,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                         name='notes'
                                                         onChange={handleNote}
                                                         id='notes'
-                                                        className='rounded-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                        className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
                                                     ></textarea>
                                                 </div>
                                             </>
@@ -832,7 +832,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md ring-2 md:ring-4 ring-blue-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-2 md:ring-4 ring-orange-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : 'rounded-md border md:border-2 border-blueGray-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
@@ -867,7 +867,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md ring-2 md:ring-4 ring-blue-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-2 md:ring-4 ring-orange-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : 'rounded-md border md:border-2 border-blueGray-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
@@ -904,7 +904,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md ring-2 md:ring-4 ring-blue-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-2 md:ring-4 ring-orange-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : orderData[0].totalPrice > 5000000
                                                                         ? 'rounded-md border-2 border-md:blueGray-200 bg-blueGray-200 filter grayscale h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : 'rounded-md border md:border-2 border-blueGray-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
@@ -947,7 +947,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                 type='button'
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md ring-2 md:ring-4 ring-blue-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md ring-2 md:ring-4 ring-orange-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : (orderData[0].totalPrice > 2500000 && paymentMethod.id == 'ALFAMART') ||
                                                                           (orderData[0].totalPrice > 5000000 && paymentMethod.id == 'INDOMARET')
                                                                         ? 'rounded-md border-2 border-md:blueGray-200 bg-blueGray-200 filter grayscale h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
@@ -1001,7 +1001,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         displayType={'text'}
                                         thousandSeparator={true}
                                         prefix={'Rp. '}
-                                        className='text-base 2xl:text-xl font-bold text-blue-500'
+                                        className='text-base 2xl:text-xl font-bold text-orange-500'
                                     />
                                 </div>
                                 <hr />
@@ -1020,7 +1020,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 id='ovo_number'
                                                 onChange={handleOvoNumber}
                                                 required
-                                                className='rounded-r-md focus:ring-blue-500 focus:border-blue-500 flex-1 block w-full text-sm placeholder-gray-300 border-blueGray-300'
+                                                className='rounded-r-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm placeholder-gray-300 border-blueGray-300'
                                                 placeholder='85199992222'
                                             />
                                         </div>

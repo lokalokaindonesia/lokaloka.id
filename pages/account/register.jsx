@@ -98,7 +98,7 @@ const register = () => {
                                         id='username'
                                         onChange={(e) => setUsername(e.target.value)}
                                         placeholder='sukaJajan_99'
-                                        className='rounded-md w-full text-sm md:text-base px-2 py-2 md:px-4 md:py-3 transition duration-300 ease-in-out bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full text-sm md:text-base px-2 py-2 md:px-4 md:py-3 transition duration-300 ease-in-out bg-gray-100 mt-2 border border-gray-300 focus:border-orange-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
                                     />
@@ -114,7 +114,7 @@ const register = () => {
                                         id='name'
                                         onChange={(e) => setName(e.target.value)}
                                         placeholder='Nama Lengkap'
-                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-orange-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
                                     />
@@ -130,7 +130,7 @@ const register = () => {
                                         id='email'
                                         onChange={(e) => setEmail(e.target.value)}
                                         placeholder='jajanin_pacar@gmail.com'
-                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-orange-600 focus:bg-white focus:outline-none'
                                         autoFocus='autofocus'
                                         autoComplete='autocomplete'
                                     />
@@ -147,7 +147,7 @@ const register = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                         placeholder='****'
                                         minLength={6}
-                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-orange-600 focus:bg-white focus:outline-none'
                                     />
                                 </div>
 
@@ -162,13 +162,13 @@ const register = () => {
                                         onChange={(e) => setPasswordConfirm(e.target.value)}
                                         placeholder='****'
                                         minLength={6}
-                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-blue-600 focus:bg-white focus:outline-none'
+                                        className='rounded-md w-full text-sm md:text-base md:px-4 transition duration-300 ease-in-out md:py-3 px-2 py-2 bg-gray-100 mt-2 border border-gray-300 focus:border-orange-600 focus:bg-white focus:outline-none'
                                     />
                                 </div>
 
                                 <button
                                     type='submit'
-                                    className='rounded-md w-full text-sm md:text-base block bg-blue-500 transition duration-300 ease-in-out hover:bg-blue-600 focus:bg-blue-600 text-white font-semibold px-2 py-2 md:px-4 md:py-3 '
+                                    className='rounded-md w-full text-sm md:text-base block bg-orange-500 transition duration-300 ease-in-out hover:bg-orange-600 focus:bg-orange-600 text-white font-semibold px-2 py-2 md:px-4 md:py-3 '
                                 >
                                     Daftar
                                 </button>
@@ -192,7 +192,7 @@ const register = () => {
                             <p className='mt-8'>
                                 Sudah punya akun? &nbsp;
                                 <Link href='/account/login'>
-                                    <span className='text-blue-500 transition duration-300 ease-in-out hover:text-blue-700 font-semibold cursor-pointer'>Masuk</span>
+                                    <span className='text-orange-500 transition duration-300 ease-in-out hover:text-orange-700 font-semibold cursor-pointer'>Masuk</span>
                                 </Link>
                             </p>
                         </div>

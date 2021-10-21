@@ -12,7 +12,9 @@ const Footer = () => {
                 <div className='container mx-auto px-4 2xl:px-0 grid lg:grid-flow-col lg:grid-cols-4 md:grid-flow-col md:grid-cols-4 gap-4 grid-cols-2'>
                     {/* 1 */}
                     <div className='flex flex-col space-y-4'>
-                        <h1 className='block md:hidden lg:block text-xl md:text-2xl lg:text-4xl font-bold text-blue-500'>Lokaloka</h1>
+                        <img src='/images/logo2.png' className='block md:hidden lg:block' alt='' style={{ width: '45%' }} />
+
+                        {/* <h1 className='block md:hidden lg:block text-xl md:text-2xl lg:text-4xl logo lowercase font-bold text-orange-500'>Lokaloka</h1> */}
                         <div className='hidden md:block lg:hidden md:w-10 md:h-10'>
                             <Image src={Logo} layout='responsive' quality={100} width={1} height={1} priority />
                         </div>

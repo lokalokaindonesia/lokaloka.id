@@ -259,7 +259,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
             ) : (
                 <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 2xl:my-6'>
                     <div className='w-full hidden md:flex space-x-2 items-center my-2 2xl:my-3'>
-                        <div className='text-blue-700 hover:text-blue-800'>
+                        <div className='text-orange-700 hover:text-orange-800'>
                             <Link href='/'>Home</Link>
                         </div>
                         <ChevronRightIcon className='w-5 h-5' />
@@ -324,7 +324,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                                                 displayType={'text'}
                                                                                 thousandSeparator={true}
                                                                                 prefix={'Rp. '}
-                                                                                className='text-xs md:text-xl font-black text-blue-500'
+                                                                                className='text-xs md:text-xl font-black text-orange-500'
                                                                             />
                                                                             {isDiscount && (
                                                                                 <NumberFormat
@@ -340,14 +340,14 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                                         <div className='flex items-center border h-6 md:h-8 w-max rounded ml-6 md:ml-[8.7rem] border-blueGray-300'>
                                                                             <div
                                                                                 onClick={() => reduceQty(product)}
-                                                                                className='select-none rounded-l cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-2 md:px-3 md:py-1 font-bold text-center border-r border-blueGray-300 text-blue-gray-800'
+                                                                                className='select-none rounded-l cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-2 md:px-3 md:py-1 font-bold text-center border-r border-blueGray-300 text-orange-gray-800'
                                                                             >
                                                                                 -
                                                                             </div>
-                                                                            <div className='px-4 py-1 w-12 flex-1 text-center text-blue-gray-800 '>{product.quantity}</div>
+                                                                            <div className='px-4 py-1 w-12 flex-1 text-center text-orange-gray-800 '>{product.quantity}</div>
                                                                             <div
                                                                                 onClick={() => addQty(product)}
-                                                                                className='select-none rounded-r cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-2 md:px-3 md:py-1 font-bold text-center border-l border-blueGray-300 text-blue-gray-800'
+                                                                                className='select-none rounded-r cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-2 md:px-3 md:py-1 font-bold text-center border-l border-blueGray-300 text-orange-gray-800'
                                                                             >
                                                                                 +
                                                                             </div>
@@ -428,7 +428,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'Rp. '}
-                                            className='text-base md:text-xl font-bold text-blue-500'
+                                            className='text-base md:text-xl font-bold text-orange-500'
                                         />
                                     </div>
                                     <hr />

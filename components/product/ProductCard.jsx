@@ -8,7 +8,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
 
     return (
         <Link href={`/${category}/${slug}`}>
-            <button className='drop-shadow-sm w-full flex flex-col space-y-1 justify-start bg-white ring-1 ring-blueGray-200 hover:bg-blue-100 transition ease-in-out duration-300 rounded-md'>
+            <button className='drop-shadow-sm w-full flex flex-col space-y-1 justify-start bg-white ring-1 ring-blueGray-200 hover:bg-orange-100 transition ease-in-out duration-300 rounded-md'>
                 {/* Product Image */}
                 <div className='w-full'>
                     <Image

@@ -59,7 +59,7 @@ const index = ({ user, session }) => {
                                     setType('all')
                                 }}
                                 className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
-                                    type == 'all' && 'bg-blue-400 text-white'
+                                    type == 'all' && 'bg-orange-400 text-white'
                                 }`}
                             >
                                 Semua
@@ -70,7 +70,7 @@ const index = ({ user, session }) => {
                                     setType('unpaid')
                                 }}
                                 className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
-                                    type == 'unpaid' && 'bg-blue-400 text-white'
+                                    type == 'unpaid' && 'bg-orange-400 text-white'
                                 }`}
                             >
                                 Belum dibayar
@@ -81,7 +81,7 @@ const index = ({ user, session }) => {
                                     setType('processed')
                                 }}
                                 className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
-                                    type == 'processed' && 'bg-blue-400 text-white'
+                                    type == 'processed' && 'bg-orange-400 text-white'
                                 }`}
                             >
                                 Diproses
@@ -92,7 +92,7 @@ const index = ({ user, session }) => {
                                     setType('done')
                                 }}
                                 className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
-                                    type == 'done' && 'bg-blue-400 text-white'
+                                    type == 'done' && 'bg-orange-400 text-white'
                                 }`}
                             >
                                 Selesai
@@ -103,7 +103,7 @@ const index = ({ user, session }) => {
                                     setStatus('&paymentStatus=CANCELED')
                                 }}
                                 className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
-                                    type == 'canceled' && 'bg-blue-400 text-white'
+                                    type == 'canceled' && 'bg-orange-400 text-white'
                                 }`}
                             >
                                 Dibatalkan
@@ -115,7 +115,7 @@ const index = ({ user, session }) => {
                             id='transaction-code'
                             onChange={handleInputSearch}
                             placeholder='Cari berdasarkan Kode Transaksi'
-                            className='mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm text-xs md:text-sm border-blueGray-200 rounded-md'
+                            className='mt-1 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm text-xs md:text-sm border-blueGray-200 rounded-md'
                         />
                         {filtered.length == 0 && <div className='py-12 flex justify-center w-full text-lg'>Tidak ada transaksi</div>}
                         {filtered.map((transaction, i) => {
@@ -164,7 +164,7 @@ const index = ({ user, session }) => {
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'Rp. '}
-                                            className='text-xs md:hidden md:text-lg xl:text-2xl 2xl:text-3xl font-extrabold text-blue-500'
+                                            className='text-xs md:hidden md:text-lg xl:text-2xl 2xl:text-3xl font-extrabold text-orange-500'
                                         />
                                     </div>
                                     <div className='flex justify-between items-start'>
@@ -182,7 +182,7 @@ const index = ({ user, session }) => {
                                             </div>
                                             <div className='flex flex-col space-y-2'>
                                                 <span className='text-sm md:text-base xl:text-lg line-clamp-1 font-semibold'>{transaction.products[0].product.name}</span>
-                                                <span className='text-xs text-blue-400 cursor-pointer'>
+                                                <span className='text-xs text-orange-400 cursor-pointer'>
                                                     {transaction.productsOrigin.length > 1 && <span>{transaction.productsOrigin.length - 1} produk lainnya</span>}
                                                 </span>
                                             </div>
@@ -194,7 +194,7 @@ const index = ({ user, session }) => {
                                                 displayType={'text'}
                                                 thousandSeparator={true}
                                                 prefix={'Rp. '}
-                                                className='text-xs md:text-lg xl:text-2xl font-extrabold text-blue-500'
+                                                className='text-xs md:text-lg xl:text-2xl font-extrabold text-orange-500'
                                             />
                                         </div>
                                     </div>

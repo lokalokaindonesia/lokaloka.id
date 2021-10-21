@@ -191,11 +191,11 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
             <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div className='container mx-auto px-4 2xl:px-0 md:my-5 2xl:my-6'>
                 <div className='w-full hidden md:text-sm md:space-x-1 md:flex space-x-2 items-center'>
-                    <div className='text-blue-700 hover:text-blue-800'>
+                    <div className='text-orange-700 hover:text-orange-800'>
                         <Link href='/'>Home</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
-                    <div className='text-blue-700 hover:text-blue-800'>
+                    <div className='text-orange-700 hover:text-orange-800'>
                         <Link href={`/${product.product_category.slug}`}>{product.product_category.name}</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />

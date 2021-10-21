@@ -108,10 +108,12 @@ const Header = () => {
             </Transition.Root>
             {/* End Modal Section */}
 
-            <div className='hidden md:block md:w-2/12 text-2xl font-extrabold text-blue-500 tracking-wide'>
+            <div className='hidden md:block md:w-2/12 text-2xl font-extrabold text-orange-500 tracking-wide'>
                 <Link href='/'>
                     <div className='cursor-pointer'>
-                        <h1 className='hidden md:block cursor-pointer text-4xl font-bold text-blue-500'>Lokaloka</h1>
+                        <img className='hidden md:block cursor-pointer ' src='/images/logo2.png' alt='' style={{ height: '32px' }} />
+                        {/* <Image objectFit='contain' layout='responsive' width={100} height={40} src='/images/logo2.png' alt='' /> */}
+                        {/* <h1 className='hidden md:block cursor-pointer logo lowercase text-4xl font-bold text-orange-500'>Lokaloka</h1> */}
                     </div>
                 </Link>
             </div>
