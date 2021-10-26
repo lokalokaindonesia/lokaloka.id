@@ -13,15 +13,13 @@ import { ToastContainer, toast } from 'react-toastify'
 import Layout from '@/components/layout/Layout'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
-import dynamic from 'next/dynamic'
-const ProductCard = dynamic(() => import('@/components/product/ProductCard'))
+import ProductCard from '@/components/product/ProductCard'
 import FancySectionTitle from '@/components/ui/FancySectionTitle'
 import { setOrder } from '@/redux/orderSlice'
 import { useDispatch } from 'react-redux'
 import { setFavorite } from '@/redux/favoriteSlice'
 
 const Product = ({ product, similarProducts, reviews, baseLink }) => {
-    console.log(product)
     const dispatch = useDispatch()
 
     const addToCartSuccessToast = (msg) => toast.success(msg)
@@ -525,7 +523,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
                 )}
                 {/* Similar Products */}
-                {/* <div className='flex flex-col space-y-4'>
+                <div className='flex flex-col space-y-4'>
                     <FancySectionTitle title='Produk serupa' />
                     <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 2xl:gap-8'>
                         {similarProducts
@@ -545,7 +543,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                             })
                             .splice(0, 6)}
                     </div>
-                </div> */}
+                </div>
             </div>
         </Layout>
     )
