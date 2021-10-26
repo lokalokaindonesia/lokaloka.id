@@ -13,7 +13,8 @@ import { ToastContainer, toast } from 'react-toastify'
 import Layout from '@/components/layout/Layout'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
-import ProductCard from '@/components/product/ProductCard'
+import dynamic from 'next/dynamic'
+const ProductCard = dynamic(() => import('@/components/product/ProductCard'))
 import FancySectionTitle from '@/components/ui/FancySectionTitle'
 import { setOrder } from '@/redux/orderSlice'
 import { useDispatch } from 'react-redux'
@@ -531,13 +532,13 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 return (
                                     <ProductCard
                                         key={index}
+                                        slug={item.slug}
+                                        category={item.product_category.slug}
                                         imgSrc={item.images[0].url}
                                         productName={item.name}
                                         price={item.sellingPrice}
-                                        discount={item.discount}
+                                        discount={item.discount ? item.discount : null}
                                         isRecommended={item.isRecommended}
-                                        category={item.product_category.slug}
-                                        slug={item.slug}
                                     />
                                 )
                             })
