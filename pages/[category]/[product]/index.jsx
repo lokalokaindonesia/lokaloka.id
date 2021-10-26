@@ -22,7 +22,6 @@ import { setFavorite } from '@/redux/favoriteSlice'
 
 const Product = ({ product, similarProducts, reviews, baseLink }) => {
     console.log(product)
-    
     // const dispatch = useDispatch()
 
     // const addToCartSuccessToast = (msg) => toast.success(msg)
@@ -186,7 +185,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
     //     setAddToCartLoading(false)
 
     //     return addToCartSuccessToast('Produk ditambahkan ke Keranjang')
-    }
+    // }
     return <div></div>
 
     return (
