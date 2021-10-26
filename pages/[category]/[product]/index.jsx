@@ -21,171 +21,173 @@ import { useDispatch } from 'react-redux'
 import { setFavorite } from '@/redux/favoriteSlice'
 
 const Product = ({ product, similarProducts, reviews, baseLink }) => {
-    const dispatch = useDispatch()
+    console.log(product)
+    
+    // const dispatch = useDispatch()
 
-    const addToCartSuccessToast = (msg) => toast.success(msg)
+    // const addToCartSuccessToast = (msg) => toast.success(msg)
 
-    const addToCartFailedToast = (msg) => toast.error(msg)
+    // const addToCartFailedToast = (msg) => toast.error(msg)
 
-    const [session, loading] = useSession()
+    // const [session, loading] = useSession()
 
-    const discountPrice = product.sellingPrice - (product.sellingPrice * product.discount) / 100
-    const isDiscount = product.discount == 0 ? false : true
-    const xPrice = product.discount ? discountPrice : product.sellingPrice
+    // const discountPrice = product.sellingPrice - (product.sellingPrice * product.discount) / 100
+    // const isDiscount = product.discount == 0 ? false : true
+    // const xPrice = product.discount ? discountPrice : product.sellingPrice
 
-    const router = useRouter()
+    // const router = useRouter()
 
-    const [addToCartLoading, setAddToCartLoading] = useState(false)
+    // const [addToCartLoading, setAddToCartLoading] = useState(false)
 
-    // Slider Image
-    const [current, setCurrent] = useState(0)
+    // // Slider Image
+    // const [current, setCurrent] = useState(0)
 
-    // Product
-    const [quantity, setQuantity] = useState(1)
-    const [subtotal, setSubtotal] = useState(xPrice)
-    const [isFavorited, setIsFavorited] = useState(false)
-    const [shareLink, setShareLink] = useState('')
+    // // Product
+    // const [quantity, setQuantity] = useState(1)
+    // const [subtotal, setSubtotal] = useState(xPrice)
+    // const [isFavorited, setIsFavorited] = useState(false)
+    // const [shareLink, setShareLink] = useState('')
 
-    const length = product.images.length
+    // const length = product.images.length
 
-    useEffect(async () => {
-        setShareLink(baseLink + router.asPath)
-        if (!loading && session) {
-            const { data } = await axios.get(`/api/user`)
-            const isFavorited = await data.favorites.filter((f) => f.id.includes(product.id))
-            isFavorited.length > 0 ? setIsFavorited(true) : setIsFavorited(false)
-        }
-        return () => {}
-    }, [session])
+    // useEffect(async () => {
+    //     setShareLink(baseLink + router.asPath)
+    //     if (!loading && session) {
+    //         const { data } = await axios.get(`/api/user`)
+    //         const isFavorited = await data.favorites.filter((f) => f.id.includes(product.id))
+    //         isFavorited.length > 0 ? setIsFavorited(true) : setIsFavorited(false)
+    //     }
+    //     return () => {}
+    // }, [session])
 
-    // * Carousel Func
-    const nextSlide = () => {
-        setCurrent(current === length - 1 ? 0 : current + 1)
+    // // * Carousel Func
+    // const nextSlide = () => {
+    //     setCurrent(current === length - 1 ? 0 : current + 1)
+    // }
+    // const prevSlide = () => {
+    //     setCurrent(current === 0 ? length - 1 : current - 1)
+    // }
+
+    // // * Qty Func
+    // const addQty = () => {
+    //     setQuantity(quantity + 1)
+    //     countSubtotal()
+    // }
+
+    // const reduceQty = () => {
+    //     setQuantity(quantity === 1 ? 1 : quantity - 1)
+    //     countSubtotal()
+    // }
+
+    // // * Count Subtotal
+    // const countSubtotal = () => {
+    //     const xPrice = product.discount ? discountPrice : product.sellingPrice
+    //     setSubtotal(quantity * xPrice)
+    // }
+
+    // // * Favorite Func
+    // const favoriteHandle = async () => {
+    //     const getFavorites = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, { headers: { Authorization: 'Bearer ' + session.jwt } })
+
+    //     const favoritesData = await getFavorites.data.favorites
+
+    //     const filteredFavorites = await favoritesData.find((f) => f == product.id)
+
+    //     // remove isFavorited
+    //     if (filteredFavorites) {
+    //         const x = await favoritesData.filter((f) => f != filteredFavorites)
+    //         const { data } = await axios.put(
+    //             `${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`,
+    //             { favorites: (x == [] && null) || (x != [] && x) },
+    //             {
+    //                 headers: {
+    //                     Authorization: `Bearer ${session.jwt}`,
+    //                 },
+    //             }
+    //         )
+    //         setIsFavorited(!isFavorited)
+    //         return dispatch(setFavorite(data.favorites))
+    //     }
+    //     // add isFavorited
+    //     const { data } = await axios.put(
+    //         `${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`,
+    //         { favorites: [...favoritesData, product.id] },
+    //         {
+    //             headers: {
+    //                 Authorization: `Bearer ${session.jwt}`,
+    //             },
+    //         }
+    //     )
+
+    //     setIsFavorited(!isFavorited)
+    //     return dispatch(setFavorite(data.favorites))
+    // }
+
+    // if (!Array.isArray(product.images) || product.images.length <= 0) return null
+
+    // // Render SubTotal
+    // useEffect(() => {
+    //     countSubtotal()
+    // })
+
+    // // Add to Cart Handler
+    // const addToCart = async () => {
+    //     setAddToCartLoading(true)
+
+    //     if (!session) {
+    //         setAddToCartLoading(false)
+    //         return addToCartFailedToast('Maaf, Kamu harus login dulu')
+    //     }
+    //     const getCartProducts = await axios.get(`/api/cart`)
+    //     const cartProducts = await getCartProducts.data
+
+    //     const sameProduct = await cartProducts.find((item) => item.product.id === product.id)
+
+    //     if (sameProduct) {
+    //         const { data } = await axios.put(
+    //             `${process.env.NEXT_PUBLIC_API_URL}/carts/${sameProduct.id}`,
+    //             {
+    //                 quantity: +sameProduct.quantity + quantity,
+    //             },
+    //             { headers: { Authorization: 'Bearer ' + session.jwt } }
+    //         )
+
+    //         if (!data) {
+    //             return console.log('something wrong when update product qty')
+    //         }
+
+    //         const cart = await axios.get('/api/cart')
+
+    //         dispatch(setOrder(cart.data))
+
+    //         setAddToCartLoading(false)
+
+    //         return addToCartSuccessToast('Produk ditambahkan ke Keranjang')
+    //     }
+
+    //     const res = await axios.post(
+    //         `${process.env.NEXT_PUBLIC_API_URL}/carts`,
+    //         {
+    //             product: product._id,
+    //             user: session.id,
+    //             quantity,
+    //         },
+    //         { headers: { Authorization: 'Bearer ' + session.jwt } }
+    //     )
+    //     if (!res.data) {
+    //         setAddToCartLoading(false)
+    //         return addToCartFailedToast('Gagal menambah Keranjang')
+    //     }
+
+    //     const cart = await axios.get('/api/cart')
+
+    //     dispatch(setOrder(cart.data))
+
+    //     setAddToCartLoading(false)
+
+    //     return addToCartSuccessToast('Produk ditambahkan ke Keranjang')
     }
-    const prevSlide = () => {
-        setCurrent(current === 0 ? length - 1 : current - 1)
-    }
-
-    // * Qty Func
-    const addQty = () => {
-        setQuantity(quantity + 1)
-        countSubtotal()
-    }
-
-    const reduceQty = () => {
-        setQuantity(quantity === 1 ? 1 : quantity - 1)
-        countSubtotal()
-    }
-
-    // * Count Subtotal
-    const countSubtotal = () => {
-        const xPrice = product.discount ? discountPrice : product.sellingPrice
-        setSubtotal(quantity * xPrice)
-    }
-
-    // * Favorite Func
-    const favoriteHandle = async () => {
-        const getFavorites = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, { headers: { Authorization: 'Bearer ' + session.jwt } })
-
-        const favoritesData = await getFavorites.data.favorites
-
-        const filteredFavorites = await favoritesData.find((f) => f == product.id)
-
-        // remove isFavorited
-        if (filteredFavorites) {
-            const x = await favoritesData.filter((f) => f != filteredFavorites)
-            const { data } = await axios.put(
-                `${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`,
-                { favorites: (x == [] && null) || (x != [] && x) },
-                {
-                    headers: {
-                        Authorization: `Bearer ${session.jwt}`,
-                    },
-                }
-            )
-            setIsFavorited(!isFavorited)
-            return dispatch(setFavorite(data.favorites))
-        }
-        // add isFavorited
-        const { data } = await axios.put(
-            `${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`,
-            { favorites: [...favoritesData, product.id] },
-            {
-                headers: {
-                    Authorization: `Bearer ${session.jwt}`,
-                },
-            }
-        )
-
-        setIsFavorited(!isFavorited)
-        return dispatch(setFavorite(data.favorites))
-    }
-
-    if (!Array.isArray(product.images) || product.images.length <= 0) return null
-
-    // Render SubTotal
-    useEffect(() => {
-        countSubtotal()
-    })
-
-    // Add to Cart Handler
-    const addToCart = async () => {
-        setAddToCartLoading(true)
-
-        if (!session) {
-            setAddToCartLoading(false)
-            return addToCartFailedToast('Maaf, Kamu harus login dulu')
-        }
-        const getCartProducts = await axios.get(`/api/cart`)
-        const cartProducts = await getCartProducts.data
-
-        const sameProduct = await cartProducts.find((item) => item.product.id === product.id)
-
-        if (sameProduct) {
-            const { data } = await axios.put(
-                `${process.env.NEXT_PUBLIC_API_URL}/carts/${sameProduct.id}`,
-                {
-                    quantity: +sameProduct.quantity + quantity,
-                },
-                { headers: { Authorization: 'Bearer ' + session.jwt } }
-            )
-
-            if (!data) {
-                return console.log('something wrong when update product qty')
-            }
-
-            const cart = await axios.get('/api/cart')
-
-            dispatch(setOrder(cart.data))
-
-            setAddToCartLoading(false)
-
-            return addToCartSuccessToast('Produk ditambahkan ke Keranjang')
-        }
-
-        const res = await axios.post(
-            `${process.env.NEXT_PUBLIC_API_URL}/carts`,
-            {
-                product: product._id,
-                user: session.id,
-                quantity,
-            },
-            { headers: { Authorization: 'Bearer ' + session.jwt } }
-        )
-        if (!res.data) {
-            setAddToCartLoading(false)
-            return addToCartFailedToast('Gagal menambah Keranjang')
-        }
-
-        const cart = await axios.get('/api/cart')
-
-        dispatch(setOrder(cart.data))
-
-        setAddToCartLoading(false)
-
-        return addToCartSuccessToast('Produk ditambahkan ke Keranjang')
-    }
-    return <div>{product}</div>
+    return <div></div>
 
     return (
         <Layout title={`${product.name} - Lokaloka`}>
