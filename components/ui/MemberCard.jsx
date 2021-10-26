@@ -49,7 +49,7 @@ const MemberCard = ({ user }) => {
                                 <div className='flex space-x-4 items-center'>
                                     <span className='lg:text-xl xl:text-2xl font-bold text-white'>{user.name}</span>
                                     {user.confirmed && (
-                                        <div className='flex md:space-x-2 items-center px-1 md:px-2 md:py-1 md:bg-orange-500 rounded bg-opacity-50'>
+                                        <div className='flex md:space-x-2 items-center px-1 md:px-2 md:py-1 md:bg-blue-500 rounded bg-opacity-50'>
                                             <span className='hidden md:block text-white text-xs'>Terverifikasi</span>
                                             <lottie-player
                                                 src='https://assets2.lottiefiles.com/packages/lf20_bvjhz66u.json'
@@ -62,7 +62,7 @@ const MemberCard = ({ user }) => {
                                         </div>
                                     )}
                                 </div>
-                                <div className='flex flex-col space-y-1 md:space-y-1 xl:space-y-2'>
+                                {/* <div className='flex flex-col space-y-1 md:space-y-1 xl:space-y-2'>
                                     <div className='text-sm text-blueGray-200'>Keuntungan</div>
                                     <div className='flex space-x-4'>
                                         <div className='rounded md:p-1 xl:p-2 bg-gradient-to-tr from-orange-500 to-indigo-500'>
@@ -70,11 +70,11 @@ const MemberCard = ({ user }) => {
                                             <span className='hidden lg:block text-blueGray-200 text-xs'>Gratis biaya pengiriman</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
-                    <div className='hidden md:absolute md:block md:top-4 md:right-8 xl:top-9 xl:right-8 2xl:top-14 2xl:right-12'>
+                    {/* <div className='hidden md:absolute md:block md:top-4 md:right-8 xl:top-9 xl:right-8 2xl:top-14 2xl:right-12'>
                         <div className='flex flex-col md:space-y-5 lg:space-y-6 xl:space-y-7 2xl:space-y-8 justify-between items-center'>
                             <div className='md:w-20 md:h-20 xl:h-24 xl:w-24'>
                                 <lottie-player
@@ -88,7 +88,7 @@ const MemberCard = ({ user }) => {
                             </div>
                             <h2 className='md:hidden lg:block lg:text-lg xl:text-xl font-bold text-orange-500'>Member Gold</h2>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

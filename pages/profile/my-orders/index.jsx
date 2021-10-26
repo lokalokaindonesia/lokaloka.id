@@ -39,7 +39,7 @@ const index = ({ user, session }) => {
         <Layout title='Pesanan Saya'>
             <div className='container mx-auto 2xl:px-0 my-3 md:my-4 xl:my-5 2xl:my-6 flex flex-col md:space-y-4 xl:space-y-5 2xl:space-y-6'>
                 <div className='px-4 md:px-0 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>Akun</div>
-                <MemberCard user={user} />
+                {/* <MemberCard user={user} /> */}
                 <div className='flex flex-col mt-4 md:mt-0 space-y-2 space-x-0 md:space-y-0 md:flex-row md:space-x-4 px-4 md:px-0'>
                     <div className='w-full md:w-2/12'>
                         <ul className='flex space-x-2 space-y-0 md:flex-col md:space-x-0 md:space-y-2'>

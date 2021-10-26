@@ -83,13 +83,13 @@ const login = () => {
                                     />
                                 </div>
 
-                                <div className='text-right my-2'>
+                                {/* <div className='text-right my-2'>
                                     <Link href='/account/forgot-password'>
                                         <span className='cursor-pointer text-sm font-semibold text-orange-500 transition duration-300 ease-in-out hover:text-orange-700 focus:text-orange-700'>
                                             Lupa Password?
                                         </span>
                                     </Link>
-                                </div>
+                                </div> */}
 
                                 <button
                                     type='submit'
