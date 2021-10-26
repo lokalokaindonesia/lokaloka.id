@@ -185,6 +185,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
 
         return addToCartSuccessToast('Produk ditambahkan ke Keranjang')
     }
+    return product
 
     return (
         <Layout title={`${product.name} - Lokaloka`}>
