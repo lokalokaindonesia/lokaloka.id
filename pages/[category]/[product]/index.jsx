@@ -196,7 +196,9 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                         <Link href='/'>Home</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
-                    <div className='text-orange-700 hover:text-orange-800'>{/* <Link href={`/${product.product_category.slug}`}>{product.product_category.name}</Link> */}</div>
+                    <div className='text-orange-700 hover:text-orange-800'>
+                        <Link href={`/${product.product_category.slug}`}>{product.product_category.name}</Link>
+                    </div>
                     <ChevronRightIcon className='w-5 h-5' />
                     <div>
                         <div className='line-clamp-1'>{product.name}</div>
@@ -523,7 +525,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
                 )}
                 {/* Similar Products */}
-                <div className='flex flex-col space-y-4'>
+                {/* <div className='flex flex-col space-y-4'>
                     <FancySectionTitle title='Produk serupa' />
                     <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 2xl:gap-8'>
                         {similarProducts
@@ -543,7 +545,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                             })
                             .splice(0, 6)}
                     </div>
-                </div>
+                </div> */}
             </div>
         </Layout>
     )
