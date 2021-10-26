@@ -524,7 +524,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
                 )}
                 {/* Similar Products */}
-                <div className='flex flex-col space-y-4'>
+                {/* <div className='flex flex-col space-y-4'>
                     <FancySectionTitle title='Produk serupa' />
                     <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 2xl:gap-8'>
                         {similarProducts
@@ -544,7 +544,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                             })
                             .splice(0, 6)}
                     </div>
-                </div>
+                </div> */}
             </div>
         </Layout>
     )
