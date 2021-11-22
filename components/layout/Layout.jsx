@@ -11,7 +11,7 @@ const Layout = ({ title, children }) => {
     const clientKey = process.env.MIDTRANS_CLIENT_KEY
     const urlMidtransSnap = process.env.NEXT_PUBLIC_MIDTRANS_SNAP
     return (
-        <div className='bg-blueGray-50 text-blueGray-800'>
+        <div className='bg-blueGray-100 text-blueGray-800'>
             <Head>
                 <title>{title}</title>
                 <meta name='description' content='Lokaloka Indonesia - Belanja oleh-oleh dengan mudah !!!' />

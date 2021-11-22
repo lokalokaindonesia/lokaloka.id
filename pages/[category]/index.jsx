@@ -256,7 +256,7 @@ const Category = ({ category }) => {
 //     return { paths, fallback: false }
 // }
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ params, query }) => {
     const res = await axios.get(`${process.env.NEXT_URL}/api/product-categories/${params.category}`)
     const data = await res.data
 

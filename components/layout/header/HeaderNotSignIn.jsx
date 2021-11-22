@@ -78,7 +78,7 @@ const HeaderNotSignIn = () => {
             <div className='w-2/12 text-2xl font-extrabold text-orange-500 tracking-wide'>
                 <Link href='/'>
                     <div>
-                        <h1 className='hidden lg:block text-4xl font-bold text-orange-500'>Lokaloka</h1>
+                        <h1 className='hidden cursor-pointer lg:block text-4xl font-bold text-orange-500'>Lokaloka</h1>
                     </div>
                 </Link>
             </div>
@@ -113,7 +113,7 @@ const HeaderNotSignIn = () => {
                     <SearchIcon className='md:h-6 md:w-6 text-blueGray-500 cursor-pointer' />
                 </button>
                 <Button href={() => router.push('/account/login')} size='base' width='max' display='block' type='secondary'>
-                    <span>Sign In</span>
+                    <span>Masuk</span>
                 </Button>
             </div>
         </header>

@@ -16,13 +16,14 @@ const Hero = () => {
                 </div>
                 <div className='w-full flex flex-col space-y-8 md:space-y-10 lg:space-y-12 xl:space-y-16'>
                     <div className='flex space-x-2 items-center'>
-                        <SparklesIcon className='h-5 w-5 md:h-6 md:w-6 xl:h-8 xl:w-8 text-red-500' />
-                        <span className='text-lg md:text-lg xl:text-2xl font-bold text-red-500'>Promo 10.10</span>
+                        {/* <SparklesIcon className='h-5 w-5 md:h-6 md:w-6 xl:h-8 xl:w-8 text-red-500' />
+                        <span className='text-lg md:text-lg xl:text-2xl font-bold text-red-500'>Promo 10.10</span> */}
                     </div>
                     <div className='flex flex-col space-y-4'>
-                        <h1 className='text-2xl md:text-4xl xl:text-6xl font-extrabold text-blue-500 font-display filter drop-shadow leading-tight md:leading-none capitalize'>
-                            Jangan lewatkan promo spesial 10.10
+                        <h1 className='text-2xl md:text-4xl xl:text-6xl font-extrabold text-blue-500 font-display filter drop-shadow leading-normal md:leading-none capitalize'>
+                            Jangan lewatkan promo spesial DISKON 10%
                         </h1>
+                        <span className='text-blue-500'>*Untuk setiap pembelian</span>
                     </div>
                     <div className='flex flex-col space-y-2'>
                         <p className='text-sm md:text-base xl:text-xl font-normal text-blueGray-700 filter drop-shadow'>
