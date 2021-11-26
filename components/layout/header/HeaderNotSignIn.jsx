@@ -112,9 +112,9 @@ const HeaderNotSignIn = () => {
                 <button type='button' className='hidden md:block' name='search' aria-label='Search' onClick={() => setOpen(true)}>
                     <SearchIcon className='md:h-6 md:w-6 text-blueGray-500 cursor-pointer' />
                 </button>
-                <Button href={() => router.push('/account/login')} size='base' width='max' display='block' type='secondary'>
+                {/* <Button href={() => router.push('/account/login')} size='base' width='max' display='block' type='secondary'>
                     <span>Masuk</span>
-                </Button>
+                </Button> */}
             </div>
         </header>
     )
