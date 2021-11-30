@@ -1,5 +1,4 @@
-import Link from 'next/link'
-const Button = ({ children, type = 'primary', size = 'base', href, width = 'max', display = 'block', buttonType = 'button' }) => {
+const Button = ({ children, disabled = false, type = 'primary', size = 'base', href, width = 'max', display = 'block', buttonType = 'button' }) => {
     const sizes = {
         sm: 'px-3 py-1 text-sm',
         base: 'px-4 py-2',
@@ -33,7 +32,14 @@ const Button = ({ children, type = 'primary', size = 'base', href, width = 'max'
     const pickedDisplay = displayStyles[display]
 
     return (
-        <button type={buttonType} onClick={href} className={` ${pickedtype} ${pickedSize} ${pickedWidth} ${pickedDisplay}`}>
+        <button
+            disabled={disabled}
+            type={buttonType}
+            onClick={href}
+            className={`${disabled && 'cursor-default'} ${
+                disabled ? 'rounded-md drop-shadow-sm bg-blueGray-400 text-white font-bold' : pickedtype
+            } ${pickedSize} ${pickedWidth} ${pickedDisplay}`}
+        >
             {children}
         </button>
     )

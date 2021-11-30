@@ -20,7 +20,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                         height={5}
                         layout='responsive'
                         objectFit='cover'
-                        quality={75}
+                        quality={50}
                     />
                 </div>
                 <div className='flex flex-col space-y-1 p-2'>

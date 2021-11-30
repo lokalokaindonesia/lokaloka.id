@@ -7,18 +7,20 @@ import { CheckIcon, ChevronRightIcon, SelectorIcon } from '@heroicons/react/soli
 import { useSelector, useDispatch } from 'react-redux'
 import Layout from '@/components/layout/Layout'
 import dynamic from 'next/dynamic'
+import Button from '@/components/ui/Button'
+import 'next-pagination/dist/index.css'
+import Pagination from 'next-pagination'
 const ProductCard = dynamic(() => import('@/components/product/ProductCard'))
 
 const classNames = (...classes) => {
     return classes.filter(Boolean).join(' ')
 }
 
-const Category = ({ category }) => {
+const Category = ({ category, products, page, productLength }) => {
     const filter = useSelector((state) => state.filter.value)
 
     const router = useRouter()
 
-    const [products, setProducts] = useState([])
     const [price, setPrice] = useState(filter[0])
     const [recommended, setRecommended] = useState(false)
     const [discount, setDiscount] = useState(false)
@@ -26,12 +28,7 @@ const Category = ({ category }) => {
     const [maximumPrice, setMaximumPrice] = useState(5000000)
     const [params, setParams] = useState('')
 
-    useEffect(async () => {
-        const { data } = await axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}/products?${price.query}&product_category=${category.id}&sellingPrice_gt=${minimumPrice}&sellingPrice_lt=${maximumPrice}${params}`
-        )
-        setProducts(data)
-    }, [recommended, discount, minimumPrice, maximumPrice, category, price])
+    const lastPage = Math.ceil(productLength / 20)
 
     const recommendedHandle = (e) => {
         setRecommended(!recommended)
@@ -75,8 +72,8 @@ const Category = ({ category }) => {
                         <span>{category.name}</span>
                     </div>
                 </div>
-                <h1 className='text-lg md:text-2xl font-semibold text-blueGray-800 my-3'>{category.name}</h1>
-                <div className='flex justify-between items-center'>
+                <h1 className='text-lg md:text-2xl font-semibold text-blueGray-800 mb-2'>{category.name}</h1>
+                <div className='flex justify-between items-center mb-4'>
                     <p className='text-xs md:text-sm'>
                         <span>{products.length} produk dari </span> <span className='font-semibold'>"Kategori {category.name}"</span>
                     </p>
@@ -85,10 +82,10 @@ const Category = ({ category }) => {
                     <div className='w-full'>
                         {products.length == 0 && (
                             <div className='flex justify-center items-center h-full'>
-                                <div className='text-xl font-semibold text-blueGray-800'>Products not found</div>
+                                <div className='text-xl font-semibold text-blueGray-800'>Produk tidak ada</div>
                             </div>
                         )}
-                        <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-6 2xl:gap-8 mt-4'>
+                        <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-6 2xl:gap-8'>
                             {products.map((product, index) => (
                                 <ProductCard
                                     key={index}
@@ -102,8 +99,12 @@ const Category = ({ category }) => {
                                 />
                             ))}
                         </div>
+                        <div className='flex space-x-4 mt-5 justify-between'>
+                            <Pagination total={productLength} />
+                        </div>
                     </div>
                     {/* Filter */}
+                    {/* TODO: ! FILTER SUCHS */}
                     <div className='mt-4 md:w-1/4 lg:w-1/3 xl:w-1/4 2xl:w-1/4 drop-shadow-sm'>
                         <div className='sticky top-28 flex flex-col space-y-2 2xl:space-y-4 border border-blueGray-200 bg-white rounded-md p-2 md:p-4'>
                             <div className='flex justify-between items-center'>
@@ -176,9 +177,9 @@ const Category = ({ category }) => {
                                     <div className='flex items-center'>
                                         <div className='flex items-center'>
                                             <input
-                                                onChange={recommendedHandle}
                                                 id='recommended'
                                                 name='recommended'
+                                                onChange={recommendedHandle}
                                                 type='checkbox'
                                                 className='focus:ring-orange-500 h-4 w-4 text-orange-600 border-blueGray-300 rounded'
                                             />
@@ -192,8 +193,8 @@ const Category = ({ category }) => {
                                     <div className='flex items-center'>
                                         <div className='flex items-center'>
                                             <input
-                                                onChange={discountHandle}
                                                 id='discount'
+                                                onChange={discountHandle}
                                                 name='discount'
                                                 type='checkbox'
                                                 className='focus:ring-orange-500 h-4 w-4 text-orange-600 border-blueGray-300 rounded'
@@ -215,8 +216,8 @@ const Category = ({ category }) => {
                                         </label>
                                         <input
                                             type='text'
-                                            onChange={minPriceHandle}
                                             name='min'
+                                            onChange={minPriceHandle}
                                             placeholder='5.000'
                                             id='min'
                                             className='mt-1 text-xs py-1 xl:px-2 2xl:py-2 2xl:px-3 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm sm:text-sm border-blueGray-300 rounded-md'
@@ -224,11 +225,11 @@ const Category = ({ category }) => {
                                     </div>
                                     <div className='w-full'>
                                         <label htmlFor='max' className='block text-sm font-medium text-blueGray-800'>
-                                            Max
+                                            Maks
                                         </label>
                                         <input
-                                            onChange={maxPriceHandle}
                                             type='text'
+                                            onChange={maxPriceHandle}
                                             placeholder='200.000'
                                             name='max'
                                             id='max'
@@ -236,6 +237,14 @@ const Category = ({ category }) => {
                                         />
                                     </div>
                                 </div>
+                                <Button
+                                    href={() => {
+                                        router.push(`/${category.slug}?page=${+page}${params}`)
+                                    }}
+                                    width='full'
+                                >
+                                    Filter
+                                </Button>
                             </div>
                         </div>
                     </div>
@@ -245,20 +254,20 @@ const Category = ({ category }) => {
     )
 }
 
-// export const getStaticPaths = async () => {
-//     const res = await axios.get(`${process.env.NEXT_URL}/api/product-categories`)
-//     const categories = await res.data
-
-//     const paths = categories.map((category) => {
-//         return { params: { category: category.slug } }
-//     })
-
-//     return { paths, fallback: false }
-// }
-
-export const getServerSideProps = async ({ params, query }) => {
-    const res = await axios.get(`${process.env.NEXT_URL}/api/product-categories/${params.category}`)
+export const getServerSideProps = async ({ params, query: { page = 1, isRecommended = '', discountGt = '' } }) => {
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/product-categories?slug_eq=${params.category}`)
     const data = await res.data
+
+    const IRQuery = isRecommended == '' ? '' : `&isRecommended=${isRecommended}`
+    const DQuery = discountGt == '' ? '' : `&discount_gt=${discountGt}`
+
+    const start = page ? 20 * (+page - 1) : 0
+
+    const getProduct = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data[0].id}&_limit=20&_start=${start}${IRQuery}${DQuery}`)
+    const productData = await getProduct.data
+
+    const countProduct = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products/count?product_category=${data[0].id}${IRQuery}${DQuery}`)
+    const countData = await countProduct.data
 
     if (!data) {
         return {
@@ -267,7 +276,7 @@ export const getServerSideProps = async ({ params, query }) => {
     }
 
     return {
-        props: { category: data },
+        props: { category: data[0], products: productData, page, productLength: countData },
     }
 }
 
