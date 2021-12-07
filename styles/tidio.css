@@ -1,0 +1,9 @@
+#tidio-chat-iframe {
+    margin-bottom: 2em !important;
+}
+@media only screen and (max-width: 980px) {
+    #tidio-chat-iframe {
+        bottom: 30px !important;
+        margin-bottom: 1em !important;
+    }
+}
