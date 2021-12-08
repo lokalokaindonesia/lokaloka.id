@@ -11,7 +11,7 @@ const Layout = ({ title, children }) => {
     const clientKey = process.env.MIDTRANS_CLIENT_KEY
     const urlMidtransSnap = process.env.NEXT_PUBLIC_MIDTRANS_SNAP
     return (
-        <div className='bg-blueGray-100 text-blueGray-800'>
+        <div className='bg-white text-blueGray-800'>
             <Head>
                 <title>{title}</title>
                 <script src='//code.tidio.co/nntihri39cqwi4krn3esqrl2m11zgv3c.js' async></script>

@@ -51,7 +51,7 @@ const index = ({ user, session }) => {
                             </li>
                         </ul>
                     </div>
-                    <div className='w-full md:w-10/12 flex flex-col space-y-2 bg-white'>
+                    <div className='w-full md:w-10/12 flex flex-col space-y-2'>
                         <div className='flex space-x-1 md:space-x-2 items-center overflow-x-scroll'>
                             <div
                                 onClick={() => {
@@ -59,7 +59,7 @@ const index = ({ user, session }) => {
                                     setType('all')
                                 }}
                                 className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
-                                    type == 'all' && 'bg-orange-400 text-white'
+                                    type == 'all' ? 'bg-orange-400 text-white' : 'bg-white'
                                 }`}
                             >
                                 Semua
@@ -70,7 +70,7 @@ const index = ({ user, session }) => {
                                     setType('unpaid')
                                 }}
                                 className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
-                                    type == 'unpaid' && 'bg-orange-400 text-white'
+                                    type == 'unpaid' ? 'bg-orange-400 text-white' : 'bg-white'
                                 }`}
                             >
                                 Belum dibayar
@@ -81,7 +81,7 @@ const index = ({ user, session }) => {
                                     setType('processed')
                                 }}
                                 className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
-                                    type == 'processed' && 'bg-orange-400 text-white'
+                                    type == 'processed' ? 'bg-orange-400 text-white' : 'bg-white'
                                 }`}
                             >
                                 Diproses
@@ -92,7 +92,7 @@ const index = ({ user, session }) => {
                                     setType('done')
                                 }}
                                 className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
-                                    type == 'done' && 'bg-orange-400 text-white'
+                                    type == 'done' ? 'bg-orange-400 text-white' : 'bg-white'
                                 }`}
                             >
                                 Selesai
@@ -103,7 +103,7 @@ const index = ({ user, session }) => {
                                     setStatus('&paymentStatus=CANCELED')
                                 }}
                                 className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
-                                    type == 'canceled' && 'bg-orange-400 text-white'
+                                    type == 'canceled' ? 'bg-orange-400 text-white' : 'bg-white'
                                 }`}
                             >
                                 Dibatalkan

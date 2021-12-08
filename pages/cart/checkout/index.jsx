@@ -24,6 +24,18 @@ const areaCollection = [
         label: 'Kota Lainnya',
     },
 ]
+const cardBoardBoxOpt = [
+    {
+        value: 0,
+        id: 'no-cardboard',
+        label: 'Tanpa Kardus',
+    },
+    {
+        value: 8000,
+        id: 'cardboard',
+        label: 'Bungkus Kardus',
+    },
+]
 
 // Images Payment Methods
 const paymentMethodCollection = [
@@ -95,6 +107,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     const order = orderData[0]
 
     const [area, setArea] = useState('malang-batu')
+    const [cardBoard, setCardBoard] = useState('no-cardboard')
     const [choosenPaymentMethod, setChoosenPaymentMethod] = useState(undefined)
     const [shippingCost, setShippingCost] = useState(15000)
     const [shippingEtd, setShippingEtd] = useState(null)
@@ -110,11 +123,13 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     const [openModalConfirmation, setOpenModalConfirmation] = useState(false)
     const [ovoNumber, setOvoNumber] = useState('')
     const [payLoading, setPayLoading] = useState(false)
+    const [plasticWrap, setPlasticWrap] = useState(2000)
+    const [cardBoardBoxPrice, setCardBoardBoxPrice] = useState(0)
 
     useEffect(() => {
         selectArea, selectPaymentMethod, countTotal()
         return () => {}
-    }, [area, choosenPaymentMethod, shippingCost, total, shippingEtd])
+    }, [area, choosenPaymentMethod, shippingCost, total, shippingEtd, cardBoardBoxPrice])
 
     // Select Area
     const selectArea = (value) => {
@@ -178,8 +193,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
         }
 
         const { data } = await axios.post(`/api/expedition/cost/`, destinationInfo)
-
-        setShippingCost(data.value)
+        const markup = data.value < 16000 ? 16000 : data.value
+        setShippingCost(markup)
         setShippingEtd(data.etd)
     }
 
@@ -191,7 +206,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
     // count total
     const countTotal = () => {
-        return setTotal(+shippingCost + +order.totalPrice)
+        return setTotal(+shippingCost + +order.totalPrice + 2000 + +cardBoardBoxPrice)
     }
 
     // Handle Modal
@@ -529,6 +544,26 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 />
                                             </div>
                                             <div className='flex justify-between space-x-2 md:space-x-4 font-medium'>
+                                                <span className='truncate font-bold w-1/2'>Biaya Penanganan</span>
+                                                <NumberFormat
+                                                    className='font-bold text-xs md:text-base'
+                                                    value={plasticWrap}
+                                                    displayType={'text'}
+                                                    thousandSeparator={true}
+                                                    prefix={'Rp. '}
+                                                />
+                                            </div>
+                                            <div className='flex justify-between space-x-2 md:space-x-4 font-medium'>
+                                                <span className='truncate font-bold w-1/2'>Packing Kardus</span>
+                                                <NumberFormat
+                                                    className='font-bold text-xs md:text-base'
+                                                    value={cardBoardBoxPrice}
+                                                    displayType={'text'}
+                                                    thousandSeparator={true}
+                                                    prefix={'Rp. '}
+                                                />
+                                            </div>
+                                            <div className='flex justify-between space-x-2 md:space-x-4 font-medium'>
                                                 <span className='truncate font-bold w-1/2'>Diskon</span>
                                                 <NumberFormat
                                                     className='font-bold text-xs md:text-base text-red-500'
@@ -797,7 +832,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             onChange={handlePostalCode}
                                                             required
                                                             className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
-                                                            placeholder='64983'
+                                                            placeholder='xxxxx'
                                                         />
                                                     </div>
                                                 </div>
@@ -812,6 +847,34 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 </div>
                                             </>
                                         )}
+                                    </div>
+                                </div>
+                                <div className='p-2 md:p-4 border border-blueGray-200 bg-white  rounded-md drop-shadow-sm'>
+                                    <h2 className='text-base md:text-lg font-semibold mb-3'>Packing</h2>
+                                    <div className='flex flex-col space-y-1 text-sm md:text-base'>
+                                        <div className='flex items-center space-x-2 md:space-x-4 text-sm md:text-base'>
+                                            {cardBoardBoxOpt.map((n, index) => {
+                                                return (
+                                                    <button
+                                                        type='button'
+                                                        key={n.id}
+                                                        onClick={() => {
+                                                            setCardBoard(n.id)
+                                                            setCardBoardBoxPrice(n.value)
+                                                        }}
+                                                        className={
+                                                            cardBoard == n.id
+                                                                ? 'py-1 px-2 flex items-center space-x-2 rounded-md border border-orange-500 bg-orange-500 text-white transition ease-in-out duration-300'
+                                                                : 'py-1 px-2 flex items-center space-x-2 rounded-md border border-blueGray-200 bg-blueGray-300  transition ease-in-out duration-300'
+                                                        }
+                                                    >
+                                                        {cardBoard != n.id && <div className='border border-blueGray-800 rounded-full w-4 h-4'></div>}
+                                                        {cardBoard == n.id && <FaCheckCircle className='text-white w-4 h-4' />}
+                                                        <span>{n.label}</span>
+                                                    </button>
+                                                )
+                                            })}
+                                        </div>
                                     </div>
                                 </div>
                                 <div className='p-2 md:p-4 border border-blueGray-200 bg-white rounded-md drop-shadow-sm'>
@@ -989,6 +1052,18 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 <span>Pengiriman</span>
                                             </div>
                                             <NumberFormat value={shippingCost} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
+                                        </div>
+                                        <div className='text-xs 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                            <div className='flex space-x-2 items-baseline'>
+                                                <span>Biaya Penanganan</span>
+                                            </div>
+                                            <NumberFormat value={plasticWrap} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
+                                        </div>
+                                        <div className='text-xs 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                            <div className='flex space-x-2 items-baseline'>
+                                                <span>Packing Kardus</span>
+                                            </div>
+                                            <NumberFormat value={cardBoardBoxPrice} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
                                     </div>
                                 </div>

@@ -9,10 +9,10 @@ import JustForYou from '@/components/layout/JustForYou'
 import Layout from '@/components/layout/Layout'
 import kaldera from '../public/images/banner/kaldera.jpg'
 import banner from '../public/images/banner/banner.png'
-import food from '../public/images/category/food.jpg'
-import fashion from '../public/images/category/fashion.jpg'
-import craft from '../public/images/category/craft.jpg'
 import { setOrder } from '@/redux/orderSlice'
+import { Fragment } from 'react'
+import Category from '@/components/layout/Category'
+import Carousel from '@/components/layout/Carousel'
 
 const Home = ({ products, promo, recommended }) => {
     const [session, loading] = useSession()
@@ -29,44 +29,18 @@ const Home = ({ products, promo, recommended }) => {
     }
 
     return (
-        <>
+        <Fragment>
             <Layout title='Liburan seru bareng Lokaloka.id'>
                 {/* Hero */}
-                <Hero />
+                {/* <Hero /> */}
+                <Carousel />
 
-                {/* Category */}
-                <div className='container mx-auto px-4 md:hidden flex space-x-4 py-4 bg-orange-100 justify-between items-center'>
-                    <Link href='/makanan-dan-minuman'>
-                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
-                            <Image src={food} alt='kategori makanan dan minuman' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
-                            <span className='absolute bottom-0 text-xs bg-gradient-to-t from-blueGray-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
-                                Makanan & Minuman
-                            </span>
-                        </div>
-                    </Link>
-                    <Link href='/kerajinan'>
-                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
-                            <Image src={craft} alt='kategori kerajinan' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
-                            <span className='absolute bottom-0 text-xs bg-gradient-to-t from-blueGray-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
-                                Kerajinan
-                            </span>
-                        </div>
-                    </Link>
-                    <Link href='/fashion'>
-                        <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
-                            <Image src={fashion} alt='kategori fashion' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
-                            <span className='absolute bottom-0 text-xs bg-gradient-to-t from-blueGray-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
-                                Fashion
-                            </span>
-                        </div>
-                    </Link>
-                </div>
+                <Category />
                 {/* End Category */}
-
                 {/* Product Section */}
                 {promo.length != 0 && <HighlightedSection sectionTitle='Promo' href='/specials/promo' data={promo} bgColor='bg-white' />}
                 {/* Promo Campaign */}
-                <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 xl:my-6' id='scrollToHere'>
+                <div className='container mx-auto px-4 2xl:px-0 mb-4 mt-8' id='scrollToHere'>
                     <div className='rounded-md bg-blueGray-200 lg:p-4 2xl:p-6 h-auto flex justify-between space-x-6 items-center'>
                         <Link href='/specials/promo'>
                             <div className='w-full h-full cursor-pointer bg-blueGray-600 rounded-md'>
@@ -78,30 +52,20 @@ const Home = ({ products, promo, recommended }) => {
 
                 <HighlightedSection sectionTitle='Rekomendasi' href='/specials/recommended' data={recommended} />
 
-                <div className='container mx-auto px-4 2xl:px-0 md:my-5 xl:my-6'>
-                    <div className='rounded-md bg-blueGray-200 h-auto flex justify-between space-x-6 items-center'>
-                        <a target='_blank' href='https://kalderaadventure.com/'>
-                            <div className='w-full h-full bg-blueGray-600 rounded-md'>
-                                <Image
-                                    src={kaldera}
-                                    alt='campaign'
-                                    placeholder='blur'
-                                    className='rounded-md'
-                                    layout='responsive'
-                                    width={3000}
-                                    height={1500}
-                                    priority
-                                    quality={100}
-                                />
-                            </div>
-                        </a>
+                <div className='container mx-auto px-4 2xl:px-0 mb-4 mt-8'>
+                    <div className='rounded-md bg-blueGray-200 lg:p-4 2xl:p-6 h-auto flex justify-between space-x-6 items-center'>
+                        <div className='w-full h-full cursor-pointer bg-blueGray-600 rounded-md'>
+                            <a target='_blank' href='https://kalderaadventure.com'>
+                                <Image src={kaldera} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' priority quality={100} width={3000} height={1500} />
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 {/* Just For You */}
                 <JustForYou sectionTitle='Hanya Untukmu' href='#' data={products} />
             </Layout>
-        </>
+        </Fragment>
     )
 }
 

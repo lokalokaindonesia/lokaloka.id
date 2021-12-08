@@ -24,11 +24,7 @@ const Category = ({ category, products, page, productLength }) => {
     const [price, setPrice] = useState(filter[0])
     const [recommended, setRecommended] = useState(false)
     const [discount, setDiscount] = useState(false)
-    const [minimumPrice, setMinimumPrice] = useState(0)
-    const [maximumPrice, setMaximumPrice] = useState(5000000)
-    const [params, setParams] = useState('')
-
-    const lastPage = Math.ceil(productLength / 20)
+    const [params, setParams] = useState()
 
     const recommendedHandle = (e) => {
         setRecommended(!recommended)
@@ -43,21 +39,21 @@ const Category = ({ category, products, page, productLength }) => {
     const discountHandle = (e) => {
         setDiscount(!discount)
         if (!discount) {
-            return setParams(params.concat('&discount_gt=0'))
+            return setParams(params.concat('&discountGt=0'))
         }
         if (discount) {
-            return setParams(params.replace('&discount_gt=0', ''))
+            return setParams(params.replace('&discountGt=0', ''))
         }
     }
 
     const minPriceHandle = (e) => {
-        if (e.target.value == '') return setMinimumPrice(0)
-        return setMinimumPrice(e.target.value)
+        if (e.target.value == '') return setParams(``)
+        return setParams(`&sellingPriceGt=${e.target.value}`)
     }
 
     const maxPriceHandle = (e) => {
-        if (e.target.value == '') return setMaximumPrice(5000000)
-        return setMaximumPrice(e.target.value)
+        if (e.target.value == '') return setParams(``)
+        return setParams(`&sellingPriceLt=${e.target.value}`)
     }
 
     return (
@@ -104,7 +100,7 @@ const Category = ({ category, products, page, productLength }) => {
                         </div>
                     </div>
                     {/* Filter */}
-                    {/* TODO: ! FILTER SUCHS */}
+                    {/* TODO: ! FILTER SUCKS */}
                     <div className='mt-4 md:w-1/4 lg:w-1/3 xl:w-1/4 2xl:w-1/4 drop-shadow-sm'>
                         <div className='sticky top-28 flex flex-col space-y-2 2xl:space-y-4 border border-blueGray-200 bg-white rounded-md p-2 md:p-4'>
                             <div className='flex justify-between items-center'>
@@ -144,7 +140,7 @@ const Category = ({ category, products, page, productLength }) => {
                                                                 value={filter}
                                                             >
                                                                 {({ price, active }) => (
-                                                                    <>
+                                                                    <Fragment>
                                                                         <div className='flex items-center'>
                                                                             <span className={classNames(price ? 'font-semibold' : 'font-normal', 'block truncate')}>
                                                                                 {filter.value}
@@ -161,7 +157,7 @@ const Category = ({ category, products, page, productLength }) => {
                                                                                 <CheckIcon className='h-5 w-5' aria-hidden='true' />
                                                                             </span>
                                                                         ) : null}
-                                                                    </>
+                                                                    </Fragment>
                                                                 )}
                                                             </Listbox.Option>
                                                         ))}
@@ -254,19 +250,24 @@ const Category = ({ category, products, page, productLength }) => {
     )
 }
 
-export const getServerSideProps = async ({ params, query: { page = 1, isRecommended = '', discountGt = '' } }) => {
+export const getServerSideProps = async ({ params, query: { page = 1, size = 20, isRecommended = '', discountGt = '', sellingPriceGt = '', sellingPriceLt = '' } }) => {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/product-categories?slug_eq=${params.category}`)
     const data = await res.data
 
     const IRQuery = isRecommended == '' ? '' : `&isRecommended=${isRecommended}`
     const DQuery = discountGt == '' ? '' : `&discount_gt=${discountGt}`
+    const SPGTQuery = sellingPriceGt == '' ? '' : `&sellingPrice_gt=${sellingPriceGt}`
+    const SPLTQuery = sellingPriceLt == '' ? '' : `&sellingPrice_lt=${sellingPriceLt}`
+    // const SORTQUery = _sort == '' ? '' : `&_sort=${_sort}`
 
-    const start = page ? 20 * (+page - 1) : 0
+    const start = page ? size * (+page - 1) : 0
 
-    const getProduct = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data[0].id}&_limit=20&_start=${start}${IRQuery}${DQuery}`)
+    const getProduct = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data[0].id}&_limit=${size}&_start=${start}${IRQuery}${DQuery}${SPGTQuery}${SPLTQuery}`
+    )
     const productData = await getProduct.data
 
-    const countProduct = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products/count?product_category=${data[0].id}${IRQuery}${DQuery}`)
+    const countProduct = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products/count?product_category=${data[0].id}${IRQuery}${DQuery}${SPGTQuery}${SPLTQuery}`)
     const countData = await countProduct.data
 
     if (!data) {
