@@ -75,23 +75,23 @@ const index = ({ user }) => {
     return (
         <Layout title='Profil'>
             <div className='container mx-auto 2xl:px-0 my-3 md:my-4 xl:my-5 2xl:my-6 flex flex-col md:space-y-4 xl:space-y-5 2xl:space-y-6'>
-                <div className='text-blueGray-800 px-4 md:px-0 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>Akun</div>
+                <div className='text-slate-800 px-4 md:px-0 font-extrabold leading-loose md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl'>Akun</div>
                 {/* <MemberCard user={user} /> */}
                 <div className='flex flex-col mt-4 md:mt-0 space-y-2 space-x-0 md:space-y-0 md:flex-row md:space-x-4 px-4 md:px-0'>
                     <div className='w-full md:w-2/12'>
                         <ul className='flex space-x-2 space-y-0 md:flex-col md:space-x-0 md:space-y-2'>
-                            <li className='rounded text-sm md:text-base font-semibold text-blueGray-500'>
+                            <li className='rounded text-sm md:text-base font-semibold text-slate-500'>
                                 <Link href='/profile/my-account'>Akun</Link>
                             </li>
-                            <li className='rounded text-sm md:text-base text-blueGray-500'>
+                            <li className='rounded text-sm md:text-base text-slate-500'>
                                 <Link href='/profile/my-orders'>Pesanan saya</Link>
                             </li>
                         </ul>
                     </div>
                     <div className='w-full md:w-10/12'>
-                        <div className='w-full h-full bg-white border border-blueGray-200 p-4 rounded-md flex flex-col space-y-2 md:space-y-4'>
+                        <div className='w-full h-full bg-white border border-slate-200 p-4 rounded-md flex flex-col space-y-2 md:space-y-4'>
                             <span className='text-base md:text-xl font-bold'>Profil</span>
-                            <hr className='border border-blueGray-200' />
+                            <hr className='border border-slate-200' />
                             <div className='flex space-x-2 md:space-x-8 w-full items-center'>
                                 <div className='w-full xl:w-10/12'>
                                     <div className='flex flex-col space-y-2 w-full'>
@@ -109,7 +109,7 @@ const index = ({ user }) => {
                                                     onChange={handleName}
                                                     id='name'
                                                     autoComplete='given-name'
-                                                    className='mt-1 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm text-xs md:text-sm border-blueGray-200 rounded-md'
+                                                    className='mt-1 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm text-xs md:text-sm border-slate-200 rounded-md'
                                                 />
                                                 {/* {user.name} */}
                                             </div>
@@ -117,69 +117,6 @@ const index = ({ user }) => {
                                         <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
                                             <div className='md:w-4/12 xl:w-2/12'>Email</div>
                                             <div className='md:w-8/12 xl:w-10/12'>{user.email}</div>
-                                        </div>
-                                        <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
-                                            <div className='md:w-4/12 xl:w-2/12'>Nomor Telepon</div>
-                                            <div className='md:w-8/12 xl:w-10/12'>
-                                                {/* {user.phone} */}
-                                                <input
-                                                    type='text'
-                                                    name='phone'
-                                                    id='phone'
-                                                    onChange={handlePhone}
-                                                    defaultValue={phone}
-                                                    autoComplete='phone'
-                                                    className='mt-1 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm text-xs md:text-sm border-blueGray-200 rounded-md'
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
-                                            <div className='md:w-4/12 xl:w-2/12'>Jenis Kelamin</div>
-                                            <div className='md:w-8/12 xl:w-10/12'>
-                                                <div className='flex space-x-4'>
-                                                    <div className='flex items-center'>
-                                                        <input
-                                                            id='gender-male'
-                                                            checked={gender == 'laki-laki' ? true : false}
-                                                            name='gender'
-                                                            type='radio'
-                                                            onChange={() => setGender('laki-laki')}
-                                                            defaultValue='laki-laki'
-                                                            className='focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300'
-                                                        />
-                                                        <label htmlFor='gender-male' className='ml-3 block text-sm md:text-base font-medium text-gray-700'>
-                                                            Laki-laki
-                                                        </label>
-                                                    </div>
-                                                    <div className='flex items-center'>
-                                                        <input
-                                                            id='gender-female'
-                                                            name='gender'
-                                                            onChange={() => setGender('perempuan')}
-                                                            defaultValue='perempuan'
-                                                            checked={gender == 'perempuan' ? true : false}
-                                                            type='radio'
-                                                            className='focus:ring-orange-500 h-4 w-4 text-orange-600 border-gray-300'
-                                                        />
-                                                        <label htmlFor='gender-female' className='ml-3 block text-sm md:text-base font-medium text-gray-700'>
-                                                            Perempuan
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
-                                            <div className='md:w-4/12 xl:w-2/12'>Tanggal Lahir</div>
-                                            <div className='md:w-8/12 xl:w-10/12 w-full'>
-                                                <input
-                                                    id='dateOfBirth'
-                                                    name='dateOfBirth'
-                                                    type='date'
-                                                    onChange={handleDateOfBirth}
-                                                    defaultValue={dateOfBirth}
-                                                    className='focus:ring-orange-500 px-2 py-1 rounded text-xs md:text-sm shadow-sm border-blueGray-200'
-                                                />
-                                            </div>
                                         </div>
                                         <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
                                             <div className='md:w-4/12 xl:w-2/12'></div>

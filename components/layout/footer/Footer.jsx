@@ -6,9 +6,9 @@ import Logo from '../../../public/logo.png'
 
 const Footer = () => {
     return (
-        <div className='text-blueGray-800'>
+        <div className='text-slate-800'>
             <PaymentGatewayFooter />
-            <div className='w-full h-auto bg-blueGray-200 py-8 md:py-12 '>
+            <div className='w-full h-auto bg-slate-200 py-8 md:py-12 '>
                 <div className='container mx-auto px-4 2xl:px-0 grid lg:grid-flow-col lg:grid-cols-4 md:grid-flow-col md:grid-cols-4 gap-4 grid-cols-2'>
                     {/* 1 */}
                     <div className='flex flex-col space-y-4'>
@@ -37,12 +37,12 @@ const Footer = () => {
                     {/* 2 */}
                     <ul className='text-sm md:text-base flex flex-col space-y-2 md:space-y-4'>
                         <li className='font-bold md:mb-2'>Lokaloka</li>
-                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
+                        <li className='text-slate-600 hover:text-slate-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
                                 Tentang
                             </Link>
                         </li>
-                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
+                        <li className='text-slate-600 hover:text-slate-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
                                 Blog
                             </Link>
@@ -52,17 +52,17 @@ const Footer = () => {
                     {/* 3 */}
                     <ul className='text-sm md:text-base flex flex-col space-y-2 md:space-y-4'>
                         <li className='font-bold md:mb-2'>Layanan</li>
-                        {/* <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
+                        {/* <li className='text-slate-600 hover:text-slate-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
                                 Kota Afiliasi
                             </Link>
                         </li>
-                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
+                        <li className='text-slate-600 hover:text-slate-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='#'>
                                 Ekspedisi
                             </Link>
                         </li> */}
-                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
+                        <li className='text-slate-600 hover:text-slate-700 underline'>
                             <a className='underline lg:no-underline cursor-pointer' href='https://kuloaja.com' rel='noopener' target='_blank'>
                                 Kurir by KULO
                             </a>
@@ -72,12 +72,12 @@ const Footer = () => {
                     {/* 4 */}
                     <ul className='text-sm md:text-base flex flex-col space-y-2 md:space-y-4'>
                         <li className='font-bold md:mb-2'>Bantuan dan Panduan</li>
-                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
+                        <li className='text-slate-600 hover:text-slate-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='/help/privacy-and-policy'>
                                 Kebijakan Pribadi
                             </Link>
                         </li>
-                        <li className='text-blueGray-600 hover:text-blueGray-700 underline'>
+                        <li className='text-slate-600 hover:text-slate-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='/help/terms-and-conditions'>
                                 Syarat dan Ketentuan
                             </Link>
@@ -85,7 +85,7 @@ const Footer = () => {
                     </ul>
                 </div>
             </div>
-            <div className='w-full h-auto text-sm md:text-base bg-blueGray-100 py-4 flex items-center justify-center'>
+            <div className='w-full h-auto text-sm md:text-base bg-slate-100 py-4 flex items-center justify-center'>
                 &copy; Lokaloka, With ❤️ from &nbsp; <b>Lokaloka Group</b>
             </div>
         </div>

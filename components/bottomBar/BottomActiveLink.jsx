@@ -6,7 +6,7 @@ const HeaderActiveLink = ({ router, children, href }) => {
 
     return (
         <Link href={href}>
-            <button className={isCurrentPath ? 'font-bold text-orange-500' : 'text-blueGray-500'}>
+            <button className={isCurrentPath ? 'font-bold text-orange-500' : 'text-slate-500'}>
                 <span className='hover:font-bold'>{children}</span>
             </button>
         </Link>

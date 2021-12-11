@@ -178,16 +178,6 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
     // * SET ORDER DATA AND CHECKOUT
     const checkout = async () => {
-        const getUser = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
-            headers: {
-                Authorization: `Bearer ${session.jwt}`,
-            },
-        })
-
-        const user = getUser.data
-
-        if (user.name == '' || user.gender == '' || user.phone == '' || user.dateOfBirth == '') return alert('Lengkapi Data Diri Kamu')
-
         setCheckoutLoading(true)
         const productsOrigin = cart.map((p) => p._id)
         const totalQuantity = cart.reduce((a, b) => +a + +b.quantity, 0)
@@ -280,7 +270,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
                                             const category = productCategories.find((c) => c.id == product.product.product_category)
                                             return (
-                                                <div key={product._id} className='w-full p-3 md:p-2 2xl:p-4 rounded-md border drop-shadow-sm bg-white border-blueGray-300'>
+                                                <div key={product._id} className='w-full p-3 md:p-2 2xl:p-4 rounded-md border drop-shadow-sm bg-white border-slate-300'>
                                                     <div className='flex space-y-2 md:space-y-4 flex-col'>
                                                         <div className='flex space-x-2 md:space-x-4 items-center'>
                                                             <div className='flex space-x-4 items-center w-full'>
@@ -304,9 +294,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                                     {/* Title */}
                                                                     <div className='flex justify-between items-start'>
                                                                         <Link href={`/${category.slug}/${product.product.slug}`}>
-                                                                            <a className='text-sm md:text-lg font-semibold text-blueGray-600 line-clamp-1'>
-                                                                                {product.product.name}
-                                                                            </a>
+                                                                            <a className='text-sm md:text-lg font-semibold text-slate-600 line-clamp-1'>{product.product.name}</a>
                                                                         </Link>
                                                                         <button
                                                                             onClick={() => deleteItem(product)}
@@ -337,17 +325,17 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                                                             )}
                                                                         </div>
                                                                         {/* Qty */}
-                                                                        <div className='flex items-center border h-6 md:h-8 w-max rounded ml-6 md:ml-[8.7rem] border-blueGray-300'>
+                                                                        <div className='flex items-center border h-6 md:h-8 w-max rounded ml-6 md:ml-[8.7rem] border-slate-300'>
                                                                             <div
                                                                                 onClick={() => reduceQty(product)}
-                                                                                className='select-none rounded-l cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-2 md:px-3 md:py-1 font-bold text-center border-r border-blueGray-300 text-orange-gray-800'
+                                                                                className='select-none rounded-l cursor-pointer transition duration-100 ease-in hover:bg-slate-200 px-2 md:px-3 md:py-1 font-bold text-center border-r border-slate-300 text-orange-gray-800'
                                                                             >
                                                                                 -
                                                                             </div>
                                                                             <div className='px-4 py-1 w-12 flex-1 text-center text-orange-gray-800 '>{product.quantity}</div>
                                                                             <div
                                                                                 onClick={() => addQty(product)}
-                                                                                className='select-none rounded-r cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-2 md:px-3 md:py-1 font-bold text-center border-l border-blueGray-300 text-orange-gray-800'
+                                                                                className='select-none rounded-r cursor-pointer transition duration-100 ease-in hover:bg-slate-200 px-2 md:px-3 md:py-1 font-bold text-center border-l border-slate-300 text-orange-gray-800'
                                                                             >
                                                                                 +
                                                                             </div>
@@ -364,14 +352,14 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                 </div>
                             </div>
                             <div className='w-full lg:w-4/12 xl:w-3/12'>
-                                <div className='sticky top-28 p-3 md:p-4 bg-white border drop-shadow-sm border-blueGray-300 h-auto rounded-md flex flex-col space-y-3 md:space-y-4'>
+                                <div className='sticky top-28 p-3 md:p-4 bg-white border drop-shadow-sm border-slate-300 h-auto rounded-md flex flex-col space-y-3 md:space-y-4'>
                                     {/* Coupon Form */}
-                                    <form className='flex items-center' onSubmit={getCoupon} method='get'>
+                                    {/* <form className='flex items-center' onSubmit={getCoupon} method='get'>
                                         <input
                                             className={
                                                 coupon
-                                                    ? 'px-2 py-2 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border md:border-2 focus:border-green-500 focus:border md:focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-blueGray-400'
-                                                    : 'px-2 py-2 text-sm md:text-base md:px-3 md:py-2 rounded-l w-full border md:border-2 focus:border-blueGray-500 focus:border md:focus:border-2 focus:ring-0 border-blueGray-500 transition ease-in-out duration-300 font-bold '
+                                                    ? 'px-2 py-2 text-sm md:text-base md:px-3 md:py-2 rounded-l rounded-r-none w-full border md:border-2 focus:rounded-r-none focus:border-green-500 focus:border md:focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-slate-500'
+                                                    : 'px-2 py-2 text-sm md:text-base md:px-3 md:py-2 rounded-l rounded-r-none w-full border md:border-2 focus:rounded-r-none focus:border-slate-500 focus:border md:focus:border-2 focus:ring-0 border-slate-500 transition ease-in-out duration-300 font-bold '
                                             }
                                             placeholder='Kode Kupon'
                                             disabled={coupon && 'disabled'}
@@ -383,35 +371,35 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                             className={
                                                 coupon
                                                     ? 'text-sm md:text-base rounded-r px-2 py-2 md:px-3 md:py-2 text-white font-bold border md:border-2 border-green-300 bg-green-300'
-                                                    : 'text-sm md:text-base rounded-r px-2 py-2 md:px-3 md:py-2 text-white font-bold border md:border-2 border-blueGray-500 bg-blueGray-500'
+                                                    : 'text-sm md:text-base rounded-r px-2 py-2 md:px-3 md:py-2 text-white font-bold border md:border-2 border-slate-500 bg-slate-500'
                                             }
                                         >
                                             Terapkan
                                         </button>
                                     </form>
-                                    <hr />
+                                    <hr className='border border-slate-200' /> */}
                                     {/* Summary */}
                                     <div className='flex flex-col space-y-2'>
                                         <div className='text-base md:text-xl font-bold'>Rincian</div>
                                         <div className='flex flex-col space-y-1'>
-                                            <div className='text-xs md:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                            <div className='text-xs md:text-base text-slate-500 font-semibold flex justify-between items-center'>
                                                 <span>Total Harga</span>
                                                 <NumberFormat value={summaryTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                             </div>
-                                            <div className='text-xs md:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                            <div className='text-xs md:text-base text-slate-500 font-semibold flex justify-between items-center'>
                                                 <span>Total Diskon</span>
                                                 <NumberFormat value={discountTotal} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
                                             </div>
                                         </div>
                                     </div>
-                                    <hr />
+                                    <hr className='border border-slate-200' />
                                     {/* Total */}
                                     <div className='text-xs md:text-base flex justify-between items-center'>
-                                        <div className='text-blueGray-500 font-semibold flex justify-between items-center'>Sub Total</div>
-                                        <NumberFormat className='text-blueGray-500 font-semibold' value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
+                                        <div className='text-slate-500 font-semibold flex justify-between items-center'>Sub Total</div>
+                                        <NumberFormat className='text-slate-500 font-semibold' value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                     </div>
                                     {coupon && (
-                                        <div className='text-sm md:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                        <div className='text-sm md:text-base text-slate-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-center'>
                                                 <span>Kupon {coupon.discount}%</span>
                                                 <button type='button' onClick={() => deleteCoupon()}>
@@ -431,7 +419,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                             className='text-base md:text-xl font-bold text-orange-500'
                                         />
                                     </div>
-                                    <hr />
+                                    <hr className='border border-slate-200' />
                                     {/* Checkout Button */}
                                     <div className='hidden md:block'>
                                         {checkoutLoading ? (

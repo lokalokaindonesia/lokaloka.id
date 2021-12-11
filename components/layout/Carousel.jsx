@@ -10,7 +10,7 @@ import 'swiper/css/autoplay'
 
 const Carousel = () => {
     return (
-        <div className='my-4 md:my-8 px-4 xl:px-0 container mx-auto'>
+        <div className='my-4 md:my-8 px-4 2xl:px-0 container mx-auto'>
             <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 spaceBetween={20}
@@ -23,22 +23,22 @@ const Carousel = () => {
                 onSwiper={(swiper) => console.log(swiper)}
             >
                 <SwiperSlide>
-                    <div className='w-full h-full cursor-pointer bg-blueGray-600 rounded-md'>
+                    <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
                         <Image src={banner} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' width={1320} priority quality={100} height={250} />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='w-full h-full cursor-pointer bg-blueGray-600 rounded-md'>
+                    <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
                         <Image src={banner} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' width={1320} priority quality={100} height={250} />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='w-full h-full cursor-pointer bg-blueGray-600 rounded-md'>
+                    <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
                         <Image src={banner} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' width={1320} priority quality={100} height={250} />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <div className='w-full h-full cursor-pointer bg-blueGray-600 rounded-md'>
+                    <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
                         <Image src={banner} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' width={1320} priority quality={100} height={250} />
                     </div>
                 </SwiperSlide>

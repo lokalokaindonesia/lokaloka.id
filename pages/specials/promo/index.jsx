@@ -14,11 +14,11 @@ const index = ({ promos }) => {
                         <Link href='/'>Home</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
-                    <div className='text-blueGray-800 font-bold hover:text-blueGray-800'>
+                    <div className='text-slate-800 font-bold hover:text-slate-800'>
                         <span>Promo 10.10</span>
                     </div>
                 </div>
-                <h1 className='text-lg md:text-2xl font-semibold text-blueGray-800 xl:my-2 2xl:my-3'>Promo 10.10</h1>
+                <h1 className='text-lg md:text-2xl font-semibold text-slate-800 xl:my-2 2xl:my-3'>Promo 10.10</h1>
                 <div className='flex space-x-8'>
                     <div className='w-full'>
                         {promos.length == 0 && (

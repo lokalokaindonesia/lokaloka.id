@@ -63,11 +63,11 @@ const MemberCard = ({ user }) => {
                                     )}
                                 </div>
                                 {/* <div className='flex flex-col space-y-1 md:space-y-1 xl:space-y-2'>
-                                    <div className='text-sm text-blueGray-200'>Keuntungan</div>
+                                    <div className='text-sm text-slate-200'>Keuntungan</div>
                                     <div className='flex space-x-4'>
                                         <div className='rounded md:p-1 xl:p-2 bg-gradient-to-tr from-orange-500 to-indigo-500'>
                                             <h3 className='p-1 md:text-sm lg:text-lg xl:text-xl font-bold text-white'>SELECTA20</h3>
-                                            <span className='hidden lg:block text-blueGray-200 text-xs'>Gratis biaya pengiriman</span>
+                                            <span className='hidden lg:block text-slate-200 text-xs'>Gratis biaya pengiriman</span>
                                         </div>
                                     </div>
                                 </div> */}

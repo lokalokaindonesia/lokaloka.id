@@ -10,14 +10,14 @@ setTimeout(() => {
 
 const Toast = ({ status, content, icon }) => {
     return (
-        <div className='p-4 border border-blueGray-100 bg-white shadow-md max-w-md rounded-md top-16 right-10 absolute'>
+        <div className='p-4 border border-slate-100 bg-white shadow-md max-w-md rounded-md top-16 right-10 absolute'>
             <div className='flex space-x-4 justify-start'>
                 {icon}
                 <div>
                     <h6 className='text-base font-bold text-orange-500 capitalize'>{status}</h6>
-                    <span className='text-sm text-blueGray-600'>{content}</span>
+                    <span className='text-sm text-slate-600'>{content}</span>
                 </div>
-                <XIcon className='w-6 h-6 text-blueGray-700' onClick={() => close()} />
+                <XIcon className='w-6 h-6 text-slate-700' onClick={() => close()} />
             </div>
         </div>
     )

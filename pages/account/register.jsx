@@ -72,7 +72,7 @@ const register = () => {
     }
 
     return (
-        <div className='text-blueGray-800'>
+        <div className='text-slate-800'>
             <Head>
                 <title>Daftar akun baru - Lokaloka.id 😊</title>
             </Head>

@@ -8,12 +8,12 @@ const Button = ({ children, disabled = false, type = 'primary', size = 'base', h
         ghostSize: 'px-4 py-3',
     }
     const types = {
-        primary: `rounded-md drop-shadow-sm bg-orange-500 text-white font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-600`,
-        secondary: `rounded-md drop-shadow-sm bg-orange-100 text-orange-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-200`,
-        tertiary: `rounded-md drop-shadow-sm bg-orange-500 text-white font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-600`,
-        tertiaryAccent: `rounded-md drop-shadow-sm bg-orange-100 text-orange-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-200`,
-        logout: `rounded-md drop-shadow-sm bg-red-100 text-red-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-red-200`,
-        ghost: `rounded-md drop-shadow-sm border border-blueGray-200 bg-white text-blueGray-800 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-white`,
+        primary: `rounded-md shadow-lg shadow-orange-500/30 bg-orange-500 text-white font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-600`,
+        secondary: `rounded-md shadow-lg shadow-orange-200/30 bg-orange-200 text-orange-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-orange-200`,
+        tertiary: `rounded-md shadow-lg shadow-orange-500/20 bg-white border-2 border-orange-500 text-orange-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:border-orange-600`,
+        tertiaryAccent: `rounded-md shadow-lg shadow-blue-400/30 bg-white border border-blue-400 text-blue-400 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:border-blue-500`,
+        logout: `rounded-md shadow-lg shadow-red-100/30 bg-red-100 text-red-500 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-red-200`,
+        ghost: `rounded-md shadow-lg shadow-slate-500/30 border border-slate-200 bg-white text-slate-800 font-bold transiton duration-300 ease-in-out hover:scale-95 hover:bg-white`,
     }
 
     const widthStyles = {
@@ -37,7 +37,7 @@ const Button = ({ children, disabled = false, type = 'primary', size = 'base', h
             type={buttonType}
             onClick={href}
             className={`${disabled && 'cursor-default'} ${
-                disabled ? 'rounded-md drop-shadow-sm bg-blueGray-400 text-white font-bold' : pickedtype
+                disabled ? 'rounded-md drop-shadow-sm bg-slate-400 text-white font-bold' : pickedtype
             } ${pickedSize} ${pickedWidth} ${pickedDisplay}`}
         >
             {children}

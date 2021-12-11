@@ -40,26 +40,38 @@ const Home = ({ products, promo, recommended }) => {
                 {/* Product Section */}
                 {promo.length != 0 && <HighlightedSection sectionTitle='Promo' href='/specials/promo' data={promo} bgColor='bg-white' />}
                 {/* Promo Campaign */}
-                <div className='container mx-auto px-4 2xl:px-0 mb-4 mt-8' id='scrollToHere'>
-                    <div className='rounded-md bg-blueGray-200 lg:p-4 2xl:p-6 h-auto flex justify-between space-x-6 items-center'>
-                        <Link href='/specials/promo'>
-                            <div className='w-full h-full cursor-pointer bg-blueGray-600 rounded-md'>
-                                <Image src={banner} alt='Promo' placeholder='blur' layout='responsive' width={1319} priority quality={100} height={250} />
-                            </div>
-                        </Link>
-                    </div>
+                <div className='my-4 md:mt-8 md:mb-4 px-4 2xl:px-0 container mx-auto'>
+                    <Link href='/specials/promo'>
+                        <Image
+                            src={banner}
+                            alt='Promo'
+                            className='rounded-md shadow shadow-slate-500/20'
+                            placeholder='blur'
+                            layout='responsive'
+                            width={1319}
+                            priority
+                            quality={100}
+                            height={250}
+                        />
+                    </Link>
                 </div>
 
                 <HighlightedSection sectionTitle='Rekomendasi' href='/specials/recommended' data={recommended} />
 
-                <div className='container mx-auto px-4 2xl:px-0 mb-4 mt-8'>
-                    <div className='rounded-md bg-blueGray-200 lg:p-4 2xl:p-6 h-auto flex justify-between space-x-6 items-center'>
-                        <div className='w-full h-full cursor-pointer bg-blueGray-600 rounded-md'>
-                            <a target='_blank' href='https://kalderaadventure.com'>
-                                <Image src={kaldera} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' priority quality={100} width={3000} height={1500} />
-                            </a>
-                        </div>
-                    </div>
+                <div className='my-4 md:mt-8 md:mb-4 px-4 2xl:px-0 container mx-auto'>
+                    <a target='_blank' href='https://kalderaadventure.com'>
+                        <Image
+                            src={kaldera}
+                            alt='Promo'
+                            className='rounded-md shadow shadow-slate-500/20'
+                            placeholder='blur'
+                            layout='responsive'
+                            priority
+                            quality={100}
+                            width={3000}
+                            height={1500}
+                        />
+                    </a>
                 </div>
 
                 {/* Just For You */}

@@ -43,10 +43,10 @@ const index = ({ user, session }) => {
                 <div className='flex flex-col mt-4 md:mt-0 space-y-2 space-x-0 md:space-y-0 md:flex-row md:space-x-4 px-4 md:px-0'>
                     <div className='w-full md:w-2/12'>
                         <ul className='flex space-x-2 space-y-0 md:flex-col md:space-x-0 md:space-y-2'>
-                            <li className='rounded text-sm md:text-base text-blueGray-500'>
+                            <li className='rounded text-sm md:text-base text-slate-500'>
                                 <Link href='/profile/my-account'>Akun</Link>
                             </li>
-                            <li className='font-extrabold rounded text-sm md:text-base text-blueGray-500'>
+                            <li className='font-extrabold rounded text-sm md:text-base text-slate-500'>
                                 <Link href='/profile/my-orders'>Pesanan saya</Link>
                             </li>
                         </ul>
@@ -58,7 +58,7 @@ const index = ({ user, session }) => {
                                     setStatus('')
                                     setType('all')
                                 }}
-                                className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
+                                className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-slate-200 ${
                                     type == 'all' ? 'bg-orange-400 text-white' : 'bg-white'
                                 }`}
                             >
@@ -69,7 +69,7 @@ const index = ({ user, session }) => {
                                     setStatus('&paymentStatus_in=UNPAID&paymentStatus_in=ACTIVE&paymentStatus_in=PENDING')
                                     setType('unpaid')
                                 }}
-                                className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
+                                className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-slate-200 ${
                                     type == 'unpaid' ? 'bg-orange-400 text-white' : 'bg-white'
                                 }`}
                             >
@@ -80,7 +80,7 @@ const index = ({ user, session }) => {
                                     setStatus('&paymentStatus=PROCESSED')
                                     setType('processed')
                                 }}
-                                className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
+                                className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-slate-200 ${
                                     type == 'processed' ? 'bg-orange-400 text-white' : 'bg-white'
                                 }`}
                             >
@@ -91,7 +91,7 @@ const index = ({ user, session }) => {
                                     setStatus('&paymentStatus_in=SUCCESS&paymentStatus_in=SUCCEEDED&paymentStatus_in=PAID&paymentStatus_in=COMPLETED')
                                     setType('done')
                                 }}
-                                className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
+                                className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-slate-200 ${
                                     type == 'done' ? 'bg-orange-400 text-white' : 'bg-white'
                                 }`}
                             >
@@ -102,7 +102,7 @@ const index = ({ user, session }) => {
                                     setType('canceled')
                                     setStatus('&paymentStatus=CANCELED')
                                 }}
-                                className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-blueGray-200 ${
+                                className={`w-max cursor-pointer rounded px-1 py-1 md:px-8 md:py-2 text-xs md:text-sm border border-slate-200 ${
                                     type == 'canceled' ? 'bg-orange-400 text-white' : 'bg-white'
                                 }`}
                             >
@@ -115,15 +115,15 @@ const index = ({ user, session }) => {
                             id='transaction-code'
                             onChange={handleInputSearch}
                             placeholder='Cari berdasarkan Kode Transaksi'
-                            className='mt-1 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm text-xs md:text-sm border-blueGray-200 rounded-md'
+                            className='mt-1 focus:ring-orange-500 focus:border-orange-500 block w-full shadow-sm text-xs md:text-sm border-slate-200 rounded-md'
                         />
                         {filtered.length == 0 && <div className='py-12 flex justify-center w-full text-lg'>Tidak ada transaksi</div>}
                         {filtered.map((transaction, i) => {
                             return (
-                                <div key={i} className='flex flex-col space-y-1 md:space-y-2 rounded p-2 md:p-4 shadow-sm bg-white border border-blueGray-200'>
+                                <div key={i} className='flex flex-col space-y-1 md:space-y-2 rounded p-2 md:p-4 shadow-sm bg-white border border-slate-200'>
                                     <div className='flex justify-between w-full text-xs md:text-base items-center'>
-                                        <span className='text-xs text-blueGray-600'>{transaction.code}</span>
-                                        <span className='text-xs text-blueGray-600'>{moment(transaction.createdAt).format('DD/MM/YYYY - HH:mm')}</span>
+                                        <span className='text-xs text-slate-600'>{transaction.code}</span>
+                                        <span className='text-xs text-slate-600'>{moment(transaction.createdAt).format('DD/MM/YYYY - HH:mm')}</span>
                                     </div>
                                     <div className='flex space-x-2 w-full justify-between items-center'>
                                         <div className='flex space-x-2 items-center'>
@@ -188,7 +188,7 @@ const index = ({ user, session }) => {
                                             </div>
                                         </div>
                                         <div className='hidden w-full md:w-4/12 xl:w-full md:flex items-end flex-col space-y-2'>
-                                            <span className='text-sm text-blueGray-400'>Total</span>
+                                            <span className='text-sm text-slate-400'>Total</span>
                                             <NumberFormat
                                                 value={transaction.shouldPayAmount || transaction.totalPrice}
                                                 displayType={'text'}
@@ -200,8 +200,8 @@ const index = ({ user, session }) => {
                                     </div>
                                     {transaction.shippingLocation && (
                                         <div className='flex flex-col'>
-                                            <span className='text-blueGray-400 text-sm'>Alamat</span>
-                                            <span className='text-blueGray-600'>{transaction.shippingLocation}</span>
+                                            <span className='text-slate-400 text-sm'>Alamat</span>
+                                            <span className='text-slate-600'>{transaction.shippingLocation}</span>
                                         </div>
                                     )}
                                 </div>

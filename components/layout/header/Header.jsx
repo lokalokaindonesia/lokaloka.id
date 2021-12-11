@@ -54,7 +54,7 @@ const Header = () => {
     }
 
     return (
-        <header className='w-full h-16 lg:h-20 container mx-auto px-4 xl:px-0 flex justify-between items-center'>
+        <header className='w-full h-16 lg:h-20 container mx-auto px-4 2xl:px-0 flex justify-between items-center'>
             {/* Modal Section */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as='div' className='fixed z-50 inset-0 overflow-y-auto' initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -68,7 +68,7 @@ const Header = () => {
                             leaveFrom='opacity-100'
                             leaveTo='opacity-0'
                         >
-                            <Dialog.Overlay className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity' />
+                            <Dialog.Overlay className='fixed inset-0 bg-slate-500 bg-opacity-75 transition-opacity' />
                         </Transition.Child>
 
                         {/* This element is to trick the browser into centering the modal contents. */}
@@ -88,7 +88,7 @@ const Header = () => {
                                 <form method='post' action={`/search?s=${inputText}`}>
                                     <div className='flex rounded-md shadow-sm'>
                                         <span className='inline-flex items-center px-3 rounded-l-md border-none'>
-                                            <SearchIcon className='w-4 h-4 text-blueGray-500' />
+                                            <SearchIcon className='w-4 h-4 text-slate-500' />
                                         </span>
                                         <input
                                             type='text'
@@ -121,8 +121,8 @@ const Header = () => {
             <div className='w-10/12 md:w-8/12 flex justify-start md:justify-center'>
                 <form method='post' className='block md:hidden' action={`/search?s=${inputText}`}>
                     <div className='flex rounded-md shadow-sm'>
-                        <span className='inline-flex bg-white bg-opacity-50 border border-r-0 border-blueGray-200 items-center px-3 rounded-l-md'>
-                            <SearchIcon className='w-4 h-4 text-blueGray-400' />
+                        <span className='inline-flex bg-white bg-opacity-50 border border-r-0 border-slate-200 items-center px-3 rounded-l-md'>
+                            <SearchIcon className='w-4 h-4 text-slate-400' />
                         </span>
                         <input
                             type='text'
@@ -130,12 +130,12 @@ const Header = () => {
                             name='search'
                             onChange={handleInputSearch}
                             id='search'
-                            className='block w-full bg-white bg-opacity-50 text-blueGray-700 border-l-0 placeholder-gray-400 border-blueGray-200 px-2 py-2 shadow-sm text-xs focus:border-blueGray-200 focus:ring-0 rounded-l-0 rounded-r-md'
+                            className='block w-full bg-white bg-opacity-50 text-slate-700 border-l-0 placeholder-gray-400 border-slate-200 px-2 py-2 shadow-sm text-xs focus:border-slate-200 focus:ring-0 rounded-l-0 rounded-r-md'
                             placeholder='Cari produk disini...'
                         />
                     </div>
                 </form>
-                <div className='hidden md:flex md:items-center md:justify-center md:w-full md:space-x-3 lg:space-x-4 xl:space-x-8 flex-initial font-medium text-blueGray-500'>
+                <div className='hidden md:flex md:items-center md:justify-center md:w-full md:space-x-3 lg:space-x-4 xl:space-x-8 flex-initial font-medium text-slate-500'>
                     <HeaderActiveLink href='/'>Home</HeaderActiveLink>
                     <HeaderActiveLink href='/makanan-dan-minuman'>Makanan & Minuman</HeaderActiveLink>
                     <HeaderActiveLink href='/kerajinan'>Kerajinan</HeaderActiveLink>
@@ -145,12 +145,12 @@ const Header = () => {
 
             <div className='md:w-2/12 flex items-center justify-end space-x-3 md:space-x-2 lg:space-x-4 xl:space-x-6'>
                 <button type='button' className='hidden md:block' name='search' aria-label='Search' onClick={() => setOpen(true)}>
-                    <SearchIcon className='md:h-6 md:w-6 text-blueGray-500 cursor-pointer' />
+                    <SearchIcon className='md:h-6 md:w-6 text-slate-500 cursor-pointer' />
                 </button>
                 <FavoritesDropdown favorite={favorite} />
                 <Link href='/cart'>
                     <button className='relative ' type='button' name='cart' aria-label='Cart'>
-                        <ShoppingCartIcon className='h-6 w-6 md:h-6 md:w-6 text-blueGray-500 cursor-pointer' />
+                        <ShoppingCartIcon className='h-6 w-6 md:h-6 md:w-6 text-slate-500 cursor-pointer' />
                         {cartLength > 0 && (
                             <span className='hidden md:flex h-3 w-3 absolute top-0 right-0'>
                                 <span className='animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75'></span>

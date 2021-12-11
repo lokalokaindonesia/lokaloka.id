@@ -10,6 +10,10 @@
     scroll-behavior: smooth;
 }
 
+hr {
+    @apply border-slate-200;
+}
+
 .logo {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif !important;
 }

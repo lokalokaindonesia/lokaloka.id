@@ -34,7 +34,7 @@ const login = () => {
     }
 
     return (
-        <div className='text-blueGray-800'>
+        <div className='text-slate-800'>
             <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <Head>
                 <title>Login buat beliin pacar oleh-oleh 😊</title>
@@ -47,7 +47,7 @@ const login = () => {
 
                     <div className='bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 lg:w-1/3 h-full px-4 md:px-6 xl:px-6 lg:px-6 flex items-center justify-center md:overflow-y-auto lg:py-6'>
                         <div className='w-full h-auto'>
-                            <h1 className='text-2xl md:text-4xl lg:text-2xl 2xl:text-4xl font-bold leading-loose text-blueGray-800'>Login biar bisa belanja</h1>
+                            <h1 className='text-2xl md:text-4xl lg:text-2xl 2xl:text-4xl font-bold leading-loose text-slate-800'>Login biar bisa belanja</h1>
 
                             <form className='mt-6 text-sm md:text-base flex flex-col space-y-4' method='POST' onSubmit={handleSubmit}>
                                 <div>

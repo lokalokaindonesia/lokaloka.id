@@ -259,7 +259,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                                 displayType={'text'}
                                                 thousandSeparator={true}
                                                 prefix={'Rp. '}
-                                                className='md:text-sm 2xl:text-base font-semibold line-through text-blueGray-500'
+                                                className='md:text-sm 2xl:text-base font-semibold line-through text-slate-500'
                                             />
                                             <NumberFormat
                                                 value={product.discount}
@@ -274,7 +274,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 {/* Navigation */}
                                 <div className='flex flex-col space-y-2'>
                                     <div className='flex flex-col space-y-1'>
-                                        <div className='text-sm font-semibold text-blueGray-600'>Bagikan</div>
+                                        <div className='text-sm font-semibold text-slate-600'>Bagikan</div>
                                         <div className='flex space-x-8 items-center'>
                                             <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} target='_blank' rel='noopener noreferrer'>
                                                 <FaFacebookSquare className='cursor-pointer text-blue-500 w-5 h-5 lg:w-6 lg:h-6' />
@@ -286,25 +286,25 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                         </div>
                                     </div>
                                     <div className='flex flex-col space-y-1'>
-                                        <div className='text-sm font-semibold text-blueGray-600'>Kuantitas</div>
-                                        <div className='flex items-center border border-blueGray-300 bg-white rounded'>
+                                        <div className='text-sm font-semibold text-slate-600'>Kuantitas</div>
+                                        <div className='flex items-center border border-slate-300 bg-white rounded'>
                                             <div
                                                 onClick={reduceQty}
-                                                className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-r border-blueGray-300'
+                                                className='select-none cursor-pointer transition duration-100 ease-in hover:bg-slate-200 px-3 py-1 font-bold text-center border-r border-slate-300'
                                             >
                                                 -
                                             </div>
                                             <div className='px-4 py-1 flex-1 text-center '>{quantity}</div>
                                             <div
                                                 onClick={addQty}
-                                                className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 py-1 font-bold text-center border-l border-blueGray-300'
+                                                className='select-none cursor-pointer transition duration-100 ease-in hover:bg-slate-200 px-3 py-1 font-bold text-center border-l border-slate-300'
                                             >
                                                 +
                                             </div>
                                         </div>
                                     </div>
                                     <div className='flex flex-col space-y-1'>
-                                        <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
+                                        <div className='text-sm font-semibold text-slate-600'>Subtotal</div>
                                         <NumberFormat
                                             value={subtotal}
                                             displayType={'text'}
@@ -327,7 +327,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                         </div>
                     </div>
                     <div className='lg:hidden flex flex-col'>
-                        <p className='2xl:text-lg md:text-base font-semibold tracking-wide py-2 text-blueGray-600'>Deskripsi</p>
+                        <p className='2xl:text-lg md:text-base font-semibold tracking-wide py-2 text-slate-600'>Deskripsi</p>
                         <p className='2xl:text-base md:text-sm font-medium text-justify md:leading-relaxed prose'>{`# Makan`}</p>
                     </div>
                 </div>
@@ -410,7 +410,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                             displayType={'text'}
                                             thousandSeparator={true}
                                             prefix={'Rp. '}
-                                            className='text-sm md:text-sm 2xl:text-base font-semibold line-through text-blueGray-500'
+                                            className='text-sm md:text-sm 2xl:text-base font-semibold line-through text-slate-500'
                                         />
                                         <NumberFormat
                                             value={product.discount}
@@ -423,7 +423,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 )}
                             </div>
                             <div className='flex flex-col'>
-                                <div className='2xl:text-lg md:text-base text-sm font-semibold tracking-wide py-2 text-blueGray-600'>Description</div>
+                                <div className='2xl:text-lg md:text-base text-sm font-semibold tracking-wide py-2 text-slate-600'>Description</div>
                                 <div className='2xl:text-base md:text-sm text-xs font-medium text-justify md:leading-relaxed prose'>{product.description}</div>
                             </div>
                         </div>
@@ -432,7 +432,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     {/* Navigation */}
                     <div className='block md:hidden lg:w-4/12 lg:flex lg:flex-col space-y-2 md:space-y-4 mt-2'>
                         <div className='flex flex-col space-y-1 md:space-y-2'>
-                            <div className='text-sm font-semibold text-blueGray-600'>Bagikan</div>
+                            <div className='text-sm font-semibold text-slate-600'>Bagikan</div>
                             <div className='flex space-x-8 items-center'>
                                 <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareLink}`} target='_blank' rel='noopener noreferrer'>
                                     <FaFacebookSquare className='cursor-pointer text-blue-500 w-5 h-5 lg:w-6 lg:h-6' />
@@ -443,10 +443,10 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 <LinkIcon onClick={() => navigator.clipboard.writeText(shareLink)} className='cursor-pointer w-5 h-5 lg:w-6 lg:h-6' />
                             </div>
                         </div>
-                        <div className='bg-blueGray-50 flex flex-col space-y-2 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
+                        <div className='flex flex-col space-y-2 md:py-0 md:space-y-4 md:bottom-0 md:relative'>
                             <div className='flex justify-between items-center lg:flex-col lg:space-y-4 lg:items-start py-2'>
                                 <div className='flex flex-col space-y-1'>
-                                    <div className='text-sm font-semibold text-blueGray-600'>Subtotal</div>
+                                    <div className='text-sm font-semibold text-slate-600'>Subtotal</div>
                                     <NumberFormat
                                         value={subtotal}
                                         displayType={'text'}
@@ -456,18 +456,18 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                     />
                                 </div>
                                 <div className='flex flex-col space-y-1 md:space-y-2'>
-                                    <div className='text-sm font-semibold text-blueGray-600'>Kuantitas</div>
-                                    <div className='flex items-center border border-blueGray-300 bg-white rounded'>
+                                    <div className='text-sm font-semibold text-slate-600'>Kuantitas</div>
+                                    <div className='flex items-center border border-slate-300 bg-white rounded'>
                                         <div
                                             onClick={reduceQty}
-                                            className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 md:py-1 font-bold text-center border-r border-blueGray-300'
+                                            className='select-none cursor-pointer transition duration-100 ease-in hover:bg-slate-200 px-3 md:py-1 font-bold text-center border-r border-slate-300'
                                         >
                                             -
                                         </div>
                                         <div className='px-4 md:py-1 flex-1 text-center '>{quantity}</div>
                                         <div
                                             onClick={addQty}
-                                            className='select-none cursor-pointer transition duration-100 ease-in hover:bg-blueGray-200 px-3 md:py-1 font-bold text-center border-l border-blueGray-300'
+                                            className='select-none cursor-pointer transition duration-100 ease-in hover:bg-slate-200 px-3 md:py-1 font-bold text-center border-l border-slate-300'
                                         >
                                             +
                                         </div>
@@ -513,7 +513,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                             <div className='w-12 h-12 rounded-full bg-red-500'></div>
                                             <div className='flex flex-col'>
                                                 <p className='text-lg font-semibold'>{review.user.username}</p>
-                                                <p className='text-xs text-blueGray-500'>{moment(review.createdAt).format('ll')}</p>
+                                                <p className='text-xs text-slate-500'>{moment(review.createdAt).format('ll')}</p>
                                             </div>
                                         </div>
                                         <span className='pl-16'>{review.text}</span>

@@ -26,10 +26,10 @@ const Hero = () => {
                         <span className='text-blue-500'>*Untuk setiap pembelian</span>
                     </div>
                     <div className='flex flex-col space-y-2'>
-                        <p className='text-sm md:text-base xl:text-xl font-normal text-blueGray-700 filter drop-shadow'>
+                        <p className='text-sm md:text-base xl:text-xl font-normal text-slate-700 filter drop-shadow'>
                             Beli oleh-oleh <b>secara mudah dan cepat !!!</b>
                         </p>
-                        <p className='text-sm md:text-base xl:text-xl font-normal text-blueGray-700 filter drop-shadow'>
+                        <p className='text-sm md:text-base xl:text-xl font-normal text-slate-700 filter drop-shadow'>
                             Pesan <b>Sekarang</b>, dapatkan <b>keuntungan</b> untuk liburanmu.
                         </p>
                     </div>

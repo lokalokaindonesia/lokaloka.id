@@ -193,7 +193,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
         }
 
         const { data } = await axios.post(`/api/expedition/cost/`, destinationInfo)
-        const markup = data.value < 16000 ? 16000 : data.value
+        const markup = data.value < 16000 || data.value == undefined ? 16000 : data.value
         setShippingCost(markup)
         setShippingEtd(data.etd)
     }
@@ -503,7 +503,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         <div className='mt-2 flex flex-col space-y-2'>
                                             <p className='text-xs md:text-sm text-gray-500'>Pesanan yang kamu inginkan sudah sesuai?</p>
                                             <br />
-                                            <div className='font-medium tracking-wide text-xs md:text-sm text-blueGray-500'>Produk</div>
+                                            <div className='font-medium tracking-wide text-xs md:text-sm text-slate-500'>Produk</div>
                                             {orderData[0].products.map((product, index) => {
                                                 return (
                                                     <div className='flex justify-between space-x-2 text-xs md:text-base' key={index}>
@@ -588,7 +588,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         <br />
                                         <div className='flex text-sm md:text-base flex-col space-y-2'>
                                             <div>
-                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Lokasi</div>
+                                                <div className='font-medium tracking-wide text-sm text-slate-500'>Lokasi</div>
                                                 {area != 'anotherCity' ? (
                                                     <>
                                                         <div className='font-medium '>{`${location}`}</div>
@@ -602,12 +602,12 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 )}
                                             </div>
                                             <div>
-                                                <div className='font-medium tracking-wide text-sm text-blueGray-500'>Metode Pembayaran</div>
+                                                <div className='font-medium tracking-wide text-sm text-slate-500'>Metode Pembayaran</div>
                                                 <div className='font-medium'>{`${choosenPaymentMethod.replace('ID_', '')} ${ovoNumber && `(${ovoNumber})`}`}</div>
                                             </div>
                                             {note != '' && (
                                                 <div>
-                                                    <div className='font-medium tracking-wide text-sm text-blueGray-500'>Catatan</div>
+                                                    <div className='font-medium tracking-wide text-sm text-slate-500'>Catatan</div>
                                                     <div className='font-medium '>{`${note}`}</div>
                                                 </div>
                                             )}
@@ -629,7 +629,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     <button
                                         type='button'
                                         onClick={() => {}}
-                                        className='w-full md:w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blueGray-200 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500'
+                                        className='w-full md:w-max inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-slate-200 text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500'
                                     >
                                         Memproses...
                                     </button>
@@ -666,7 +666,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                     <div className='flex flex-col space-y-4 space-x-0 lg:flex-row lg:justify-between lg:space-y-0 lg:space-x-5'>
                         <div className='w-full lg:w-9/12'>
                             <div className='flex flex-col space-y-2 md:space-y-4'>
-                                <div className='p-2 md:p-4 border border-blueGray-200 bg-white  rounded-md drop-shadow-sm'>
+                                <div className='p-2 md:p-4 border border-slate-200 bg-white  rounded-md drop-shadow-sm'>
                                     <h2 className='text-base md:text-lg font-semibold mb-3'>Informasi Pengiriman</h2>
                                     <div className='flex flex-col space-y-4'>
                                         {/* Area */}
@@ -684,10 +684,10 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             className={
                                                                 area == n.value
                                                                     ? 'py-1 px-2 flex items-center space-x-2 rounded-md border border-orange-500 bg-orange-500 text-white transition ease-in-out duration-300'
-                                                                    : 'py-1 px-2 flex items-center space-x-2 rounded-md border border-blueGray-200 bg-blueGray-300  transition ease-in-out duration-300'
+                                                                    : 'py-1 px-2 flex items-center space-x-2 rounded-md border border-slate-200 bg-slate-300  transition ease-in-out duration-300'
                                                             }
                                                         >
-                                                            {area != n.value && <div className='border border-blueGray-800 rounded-full w-4 h-4'></div>}
+                                                            {area != n.value && <div className='border border-slate-800 rounded-full w-4 h-4'></div>}
                                                             {area == n.value && <FaCheckCircle className='text-white w-4 h-4' />}
                                                             <span>{n.label}</span>
                                                         </button>
@@ -707,8 +707,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             id='location'
                                                             onChange={handleLocation}
                                                             required
-                                                            className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
-                                                            placeholder='Fakultas Kedokteran ITB'
+                                                            className='rounded-md placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-slate-200'
+                                                            placeholder='Hotel Singhasari'
                                                         />
                                                     </div>
                                                     <div className='flex flex-col flex-1 space-y-1'>
@@ -719,8 +719,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             name='address'
                                                             required
                                                             id='address'
-                                                            className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
-                                                            placeholder='Jl. Ganesa No.10, Lb. Siliwangi, Kecamatan Coblong, Kota Bandung, Jawa Barat 40132'
+                                                            className='rounded-md placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-slate-200'
+                                                            placeholder='Jl. Ir. Soekarno No.120, Beji, Kec. Batu, Kota Batu, Jawa Timur 65236'
                                                         />
                                                     </div>
                                                 </div>
@@ -731,7 +731,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                         id='notes'
                                                         onChange={handleNote}
                                                         placeholder=''
-                                                        className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                        className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-slate-200'
                                                     ></textarea>
                                                 </div>
                                             </>
@@ -747,7 +747,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             onChange={handleAddress}
                                                             required
                                                             id='address'
-                                                            className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                            className='rounded-md placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-slate-200'
                                                             placeholder='Jl. Ganesa No.10, Lb. Siliwangi, Kecamatan Coblong, Kota Bandung, Jawa Barat 40132'
                                                         />
                                                     </div>
@@ -757,16 +757,16 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                         <label htmlFor='city'>Kota</label>
                                                         <button
                                                             onClick={() => setCityToggle(!cityToggle)}
-                                                            className='rounded-md border flex items-center justify-between text-sm px-2 text-blueGray-500 w-full py-2 border-blueGray-200'
+                                                            className='rounded-md border flex items-center justify-between text-sm px-2 text-slate-500 w-full py-2 border-slate-200'
                                                         >
                                                             <span>{city ? city.type + ' ' + city.city_name : 'Pilih Kota'}</span>
                                                             <span>
-                                                                <SelectorIcon className='w-4 h-4 text-blueGray-500' />
+                                                                <SelectorIcon className='w-4 h-4 text-slate-500' />
                                                             </span>
                                                         </button>
                                                         {cityToggle && (
                                                             <div className='relative'>
-                                                                <div className='rounded-md bg-white border border-blueGray-200 drop-shadow-sm  h-auto w-auto absolute'>
+                                                                <div className='rounded-md bg-white border border-slate-200 drop-shadow-sm  h-auto w-auto absolute'>
                                                                     <ul
                                                                         className='w-96 bg-white max-h-32 rounded-md py-1 overflow-auto focus:outline-none text-sm'
                                                                         tabIndex='-1'
@@ -782,7 +782,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                                 name='city'
                                                                                 id='city'
                                                                                 onChange={handleCityInput}
-                                                                                className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border border-blueGray-200'
+                                                                                className='rounded-md placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border border-slate-200'
                                                                                 placeholder='Cari Kota...'
                                                                             />
                                                                         </div>
@@ -819,7 +819,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             readOnly={true}
                                                             id='province'
                                                             required
-                                                            className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                            className='rounded-md placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-slate-200'
                                                             placeholder='Jawa Barat'
                                                         />
                                                     </div>
@@ -831,7 +831,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             id='postalCode'
                                                             onChange={handlePostalCode}
                                                             required
-                                                            className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                            className='rounded-md placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-slate-200'
                                                             placeholder='xxxxx'
                                                         />
                                                     </div>
@@ -842,14 +842,14 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                         name='notes'
                                                         onChange={handleNote}
                                                         id='notes'
-                                                        className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-blueGray-200'
+                                                        className='rounded-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-slate-200'
                                                     ></textarea>
                                                 </div>
                                             </>
                                         )}
                                     </div>
                                 </div>
-                                <div className='p-2 md:p-4 border border-blueGray-200 bg-white  rounded-md drop-shadow-sm'>
+                                <div className='p-2 md:p-4 border border-slate-200 bg-white  rounded-md drop-shadow-sm'>
                                     <h2 className='text-base md:text-lg font-semibold mb-3'>Packing</h2>
                                     <div className='flex flex-col space-y-1 text-sm md:text-base'>
                                         <div className='flex items-center space-x-2 md:space-x-4 text-sm md:text-base'>
@@ -865,10 +865,10 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                         className={
                                                             cardBoard == n.id
                                                                 ? 'py-1 px-2 flex items-center space-x-2 rounded-md border border-orange-500 bg-orange-500 text-white transition ease-in-out duration-300'
-                                                                : 'py-1 px-2 flex items-center space-x-2 rounded-md border border-blueGray-200 bg-blueGray-300  transition ease-in-out duration-300'
+                                                                : 'py-1 px-2 flex items-center space-x-2 rounded-md border border-slate-200 bg-slate-300  transition ease-in-out duration-300'
                                                         }
                                                     >
-                                                        {cardBoard != n.id && <div className='border border-blueGray-800 rounded-full w-4 h-4'></div>}
+                                                        {cardBoard != n.id && <div className='border border-slate-800 rounded-full w-4 h-4'></div>}
                                                         {cardBoard == n.id && <FaCheckCircle className='text-white w-4 h-4' />}
                                                         <span>{n.label}</span>
                                                     </button>
@@ -877,9 +877,9 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='p-2 md:p-4 border border-blueGray-200 bg-white rounded-md drop-shadow-sm'>
+                                <div className='p-2 md:p-4 border border-slate-200 bg-white rounded-md drop-shadow-sm'>
                                     <h2 className='text-base md:text-lg font-semibold mb-3'>Metode Pembayaran</h2>
-                                    <div className='flex flex-col space-y-2 2xl:space-y-4 font-semibold text-blueGray-500'>
+                                    <div className='flex flex-col space-y-2 2xl:space-y-4 font-semibold text-slate-500'>
                                         <div className='flex flex-col space-y-1 2xl:space-y-2'>
                                             <h3 className='text-sm md:text-base font-normal'>Virtual Account</h3>
                                             <div className='flex space-x-2 md:space-x-4 items-center'>
@@ -896,7 +896,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
                                                                         ? 'rounded-md ring-2 md:ring-4 ring-orange-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border md:border-2 border-blueGray-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border md:border-2 border-slate-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
                                                                 <Image
@@ -931,7 +931,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                 className={
                                                                     choosenPaymentMethod == paymentMethod.id
                                                                         ? 'rounded-md ring-2 md:ring-4 ring-orange-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border md:border-2 border-blueGray-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border md:border-2 border-slate-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
                                                                 <Image
@@ -969,8 +969,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                     choosenPaymentMethod == paymentMethod.id
                                                                         ? 'rounded-md ring-2 md:ring-4 ring-orange-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : orderData[0].totalPrice > 5000000
-                                                                        ? 'rounded-md border-2 border-md:blueGray-200 bg-blueGray-200 filter grayscale h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border md:border-2 border-blueGray-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md border-2 border-md:slate-200 bg-slate-200 filter grayscale h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border md:border-2 border-slate-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
                                                                 <Image
@@ -1013,8 +1013,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                                         ? 'rounded-md ring-2 md:ring-4 ring-orange-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                         : (orderData[0].totalPrice > 2500000 && paymentMethod.id == 'ALFAMART') ||
                                                                           (orderData[0].totalPrice > 5000000 && paymentMethod.id == 'INDOMARET')
-                                                                        ? 'rounded-md border-2 border-md:blueGray-200 bg-blueGray-200 filter grayscale h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border md:border-2 border-blueGray-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        ? 'rounded-md border-2 border-md:slate-200 bg-slate-200 filter grayscale h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md border md:border-2 border-slate-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
                                                                 }
                                                             >
                                                                 <Image
@@ -1038,32 +1038,32 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                             </div>
                         </div>
                         <div className='w-full lg:w-3/12'>
-                            <div className='sticky top-28 p-4 bg-white border drop-shadow-sm border-blueGray-200 h-auto rounded-md flex flex-col space-y-4'>
+                            <div className='sticky top-28 p-4 bg-white border drop-shadow-sm border-slate-200 h-auto rounded-md flex flex-col space-y-4'>
                                 {/* Summary */}
                                 <div className='flex flex-col space-y-2'>
                                     <div className='text-base md:text-xl font-bold '>Rincian</div>
                                     <div className='flex flex-col space-y-xs text-sm md:text-base'>
-                                        <div className='text-xs 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                        <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
                                             <span>Total ({order.totalQuantity})</span>
                                             <NumberFormat value={order.totalPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
-                                        <div className='text-xs 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                        <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-baseline'>
                                                 <span>Pengiriman</span>
                                             </div>
-                                            <NumberFormat value={shippingCost} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
+                                            <NumberFormat value={shippingCost} displayType={'text'} className='text-slate-500' thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
-                                        <div className='text-xs 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                        <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-baseline'>
                                                 <span>Biaya Penanganan</span>
                                             </div>
-                                            <NumberFormat value={plasticWrap} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
+                                            <NumberFormat value={plasticWrap} displayType={'text'} className='text-slate-500' thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
-                                        <div className='text-xs 2xl:text-base text-blueGray-500 font-semibold flex justify-between items-center'>
+                                        <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
                                             <div className='flex space-x-2 items-baseline'>
                                                 <span>Packing Kardus</span>
                                             </div>
-                                            <NumberFormat value={cardBoardBoxPrice} displayType={'text'} className='text-blueGray-500' thousandSeparator={true} prefix={'Rp. '} />
+                                            <NumberFormat value={cardBoardBoxPrice} displayType={'text'} className='text-slate-500' thousandSeparator={true} prefix={'Rp. '} />
                                         </div>
                                     </div>
                                 </div>
@@ -1082,11 +1082,11 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                 <hr />
                                 {choosenPaymentMethod == 'ID_OVO' ? (
                                     <div className='flex flex-col space-y-1  text-sm md:text-base'>
-                                        <label htmlFor='ovo_number' className='block text-sm font-medium text-blueGray-500'>
+                                        <label htmlFor='ovo_number' className='block text-sm font-medium text-slate-500'>
                                             Nomor OVO
                                         </label>
                                         <div className='mt-1 flex rounded-md shadow-sm'>
-                                            <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-blueGray-300 bg-blueGray-50 text-blueGray-500 text-sm'>
+                                            <span className='inline-flex items-center px-3 rounded-l-md border border-r-0 border-slate-300 bg-slate-50 text-slate-500 text-sm'>
                                                 +62
                                             </span>
                                             <input
@@ -1095,7 +1095,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 id='ovo_number'
                                                 onChange={handleOvoNumber}
                                                 required
-                                                className='rounded-r-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm placeholder-gray-300 border-blueGray-300'
+                                                className='rounded-r-md focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm placeholder-gray-400 border-slate-300'
                                                 placeholder='85199992222'
                                             />
                                         </div>

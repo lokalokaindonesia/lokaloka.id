@@ -44,9 +44,7 @@ const ProfileDropdown = () => {
                             {({ active }) => (
                                 <div className='cursor-pointer w-full'>
                                     <Link href='/profile/my-account'>
-                                        <div className={classNames(active ? 'bg-gray-100 text-blueGray-800' : 'text-blueGray-700', 'block w-full text-left px-4 py-2 text-sm')}>
-                                            Akun
-                                        </div>
+                                        <div className={classNames(active ? 'bg-gray-100 text-slate-800' : 'text-slate-700', 'block w-full text-left px-4 py-2 text-sm')}>Akun</div>
                                     </Link>
                                 </div>
                             )}
@@ -55,19 +53,19 @@ const ProfileDropdown = () => {
                             {({ active }) => (
                                 <div className='cursor-pointer w-full'>
                                     <Link href='/profile/my-orders'>
-                                        <div className={classNames(active ? 'bg-gray-100 text-blueGray-800' : 'text-blueGray-700', 'block w-full text-left px-4 py-2 text-sm')}>
+                                        <div className={classNames(active ? 'bg-gray-100 text-slate-800' : 'text-slate-700', 'block w-full text-left px-4 py-2 text-sm')}>
                                             Pesanan Saya
                                         </div>
                                     </Link>
                                 </div>
                             )}
                         </Menu.Item>
-                        {/* <hr className='border border-blueGray-200' />
+                        {/* <hr className='border border-slate-200' />
                         <Menu.Item>
                             {({ active }) => (
                                 <div className='cursor-pointer w-full'>
                                     <Link href='#'>
-                                        <div className={classNames(active ? 'bg-gray-100 text-blueGray-800' : 'text-blueGray-700', 'block w-full text-left px-4 py-2 text-sm')}>
+                                        <div className={classNames(active ? 'bg-gray-100 text-slate-800' : 'text-slate-700', 'block w-full text-left px-4 py-2 text-sm')}>
                                             Bantuan
                                         </div>
                                     </Link>
@@ -80,7 +78,7 @@ const ProfileDropdown = () => {
                                 <button
                                     onClick={() => logoutHandler()}
                                     type='submit'
-                                    className={classNames(active ? 'bg-gray-100 text-blueGray-800' : 'text-blueGray-700', 'block w-full text-left px-4 py-2 text-sm')}
+                                    className={classNames(active ? 'bg-gray-100 text-slate-800' : 'text-slate-700', 'block w-full text-left px-4 py-2 text-sm')}
                                 >
                                     Keluar
                                 </button>

@@ -17,11 +17,11 @@ const index = ({ searchedProducts }) => {
                         <Link href='/'>Home</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
-                    <div className='text-blueGray-800 font-bold hover:text-blueGray-800'>
+                    <div className='text-slate-800 font-bold hover:text-slate-800'>
                         <span>Pencarian</span>
                     </div>
                 </div>
-                <h1 className='text-2xl font-semibold text-blueGray-800 my-2 2xl:my-3 capitalize'>Pencarian {query}</h1>
+                <h1 className='text-2xl font-semibold text-slate-800 my-2 2xl:my-3 capitalize'>Pencarian {query}</h1>
                 <div className='flex justify-between items-center'>
                     <p className='text-sm'>
                         <span>Ditemukan {searchedProducts.length} produk dari </span> <span className='font-semibold'>"{query}"</span>
