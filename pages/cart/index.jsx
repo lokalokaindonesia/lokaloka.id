@@ -188,7 +188,6 @@ const Cart = ({ cartProducts, session, productCategories }) => {
             totalPrice: grandTotal,
             totalQuantity,
             totalWeight,
-            discount: couponPromo,
             subTotal: subTotal,
             user: session.id,
             coupon: coupon != null ? coupon._id : null,

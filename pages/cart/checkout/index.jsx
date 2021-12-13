@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
-import { ChevronRightIcon, ExclamationIcon, SelectorIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon, ExclamationIcon, SelectorIcon, TrashIcon } from '@heroicons/react/solid'
 import { FaCheckCircle, FaWallet } from 'react-icons/fa'
 import NumberFormat from 'react-number-format'
 import { useEffect, useState } from 'react'
@@ -119,17 +119,62 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     const [address, setAddress] = useState('')
     const [location, setLocation] = useState('')
     const [postalCode, setPostalCode] = useState('')
+    const [phone, setPhone] = useState()
     const [note, setNote] = useState('')
     const [openModalConfirmation, setOpenModalConfirmation] = useState(false)
     const [ovoNumber, setOvoNumber] = useState('')
+    const [couponInput, setCouponInput] = useState(null)
+    const [couponPromo, setCouponPromo] = useState(0)
+    const [coupon, setCoupon] = useState('')
+    const [subTotal, setSubTotal] = useState(0)
     const [payLoading, setPayLoading] = useState(false)
     const [plasticWrap, setPlasticWrap] = useState(2000)
     const [cardBoardBoxPrice, setCardBoardBoxPrice] = useState(0)
 
     useEffect(() => {
-        selectArea, selectPaymentMethod, countTotal()
+        selectArea, selectPaymentMethod, countTotal(), countCouponPromo(), countSubTotal()
         return () => {}
-    }, [area, choosenPaymentMethod, shippingCost, total, shippingEtd, cardBoardBoxPrice])
+    }, [area, choosenPaymentMethod, shippingCost, total, shippingEtd, cardBoardBoxPrice, coupon, subTotal, couponPromo])
+
+    // * Handle Coupon Input
+    const handleCouponInput = (e) => {
+        e.preventDefault()
+        return setCouponInput(e.target.value)
+    }
+    // * END Handle Coupon Input
+
+    //  * GET Coupons
+    const getCoupon = async (e) => {
+        e.preventDefault()
+        if (!couponInput) {
+            return alert('Fill the form')
+        }
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/coupons`, {
+            headers: {
+                Authorization: 'Bearer ' + session.jwt,
+            },
+        })
+        const couponData = await data.find((c) => c.code === couponInput)
+        if (!couponData) {
+            return alert('Coupon not found!')
+        }
+        return setCoupon(couponData)
+    }
+    // * END GET Coupon
+
+    // * DELETE COUPON
+    const deleteCoupon = async () => {
+        return setCoupon('')
+    }
+    // * END DELETE COUPON
+
+    const countCouponPromo = async () => {
+        if (coupon) {
+            setCouponPromo((subTotal * coupon.discount) / 100)
+            return
+        }
+        return 0
+    }
 
     // Select Area
     const selectArea = (value) => {
@@ -157,6 +202,11 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     // Handle Location
     const handleLocation = async (e) => {
         return setLocation(e.target.value)
+    }
+
+    // Handle Phone
+    const handlePhone = async (e) => {
+        return setPhone(e.target.value)
     }
 
     // Handle Note
@@ -204,9 +254,20 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
         return setChoosenPaymentMethod(data.id)
     }
 
+    // count subtotal
+    const countSubTotal = () => {
+        const x = +shippingCost + +order.totalPrice + 2000 + +cardBoardBoxPrice
+        return setSubTotal(x)
+    }
+
     // count total
     const countTotal = () => {
-        return setTotal(+shippingCost + +order.totalPrice + 2000 + +cardBoardBoxPrice)
+        const x = +shippingCost + +order.totalPrice + 2000 + +cardBoardBoxPrice
+        if (!coupon) {
+            return setTotal(x)
+        }
+        const z = (x * coupon.discount) / 100
+        return setTotal(x - z)
     }
 
     // Handle Modal
@@ -247,6 +308,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                 shouldPayAmount: total,
                 shippingLocation: toShipping,
                 code: invoiceResponse.external_id,
+                phone,
+                discount: couponPromo,
                 paymentStatus: invoiceResponse.status,
                 paymentMethod: choosenPaymentMethod,
                 bankNumber: selectedPaymentMethod.bank_account_number,
@@ -289,6 +352,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                 shouldPayAmount: total,
                 code: gopayResponse.data.transaction_details.order_id,
                 shippingLocation: toShipping,
+                discount: couponPromo,
+                phone,
                 paymentStatus: 'PAID',
                 // qrCodeString: gopayResponse.actions[0].url,
                 paymentMethod: choosenPaymentMethod,
@@ -332,6 +397,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
             const transactionData = {
                 ...orderData[0],
+                discount: couponPromo,
+                phone,
                 shouldPayAmount: total,
                 shippingLocation: toShipping,
                 code: eWalletResponse.reference_id,
@@ -372,6 +439,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
 
             const transactionData = {
+                discount: couponPromo,
+                phone,
                 ...orderData[0],
                 shouldPayAmount: total,
                 shippingLocation: toShipping,
@@ -410,7 +479,9 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
 
             const transactionData = {
+                discount: couponPromo,
                 ...orderData[0],
+                phone,
                 shouldPayAmount: total,
                 shippingLocation: toShipping,
                 code: qrCodeResponse.external_id,
@@ -453,6 +524,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
             const transactionData = {
                 ...orderData[0],
                 shouldPayAmount: total,
+                discount: couponPromo,
+                phone,
                 shippingLocation: toShipping,
                 code: retailOutletInvoiceResponse.external_id,
                 paymentStatus: retailOutletInvoiceResponse.status,
@@ -512,7 +585,9 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             <span className='w-10/12 line-clamp-1 flex-initial max-w-sm'>{product.product.name}</span>
                                                         </div>
                                                         <NumberFormat
-                                                            value={product.quantity * product.product.sellingPrice}
+                                                            value={
+                                                                product.quantity * (product.product.sellingPrice - (product.product.sellingPrice * product.product.discount) / 100)
+                                                            }
                                                             displayType={'text'}
                                                             thousandSeparator={true}
                                                             prefix={'Rp. '}
@@ -567,7 +642,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 <span className='truncate font-bold w-1/2'>Diskon</span>
                                                 <NumberFormat
                                                     className='font-bold text-xs md:text-base text-red-500'
-                                                    value={orderData[0].discount}
+                                                    value={couponPromo}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
                                                     prefix={'-Rp. '}
@@ -600,6 +675,10 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                         <div className='font-medium '>{`${postalCode}, ${city.type} ${city.city_name}, ${province.province}`}</div>
                                                     </>
                                                 )}
+                                            </div>
+                                            <div>
+                                                <div className='font-medium tracking-wide text-sm text-slate-500'>Nomor Telepon</div>
+                                                <div className='font-medium'>{phone}</div>
                                             </div>
                                             <div>
                                                 <div className='font-medium tracking-wide text-sm text-slate-500'>Metode Pembayaran</div>
@@ -723,8 +802,19 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             placeholder='Jl. Ir. Soekarno No.120, Beji, Kec. Batu, Kota Batu, Jawa Timur 65236'
                                                         />
                                                     </div>
+                                                    <div className='flex flex-col flex-initial space-y-1'>
+                                                        <label htmlFor='phone'>Nomor Telepon</label>
+                                                        <input
+                                                            type='text'
+                                                            name='phone'
+                                                            id='phone'
+                                                            onChange={handlePhone}
+                                                            required
+                                                            className='rounded-md placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-slate-200'
+                                                        />
+                                                    </div>
                                                 </div>
-                                                <div className='flex flex-col space-y-1  text-sm md:text-base'>
+                                                <div className='flex flex-col space-y-1 text-sm md:text-base'>
                                                     <label htmlFor='notes'>Catatan</label>
                                                     <textarea
                                                         name='notes'
@@ -833,6 +923,19 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             required
                                                             className='rounded-md placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-slate-200'
                                                             placeholder='xxxxx'
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className='w-1/3'>
+                                                    <div className='flex flex-col flex-initial space-y-1'>
+                                                        <label htmlFor='phone'>Nomor Telepon</label>
+                                                        <input
+                                                            type='text'
+                                                            name='phone'
+                                                            id='phone'
+                                                            onChange={handlePhone}
+                                                            required
+                                                            className='rounded-md placeholder-slate-400 focus:ring-orange-500 focus:border-orange-500 flex-1 block w-full text-sm border-slate-200'
                                                         />
                                                     </div>
                                                 </div>
@@ -1067,17 +1170,50 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         </div>
                                     </div>
                                 </div>
+                                <div className='flex justify-between items-center'>
+                                    <div className='text-base font-bold '>Sub Total</div>
+                                    <NumberFormat value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-base font-bold text-orange-500' />
+                                </div>
                                 <hr />
+                                <form className='flex items-center' onSubmit={getCoupon} method='get'>
+                                    <input
+                                        className={
+                                            coupon
+                                                ? 'px-2 py-2 text-sm md:text-base md:px-3 md:py-2 rounded-l rounded-r-none w-full border md:border-2 focus:rounded-r-none focus:border-green-500 focus:border md:focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-slate-500'
+                                                : 'px-2 py-2 text-sm md:text-base md:px-3 md:py-2 rounded-l rounded-r-none w-full border md:border-2 focus:rounded-r-none focus:border-slate-500 focus:border md:focus:border-2 focus:ring-0 border-slate-500 transition ease-in-out duration-300 font-bold '
+                                        }
+                                        placeholder='Kode Kupon'
+                                        disabled={coupon && 'disabled'}
+                                        onChange={handleCouponInput}
+                                        type='text'
+                                    />
+                                    <button
+                                        type='submit'
+                                        className={
+                                            coupon
+                                                ? 'text-sm md:text-base rounded-r px-2 py-2 md:px-3 md:py-2 text-white font-bold border md:border-2 border-green-300 bg-green-300'
+                                                : 'text-sm md:text-base rounded-r px-2 py-2 md:px-3 md:py-2 text-white font-bold border md:border-2 border-slate-500 bg-slate-500'
+                                        }
+                                    >
+                                        Terapkan
+                                    </button>
+                                </form>
+                                <hr />
+                                {coupon && (
+                                    <div className='text-sm md:text-base text-slate-500 font-semibold flex justify-between items-center'>
+                                        <div className='flex space-x-2 items-center'>
+                                            <span>Kupon {coupon.discount}%</span>
+                                            <button type='button' onClick={() => deleteCoupon()}>
+                                                <TrashIcon className='text-red-500 w-4 h-4' />
+                                            </button>
+                                        </div>
+                                        <NumberFormat value={couponPromo} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
+                                    </div>
+                                )}
                                 {/* Total */}
                                 <div className='flex justify-between items-center'>
-                                    <div className='text-base 2xl:text-xl font-bold '>Total</div>
-                                    <NumberFormat
-                                        value={total}
-                                        displayType={'text'}
-                                        thousandSeparator={true}
-                                        prefix={'Rp. '}
-                                        className='text-base 2xl:text-xl font-bold text-orange-500'
-                                    />
+                                    <div className='text-base font-bold '>Total</div>
+                                    <NumberFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-base font-bold text-orange-500' />
                                 </div>
                                 <hr />
                                 {choosenPaymentMethod == 'ID_OVO' ? (
