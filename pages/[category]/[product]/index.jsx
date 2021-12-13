@@ -328,7 +328,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
                     <div className='lg:hidden flex flex-col'>
                         <p className='2xl:text-lg md:text-base font-semibold tracking-wide py-2 text-slate-600'>Deskripsi</p>
-                        <p className='2xl:text-base md:text-sm font-medium text-justify md:leading-relaxed prose'>{`# Makan`}</p>
+                        <p className='2xl:text-base md:text-sm font-medium text-justify md:leading-relaxed prose'>{product.description}</p>
                     </div>
                 </div>
 
