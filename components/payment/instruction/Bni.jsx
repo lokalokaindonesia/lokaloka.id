@@ -29,8 +29,7 @@ const Bni = ({ transaction }) => {
                         <div className='font-semibold text-sm md:text-lg lg:text-2xl xl:text-3xl 2xl:text-4xl'>{transaction.bankNumber} / Lokaloka</div>
                     </div>
                     <div>
-                        <span className='text-xs md:text-base text-slate-200'>Bayar tagihan sebelum </span>
-                        <div className='font-medium text-sm md:text-lg xl:text-xl'>08:00 | 10 September 2021</div>
+                        <span className='text-xs md:text-base text-slate-200'>*Tagihan hanya berlaku selama 24 Jam</span>
                     </div>
                 </div>
             </div>

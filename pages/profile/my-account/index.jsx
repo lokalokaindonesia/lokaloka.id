@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getSession, useSession } from 'next-auth/client'
+import { getSession, signOut, useSession } from 'next-auth/client'
 import Image from 'next/image'
 import Link from 'next/link'
 import Layout from '@/components/layout/Layout'
@@ -23,6 +23,15 @@ const index = ({ user }) => {
     useEffect(() => {
         import('@lottiefiles/lottie-player')
     })
+
+    const logoutHandler = () => {
+        if (session) {
+            return signOut({
+                redirect: true,
+                callbackUrl: process.env.NEXTAUTH_URL,
+            })
+        }
+    }
 
     const handlePhone = async (e) => {
         setPhone(e.target.value)
@@ -118,21 +127,17 @@ const index = ({ user }) => {
                                             <div className='md:w-4/12 xl:w-2/12'>Email</div>
                                             <div className='md:w-8/12 xl:w-10/12'>{user.email}</div>
                                         </div>
-                                        <div className='text-sm md:text-base flex flex-col md:flex-row space-y-1 md:space-y-0 md:items-center'>
-                                            <div className='md:w-4/12 xl:w-2/12'></div>
-                                            <div className='hidden md:block md:w-4/12 xl:w-2/12'>
-                                                <div onClick={() => updateUser()}>
-                                                    <Button size='base' width='max' display='flex' type='primary' href={() => {}}>
-                                                        Perbarui
-                                                    </Button>
-                                                </div>
+                                        <br />
+                                        <div className='text-sm md:text-base flex flex-row space-x-1 justify-between items-center'>
+                                            <div onClick={() => updateUser()}>
+                                                <Button size='sm' width='max' display='flex' type='primary' href={() => {}}>
+                                                    Perbarui
+                                                </Button>
                                             </div>
-                                            <div className='flex w-full justify-end md:hidden md:w-4/12 xl:w-2/12'>
-                                                <div onClick={() => updateUser()}>
-                                                    <Button size='sm' width='max' display='flex' type='primary' href={() => {}}>
-                                                        Perbarui
-                                                    </Button>
-                                                </div>
+                                            <div className=''>
+                                                <Button size='sm' width='max' display='flex' type='logout' href={() => logoutHandler()}>
+                                                    Logout
+                                                </Button>
                                             </div>
                                         </div>
                                     </div>

@@ -29,8 +29,7 @@ const RetailOutlet = ({ transaction }) => {
                         <div className='font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl'>{transaction.paymentCode}</div>
                     </div>
                     <div>
-                        <span className='text-sm md:text-base text-slate-200'>Bayar tagihan sebelum </span>
-                        <div className='font-medium text-base md:text-lg xl:text-xl'>08:00 | 10 September 2021</div>
+                        <span className='text-xs md:text-base text-slate-200'>*Tagihan hanya berlaku selama 24 Jam</span>
                     </div>
                 </div>
             </div>
