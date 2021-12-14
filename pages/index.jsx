@@ -2,8 +2,7 @@ import Image from 'next/image'
 import axios from 'axios'
 import { useSession } from 'next-auth/client'
 import { useDispatch } from 'react-redux'
-import Link from 'next/link'
-import Hero from '@/components/layout/Hero'
+import { useRouter } from 'next/router'
 import HighlightedSection from '@/components/layout/HighlightedSection'
 import JustForYou from '@/components/layout/JustForYou'
 import Layout from '@/components/layout/Layout'
@@ -18,6 +17,8 @@ const Home = ({ products, promo, recommended }) => {
     const [session, loading] = useSession()
 
     const dispatch = useDispatch()
+
+    const router = useRouter()
 
     if (session) {
         const setLocalStorageCart = async () => {
@@ -40,20 +41,23 @@ const Home = ({ products, promo, recommended }) => {
                 {/* Product Section */}
                 {promo.length != 0 && <HighlightedSection sectionTitle='Promo' href='/specials/promo' data={promo} bgColor='bg-white' />}
                 {/* Promo Campaign */}
-                <div className='my-4 md:mt-8 md:mb-4 px-4 2xl:px-0 container mx-auto'>
-                    <Link href='/specials/promo'>
-                        <Image
-                            src={banner}
-                            alt='Promo'
-                            className='rounded-md shadow shadow-slate-500/20'
-                            placeholder='blur'
-                            layout='responsive'
-                            width={1319}
-                            priority
-                            quality={100}
-                            height={250}
-                        />
-                    </Link>
+                <div
+                    className='cursor-pointer my-4 md:mt-8 md:mb-4 px-4 2xl:px-0 container mx-auto'
+                    onClick={() => {
+                        router.push('/specials/promo')
+                    }}
+                >
+                    <Image
+                        src={banner}
+                        alt='Promo'
+                        className='rounded-md shadow shadow-slate-500/20'
+                        placeholder='blur'
+                        layout='responsive'
+                        width={1319}
+                        priority
+                        quality={100}
+                        height={250}
+                    />
                 </div>
 
                 <HighlightedSection sectionTitle='Rekomendasi' href='/specials/recommended' data={recommended} />

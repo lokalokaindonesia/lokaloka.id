@@ -524,7 +524,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
                 )}
                 {/* Similar Products */}
-                {/* <div className='flex flex-col space-y-4'>
+                <div className='flex flex-col space-y-4'>
                     <FancySectionTitle title='Produk serupa' />
                     <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 2xl:gap-8'>
                         {similarProducts
@@ -544,25 +544,11 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                             })
                             .splice(0, 6)}
                     </div>
-                </div> */}
+                </div>
             </div>
         </Layout>
     )
 }
-
-// export const getStaticPaths = async () => {
-//     const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
-//     const data = await getProducts.data
-
-//     const paths = data.map((product) => {
-//         return { params: { category: product.product_category.slug, product: product.slug } }
-//     })
-
-//     return {
-//         paths,
-//         fallback: false,
-//     }
-// }
 
 export const getServerSideProps = async ({ params }) => {
     const getProduct = await axios.get(`${process.env.NEXT_URL}/api/products/${params.product}`)
