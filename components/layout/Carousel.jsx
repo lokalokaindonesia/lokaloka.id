@@ -1,7 +1,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Autoplay } from 'swiper'
-import banner from '../../public/images/banner/banner.png'
 import Image from 'next/image'
+import banner1 from '../../public/images/banner/banner1.jpg'
+import banner2 from '../../public/images/banner/banner2.jpg'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -24,22 +25,12 @@ const Carousel = () => {
             >
                 <SwiperSlide>
                     <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
-                        <Image src={banner} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' width={1320} priority quality={100} height={250} />
+                        <Image src={banner1} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' width={6} priority quality={100} height={3} />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
-                        <Image src={banner} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' width={1320} priority quality={100} height={250} />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
-                        <Image src={banner} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' width={1320} priority quality={100} height={250} />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
-                        <Image src={banner} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' width={1320} priority quality={100} height={250} />
+                        <Image src={banner2} alt='Promo' className='rounded-md' placeholder='blur' layout='responsive' width={6} priority quality={100} height={3} />
                     </div>
                 </SwiperSlide>
             </Swiper>
