@@ -527,22 +527,20 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                 <div className='flex flex-col space-y-4'>
                     <FancySectionTitle title='Produk serupa' />
                     <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 2xl:gap-8'>
-                        {similarProducts
-                            .map((item, index) => {
-                                return (
-                                    <ProductCard
-                                        key={index}
-                                        slug={item.slug}
-                                        category={item.product_category.slug}
-                                        imgSrc={item.images[0].url}
-                                        productName={item.name}
-                                        price={item.sellingPrice}
-                                        discount={item.discount ? item.discount : null}
-                                        isRecommended={item.isRecommended}
-                                    />
-                                )
-                            })
-                            .splice(0, 6)}
+                        {similarProducts.map((item, index) => {
+                            return (
+                                <ProductCard
+                                    key={index}
+                                    slug={item.slug}
+                                    category={item.product_category.slug}
+                                    imgSrc={item.images[0].url}
+                                    productName={item.name}
+                                    price={item.sellingPrice}
+                                    discount={item.discount ? item.discount : null}
+                                    isRecommended={item.isRecommended}
+                                />
+                            )
+                        })}
                     </div>
                 </div>
             </div>
@@ -561,7 +559,7 @@ export const getServerSideProps = async ({ params }) => {
         }
     }
 
-    const resSimilarProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
+    const resSimilarProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.product_category.id}&_limit=6`)
     const similarProducts = await resSimilarProducts.data
 
     const resReviews = await axios.get(`${process.env.NEXT_URL}/api/reviews/${data.id}`)
@@ -570,7 +568,7 @@ export const getServerSideProps = async ({ params }) => {
     return {
         props: {
             product: data,
-            similarProducts,
+            similarProducts: similarProducts,
             baseLink,
             reviews,
         },
