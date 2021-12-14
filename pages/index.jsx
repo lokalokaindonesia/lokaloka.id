@@ -12,6 +12,7 @@ import { setOrder } from '@/redux/orderSlice'
 import { Fragment } from 'react'
 import Category from '@/components/layout/Category'
 import Carousel from '@/components/layout/Carousel'
+import CarouselMobile from '@/components/layout/CarouselMobile'
 
 const Home = ({ products, promo, recommended }) => {
     const [session, loading] = useSession()
@@ -35,6 +36,7 @@ const Home = ({ products, promo, recommended }) => {
                 {/* Hero */}
                 {/* <Hero /> */}
                 <Carousel />
+                <CarouselMobile />
 
                 <Category />
                 {/* End Category */}
