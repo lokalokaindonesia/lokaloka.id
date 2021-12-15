@@ -17,11 +17,12 @@ const index = ({ transaction }) => {
     const [paid, setPaid] = useState(false)
 
     const getTransactionStatus = async () => {
-        const { data } = await axios.get(`/api/transactions/check/${transaction.id}`)
+        const { data } = await axios.get(`${process.env.NEXT_URL}/api/transactions/check/${transaction.id}`)
 
         if (
             data.paymentStatus == 'SETTLED' ||
             data.paymentStatus == 'PAID' ||
+            data.paymentStatus == 'PROCESSED' ||
             data.paymentStatus == 'COMPLETED' ||
             data.paymentStatus == 'SUCCESS' ||
             data.paymentStatus == 'SUCEEDED'
