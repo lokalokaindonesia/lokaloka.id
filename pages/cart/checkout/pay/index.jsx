@@ -21,6 +21,7 @@ const index = ({ transaction }) => {
 
         if (
             data.paymentStatus == 'SETTLED' ||
+            data.paymentStatus == 'SETTLEMENT' ||
             data.paymentStatus == 'PAID' ||
             data.paymentStatus == 'PROCESSED' ||
             data.paymentStatus == 'COMPLETED' ||
