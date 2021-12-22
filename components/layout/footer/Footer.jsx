@@ -42,11 +42,6 @@ const Footer = () => {
                                 Tentang
                             </Link>
                         </li>
-                        <li className='text-slate-600 hover:text-slate-700 underline'>
-                            <Link className='underline lg:no-underline cursor-pointer' href='#'>
-                                Blog
-                            </Link>
-                        </li>
                     </ul>
 
                     {/* 3 */}
@@ -74,7 +69,7 @@ const Footer = () => {
                         <li className='font-bold md:mb-2'>Bantuan dan Panduan</li>
                         <li className='text-slate-600 hover:text-slate-700 underline'>
                             <Link className='underline lg:no-underline cursor-pointer' href='/help/privacy-and-policy'>
-                                Kebijakan Pribadi
+                                Kebijakan
                             </Link>
                         </li>
                         <li className='text-slate-600 hover:text-slate-700 underline'>

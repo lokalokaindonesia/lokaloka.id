@@ -423,7 +423,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                 )}
                             </div>
                             <div className='flex flex-col'>
-                                <div className='2xl:text-lg md:text-base text-sm font-semibold tracking-wide py-2 text-slate-600'>Description</div>
+                                <div className='2xl:text-lg md:text-base text-sm font-semibold tracking-wide py-2 text-slate-600'>Deskripsi</div>
                                 <div className='2xl:text-base md:text-sm text-xs font-medium text-justify md:leading-relaxed prose'>{product.description}</div>
                             </div>
                         </div>

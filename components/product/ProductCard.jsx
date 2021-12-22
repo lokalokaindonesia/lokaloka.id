@@ -24,27 +24,29 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                     />
                 </div>
                 <div className='flex flex-col space-y-1 p-2'>
-                    <div className={isRecommended ? 'px-1 bg-green-100 text-xs text-green-500 w-max rounded-sm' : 'hidden'}>Rekomendasi</div>
+                    <div className={isRecommended ? 'px-1 py-0.5 bg-green-500 text-xs text-green-100 w-max rounded-sm uppercase font-bold' : 'hidden'}>Rekomendasi</div>
                     <span className='line-clamp-2 text-sm font-normal text-left leading-snug'>{productName}</span>
                     <div className='flex flex-col items-start space-y-1 leading-snug pb-1'>
-                        <NumberFormat value={isDiscount ? sellingPrice : price} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-sm text-orange-500' />
-                        {isDiscount && (
-                            <div className='flex space-x-4 items-center'>
-                                <NumberFormat
-                                    value={price}
-                                    displayType={'text'}
-                                    thousandSeparator={true}
-                                    prefix={'Rp. '}
-                                    className='text-xs font-normal text-slate-500 line-through'
-                                />
+                        <div className='flex space-x-4 items-center'>
+                            <NumberFormat
+                                value={isDiscount ? sellingPrice : price}
+                                displayType={'text'}
+                                thousandSeparator={true}
+                                prefix={'Rp. '}
+                                className='text-sm text-orange-500'
+                            />
+                            {isDiscount && (
                                 <NumberFormat
                                     value={discount}
                                     displayType={'text'}
                                     thousandSeparator={true}
                                     suffix={'%'}
-                                    className='text-xs font-normal px-1 rounded text-white bg-red-500'
+                                    className='text-xs font-normal px-1 rounded-sm text-white bg-red-500'
                                 />
-                            </div>
+                            )}
+                        </div>
+                        {isDiscount && (
+                            <NumberFormat value={price} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-xs font-normal text-slate-500 line-through' />
                         )}
                     </div>
                 </div>
