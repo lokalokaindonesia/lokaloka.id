@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
-import { ChevronRightIcon, ExclamationIcon, SelectorIcon, TrashIcon } from '@heroicons/react/solid'
+import { ChevronRightIcon, ExclamationIcon, SelectorIcon, TrashIcon, CashIcon } from '@heroicons/react/solid'
 import { FaCheckCircle, FaWallet } from 'react-icons/fa'
 import NumberFormat from 'react-number-format'
 import { useEffect, useState } from 'react'
@@ -99,6 +99,12 @@ const paymentMethodCollection = [
         id: 'ALFAMART',
         label: 'ALFAMART',
     },
+    {
+        src: '/images/payment-gateway-small/alfamart.png',
+        type: 'cod',
+        id: 'COD',
+        label: 'COD',
+    },
 ]
 
 const index = ({ orderData, cityData, carts, provinceData, session }) => {
@@ -188,6 +194,9 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
     // Select Area
     const selectArea = (value) => {
+        if (subTotal >= 200000) {
+            return setShippingCost(0)
+        }
         const data = areaCollection.find((area) => area.value == value)
         setArea(data.value)
         if (data.value == 'malang-batu') return setShippingCost(15000)
@@ -275,6 +284,10 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
     // count total
     const countTotal = () => {
+        if (subTotal >= 200000) {
+            const z = Math.round(+subTotal + 2000 + +cardBoardBoxPrice)
+            return setTotal(z)
+        }
         const x = Math.round(+shippingCost + +subTotal + 2000 + +cardBoardBoxPrice)
         return setTotal(x)
     }
@@ -300,6 +313,48 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     // pay Handle
     const pay = async () => {
         setPayLoading(true)
+        if (choosenPaymentMethod == 'COD') {
+            dispatch(setPaymentMethod('COD'))
+
+            const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
+
+            const getExternalID = await axios.get(`/api/generatePaymentID`)
+            const externalID = getExternalID.data
+
+            const transactionData = {
+                ...orderData[0],
+                shouldPayAmount: total,
+                shippingLocation: toShipping,
+                code: externalID,
+                phone,
+                notes: note,
+                shippingCost,
+                packagingFee: cardBoardBoxPrice,
+                discount: couponPromo,
+                paymentStatus: 'PAID',
+                paymentMethod: choosenPaymentMethod,
+            }
+
+            const createTransaction = await axios.post(`/api/transactions`, transactionData)
+            const transactionResponse = await createTransaction.data
+
+            dispatch(setTransaction(transactionData))
+
+            await carts.forEach(async (c) => {
+                await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/carts/${c.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${session.jwt}`,
+                    },
+                })
+            })
+
+            setPayLoading(false)
+
+            alert('Pesanan sedang diproses. \nJangan lupa bayar pesanan kepada kurir ya 🙂')
+
+            return await router.push('/')
+        }
+
         if (choosenPaymentMethod == 'BNI' || choosenPaymentMethod == 'BRI' || choosenPaymentMethod == 'MANDIRI' || choosenPaymentMethod == 'PERMATA') {
             const createInvoice = await axios.post(`/api/payment/invoice`, {
                 amount: total,
@@ -601,7 +656,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             Konfirmasi pesanan
                                         </h3>
                                         <div className='mt-2 flex flex-col space-y-2'>
-                                            <p className='text-xs md:text-sm text-gray-500'>Pesanan yang kamu inginkan sudah sesuai?</p>
+                                            <p className='text-xs md:text-sm text-gray-500'>Apakah pesananmu sudah sesuai?</p>
                                             <br />
                                             <div className='font-medium tracking-wide text-xs md:text-sm text-slate-500'>Produk</div>
                                             {orderData[0].products.map((product, index) => {
@@ -638,7 +693,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             <div className='flex justify-between space-x-2 md:space-x-4 font-medium'>
                                                 <span className='truncate font-bold w-1/2'>Biaya Pengiriman</span>
                                                 <NumberFormat
-                                                    className='font-bold text-xs md:text-base'
+                                                    className={`font-bold text-xs md:text-base ${subTotal >= 200000 && 'line-through text-red-400'}`}
                                                     value={shippingCost}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
@@ -709,7 +764,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             </div>
                                             <div>
                                                 <div className='font-medium tracking-wide text-sm text-slate-500'>Metode Pembayaran</div>
-                                                <div className='font-medium'>{`${choosenPaymentMethod.replace('ID_', '')} ${ovoNumber && `(${ovoNumber})`}`}</div>
+                                                <div className='font-medium'>{`${choosenPaymentMethod.replace('ID_', '').toUpperCase()} ${ovoNumber && `(${ovoNumber})`}`}</div>
                                             </div>
                                             {note != '' && (
                                                 <div>
@@ -1163,6 +1218,31 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                     })}
                                             </div>
                                         </div>
+                                        <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
+                                            <h3 className='text-sm md:text-base font-normal'>COD</h3>
+                                            <div className='flex space-x-2 md:space-x-4 items-center'>
+                                                {paymentMethodCollection
+                                                    .filter((pm) => pm.type == 'cod')
+                                                    .map((paymentMethod, index) => {
+                                                        return (
+                                                            <button
+                                                                key={index}
+                                                                onClick={() => {
+                                                                    selectPaymentMethod(paymentMethod.id)
+                                                                }}
+                                                                type='button'
+                                                                className={
+                                                                    choosenPaymentMethod == paymentMethod.id
+                                                                        ? 'rounded-md flex justify-center items-center ring-2 md:ring-4 ring-orange-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                        : 'rounded-md flex justify-center items-center border md:border-2 border-slate-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                }
+                                                            >
+                                                                <CashIcon className='w-7 h-7' />
+                                                            </button>
+                                                        )
+                                                    })}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1228,9 +1308,15 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                 </div>
                                 <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
                                     <div className='flex space-x-2 items-baseline'>
-                                        <span>Pengiriman</span>
+                                        <span>Biaya Pengiriman</span>
                                     </div>
-                                    <NumberFormat value={shippingCost} displayType={'text'} className='text-slate-500' thousandSeparator={true} prefix={'Rp. '} />
+                                    <NumberFormat
+                                        value={shippingCost}
+                                        displayType={'text'}
+                                        className={`text-slate-500 ${subTotal >= 200000 && 'line-through text-red-400'}`}
+                                        thousandSeparator={true}
+                                        prefix={'Rp. '}
+                                    />
                                 </div>
                                 <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
                                     <div className='flex space-x-2 items-baseline'>
