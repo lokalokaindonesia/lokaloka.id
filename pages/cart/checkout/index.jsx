@@ -130,20 +130,21 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     const [payLoading, setPayLoading] = useState(false)
     const [plasticWrap, setPlasticWrap] = useState(2000)
     const [cardBoardBoxPrice, setCardBoardBoxPrice] = useState(0)
+    const [showCouponMessage, setShowCouponMessage] = useState('')
 
     useEffect(() => {
         selectArea, selectPaymentMethod, countTotal(), countCouponPromo(), countSubTotal()
         return () => {}
     }, [area, choosenPaymentMethod, shippingCost, total, shippingEtd, cardBoardBoxPrice, coupon, subTotal, couponPromo])
 
-    // * Handle Coupon Input
+    // Handle Coupon Input
     const handleCouponInput = (e) => {
         e.preventDefault()
         return setCouponInput(e.target.value)
     }
-    // * END Handle Coupon Input
+    // END Handle Coupon Input
 
-    //  * GET Coupons
+    //  GET Coupons
     const getCoupon = async (e) => {
         e.preventDefault()
         if (!couponInput) {
@@ -156,24 +157,33 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
         })
         const couponData = await data.find((c) => c.code === couponInput)
         if (!couponData) {
-            return alert('Coupon not found!')
+            return alert('Kupon tidak terdaftar!')
         }
         return setCoupon(couponData)
     }
-    // * END GET Coupon
+    //  END GET Coupon
 
-    // * DELETE COUPON
+    //  DELETE COUPON
     const deleteCoupon = async () => {
         return setCoupon('')
     }
-    // * END DELETE COUPON
+    // UPDATE COUPON END DELETE COUPON
 
     const countCouponPromo = async () => {
-        if (coupon) {
-            setCouponPromo((subTotal * coupon.discount) / 100)
+        if ((coupon.code == 'KANGNI' && order.totalPrice < 200000) || (coupon.code == 'PROMOBARU' && order.totalPrice < 200000)) {
+            setCouponPromo(Math.round((order.totalPrice * coupon.discount) / 100))
             return
         }
-        return 0
+        if ((coupon.code == 'KANGNI' && order.totalPrice > 200000) || (coupon.code == 'PROMOBARU' && order.totalPrice > 200000)) {
+            setShowCouponMessage('Kupon tidak berlaku untuk pembelian diatas Rp. 200.000')
+            setCoupon('')
+            return setCouponPromo(0)
+        }
+        if (coupon.code == 'LOKALOKA') {
+            setCouponPromo(Math.round((order.totalPrice * coupon.discount) / 100))
+            return
+        }
+        return setCouponPromo(0)
     }
 
     // Select Area
@@ -256,18 +266,17 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
     // count subtotal
     const countSubTotal = () => {
-        const x = +shippingCost + +order.totalPrice + 2000 + +cardBoardBoxPrice
+        const x = Math.round(+order.totalPrice - (+order.totalPrice * coupon.discount) / 100)
+        if (!coupon) {
+            return setSubTotal(+order.totalPrice)
+        }
         return setSubTotal(x)
     }
 
     // count total
     const countTotal = () => {
-        const x = +shippingCost + +order.totalPrice + 2000 + +cardBoardBoxPrice
-        if (!coupon) {
-            return setTotal(x)
-        }
-        const z = (x * coupon.discount) / 100
-        return setTotal(x - z)
+        const x = Math.round(+shippingCost + +subTotal + 2000 + +cardBoardBoxPrice)
+        return setTotal(x)
     }
 
     // Handle Modal
@@ -620,7 +629,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 <span className='truncate font-bold w-1/2'>Sub Total</span>
                                                 <NumberFormat
                                                     className='font-bold text-xs md:text-base'
-                                                    value={orderData[0].subTotal}
+                                                    value={subTotal}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
                                                     prefix={'Rp. '}
@@ -1161,38 +1170,11 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                         <div className='w-full lg:w-3/12'>
                             <div className='sticky top-28 p-4 bg-white border drop-shadow-sm border-slate-200 h-auto rounded-md flex flex-col space-y-4'>
                                 {/* Summary */}
-                                <div className='flex flex-col space-y-2'>
-                                    <div className='text-base md:text-xl font-bold '>Rincian</div>
-                                    <div className='flex flex-col space-y-xs text-sm md:text-base'>
-                                        <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
-                                            <span>Total ({order.totalQuantity})</span>
-                                            <NumberFormat value={order.totalPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
-                                        </div>
-                                        <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
-                                            <div className='flex space-x-2 items-baseline'>
-                                                <span>Pengiriman</span>
-                                            </div>
-                                            <NumberFormat value={shippingCost} displayType={'text'} className='text-slate-500' thousandSeparator={true} prefix={'Rp. '} />
-                                        </div>
-                                        <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
-                                            <div className='flex space-x-2 items-baseline'>
-                                                <span>Biaya Penanganan</span>
-                                            </div>
-                                            <NumberFormat value={plasticWrap} displayType={'text'} className='text-slate-500' thousandSeparator={true} prefix={'Rp. '} />
-                                        </div>
-                                        <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
-                                            <div className='flex space-x-2 items-baseline'>
-                                                <span>Packing Kardus</span>
-                                            </div>
-                                            <NumberFormat value={cardBoardBoxPrice} displayType={'text'} className='text-slate-500' thousandSeparator={true} prefix={'Rp. '} />
-                                        </div>
-                                    </div>
+                                <div className='text-base md:text-xl font-bold '>Rincian</div>
+                                <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
+                                    <span>Total ({order.totalQuantity})</span>
+                                    <NumberFormat value={order.totalPrice} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                 </div>
-                                <div className='flex justify-between items-center'>
-                                    <div className='text-base font-bold '>Sub Total</div>
-                                    <NumberFormat value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-base font-bold text-orange-500' />
-                                </div>
-                                <hr />
                                 <form className='flex items-center' onSubmit={getCoupon} method='get'>
                                     <input
                                         className={
@@ -1205,6 +1187,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         onChange={handleCouponInput}
                                         type='text'
                                     />
+
                                     <button
                                         type='submit'
                                         className={
@@ -1216,7 +1199,6 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                         Terapkan
                                     </button>
                                 </form>
-                                <hr />
                                 {coupon && (
                                     <div className='text-sm md:text-base text-slate-500 font-semibold flex justify-between items-center'>
                                         <div className='flex space-x-2 items-center'>
@@ -1225,9 +1207,46 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 <TrashIcon className='text-red-500 w-4 h-4' />
                                             </button>
                                         </div>
-                                        <NumberFormat value={couponPromo} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
+                                        <NumberFormat
+                                            value={Math.round((order.totalPrice * coupon.discount) / 100)}
+                                            displayType={'text'}
+                                            className='text-red-500'
+                                            thousandSeparator={true}
+                                            prefix={'-Rp. '}
+                                        />
                                     </div>
                                 )}
+                                {showCouponMessage && (
+                                    <>
+                                        <span className='text-sm text-red-500'>{showCouponMessage}</span>
+                                    </>
+                                )}
+                                <hr />
+                                <div className='flex justify-between items-center'>
+                                    <div className='text-base font-bold '>Sub Total</div>
+                                    <NumberFormat value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} className='text-base font-bold text-orange-500' />
+                                </div>
+                                <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
+                                    <div className='flex space-x-2 items-baseline'>
+                                        <span>Pengiriman</span>
+                                    </div>
+                                    <NumberFormat value={shippingCost} displayType={'text'} className='text-slate-500' thousandSeparator={true} prefix={'Rp. '} />
+                                </div>
+                                <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
+                                    <div className='flex space-x-2 items-baseline'>
+                                        <span>Biaya Penanganan</span>
+                                    </div>
+                                    <NumberFormat value={plasticWrap} displayType={'text'} className='text-slate-500' thousandSeparator={true} prefix={'Rp. '} />
+                                </div>
+                                <div className='text-xs 2xl:text-base text-slate-500 font-semibold flex justify-between items-center'>
+                                    <div className='flex space-x-2 items-baseline'>
+                                        <span>Packing Kardus</span>
+                                    </div>
+                                    <NumberFormat value={cardBoardBoxPrice} displayType={'text'} className='text-slate-500' thousandSeparator={true} prefix={'Rp. '} />
+                                </div>
+
+                                <hr />
+
                                 {/* Total */}
                                 <div className='flex justify-between items-center'>
                                     <div className='text-base font-bold '>Total</div>
