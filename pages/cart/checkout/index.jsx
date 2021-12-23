@@ -840,7 +840,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             type='button'
                                                             key={n.value}
                                                             onClick={() => {
-                                                                selectArea(n.value)
+                                                                console.log(n.value)
                                                             }}
                                                             className={
                                                                 area == n.value
