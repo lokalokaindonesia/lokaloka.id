@@ -194,12 +194,14 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
     // Select Area
     const selectArea = (value) => {
-        if (subTotal >= 200000) {
-            return setShippingCost(0)
-        }
         const data = areaCollection.find((area) => area.value == value)
         setArea(data.value)
-        if (data.value == 'malang-batu') return setShippingCost(15000)
+        if (data.value == 'malang-batu') {
+            if (subTotal >= 200000) {
+                return setShippingCost(0)
+            }
+            return setShippingCost(15000)
+        }
         if (data.value == 'anotherCity') {
             return setShippingCost(0)
         }
@@ -840,7 +842,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                             type='button'
                                                             key={n.value}
                                                             onClick={() => {
-                                                                console.log(n.value)
+                                                                selectArea(n.value)
                                                             }}
                                                             className={
                                                                 area == n.value
