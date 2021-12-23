@@ -176,16 +176,12 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     // UPDATE COUPON END DELETE COUPON
 
     const countCouponPromo = async () => {
-        if ((coupon.code == 'KANGNI' && order.totalPrice < 200000) || (coupon.code == 'PROMOBARU' && order.totalPrice < 200000)) {
-            setCouponPromo(Math.round((order.totalPrice * coupon.discount) / 100))
-            return
-        }
-        if ((coupon.code == 'KANGNI' && order.totalPrice > 200000) || (coupon.code == 'PROMOBARU' && order.totalPrice > 200000)) {
+        if (coupon && order.totalPrice >= 200000) {
             setShowCouponMessage('Kupon tidak berlaku untuk pembelian diatas Rp. 200.000')
             setCoupon('')
             return setCouponPromo(0)
         }
-        if (coupon.code == 'LOKALOKA') {
+        if (coupon && order.totalPrice < 200000) {
             setCouponPromo(Math.round((order.totalPrice * coupon.discount) / 100))
             return
         }
