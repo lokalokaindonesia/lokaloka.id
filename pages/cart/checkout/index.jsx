@@ -286,7 +286,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
     // count total
     const countTotal = () => {
-        if (subTotal >= 200000) {
+        if (subTotal >= 200000 && area == 'malang-batu') {
             const z = Math.round(+subTotal + 2000 + +cardBoardBoxPrice)
             return setTotal(z)
         }
@@ -298,16 +298,16 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     const openModal = () => {
         if (area != 'anotherCity') {
             if (address == '' || location == '') {
-                return alert('Fill all inputs form')
+                return alert('Lengkapi form untuk melanjutkan')
             }
         }
         if (area == 'anotherCity') {
             if (address == '' || postalCode == '') {
-                return alert('Fill all inputs form')
+                return alert('Lengkapi form untuk melanjutkan')
             }
         }
         if (choosenPaymentMethod == undefined) {
-            return alert('select payment method!')
+            return alert('Pilih Metode Pembayaran')
         }
         return setOpenModalConfirmation(!openModalConfirmation)
     }
@@ -695,7 +695,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                             <div className='flex justify-between space-x-2 md:space-x-4 font-medium'>
                                                 <span className='truncate font-bold w-1/2'>Biaya Pengiriman</span>
                                                 <NumberFormat
-                                                    className={`font-bold text-xs md:text-base ${subTotal >= 200000 && 'line-through text-red-400'}`}
+                                                    className={`font-bold text-xs md:text-base ${subTotal >= 200000 && area == 'malang-batu' ? 'line-through text-red-400' : ''}`}
                                                     value={shippingCost}
                                                     displayType={'text'}
                                                     thousandSeparator={true}
@@ -1315,7 +1315,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                     <NumberFormat
                                         value={shippingCost}
                                         displayType={'text'}
-                                        className={`text-slate-500 ${subTotal >= 200000 && 'line-through text-red-400'}`}
+                                        className={`font-bold text-xs md:text-base ${subTotal >= 200000 && area == 'malang-batu' ? 'line-through text-red-400' : ''}`}
                                         thousandSeparator={true}
                                         prefix={'Rp. '}
                                     />
