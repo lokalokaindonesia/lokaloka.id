@@ -14,7 +14,7 @@ const FavoritesDropdown = ({ favorite }) => {
     return (
         <Menu as='div' className='relative inline-block text-left mt-1'>
             <div>
-                <Menu.Button className='inline-flex justify-center w-full rounded-md shadow-sm bg-transparent text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none'>
+                <Menu.Button className='inline-flex justify-center w-full rounded-md bg-transparent text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none'>
                     <HeartIcon className='block h-6 w-6 md:h-6 md:w-6 text-slate-500 cursor-pointer' />
                     {favorite.length > 0 && (
                         <span className='flex h-3 w-3 absolute top-0 right-0'>

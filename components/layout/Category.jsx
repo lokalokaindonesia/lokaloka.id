@@ -3,58 +3,34 @@ import Link from 'next/link'
 import food from '../../public/images/category/food.jpg'
 import fashion from '../../public/images/category/fashion.jpg'
 import craft from '../../public/images/category/craft.jpg'
+import FancySectionTitle from '../ui/FancySectionTitle'
 
 const Category = () => {
     return (
-        <div>
+        <div className='container mx-auto px-4 md:px-12 lg:px-16 flex flex-col space-y-4'>
             {/* Category */}
-            <div className='container mx-auto flex md:hidden space-x-4 md:space-x-8 px-4 2xl:px-0 rounded-md justify-between items-center'>
+            <FancySectionTitle title='Kategori' />
+            <div className='drop-shadow grid grid-cols-3 gap-2 md:gap-4 lg:gap-6 xl:gap-8 rounded-md'>
                 <Link href='/makanan-dan-minuman'>
-                    <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
-                        <Image src={food} alt='kategori makanan dan minuman' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
-                        <span className='absolute md:text-xl lg:text-3xl md:pb-5 lg:pb-8 bottom-0 text-xs bg-gradient-to-t from-slate-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
+                    <div className='cursor-pointer grid grid-cols-2 w-auto h-full rounded-md bg-white'>
+                        <Image src={food} alt='kategori makanan dan minuman' priority layout='responsive' objectFit='cover' className='rounded-l-md' width={4} height={2} />
+                        <span className='text-xs md:text-xl lg:text-2xl border border-slate-100 font-medium bottom-0 w-full h-full flex items-center justify-start p-2 md:p-4 ld:p-6 text-slate-800 rounded-r-md'>
                             Makanan & Minuman
                         </span>
                     </div>
                 </Link>
                 <Link href='/kerajinan'>
-                    <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
-                        <Image src={craft} alt='kategori kerajinan' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
-                        <span className='absolute md:text-xl lg:text-3xl md:pb-5 lg:pb-8 bottom-0 text-xs bg-gradient-to-t from-slate-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
+                    <div className='cursor-pointer grid grid-cols-2 w-auto h-full rounded-md bg-white'>
+                        <Image src={craft} alt='kategori makanan dan minuman' priority layout='responsive' objectFit='cover' className='rounded-l-md' width={4} height={2} />
+                        <span className='text-xs md:text-xl lg:text-2xl border border-slate-100 font-medium bottom-0 w-full h-full flex items-center justify-start p-2 md:p-4 ld:p-6 text-slate-800 rounded-r-md'>
                             Kerajinan
                         </span>
                     </div>
                 </Link>
                 <Link href='/fashion'>
-                    <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
-                        <Image src={fashion} alt='kategori fashion' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={3} />
-                        <span className='absolute md:text-xl lg:text-3xl md:pb-5 lg:pb-8 bottom-0 text-xs bg-gradient-to-t from-slate-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
-                            Fashion
-                        </span>
-                    </div>
-                </Link>
-            </div>
-            <div className='container mx-auto mt-8 hidden md:flex space-x-4 md:space-x-8 px-4 2xl:px-0 rounded-md justify-between items-center'>
-                <Link href='/makanan-dan-minuman'>
-                    <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
-                        <Image src={food} alt='kategori makanan dan minuman' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={1.5} />
-                        <span className='absolute md:text-xl lg:text-3xl md:pb-5 lg:pb-8 bottom-0 text-xs bg-gradient-to-t from-slate-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
-                            Makanan & Minuman
-                        </span>
-                    </div>
-                </Link>
-                <Link href='/kerajinan'>
-                    <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
-                        <Image src={craft} alt='kategori kerajinan' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={1.5} />
-                        <span className='absolute md:text-xl lg:text-3xl md:pb-5 lg:pb-8 bottom-0 text-xs bg-gradient-to-t from-slate-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
-                            Kerajinan
-                        </span>
-                    </div>
-                </Link>
-                <Link href='/fashion'>
-                    <div className='cursor-pointer transition duration-300 ease-in-out hover:scale-105 w-1/3 bg-orange-400 h-auto rounded-md relative'>
-                        <Image src={fashion} alt='kategori fashion' priority layout='responsive' objectFit='cover' className='rounded-md' width={4} height={1.5} />
-                        <span className='absolute md:text-xl lg:text-3xl md:pb-5 lg:pb-8 bottom-0 text-xs bg-gradient-to-t from-slate-700 to-transparent w-full h-full flex justify-center items-end p-2 text-white rounded-md'>
+                    <div className='cursor-pointer grid grid-cols-2 w-auto h-full rounded-md bg-white'>
+                        <Image src={fashion} alt='kategori makanan dan minuman' priority layout='responsive' objectFit='cover' className='rounded-l-md' width={4} height={2} />
+                        <span className='text-xs md:text-xl lg:text-2xl border border-slate-100 font-medium bottom-0 w-full h-full flex items-center justify-start p-2 md:p-4 ld:p-6 text-slate-800 rounded-r-md'>
                             Fashion
                         </span>
                     </div>

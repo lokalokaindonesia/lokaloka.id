@@ -3,7 +3,7 @@ import Layout from '@/components/layout/Layout'
 const index = () => {
     return (
         <Layout title='Syarat dan Ketentuan | Lokaloka.id'>
-            <div className='container mx-auto px-4 md:px-0 flex justify-start space-x-4 my-4 md:my-5 lg:my-6'>
+            <div className='container mx-auto px-4 md:px-12 lg:px-16 flex justify-start space-x-4 my-4 md:my-5 lg:my-6'>
                 <div className='flex flex-col space-y-4'>
                     <h1 className='text-2xl font-bold'>Syarat dan Ketentuan Lokaloka</h1>
                     <hr />

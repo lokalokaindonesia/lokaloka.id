@@ -3,7 +3,7 @@ import Layout from '@/components/layout/Layout'
 const index = () => {
     return (
         <Layout title='Kebijakan Privasi | Lokaloka'>
-            <div className='container mx-auto px-4 md:px-0 flex justify-start space-x-4 my-4 md:mt-5 lg:my-6'>
+            <div className='container mx-auto px-4 md:px-12 lg:px-16 flex justify-start space-x-4 my-4 md:mt-5 lg:my-6'>
                 <div className='flex flex-col space-y-4'>
                     <h1 className='text-2xl font-bold'>Kebijakan Pribadi</h1>
                     <hr />

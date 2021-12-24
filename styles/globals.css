@@ -38,3 +38,7 @@ hr {
 ::-webkit-scrollbar-thumb:hover {
     background: #7f8c8d;
 }
+
+details summary::-webkit-details-marker {
+    display: none;
+}

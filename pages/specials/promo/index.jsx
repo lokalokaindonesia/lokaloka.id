@@ -8,17 +8,17 @@ import Layout from '@/components/layout/Layout'
 const index = ({ promos }) => {
     return (
         <Layout title='Promo Spesial'>
-            <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 2xl:my-6'>
+            <div className='container mx-auto px-4 md:px-12 lg:px-16 my-4 md:my-5 2xl:my-6'>
                 <div className='w-full hidden md:flex space-x-2 items-center my-3'>
-                    <div className='text-orange-700 hover:text-orange-800'>
+                    <div className='text-orange-500 hover:text-orange-600'>
                         <Link href='/'>Home</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />
                     <div className='text-slate-800 font-bold hover:text-slate-800'>
-                        <span>Promo 10.10</span>
+                        <span>Promo</span>
                     </div>
                 </div>
-                <h1 className='text-lg md:text-2xl font-semibold text-slate-800 xl:my-2 2xl:my-3'>Promo 10.10</h1>
+                <h1 className='text-lg md:text-2xl font-semibold text-slate-800 xl:my-2 2xl:my-3'>Promo</h1>
                 <div className='flex space-x-8'>
                     <div className='w-full'>
                         {promos.length == 0 && (

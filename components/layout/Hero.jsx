@@ -10,7 +10,7 @@ const Hero = () => {
 
     return (
         <div className='bg-blue-50 h-max py-32 flex items-center'>
-            <div className='flex justify-between items-center flex-row-reverse container mx-auto px-4 2xl:px-0'>
+            <div className='flex justify-between items-center flex-row-reverse container mx-auto px-4 md:px-12 lg:px-16'>
                 <div className='md:w-3/4 xl:w-2/4 filter drop-shadow-2xl'>
                     <Image src={heroImage} layout='responsive' objectFit='cover' alt="Let's go Shopping" priority />
                 </div>

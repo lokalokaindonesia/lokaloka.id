@@ -8,9 +8,9 @@ import Layout from '@/components/layout/Layout'
 const index = ({ recommendeds }) => {
     return (
         <Layout title='Produk Rekomendasi Lokaloka'>
-            <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 2xl:my-6'>
+            <div className='container mx-auto px-4 md:px-12 lg:px-16 my-4 md:my-5 2xl:my-6'>
                 <div className='w-full hidden md:flex space-x-2 items-center my-3'>
-                    <div className='text-orange-700 hover:text-orange-800'>
+                    <div className='text-orange-500 hover:text-orange-600'>
                         <Link href='/'>Home</Link>
                     </div>
                     <ChevronRightIcon className='w-5 h-5' />

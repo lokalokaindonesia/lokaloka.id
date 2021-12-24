@@ -183,7 +183,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
     return (
         <Layout title='Keranjang Belanja'>
             {cart.length == 0 ? (
-                <div className='container my-12 mx-auto px-4 2xl:px-0 flex flex-col space-y-4 space-x-0 lg:flex-row items-center lg:space-x-12 lg:space-y-0 2xl:space-x-24 justify-center'>
+                <div className='container my-12 mx-auto px-4 md:px-12 lg:px-16 flex flex-col space-y-4 space-x-0 lg:flex-row items-center lg:space-x-12 lg:space-y-0 2xl:space-x-24 justify-center'>
                     <lottie-player
                         src='https://assets2.lottiefiles.com/private_files/lf30_x2lzmtdl.json'
                         id='verified'
@@ -204,7 +204,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
             ) : (
                 <div className='container mx-auto px-4 2xl:px-0 my-4 md:my-5 2xl:my-6'>
                     <div className='w-full hidden md:flex space-x-2 items-center my-2 2xl:my-3'>
-                        <div className='text-orange-700 hover:text-orange-800'>
+                        <div className='text-orange-500 hover:text-orange-600'>
                             <Link href='/'>Home</Link>
                         </div>
                         <ChevronRightIcon className='w-5 h-5' />

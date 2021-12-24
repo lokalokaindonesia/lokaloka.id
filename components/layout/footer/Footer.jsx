@@ -9,7 +9,7 @@ const Footer = () => {
         <div className='text-slate-800'>
             <PaymentGatewayFooter />
             <div className='w-full h-auto bg-slate-200 py-8 md:py-12 '>
-                <div className='container mx-auto px-4 2xl:px-0 grid lg:grid-flow-col lg:grid-cols-4 md:grid-flow-col md:grid-cols-4 gap-4 grid-cols-2'>
+                <div className='container mx-auto px-4 md:px-12 lg:px-16 grid lg:grid-flow-col lg:grid-cols-4 md:grid-flow-col md:grid-cols-4 gap-4 grid-cols-2'>
                     {/* 1 */}
                     <div className='flex flex-col space-y-4'>
                         <img src='/images/logo2.png' className='block md:hidden lg:block' alt='' style={{ width: '45%' }} />

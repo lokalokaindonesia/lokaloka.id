@@ -8,7 +8,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
 
     return (
         <Link href={`/${category}/${slug}`}>
-            <button className='w-full flex flex-col space-y-1 justify-start ring-1 ring-slate-200 shadow shadow-slate-500/30 bg-white transition ease-in-out hover:scale-95 duration-300 rounded-md'>
+            <button className='w-full flex flex-col space-y-1 justify-start ring-1 ring-slate-200 drop-shadow-md bg-white transition ease-in-out hover:scale-95 duration-300 rounded-md'>
                 {/* Product Image */}
                 <div className='w-full'>
                     <Image
@@ -24,7 +24,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                     />
                 </div>
                 <div className='flex flex-col space-y-1 p-2'>
-                    <div className={isRecommended ? 'px-1 py-0.5 bg-green-500 text-xs text-green-100 w-max rounded-sm uppercase font-bold' : 'hidden'}>Rekomendasi</div>
+                    <div className={isRecommended ? 'text-[10px] text-green-500 w-max rounded-sm uppercase font-bold' : 'hidden'}>Rekomendasi</div>
                     <span className='line-clamp-2 text-sm font-normal text-left leading-snug'>{productName}</span>
                     <div className='flex flex-col items-start space-y-1 leading-snug pb-1'>
                         <div className='flex space-x-4 items-center'>
@@ -41,7 +41,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                                     displayType={'text'}
                                     thousandSeparator={true}
                                     suffix={'%'}
-                                    className='text-xs font-normal px-1 rounded-sm text-white bg-red-500'
+                                    className='text-[10px] font-normal px-1 py-0.5 rounded-sm text-white bg-red-500'
                                 />
                             )}
                         </div>

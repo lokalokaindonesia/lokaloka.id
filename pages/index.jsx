@@ -12,7 +12,6 @@ import { setOrder } from '@/redux/orderSlice'
 import { Fragment } from 'react'
 import Category from '@/components/layout/Category'
 import Carousel from '@/components/layout/Carousel'
-import CarouselMobile from '@/components/layout/CarouselMobile'
 import Script from 'next/script'
 
 const Home = ({ products, promo, recommended }) => {
@@ -37,15 +36,14 @@ const Home = ({ products, promo, recommended }) => {
                 {/* Hero */}
                 {/* <Hero /> */}
                 <Carousel />
-                <CarouselMobile />
 
                 <Category />
                 {/* End Category */}
                 {/* Product Section */}
                 {promo.length != 0 && <HighlightedSection sectionTitle='Promo' href='/specials/promo' data={promo} bgColor='bg-white' />}
                 {/* Promo Campaign */}
-                <div
-                    className='cursor-pointer my-4 md:mt-8 md:mb-4 px-4 2xl:px-0 container mx-auto'
+                {/* <div
+                    className='cursor-pointer drop-shadow-md my-4 md:mt-8 md:mb-4 px-4 md:px-12 lg:px-16 container mx-auto'
                     onClick={() => {
                         router.push('/specials/promo')
                     }}
@@ -61,11 +59,11 @@ const Home = ({ products, promo, recommended }) => {
                         quality={100}
                         height={250}
                     />
-                </div>
+                </div> */}
 
                 <HighlightedSection sectionTitle='Rekomendasi' href='/specials/recommended' data={recommended} />
 
-                <div className='my-4 md:mt-8 md:mb-4 px-4 2xl:px-0 container mx-auto'>
+                {/* <div className='my-4 md:mt-8 md:mb-4 px-4 md:px-12 lg:px-16 drop-shadow-lg container mx-auto'>
                     <a target='_blank' href='https://kalderaadventure.com'>
                         <Image
                             src={kaldera}
@@ -79,7 +77,7 @@ const Home = ({ products, promo, recommended }) => {
                             height={1500}
                         />
                     </a>
-                </div>
+                </div> */}
 
                 {/* Just For You */}
                 <JustForYou sectionTitle='Hanya Untukmu' href='#' data={products} />

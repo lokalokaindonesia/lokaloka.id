@@ -9,7 +9,7 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
     const router = useRouter()
     return (
         <div className={`${bgColor} relative`}>
-            <div className='w-full flex space-y-4 my-4 md:py-0 py-4 flex-col container mx-auto px-4 2xl:px-0'>
+            <div className='w-full flex space-y-4 my-4 md:py-0 py-4 flex-col container mx-auto px-4 md:px-12 lg:px-16'>
                 {/* Section Title */}
                 <div className='flex lg:hidden w-full justify-between items-center'>
                     <FancySectionTitle title={sectionTitle} />
