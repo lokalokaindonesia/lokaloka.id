@@ -26,9 +26,6 @@ const Cart = ({ cartProducts, session, productCategories }) => {
     const [discountTotal, setDiscountTotal] = useState(0)
     const [subTotal, setSubTotal] = useState(0)
     const [grandTotal, setGrandTotal] = useState(0)
-    const [couponPromo, setCouponPromo] = useState(0)
-    const [coupon, setCoupon] = useState(null)
-    const [couponInput, setCouponInput] = useState(null)
     const [totalWeight, setTotalWeight] = useState(0)
 
     const [checkoutLoading, setCheckoutLoading] = useState(false)
@@ -37,19 +34,10 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
     // * QTY Effect
     useEffect(() => {
-        countGrandTotal(), countSummaryTotal(), countDiscountTotal(), cart, countCouponPromo(), countSubTotal(), countWeight()
+        countGrandTotal(), countSummaryTotal(), countDiscountTotal(), cart, countSubTotal(), countWeight()
         return () => {}
-    }, [cart, summaryTotal, discountTotal, coupon, couponPromo, subTotal])
+    }, [cart, summaryTotal, discountTotal, , subTotal])
     // * END QTY Effect
-
-    // * PRICE
-    const countCouponPromo = async () => {
-        if (coupon) {
-            setCouponPromo((subTotal * coupon.discount) / 100)
-            return
-        }
-        return 0
-    }
 
     const countSummaryTotal = async () => {
         const sum = cart.reduce((currentSummary, product) => currentSummary + +product.quantity * +product.product.sellingPrice, 0)
@@ -71,10 +59,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
     }
 
     const countGrandTotal = async () => {
-        if (!coupon) {
-            return setGrandTotal(subTotal)
-        }
-        return setGrandTotal(subTotal - couponPromo)
+        return setGrandTotal(subTotal)
     }
     // * END PRICE
 
@@ -144,40 +129,12 @@ const Cart = ({ cartProducts, session, productCategories }) => {
     }
     //  * END Qty Func
 
-    // * Handle Coupon Input
-    const handleCouponInput = (e) => {
-        e.preventDefault()
-        return setCouponInput(e.target.value)
-    }
-    // * END Handle Coupon Input
-
-    //  * GET Coupons
-    const getCoupon = async (e) => {
-        e.preventDefault()
-        if (!couponInput) {
-            return alert('Fill the form')
-        }
-        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/coupons`, {
-            headers: {
-                Authorization: 'Bearer ' + session.jwt,
-            },
-        })
-        const couponData = await data.find((c) => c.code === couponInput)
-        if (!couponData) {
-            return alert('Coupon not found!')
-        }
-        return setCoupon(couponData)
-    }
-    // * END GET Coupon
-
-    // * DELETE COUPON
-    const deleteCoupon = async () => {
-        return setCoupon('')
-    }
-    // * END DELETE COUPON
-
     // * SET ORDER DATA AND CHECKOUT
     const checkout = async () => {
+        if (!session.user.name) {
+            alert('Lengkapi Profil kamu dulu')
+            return router.push('/profile/my-account')
+        }
         setCheckoutLoading(true)
         const productsOrigin = cart.map((p) => p._id)
         const totalQuantity = cart.reduce((a, b) => +a + +b.quantity, 0)
@@ -190,7 +147,6 @@ const Cart = ({ cartProducts, session, productCategories }) => {
             totalWeight,
             subTotal: subTotal,
             user: session.id,
-            coupon: coupon != null ? coupon._id : null,
         }
 
         const getOrder = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders?user_eq=${session.id}`, {
@@ -352,32 +308,6 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                             </div>
                             <div className='w-full lg:w-4/12 xl:w-3/12'>
                                 <div className='sticky top-28 p-3 md:p-4 bg-white border drop-shadow-sm border-slate-300 h-auto rounded-md flex flex-col space-y-3 md:space-y-4'>
-                                    {/* Coupon Form */}
-                                    {/* <form className='flex items-center' onSubmit={getCoupon} method='get'>
-                                        <input
-                                            className={
-                                                coupon
-                                                    ? 'px-2 py-2 text-sm md:text-base md:px-3 md:py-2 rounded-l rounded-r-none w-full border md:border-2 focus:rounded-r-none focus:border-green-500 focus:border md:focus:border-2 focus:ring-0 border-green-300 transition ease-in-out duration-300 font-bold text-slate-500'
-                                                    : 'px-2 py-2 text-sm md:text-base md:px-3 md:py-2 rounded-l rounded-r-none w-full border md:border-2 focus:rounded-r-none focus:border-slate-500 focus:border md:focus:border-2 focus:ring-0 border-slate-500 transition ease-in-out duration-300 font-bold '
-                                            }
-                                            placeholder='Kode Kupon'
-                                            disabled={coupon && 'disabled'}
-                                            onChange={handleCouponInput}
-                                            type='text'
-                                        />
-                                        <button
-                                            type='submit'
-                                            className={
-                                                coupon
-                                                    ? 'text-sm md:text-base rounded-r px-2 py-2 md:px-3 md:py-2 text-white font-bold border md:border-2 border-green-300 bg-green-300'
-                                                    : 'text-sm md:text-base rounded-r px-2 py-2 md:px-3 md:py-2 text-white font-bold border md:border-2 border-slate-500 bg-slate-500'
-                                            }
-                                        >
-                                            Terapkan
-                                        </button>
-                                    </form>
-                                    <hr className='border border-slate-200' /> */}
-                                    {/* Summary */}
                                     <div className='flex flex-col space-y-2'>
                                         <div className='text-base md:text-xl font-bold'>Rincian</div>
                                         <div className='flex flex-col space-y-1'>
@@ -397,17 +327,6 @@ const Cart = ({ cartProducts, session, productCategories }) => {
                                         <div className='text-slate-500 font-semibold flex justify-between items-center'>Sub Total</div>
                                         <NumberFormat className='text-slate-500 font-semibold' value={subTotal} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
                                     </div>
-                                    {coupon && (
-                                        <div className='text-sm md:text-base text-slate-500 font-semibold flex justify-between items-center'>
-                                            <div className='flex space-x-2 items-center'>
-                                                <span>Kupon {coupon.discount}%</span>
-                                                <button type='button' onClick={() => deleteCoupon()}>
-                                                    <TrashIcon className='text-red-500 w-4 h-4' />
-                                                </button>
-                                            </div>
-                                            <NumberFormat value={couponPromo} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
-                                        </div>
-                                    )}
                                     <div className='flex justify-between items-center'>
                                         <div className='text-base md:text-xl font-bold '>Total</div>
                                         <NumberFormat

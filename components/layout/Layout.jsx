@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Footer from '@/components/layout/footer/Footer'
 import Header from '@/components/layout/header/Header'
 import HeaderNotSignIn from '@/components/layout/header/HeaderNotSignIn'
-import Banner from '@/components/ui/Banner'
 import { useSession } from 'next-auth/client'
 import BottomMenuBar from '../bottomBar/BottomMenuBar'
 
@@ -14,7 +13,7 @@ const Layout = ({ title, children }) => {
         <div className='bg-white text-slate-800'>
             <Head>
                 <title>{title}</title>
-                <script src='//code.tidio.co/nntihri39cqwi4krn3esqrl2m11zgv3c.js' async></script>
+                {/* <script src='//code.tidio.co/nntihri39cqwi4krn3esqrl2m11zgv3c.js' async></script> */}
                 <meta name='description' content='Lokaloka Indonesia - Belanja oleh-oleh dengan mudah !!!' />
                 <script type='text/javascript' src={urlMidtransSnap} data-client-key={clientKey}></script>
             </Head>

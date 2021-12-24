@@ -12,6 +12,7 @@ import Layout from '@/components/layout/Layout'
 import Button from '@/components/ui/Button'
 import { setPaymentMethod } from '@/redux/paymentMethod'
 import { setTransaction } from '@/redux/transactionSlice'
+import { data } from 'autoprefixer'
 
 // Area Data
 const areaCollection = [
@@ -176,16 +177,15 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     // UPDATE COUPON END DELETE COUPON
 
     const countCouponPromo = async () => {
-        if (coupon && order.totalPrice >= 200000) {
-            setShowCouponMessage('Kupon tidak berlaku untuk pembelian diatas Rp. 200.000')
-            setCoupon('')
+        if (order.totalPrice < coupon.minSpend) {
+            setShowCouponMessage(`Minimal pembelanjaan adalah Rp. ${coupon.minSpend} untuk memakain diskon ini.`)
             return setCouponPromo(0)
         }
-        if (coupon && order.totalPrice < 200000) {
-            setCouponPromo(Math.round((order.totalPrice * coupon.discount) / 100))
-            return
+        let potongan = (order.totalPrice * coupon.discount) / 100
+        if (potongan >= coupon.maxDiscount) {
+            return setCouponPromo(Math.round(coupon.maxDiscount))
         }
-        return setCouponPromo(0)
+        return setCouponPromo(Math.round(potongan))
     }
 
     // Select Area
@@ -273,7 +273,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
 
     // count subtotal
     const countSubTotal = () => {
-        const x = Math.round(+order.totalPrice - (+order.totalPrice * coupon.discount) / 100)
+        const x = Math.round(+order.totalPrice - couponPromo)
         if (!coupon) {
             return setSubTotal(+order.totalPrice)
         }
@@ -1063,41 +1063,43 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                 <div className='p-2 md:p-4 border border-slate-200 bg-white rounded-md drop-shadow-sm'>
                                     <h2 className='text-base md:text-lg font-semibold mb-3'>Metode Pembayaran</h2>
                                     <div className='flex flex-col space-y-2 2xl:space-y-4 font-semibold text-slate-500'>
-                                        <div className='flex flex-col space-y-1 2xl:space-y-2'>
-                                            <h3 className='text-sm md:text-base font-normal'>Virtual Account</h3>
-                                            <div className='flex space-x-2 md:space-x-4 items-center'>
-                                                {paymentMethodCollection
-                                                    .filter((pm) => pm.type == 'va')
-                                                    .map((paymentMethod, index) => {
-                                                        return (
-                                                            <button
-                                                                key={index}
-                                                                onClick={() => {
-                                                                    selectPaymentMethod(paymentMethod.id)
-                                                                }}
-                                                                type='button'
-                                                                className={
-                                                                    choosenPaymentMethod == paymentMethod.id
-                                                                        ? 'rounded-md ring-2 md:ring-4 ring-orange-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                        : 'rounded-md border md:border-2 border-slate-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
-                                                                }
-                                                            >
-                                                                <Image
-                                                                    title={paymentMethod.label}
-                                                                    src={paymentMethod.src}
-                                                                    layout='responsive'
-                                                                    alt={paymentMethod.label}
-                                                                    priority
-                                                                    quality={100}
-                                                                    objectFit='scale-down'
-                                                                    width={8}
-                                                                    height={4}
-                                                                />
-                                                            </button>
-                                                        )
-                                                    })}
+                                        {order.totalPrice >= 200000 && (
+                                            <div className='flex flex-col space-y-1 2xl:space-y-2'>
+                                                <h3 className='text-sm md:text-base font-normal'>Virtual Account</h3>
+                                                <div className='flex space-x-2 md:space-x-4 items-center'>
+                                                    {paymentMethodCollection
+                                                        .filter((pm) => pm.type == 'va')
+                                                        .map((paymentMethod, index) => {
+                                                            return (
+                                                                <button
+                                                                    key={index}
+                                                                    onClick={() => {
+                                                                        selectPaymentMethod(paymentMethod.id)
+                                                                    }}
+                                                                    type='button'
+                                                                    className={
+                                                                        choosenPaymentMethod == paymentMethod.id
+                                                                            ? 'rounded-md ring-2 md:ring-4 ring-orange-500 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                            : 'rounded-md border md:border-2 border-slate-200 bg-white h-8 w-16 md:h-16 md:w-40 px-2 md:px-10 drop-shadow-sm transition duration-300 ease-in'
+                                                                    }
+                                                                >
+                                                                    <Image
+                                                                        title={paymentMethod.label}
+                                                                        src={paymentMethod.src}
+                                                                        layout='responsive'
+                                                                        alt={paymentMethod.label}
+                                                                        priority
+                                                                        quality={100}
+                                                                        objectFit='scale-down'
+                                                                        width={8}
+                                                                        height={4}
+                                                                    />
+                                                                </button>
+                                                            )
+                                                        })}
+                                                </div>
                                             </div>
-                                        </div>
+                                        )}
                                         <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
                                             <h3 className='text-sm md:text-base font-normal'>E-Wallet</h3>
                                             <div className='flex space-x-2 md:space-x-4 items-center'>
@@ -1172,7 +1174,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                     })}
                                             </div>
                                         </div>
-                                        <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
+                                        {/* <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
                                             <h3 className='text-sm md:text-base font-normal'>Retail Outlet</h3>
                                             <div className='flex space-x-2 md:space-x-4 items-center'>
                                                 {paymentMethodCollection
@@ -1215,7 +1217,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                         )
                                                     })}
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className='flex flex-col md:space-y-1 2xl:space-y-2'>
                                             <h3 className='text-sm md:text-base font-normal'>COD</h3>
                                             <div className='flex space-x-2 md:space-x-4 items-center'>
@@ -1285,13 +1287,7 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 <TrashIcon className='text-red-500 w-4 h-4' />
                                             </button>
                                         </div>
-                                        <NumberFormat
-                                            value={Math.round((order.totalPrice * coupon.discount) / 100)}
-                                            displayType={'text'}
-                                            className='text-red-500'
-                                            thousandSeparator={true}
-                                            prefix={'-Rp. '}
-                                        />
+                                        <NumberFormat value={couponPromo} displayType={'text'} className='text-red-500' thousandSeparator={true} prefix={'-Rp. '} />
                                     </div>
                                 )}
                                 {showCouponMessage && (
