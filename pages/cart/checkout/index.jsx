@@ -166,6 +166,9 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
         if (!couponData) {
             return alert('Kupon tidak terdaftar!')
         }
+        if (+order.totalPrice < +couponData.minSpend) {
+            return setShowCouponMessage(`Minimal pembelanjaan adalah Rp. ${couponData.minSpend} untuk memakain diskon ini.`)
+        }
         return setCoupon(couponData)
     }
     //  END GET Coupon
@@ -177,12 +180,8 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     // UPDATE COUPON END DELETE COUPON
 
     const countCouponPromo = async () => {
-        if (order.totalPrice < coupon.minSpend) {
-            setShowCouponMessage(`Minimal pembelanjaan adalah Rp. ${coupon.minSpend} untuk memakain diskon ini.`)
-            return setCouponPromo(0)
-        }
-        let potongan = (order.totalPrice * coupon.discount) / 100
-        if (potongan >= coupon.maxDiscount) {
+        let potongan = (+order.totalPrice * coupon.discount) / 100
+        if (+potongan >= +coupon.maxDiscount) {
             return setCouponPromo(Math.round(coupon.maxDiscount))
         }
         return setCouponPromo(Math.round(potongan))
