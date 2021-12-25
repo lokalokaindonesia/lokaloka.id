@@ -21,6 +21,7 @@ const Category = () => {
                             objectFit='cover'
                             className='rounded-t-md md:rounded-l-md'
                             width={4}
+                            quality={50}
                             height={2}
                         />
                         <span className='text-sm md:text-xl lg:text-2xl border border-slate-100 font-medium bottom-0 w-full h-auto flex items-center justify-start p-2 md:p-4 ld:p-6 text-slate-800 rounded-r-md'>
@@ -38,6 +39,7 @@ const Category = () => {
                             objectFit='cover'
                             className='rounded-t-md md:rounded-l-md'
                             width={4}
+                            quality={50}
                             height={2}
                         />
                         <span className='text-sm md:text-xl lg:text-2xl border border-slate-100 font-medium bottom-0 w-full h-auto flex items-center justify-start p-2 md:p-4 ld:p-6 text-slate-800 rounded-r-md'>
@@ -55,6 +57,7 @@ const Category = () => {
                             objectFit='cover'
                             className='rounded-t-md md:rounded-l-md'
                             width={4}
+                            quality={50}
                             height={2}
                         />
                         <span className='text-sm md:text-xl lg:text-2xl border border-slate-100 font-medium bottom-0 w-full h-auto flex items-center justify-start p-2 md:p-4 ld:p-6 text-slate-800 rounded-r-md'>

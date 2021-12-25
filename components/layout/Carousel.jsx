@@ -32,7 +32,7 @@ const Carousel = () => {
                     </SwiperSlide> */}
                     <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
-                            <Image src={christmastBannerWeb} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={2} />
+                            <Image src={christmastBannerWeb} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
                         </div>
                     </SwiperSlide>
                 </Swiper>
