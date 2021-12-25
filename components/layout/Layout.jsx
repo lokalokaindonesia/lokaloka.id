@@ -14,7 +14,7 @@ const Layout = ({ title, children }) => {
             <Head>
                 <title>{title}</title>
                 {/* <script src='//code.tidio.co/nntihri39cqwi4krn3esqrl2m11zgv3c.js' async></script> */}
-                <meta name='description' content='Lokaloka Indonesia - Belanja oleh-oleh dengan mudah !!!' />
+                <meta name='description' content='Lokaloka - Belanja oleh-oleh online' />
                 <script type='text/javascript' src={urlMidtransSnap} data-client-key={clientKey}></script>
             </Head>
             {/* Header - Navbar */}

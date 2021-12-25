@@ -32,7 +32,7 @@ const Home = ({ products, promo, recommended }) => {
 
     return (
         <Fragment>
-            <Layout title='Liburan seru bareng Lokaloka.id'>
+            <Layout title='Lokaloka - Belanja oleh-oleh online'>
                 {/* Hero */}
                 {/* <Hero /> */}
                 <Carousel />
