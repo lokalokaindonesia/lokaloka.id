@@ -108,7 +108,8 @@ const Home = ({ products, promo, recommended }) => {
     )
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async ({ req, res }) => {
+    res.setHeader('Cache-Control', 'public, s-maxage=31536000, stale-while-revalidate=59')
     const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
     const products = await getProducts.data.splice(0, 42)
 
