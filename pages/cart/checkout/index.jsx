@@ -180,11 +180,14 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
     // UPDATE COUPON END DELETE COUPON
 
     const countCouponPromo = async () => {
-        let potongan = (+order.totalPrice * coupon.discount) / 100
-        if (+potongan >= +coupon.maxDiscount) {
-            return setCouponPromo(Math.round(coupon.maxDiscount))
+        if (coupon) {
+            let potongan = (+order.totalPrice * coupon.discount) / 100
+            if (+potongan >= +coupon.maxDiscount) {
+                return setCouponPromo(Math.round(coupon.maxDiscount))
+            }
+            return setCouponPromo(Math.round(potongan))
         }
-        return setCouponPromo(Math.round(potongan))
+        return setCouponPromo(0)
     }
 
     // Select Area
