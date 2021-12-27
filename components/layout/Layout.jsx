@@ -16,18 +16,6 @@ const Layout = ({ title, children }) => {
                 <title>{title}</title>
                 {/* <script src='//code.tidio.co/nntihri39cqwi4krn3esqrl2m11zgv3c.js' async></script> */}
                 <meta name='description' content='Lokaloka - Belanja oleh-oleh online' />
-                <Script strategy='beforeInteractive' async src='https://www.googletagmanager.com/gtag/js?id=G-1PVD2RCM5H' />
-                <Script
-                    strategy='afterInteractive'
-                    dangerouslySetInnerHTML={{
-                        __html: `window.dataLayer = window.dataLayer || [];
-                                function gtag(){dataLayer.push(arguments);}
-                                gtag('js', new Date());
-
-                                gtag('config', 'G-1PVD2RCM5H');
-                                `,
-                    }}
-                />
                 <script type='text/javascript' src={urlMidtransSnap} data-client-key={clientKey}></script>
             </Head>
             {/* Header - Navbar */}
