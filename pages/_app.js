@@ -7,6 +7,7 @@ import { Router, useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Script from 'next/script'
 import Loading from '@/components/ui/Loading'
+import LoadingOverlay from 'react-loading-overlay';
 
 function MyApp({
   Component,
@@ -56,7 +57,13 @@ function MyApp({
                         });
                     `
         }</Script>
-      {loading ? <Loading /> : <Component {...pageProps} />}
+      {loading ?
+        (<LoadingOverlay
+          active={loading}
+          spinner
+          className='w-screen h-screen bg-slate-500/20'
+        >
+        </LoadingOverlay>) : <Component {...pageProps} />}
     </ReduxProvider>
   </Provider>
 }
