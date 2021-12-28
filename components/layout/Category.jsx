@@ -19,7 +19,7 @@ const Category = () => {
                             priority
                             layout='responsive'
                             objectFit='cover'
-                            className='rounded-t-md md:rounded-l-md'
+                            className='rounded-t-md md:rounded-l-md md:rounded-tr-none'
                             width={4}
                             quality={50}
                             height={2}
@@ -37,7 +37,7 @@ const Category = () => {
                             priority
                             layout='responsive'
                             objectFit='cover'
-                            className='rounded-t-md md:rounded-l-md'
+                            className='rounded-t-md md:rounded-l-md md:rounded-tr-none'
                             width={4}
                             quality={50}
                             height={2}
@@ -55,7 +55,7 @@ const Category = () => {
                             priority
                             layout='responsive'
                             objectFit='cover'
-                            className='rounded-t-md md:rounded-l-md'
+                            className='rounded-t-md md:rounded-l-md md:rounded-tr-none'
                             width={4}
                             quality={50}
                             height={2}

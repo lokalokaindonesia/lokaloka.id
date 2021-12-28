@@ -36,6 +36,9 @@ const options = {
     session: {
         jwt: true,
     },
+    jwt: {
+        signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
+    },
     callbacks: {
         jwt: async (token, user, account, profile, isNewUser) => {
             const isSignIn = user ? true : false;

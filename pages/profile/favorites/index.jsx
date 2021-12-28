@@ -13,11 +13,11 @@ const index = ({ favorites }) => {
                     <div className='text-orange-500 hover:text-orange-600'>
                         <Link href='/'>Home</Link>
                     </div>
-                    <ChevronRightIcon className='w-5 h-5' />
+                    <ChevronRightIcon className='w-5 h-5 text-slate-500' />
                     <div className='text-orange-500 hover:text-orange-600'>
                         <Link href='/profile'>Profil</Link>
                     </div>
-                    <ChevronRightIcon className='w-5 h-5' />
+                    <ChevronRightIcon className='w-5 h-5 text-slate-500' />
                     <div className='font-bold'>
                         <span>Favorit</span>
                     </div>

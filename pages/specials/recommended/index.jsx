@@ -13,7 +13,7 @@ const index = ({ recommendeds }) => {
                     <div className='text-orange-500 hover:text-orange-600'>
                         <Link href='/'>Home</Link>
                     </div>
-                    <ChevronRightIcon className='w-5 h-5' />
+                    <ChevronRightIcon className='w-5 h-5 text-slate-500' />
                     <div className='text-slate-800 font-bold hover:text-slate-800'>
                         <span>Rekomendasi</span>
                     </div>

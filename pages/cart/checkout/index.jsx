@@ -815,11 +815,11 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                     <div className='text-orange-500 hover:text-orange-600'>
                         <Link href='/'>Home</Link>
                     </div>
-                    <ChevronRightIcon className='w-5 h-5' />
+                    <ChevronRightIcon className='w-5 h-5 text-slate-500' />
                     <div className='text-orange-500 hover:text-orange-600'>
                         <Link href='/cart'>Keranjang</Link>
                     </div>
-                    <ChevronRightIcon className='w-5 h-5' />
+                    <ChevronRightIcon className='w-5 h-5 text-slate-500' />
                     <div className=''>Checkout</div>
                 </div>
                 <h1 className='text-lg md:text-2xl font-semibold my-2 2xl:my-3'>Pembayaran</h1>

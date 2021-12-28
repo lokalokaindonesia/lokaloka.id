@@ -1,17 +1,13 @@
 import Link from 'next/link'
 import { SearchIcon, ColorSwatchIcon, ShoppingCartIcon, HeartIcon } from '@heroicons/react/outline'
-import Image from 'next/image'
 import { useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
-import HeaderActiveLink from '@/components/layout/header/HeaderActiveLink'
 import ProfileDropdown from '@/components/navbar/ProfileDropdown'
 import FavoritesDropdown from '@/components/navbar/FavoritesDropdown'
 import { useEffect, useState, Fragment, useRef } from 'react'
 import axios from 'axios'
-import NumberFormat from 'react-number-format'
 import { useDispatch, useSelector } from 'react-redux'
 import { setFavorite } from '@/redux/favoriteSlice'
-import { Dialog, Transition } from '@headlessui/react'
 
 const Header = () => {
     const router = useRouter()
@@ -58,7 +54,7 @@ const Header = () => {
             <div className='hidden md:block md:w-2/12 text-2xl font-extrabold text-orange-500 tracking-wide'>
                 <Link href='/'>
                     <div className='cursor-pointer'>
-                        <img className='hidden md:block cursor-pointer ' src='/images/logo2.png' alt='' style={{ height: '32px' }} />
+                        <img className='hidden md:block cursor-pointer ' src='/logo.png' alt='' style={{ height: '32px' }} />
                         {/* <Image objectFit='contain' layout='responsive' width={100} height={40} src='/images/logo2.png' alt='' /> */}
                         {/* <h1 className='hidden md:block cursor-pointer logo lowercase text-4xl font-bold text-orange-500'>Lokaloka</h1> */}
                     </div>

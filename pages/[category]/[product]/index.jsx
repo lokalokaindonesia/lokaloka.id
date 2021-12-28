@@ -194,11 +194,11 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     <div className='text-orange-500 hover:text-orange-600'>
                         <Link href='/'>Home</Link>
                     </div>
-                    <ChevronRightIcon className='w-5 h-5' />
+                    <ChevronRightIcon className='w-5 h-5 text-slate-500' />
                     <div className='text-orange-500 hover:text-orange-600'>
                         <Link href={`/${product.product_category.slug}`}>{product.product_category.name}</Link>
                     </div>
-                    <ChevronRightIcon className='w-5 h-5' />
+                    <ChevronRightIcon className='w-5 h-5 text-slate-500' />
                     <div>
                         <div className='line-clamp-1'>{product.name}</div>
                     </div>
