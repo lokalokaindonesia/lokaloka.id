@@ -2,6 +2,8 @@ import { getSession, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Link from 'next/link'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import Image from 'next/image'
 import { ChevronRightIcon, ChevronLeftIcon, LinkIcon } from '@heroicons/react/solid'
 import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart, FaCheckCircle } from 'react-icons/fa'
@@ -326,10 +328,12 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                             </div>
                         </div>
                     </div>
-                    <div className='lg:hidden flex flex-col'>
-                        <p className='2xl:text-lg md:text-base font-semibold tracking-wide py-2 text-slate-600'>Deskripsi</p>
-                        <p className='2xl:text-base md:text-sm font-medium text-justify md:leading-relaxed prose'>{product.description}</p>
-                    </div>
+                    <details open={true} className='lg:hidden flex flex-col'>
+                        <summary className='appearance-none list-none cursor-pointer 2xl:text-lg md:text-base font-semibold tracking-wide py-2 text-slate-600'>Deskripsi</summary>
+                        <div className='prose prose-sm leading-snug text-slate-700'>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]} children={product.description} />
+                        </div>
+                    </details>
                 </div>
 
                 {/* Mobile and Desktop */}
@@ -422,10 +426,14 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                                     </div>
                                 )}
                             </div>
-                            <div className='flex flex-col'>
-                                <div className='2xl:text-lg md:text-base text-sm font-semibold tracking-wide py-2 text-slate-600'>Deskripsi</div>
-                                <div className='2xl:text-base md:text-sm text-xs font-medium text-justify md:leading-relaxed prose'>{product.description}</div>
-                            </div>
+                            <details open={true} className='flex flex-col select-none'>
+                                <summary className='2xl:text-lg md:text-base cursor-pointer underline appearance-none list-none text-sm font-semibold tracking-wide py-2 text-slate-600'>
+                                    Deskripsi
+                                </summary>
+                                <div className='prose prose-sm leading-snug text-slate-700'>
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]} children={product.description} />
+                                </div>
+                            </details>
                         </div>
                     </div>
 

@@ -17,6 +17,8 @@ const Layout = ({ title, children }) => {
                 {/* <script src='//code.tidio.co/nntihri39cqwi4krn3esqrl2m11zgv3c.js' async></script> */}
                 <meta name='description' content='Lokaloka - Belanja oleh-oleh online' />
                 <meta name='keyword' content='Belanja, Belanja oleh-oleh, Belanja oleh-oleh online, Belanja oleh-oleh online dengan mudah, oleh-oleh, liburan, traveling' />
+                <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-text.min.css' />
+                <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-display.min.css' />
                 <script type='text/javascript' src={urlMidtransSnap} data-client-key={clientKey}></script>
             </Head>
             {/* Header - Navbar */}
