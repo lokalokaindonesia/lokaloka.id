@@ -19,6 +19,7 @@ const ProductCard = ({ imgSrc, category, productName, price, discount, isRecomme
                         width={4}
                         height={4.4}
                         layout='responsive'
+                        priority
                         objectFit='cover'
                         quality={50}
                     />

@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-text.min.css');
-@import url('https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-display.min.css');
+/* @import url('https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-text.min.css');
+@import url('https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-display.min.css'); */
 
 * {
     font-family: 'Plus Jakarta Text', sans-serif;

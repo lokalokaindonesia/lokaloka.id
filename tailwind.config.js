@@ -6,8 +6,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'display': ['Plus Jakarta Display'],
-      'body': ['Plus Jakarta Text',],
+      'display': ['"Plus Jakarta Display"', 'sans-serif'],
+      'body': ['"Plus Jakarta Text"', 'sans-serif'],
     },
     extend: {
       colors: {
