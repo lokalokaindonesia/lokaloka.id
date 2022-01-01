@@ -3,7 +3,8 @@ import { Pagination, Navigation, Autoplay } from 'swiper'
 import Image from 'next/image'
 import christmastBannerWeb from '../../public/images/banner/christmas-promo/christmas-web.jpg'
 import christmastBannerMobile from '../../public/images/banner/christmas-promo/christmas-mobile.jpg'
-import newYearBanner from '../../public/images/banner/new-year-promo/new-year-web.png'
+import newYearBannerWeb from '../../public/images/banner/new-year-promo/new-year-web.png'
+import newYearBannerMobile from '../../public/images/banner/new-year-promo/new-year-mobile.png'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -32,7 +33,7 @@ const Carousel = () => {
                     </SwiperSlide> */}
                     <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
-                            <Image src={christmastBannerWeb} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
+                            <Image src={newYearBannerWeb} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
                         </div>
                     </SwiperSlide>
                 </Swiper>
@@ -50,7 +51,7 @@ const Carousel = () => {
                 >
                     <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
-                            <Image src={christmastBannerMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
+                            <Image src={newYearBannerMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
                         </div>
                     </SwiperSlide>
                     {/* <SwiperSlide>
