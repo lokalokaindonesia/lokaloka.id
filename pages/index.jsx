@@ -87,9 +87,8 @@ const Home = ({ products, promo, recommended }) => {
 }
 
 export const getServerSideProps = async ({ req, res }) => {
-    res.setHeader('Cache-Control', 'public, s-maxage=31536000, stale-while-revalidate=59')
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`)
-    const nonShuffledProducts = await data.splice(0, 100)
+    const nonShuffledProducts = await data.splice(0, 99)
     const shuffledProducts = await nonShuffledProducts.sort(() => Math.random() - 0.5)
     const products = await shuffledProducts.splice(0, 42)
 
@@ -98,6 +97,8 @@ export const getServerSideProps = async ({ req, res }) => {
 
     const { data: getRecommended } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?isRecommended=true`)
     const recommended = await getRecommended.splice(0, 12)
+
+    console.log(nonShuffledProducts)
 
     if (!data) {
         return {
