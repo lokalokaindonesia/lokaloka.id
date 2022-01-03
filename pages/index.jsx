@@ -88,16 +88,16 @@ const Home = ({ products, promo, recommended }) => {
 
 export const getServerSideProps = async ({ req, res }) => {
     res.setHeader('Cache-Control', 'public, s-maxage=31536000, stale-while-revalidate=59')
-    const getProducts = await axios.get(`${process.env.NEXT_URL}/api/products`)
-    const products = await getProducts.data.splice(0, 42)
+    const { data } = await axios.get(`${process.env.NEXT_URL}/api/products`)
+    const products = data.sort(() => Math.random() - 0.5)
 
-    const getPromo = await products.filter((item) => item.discount != 0)
+    const getPromo = await data.filter((item) => item.discount != 0)
     const promo = await getPromo.splice(0, 12)
 
-    const getRecommended = await products.filter((item) => item.isRecommended == true)
+    const getRecommended = await data.filter((item) => item.isRecommended == true)
     const recommended = await getRecommended.splice(0, 12)
 
-    if (!products) {
+    if (!data) {
         return {
             notFound: true,
         }
