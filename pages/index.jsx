@@ -87,7 +87,7 @@ const Home = ({ products, promo, recommended }) => {
 }
 
 export const getServerSideProps = async ({ req, res }) => {
-    const { data } = await axios.get(`${process.env.NECT_URL}/api/products`)
+    const { data } = await axios.get(`${process.env.NEXT_URL}/api/products`)
     const products = await data.splice(0, 42)
 
     const { data: getPromo } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?discount_gt=0`)
