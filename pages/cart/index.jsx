@@ -12,7 +12,7 @@ import Layout from '@/components/layout/Layout'
 import { setOrder } from '@/redux/orderSlice'
 import Button from '@/components/ui/Button'
 
-const Cart = ({ cartProducts, session, productCategories }) => {
+const Cart = ({ cartProducts, session, productCategories, user }) => {
     const router = useRouter()
     const ref = useRef(null)
 
@@ -131,7 +131,7 @@ const Cart = ({ cartProducts, session, productCategories }) => {
 
     // * SET ORDER DATA AND CHECKOUT
     const checkout = async () => {
-        if (!session.user.name) {
+        if (!user.name) {
             alert('Lengkapi Profil kamu dulu')
             return router.push('/profile/my-account')
         }
@@ -382,6 +382,13 @@ export const getServerSideProps = async (context) => {
         }
     }
 
+    const getUser = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`, {
+        headers: {
+            Authorization: `Bearer ${session.jwt}`,
+        },
+    })
+    const user = await getUser.data
+
     const getCartProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`, {
         headers: {
             Authorization: 'Bearer ' + session.jwt,
@@ -396,6 +403,7 @@ export const getServerSideProps = async (context) => {
         props: {
             cartProducts,
             session,
+            user,
             productCategories,
         },
     }

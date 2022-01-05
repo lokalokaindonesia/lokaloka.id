@@ -29,6 +29,7 @@ const Home = ({ products, promo, recommended }) => {
 
         setLocalStorageCart()
     }
+    console.log(products)
 
     return (
         <Fragment>
@@ -87,9 +88,8 @@ const Home = ({ products, promo, recommended }) => {
 }
 
 export const getServerSideProps = async ({ req, res }) => {
-    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`)
-    const nonShuffledProducts = await data.splice(0, 99)
-    const shuffledProducts = await nonShuffledProducts.sort(() => Math.random() - 0.5)
+    const { data } = await axios.get(`${process.env.NEXT_URL}/api/products`)
+    const shuffledProducts = await data.sort(() => Math.random() - 0.5)
     const products = await shuffledProducts.splice(0, 42)
 
     const { data: getPromo } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?discount_gt=0`)
@@ -97,8 +97,6 @@ export const getServerSideProps = async ({ req, res }) => {
 
     const { data: getRecommended } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?isRecommended=true`)
     const recommended = await getRecommended.splice(0, 12)
-
-    console.log(nonShuffledProducts)
 
     if (!data) {
         return {

@@ -13,6 +13,7 @@ import Button from '@/components/ui/Button'
 import { setPaymentMethod } from '@/redux/paymentMethod'
 import { setTransaction } from '@/redux/transactionSlice'
 import { data } from 'autoprefixer'
+import user from 'pages/api/user'
 
 // Area Data
 const areaCollection = [
@@ -108,7 +109,7 @@ const paymentMethodCollection = [
     },
 ]
 
-const index = ({ orderData, cityData, carts, provinceData, session }) => {
+const index = ({ orderData, cityData, carts, provinceData, session, user }) => {
     const router = useRouter()
     const dispatch = useDispatch()
     const order = orderData[0]
@@ -759,6 +760,10 @@ const index = ({ orderData, cityData, carts, provinceData, session }) => {
                                                 )}
                                             </div>
                                             <div>
+                                                <div className='font-medium tracking-wide text-sm text-slate-500'>Penerima</div>
+                                                <div className='font-medium'>{user.name}</div>
+                                            </div>
+                                            <div>
                                                 <div className='font-medium tracking-wide text-sm text-slate-500'>Nomor Telepon</div>
                                                 <div className='font-medium'>{phone}</div>
                                             </div>
@@ -1386,6 +1391,13 @@ export const getServerSideProps = async (contex) => {
         return { notFound: true }
     }
 
+    const getUser = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`, {
+        headers: {
+            Authorization: `Bearer ${session.jwt}`,
+        },
+    })
+    const user = await getUser.data
+
     const getCart = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/carts?user=${session.id}`, {
         headers: {
             Authorization: `Bearer ${session.jwt}`,
@@ -1409,6 +1421,7 @@ export const getServerSideProps = async (contex) => {
     return {
         props: {
             session,
+            user,
             orderData: order,
             cityData: city,
             carts,
