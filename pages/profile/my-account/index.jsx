@@ -49,9 +49,6 @@ const index = ({ user }) => {
         try {
             const updateData = {
                 name,
-                phone,
-                gender,
-                dateOfBirth,
             }
 
             const { data } = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`, updateData, {

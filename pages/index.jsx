@@ -87,10 +87,8 @@ const Home = ({ products, promo, recommended }) => {
 }
 
 export const getServerSideProps = async ({ req, res }) => {
-    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`)
-    const nonShuffledProducts = await data.splice(0, 99)
-    const shuffledProducts = await nonShuffledProducts.sort(() => Math.random() - 0.5)
-    const products = await shuffledProducts.splice(0, 42)
+    const { data } = await axios.get(`${process.env.NECT_URL}/api/products`)
+    const products = await data.splice(0, 42)
 
     const { data: getPromo } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?discount_gt=0`)
     const promo = await getPromo.splice(0, 12)

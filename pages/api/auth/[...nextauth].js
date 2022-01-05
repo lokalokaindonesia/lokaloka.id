@@ -68,8 +68,17 @@ const options = {
                     }
                 }
 
-                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/${provider}/callback?access_token=${accessToken}`);
-                const data = await response.json();
+                const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/${provider}/callback?access_token=${accessToken}`);
+
+                if (data.user.name != null) {
+                    await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/users/${data.user.id}`, {
+                        name: user.name
+                    }, {
+                        headers: {
+                            Authorization: `Bearer ${data.jwt}`,
+                        },
+                    })
+                }
 
                 token.jwt = data.jwt;
                 token.id = data.user.id;
