@@ -323,6 +323,7 @@ const index = ({ orderData, cityData, carts, provinceData, session, user }) => {
             const externalID = getExternalID.data
 
             const transactionData = {
+                area,
                 ...orderData[0],
                 shouldPayAmount: total,
                 shippingLocation: toShipping,
@@ -369,6 +370,7 @@ const index = ({ orderData, cityData, carts, provinceData, session, user }) => {
             const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
 
             const transactionData = {
+                area,
                 ...orderData[0],
                 shouldPayAmount: total,
                 shippingLocation: toShipping,
@@ -416,6 +418,7 @@ const index = ({ orderData, cityData, carts, provinceData, session, user }) => {
             setOpenModalConfirmation(false)
 
             const createTransaction = await axios.post(`/api/transactions`, {
+                area,
                 ...orderData[0],
                 shouldPayAmount: total,
                 code: gopayResponse.data.transaction_details.order_id,
@@ -467,6 +470,7 @@ const index = ({ orderData, cityData, carts, provinceData, session, user }) => {
             const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
 
             const transactionData = {
+                area,
                 ...orderData[0],
                 discount: couponPromo,
                 phone,
@@ -518,6 +522,7 @@ const index = ({ orderData, cityData, carts, provinceData, session, user }) => {
                 notes: note,
                 shippingCost,
                 packagingFee: cardBoardBoxPrice,
+                area,
                 ...orderData[0],
                 shouldPayAmount: total,
                 shippingLocation: toShipping,
@@ -557,6 +562,7 @@ const index = ({ orderData, cityData, carts, provinceData, session, user }) => {
 
             const transactionData = {
                 discount: couponPromo,
+                area,
                 ...orderData[0],
                 phone,
                 notes: note,
@@ -602,6 +608,7 @@ const index = ({ orderData, cityData, carts, provinceData, session, user }) => {
             const toShipping = area != 'anotherCity' ? `${location} ${address}` : `${address}, ${postalCode}, ${city.type} ${city.city_name}, ${province.province}`
             // return console.log(retailOutletInvoiceResponse)
             const transactionData = {
+                area,
                 ...orderData[0],
                 shouldPayAmount: total,
                 discount: couponPromo,
