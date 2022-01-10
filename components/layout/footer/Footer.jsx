@@ -11,6 +11,17 @@ const Footer = () => {
             {/* <PaymentGatewayFooter /> */}
             <div className='w-full h-auto py-8 md:py-12 container mx-auto px-4 md:px-12 lg:px-16 flex flex-col space-y-4 md:flex-row md:space-y-0 md:justify-between'>
                 <div className='flex flex-col space-y-1 md:space-y-3'>
+                    <h4 className='text-base md:underline md:decoration-blue-400 md:decoration-2 font-bold'>Lokaloka</h4>
+                    <div className='flex flex-col space-y-2 text-xs md:text-sm'>
+                        <span className='flex space-x-2 items-center'>
+                            <Link href='/help/privacy-and-policy'>Kebijakan Privasi</Link>
+                        </span>
+                        <span className='flex space-x-2 items-center'>
+                            <Link href='/help/terms-and-conditions'>Syarat dan Ketentuan</Link>
+                        </span>
+                    </div>
+                </div>
+                <div className='flex flex-col space-y-1 md:space-y-3'>
                     <h4 className='text-base md:underline md:decoration-blue-400 md:decoration-2 font-bold'>Hubungi Kami</h4>
                     <div className='flex flex-col space-y-2 text-xs md:text-sm'>
                         <span className='flex space-x-2 items-center'>

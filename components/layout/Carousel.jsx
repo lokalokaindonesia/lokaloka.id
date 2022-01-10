@@ -1,10 +1,10 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Autoplay } from 'swiper'
 import Image from 'next/image'
-import christmastBannerWeb from '../../public/images/banner/christmas-promo/christmas-web.jpg'
-import christmastBannerMobile from '../../public/images/banner/christmas-promo/christmas-mobile.jpg'
-import newYearBannerWeb from '../../public/images/banner/new-year-promo/new-year-web.png'
-import newYearBannerMobile from '../../public/images/banner/new-year-promo/new-year-mobile.png'
+import janMobile from '../../public/images/desain-juragan-kondang/januari_lokaloka_pc.jpg'
+import janDesktop from '../../public/images/desain-juragan-kondang/januari_lokaloka.jpg'
+import desainKondangDesktop from '../../public/images/desain-juragan-kondang/banner_pc.jpg'
+import desainkondangMobile from '../../public/images/desain-juragan-kondang/banner_mobile.jpg'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -33,7 +33,12 @@ const Carousel = () => {
                     </SwiperSlide> */}
                     <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
-                            <Image src={newYearBannerWeb} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
+                            <Image src={janDesktop} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
+                            <Image src={desainKondangDesktop} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
                         </div>
                     </SwiperSlide>
                 </Swiper>
@@ -51,7 +56,12 @@ const Carousel = () => {
                 >
                     <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
-                            <Image src={newYearBannerMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
+                            <Image src={janMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
+                            <Image src={desainkondangMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
                         </div>
                     </SwiperSlide>
                     {/* <SwiperSlide>

@@ -29,7 +29,6 @@ const Home = ({ products, promo, recommended }) => {
 
         setLocalStorageCart()
     }
-    console.log(products)
 
     return (
         <Fragment>
