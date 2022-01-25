@@ -9,17 +9,30 @@ import Layout from '@/components/layout/Layout'
 import kaldera from '../public/images/banner/kaldera.jpg'
 import banner from '../public/images/promo/12-15-21.jpg'
 import { setOrder } from '@/redux/orderSlice'
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Category from '@/components/layout/Category'
 import Carousel from '@/components/layout/Carousel'
 import Script from 'next/script'
 
-const Home = ({ products, promo, recommended }) => {
+const Home = ({ promo, recommended }) => {
     const [session, loading] = useSession()
+    const [products, setProducts] = useState([])
 
     const dispatch = useDispatch()
 
     const router = useRouter()
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+
+    const getProducts = async () => {
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`)
+
+        const shuffledProducts = await data.sort(() => Math.random() - 0.5)
+        const products = await shuffledProducts.splice(0, 42)
+        setProducts(products)
+    }
 
     if (session) {
         const setLocalStorageCart = async () => {
@@ -80,32 +93,21 @@ const Home = ({ products, promo, recommended }) => {
                 </div> */}
 
                 {/* Just For You */}
-                <JustForYou sectionTitle='Hanya Untukmu' href='#' data={products} />
+                {products && <JustForYou sectionTitle='Hanya Untukmu' href='#' data={products} />}
             </Layout>
         </Fragment>
     )
 }
 
 export const getServerSideProps = async ({ req, res }) => {
-    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`)
     const { data: getPromo } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?discount_gt=0`)
-    const { data: getRecommended } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?isRecommended=true`)
-
-    const shuffledProducts = await data.sort(() => Math.random() - 0.5)
-    const products = await shuffledProducts.splice(0, 42)
-
     const promo = await getPromo.splice(0, 12)
 
+    const { data: getRecommended } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?isRecommended=true`)
     const recommended = await getRecommended.splice(0, 12)
 
-    if (!data) {
-        return {
-            notFound: true,
-        }
-    }
-
     return {
-        props: { products, promo, recommended },
+        props: { promo, recommended },
     }
 }
 

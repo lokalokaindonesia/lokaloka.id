@@ -16,7 +16,7 @@ const HighlightedSection = ({ sectionTitle, href, data }) => {
                     <ProductCard
                         key={index}
                         slug={product.slug}
-                        category={product.product_category.slug}
+                        category={product.product_category?.slug}
                         imgSrc={product.images[0].url}
                         productName={product.name}
                         price={product.sellingPrice}

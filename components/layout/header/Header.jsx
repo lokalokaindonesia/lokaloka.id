@@ -52,13 +52,13 @@ const Header = () => {
     return (
         <header className='w-full h-16 lg:h-20 container mx-auto px-4 2xl:px-0 flex justify-between items-center'>
             <div className='hidden md:block md:w-2/12 text-2xl font-extrabold text-orange-500 tracking-wide'>
-                <Link href='/'>
+                <a href='/'>
                     <div className='cursor-pointer'>
                         <img className='hidden md:block cursor-pointer ' src='/logo.png' alt='' style={{ height: '40px' }} />
                         {/* <Image objectFit='contain' layout='responsive' width={100} height={40} src='/images/logo2.png' alt='' /> */}
                         {/* <h1 className='hidden md:block cursor-pointer logo lowercase text-4xl font-bold text-orange-500'>Lokaloka</h1> */}
                     </div>
-                </Link>
+                </a>
             </div>
 
             <div className='w-9/12 flex justify-start md:justify-center'>
