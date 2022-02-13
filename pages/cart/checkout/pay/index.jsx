@@ -11,7 +11,6 @@ import Qris from '@/components/payment/instruction/Qris'
 import RetailOutlet from '@/components/payment/instruction/RetailOutlet'
 import Gopay from '@/components/payment/instruction/Gopay'
 import { useEffect, useState } from 'react'
-import { useDebounceInterval } from 'hooks/useDebounceInterval'
 
 const index = ({ transaction, session }) => {
     const router = useRouter()
