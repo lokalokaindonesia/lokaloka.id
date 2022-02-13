@@ -5,8 +5,8 @@ import janMobile from '../../public/images/desain-juragan-kondang/januari_lokalo
 import janDesktop from '../../public/images/desain-juragan-kondang/januari_lokaloka.jpg'
 import desainKondangDesktop from '../../public/images/desain-juragan-kondang/banner_pc.jpg'
 import desainkondangMobile from '../../public/images/desain-juragan-kondang/banner_mobile.jpg'
-import myDsWeb from '../../public/images/banner/new-year-promo/new-year-web.png'
-import myDsMobile from '../../public/images/banner/new-year-promo/new-year-mobile.png'
+import myDsWeb from '../../public/images/banner/valentine/ValentineWeb.png'
+import myDsMobile from '../../public/images/banner/valentine/ValentineMobile.png'
 
 // Import Swiper styles
 import 'swiper/css'
