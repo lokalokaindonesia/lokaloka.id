@@ -25,7 +25,15 @@ const index = ({ transaction, session }) => {
                     Authorization: `Bearer ${session.jwt}`,
                 },
             })
-            if (data.paymentStatus != 'PENDING') {
+            if (
+                data.paymentStatus == 'SETTLED' ||
+                data.paymentStatus == 'SETTLEMENT' ||
+                data.paymentStatus == 'PAID' ||
+                data.paymentStatus == 'PROCESSED' ||
+                data.paymentStatus == 'COMPLETED' ||
+                data.paymentStatus == 'SUCCESS' ||
+                data.paymentStatus == 'SUCCEEDED'
+            ) {
                 setPaid(true)
             } else {
                 setPaid(false)
