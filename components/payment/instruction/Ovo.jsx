@@ -21,9 +21,9 @@ const Ovo = ({ transaction }) => {
                     </div>
                 </div>
                 <div className='flex flex-col space-y-2 md:flex-row md:space-y-0 md:justify-between md:items-center'>
-                    <div>
+                    <div className='hidden'>
                         <span className='text-sm md:text-base text-slate-200'>No Hp</span>
-                        <div className='font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl'>{transaction.mobileNumber}</div>
+                        <div className='font-semibold text-base md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl'>{transaction.phone}</div>
                     </div>
                     <div>
                         <span className='text-sm md:text-base text-slate-200'>Merchant</span>
