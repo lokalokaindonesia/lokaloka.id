@@ -54,6 +54,13 @@ const index = ({ favorites }) => {
 
 export const getServerSideProps = async (ctx) => {
     const session = await getSession({ ctx })
+
+    if (!session) {
+        return {
+            redirect: { destination: '/', permanent: false },
+        }
+    }
+
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`, {
         headers: {
             Authorization: `Bearer ${session.jwt}`,

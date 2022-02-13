@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { ChevronRightIcon, ChevronLeftIcon, LinkIcon } from '@heroicons/react/solid'
 import { FaInstagram, FaFacebookSquare, FaWhatsapp, FaHeart, FaCheckCircle } from 'react-icons/fa'
 import moment from 'moment'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Fragment } from 'react'
 import NumberFormat from 'react-number-format'
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer, toast } from 'react-toastify'
@@ -21,9 +21,13 @@ import FancySectionTitle from '@/components/ui/FancySectionTitle'
 import { setOrder } from '@/redux/orderSlice'
 import { useDispatch } from 'react-redux'
 import { setFavorite } from '@/redux/favoriteSlice'
+import { Dialog, Transition } from '@headlessui/react'
+import { ExclamationCircleIcon, ExclamationIcon } from '@heroicons/react/outline'
 
 const Product = ({ product, similarProducts, reviews, baseLink }) => {
     const dispatch = useDispatch()
+    const [open, setOpen] = useState(false)
+    const cancelButtonRef = useRef(null)
 
     const addToCartSuccessToast = (msg) => toast.success(msg)
 
@@ -136,7 +140,7 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
 
         if (!session) {
             setAddToCartLoading(false)
-            return addToCartFailedToast('Maaf, Kamu harus login dulu')
+            return setOpen(true)
         }
         const getCartProducts = await axios.get(`/api/cart`)
         const cartProducts = await getCartProducts.data
@@ -190,6 +194,51 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
 
     return (
         <Layout title={`${product.name} - Lokaloka`}>
+            <Transition.Root show={open} as={Fragment}>
+                <Dialog as='div' className='fixed z-50 inset-0 overflow-y-auto' initialFocus={cancelButtonRef} onClose={setOpen}>
+                    <div className='flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0'>
+                        <Transition.Child
+                            as={Fragment}
+                            enter='ease-out duration-300'
+                            enterFrom='opacity-0'
+                            enterTo='opacity-100'
+                            leave='ease-in duration-200'
+                            leaveFrom='opacity-100'
+                            leaveTo='opacity-0'
+                        >
+                            <Dialog.Overlay className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity' />
+                        </Transition.Child>
+
+                        {/* This element is to trick the browser into centering the modal contents. */}
+                        <span className='hidden sm:inline-block sm:align-middle sm:h-screen' aria-hidden='true'>
+                            &#8203;
+                        </span>
+                        <Transition.Child
+                            as={Fragment}
+                            enter='ease-out duration-300'
+                            enterFrom='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
+                            enterTo='opacity-100 translate-y-0 sm:scale-100'
+                            leave='ease-in duration-200'
+                            leaveFrom='opacity-100 translate-y-0 sm:scale-100'
+                            leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
+                        >
+                            <div className='inline-block align-bottom rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full'>
+                                <div className='bg-white p-4'>
+                                    <div className='flex flex-col items-center justify-between w-full'>
+                                        <ExclamationCircleIcon className='text-red-500 w-12 h-12' />
+                                        <Dialog.Title as='h3' className='mt-3 text-lg leading-6 font-medium text-gray-900'>
+                                            Anda belum login
+                                        </Dialog.Title>
+                                        <div className='mt-2'>
+                                            <p className='text-sm text-gray-500'>Silahkan melakukan login untuk membeli produk!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Transition.Child>
+                    </div>
+                </Dialog>
+            </Transition.Root>
             <ToastContainer position='bottom-right' autoClose={3000} hideProgressBar newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
             <div className='container mx-auto px-4 md:px-12 lg:px-16 md:my-5 2xl:my-6'>
                 <div className='w-full hidden md:text-sm md:space-x-1 md:flex space-x-2 items-center'>
@@ -210,16 +259,18 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     {/* Images */}
                     <div className='lg:hidden flex space-x-4'>
                         <div className='w-auto'>
-                            <div className='flex justify-end absolute w-96 z-30 items-start px-4 py-4'>
-                                <div
-                                    className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50'
-                                    onClick={() => {
-                                        favoriteHandle()
-                                    }}
-                                >
-                                    <FaHeart className={`${isFavorited ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
+                            {session && (
+                                <div className='flex justify-end absolute w-96 z-30 items-start px-4 py-4'>
+                                    <div
+                                        className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50'
+                                        onClick={() => {
+                                            favoriteHandle()
+                                        }}
+                                    >
+                                        <FaHeart className={`${isFavorited ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                             <div className='flex justify-between md:w-96 lg:w-96 lg:h-96 absolute'>
                                 {product.images.map((img, index) => {
                                     return (
@@ -339,16 +390,18 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                 {/* Mobile and Desktop */}
                 <div className='flex flex-col space-y-2 space-x-0 md:hidden lg:space-y-0 lg:flex lg:flex-row lg:justify-start my-4 md:my-5 2xl:my-6'>
                     <div className='aspect-w-1 aspect-h-1 lg:hidden w-full'>
-                        <div className='flex justify-end absolute w-full h-full lg:w-96 z-20 items-start px-4 py-4'>
-                            <div
-                                className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50'
-                                onClick={() => {
-                                    favoriteHandle()
-                                }}
-                            >
-                                <FaHeart className={`${isFavorited ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
+                        {session && (
+                            <div className='flex justify-end absolute w-full h-full lg:w-96 z-20 items-start px-4 py-4'>
+                                <div
+                                    className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50'
+                                    onClick={() => {
+                                        favoriteHandle()
+                                    }}
+                                >
+                                    <FaHeart className={`${isFavorited ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
+                                </div>
                             </div>
-                        </div>
+                        )}
                         <div className='flex justify-between w-full h-full lg:w-96 lg:h-96 absolute'>
                             {product.images.map((img, index) => {
                                 return (
@@ -367,16 +420,18 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                         </div>
                     </div>
                     <div className='hidden lg:flex flex-1 w-96 h-96'>
-                        <div className='flex justify-end absolute w-96 z-20 items-start px-4 py-4'>
-                            <div
-                                className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50'
-                                onClick={() => {
-                                    favoriteHandle()
-                                }}
-                            >
-                                <FaHeart className={`${isFavorited ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
+                        {session && (
+                            <div className='flex justify-end absolute w-96 z-20 items-start px-4 py-4'>
+                                <div
+                                    className='px-3 py-3 rounded-full cursor-pointer bg-gray-300 bg-opacity-50'
+                                    onClick={() => {
+                                        favoriteHandle()
+                                    }}
+                                >
+                                    <FaHeart className={`${isFavorited ? 'text-red-500' : 'text-white'} hover:text-red-500 transition duration-300 ease-in-out w-6 h-6`} />
+                                </div>
                             </div>
-                        </div>
+                        )}
                         <div className='flex w-96 h-96 absolute'>
                             {product.images.map((img, index) => {
                                 return (

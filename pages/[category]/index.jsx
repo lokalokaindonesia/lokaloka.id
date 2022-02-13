@@ -255,6 +255,13 @@ const Category = ({ category, products, page, productLength }) => {
 export const getServerSideProps = async ({ params, query: { page = 1, size = 20, isRecommended = '', discountGt = '', sellingPriceGt = '', sellingPriceLt = '' } }) => {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/product-categories?slug_eq=${params.category}`)
     const data = await res.data
+    console.log(data)
+
+    if (data.length === 0) {
+        return {
+            notFound: true,
+        }
+    }
 
     const IRQuery = isRecommended == '' ? '' : `&isRecommended=${isRecommended}`
     const DQuery = discountGt == '' ? '' : `&discount_gt=${discountGt}`
@@ -271,12 +278,6 @@ export const getServerSideProps = async ({ params, query: { page = 1, size = 20,
 
     const countProduct = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products/count?product_category=${data[0].id}${IRQuery}${DQuery}${SPGTQuery}${SPLTQuery}`)
     const countData = await countProduct.data
-
-    if (!data) {
-        return {
-            notFound: true,
-        }
-    }
 
     return {
         props: { category: data[0], products: productData, page, productLength: countData },

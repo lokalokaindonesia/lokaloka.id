@@ -14,25 +14,36 @@ import Category from '@/components/layout/Category'
 import Carousel from '@/components/layout/Carousel'
 import Script from 'next/script'
 
-const Home = ({ promo, recommended }) => {
+const Home = () => {
     const [session, loading] = useSession()
     const [products, setProducts] = useState([])
+    const [promo, setPromo] = useState([])
+    const [recommended, setRecommended] = useState([])
 
     const dispatch = useDispatch()
 
     const router = useRouter()
 
     useEffect(() => {
+        const getProducts = async () => {
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`)
+
+            const shuffledProducts = await data.sort(() => Math.random() - 0.5)
+            const products = await shuffledProducts.splice(0, 42)
+
+            const { data: getPromo } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?discount_gt=0`)
+            const promo = await getPromo.splice(0, 12)
+
+            const { data: getRecommended } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?isRecommended=true`)
+            const recommended = await getRecommended.splice(0, 12)
+
+            setProducts(products)
+            setPromo(promo)
+            setRecommended(recommended)
+        }
+
         getProducts()
     }, [])
-
-    const getProducts = async () => {
-        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`)
-
-        const shuffledProducts = await data.sort(() => Math.random() - 0.5)
-        const products = await shuffledProducts.splice(0, 42)
-        setProducts(products)
-    }
 
     if (session) {
         const setLocalStorageCart = async () => {
@@ -97,18 +108,6 @@ const Home = ({ promo, recommended }) => {
             </Layout>
         </Fragment>
     )
-}
-
-export const getServerSideProps = async ({ req, res }) => {
-    const { data: getPromo } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?discount_gt=0`)
-    const promo = await getPromo.splice(0, 12)
-
-    const { data: getRecommended } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?isRecommended=true`)
-    const recommended = await getRecommended.splice(0, 12)
-
-    return {
-        props: { promo, recommended },
-    }
 }
 
 export default Home

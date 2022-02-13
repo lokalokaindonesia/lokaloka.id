@@ -1,8 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import food from '../../public/images/desain-juragan-kondang/fnb_icon.jpg'
-import fashion from '../../public/images/desain-juragan-kondang/fashion_icon.jpg'
-import craft from '../../public/images/desain-juragan-kondang/kerajinan_icon.jpg'
+// import food from '../../public/images/desain-juragan-kondang/fnb_icon.jpg'
+// import fashion from '../../public/images/desain-juragan-kondang/fashion_icon.jpg'
+// import craft from '../../public/images/desain-juragan-kondang/kerajinan_icon.jpg'
+import food from '../../public/images/category/food.jpg'
+import fashion from '../../public/images/category/fashion.jpg'
+import craft from '../../public/images/category/craft.jpg'
 import FancySectionTitle from '../ui/FancySectionTitle'
 
 const Category = () => {

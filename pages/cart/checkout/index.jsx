@@ -1395,7 +1395,9 @@ const index = ({ orderData, cityData, carts, provinceData, session, user }) => {
 export const getServerSideProps = async (contex) => {
     const session = await getSession(contex)
     if (!session) {
-        return { notFound: true }
+        return {
+            redirect: { destination: '/', permanent: false },
+        }
     }
 
     const getUser = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/${session.id}`, {

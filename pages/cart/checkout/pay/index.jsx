@@ -62,6 +62,12 @@ const index = ({ transaction }) => {
 export const getServerSideProps = async (context) => {
     const session = await getSession(context)
 
+    if (!session) {
+        return {
+            redirect: { destination: '/', permanent: false },
+        }
+    }
+
     const getTransaction = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/transactions?user=${session.id}&paymentStatus=PENDING&paymentStatus=ACTIVE`, {
         headers: {
             Authorization: `Bearer ${session.jwt}`,

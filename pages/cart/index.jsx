@@ -220,7 +220,7 @@ const Cart = ({ cartProducts, session, productCategories, user }) => {
                                         {cart.map((product) => {
                                             // Count Price
                                             const discountPrice = product.product.sellingPrice - (product.product.sellingPrice * product.product.discount) / 100
-                                            const isDiscount = product.product.discount !== 0 && product.product.discount !== null ? true : false
+                                            const isDiscount = product.product.discount != 0 ? true : false
                                             const xPrice = isDiscount ? discountPrice : product.product.sellingPrice
 
                                             const category = productCategories.find((c) => c.id == product.product.product_category)
