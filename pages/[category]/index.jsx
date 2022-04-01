@@ -255,7 +255,7 @@ const Category = ({ category, products, page, productLength }) => {
     )
 }
 
-export const getServerSideProps = async ({ params, query: { page = 1, sort, size = 20, isRecommended = '', discountGt = '', sellingPriceGt = '', sellingPriceLt = '' } }) => {
+export const getServerSideProps = async ({ params, query: { page = 1, sort = '', size = 20, isRecommended = '', discountGt = '', sellingPriceGt = '', sellingPriceLt = '' } }) => {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/product-categories?slug_eq=${params.category}`)
     const data = await res.data
 
