@@ -24,7 +24,11 @@ const Category = ({ category, products, page, productLength }) => {
     const [price, setPrice] = useState(filter[0])
     const [recommended, setRecommended] = useState(false)
     const [discount, setDiscount] = useState(false)
-    const [params, setParams] = useState()
+    const [params, setParams] = useState(price.query)
+
+    useEffect(() => {
+        setParams(price.query)
+    }, [price])
 
     const recommendedHandle = (e) => {
         setRecommended(!recommended)
@@ -149,7 +153,6 @@ const Category = ({ category, products, page, productLength }) => {
                                                                                     {filter.value}
                                                                                 </span>
                                                                             </div>
-
                                                                             {price ? (
                                                                                 <span
                                                                                     className={classNames(
@@ -252,31 +255,30 @@ const Category = ({ category, products, page, productLength }) => {
     )
 }
 
-export const getServerSideProps = async ({ params, query: { page = 1, size = 20, isRecommended = '', discountGt = '', sellingPriceGt = '', sellingPriceLt = '' } }) => {
+export const getServerSideProps = async ({ params, query: { page = 1, sort, size = 20, isRecommended = '', discountGt = '', sellingPriceGt = '', sellingPriceLt = '' } }) => {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/product-categories?slug_eq=${params.category}`)
     const data = await res.data
+
+    if (data.length === 0) {
+        return {
+            notFound: true,
+        }
+    }
 
     const IRQuery = isRecommended == '' ? '' : `&isRecommended=${isRecommended}`
     const DQuery = discountGt == '' ? '' : `&discount_gt=${discountGt}`
     const SPGTQuery = sellingPriceGt == '' ? '' : `&sellingPrice_gt=${sellingPriceGt}`
     const SPLTQuery = sellingPriceLt == '' ? '' : `&sellingPrice_lt=${sellingPriceLt}`
-    // const SORTQUery = _sort == '' ? '' : `&_sort=${_sort}`
-
+    const SORTQuery = sort == '' ? '' : `&_sort=sellingPrice:${sort}`
     const start = page ? size * (+page - 1) : 0
 
     const getProduct = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data[0].id}&_limit=${size}&_start=${start}${IRQuery}${DQuery}${SPGTQuery}${SPLTQuery}`
+        `${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data[0].id}&_limit=${size}&_start=${start}${IRQuery}${DQuery}${SPGTQuery}${SPLTQuery}${SORTQuery}`
     )
     const productData = await getProduct.data
 
-    const countProduct = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products/count?product_category=${data[0].id}${IRQuery}${DQuery}${SPGTQuery}${SPLTQuery}`)
+    const countProduct = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products/count?product_category=${data[0].id}${IRQuery}${DQuery}${SPGTQuery}${SPLTQuery}${SORTQuery}`)
     const countData = await countProduct.data
-
-    if (!data) {
-        return {
-            notFound: true,
-        }
-    }
 
     return {
         props: { category: data[0], products: productData, page, productLength: countData },

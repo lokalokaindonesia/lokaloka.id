@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import axios from 'axios'
-import { getSession } from 'next-auth/client'
+import { getSession, useSession } from 'next-auth/client'
 import Layout from '@/components/layout/Layout'
 import Bni from '@/components/payment/instruction/Bni'
 import Bri from '@/components/payment/instruction/Bri'
@@ -10,36 +10,43 @@ import Ovo from '@/components/payment/instruction/Ovo'
 import Qris from '@/components/payment/instruction/Qris'
 import RetailOutlet from '@/components/payment/instruction/RetailOutlet'
 import Gopay from '@/components/payment/instruction/Gopay'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-const index = ({ transaction }) => {
+const index = ({ transaction, session }) => {
     const router = useRouter()
     const [paid, setPaid] = useState(false)
 
-    const getTransactionStatus = async () => {
-        const { data } = await axios.get(`/api/transactions/check/${transaction.id}`)
+    // const debbounceInterval = useDebounceInterval(paid, 10000)
 
-        if (
-            data.paymentStatus == 'SETTLED' ||
-            data.paymentStatus == 'SETTLEMENT' ||
-            data.paymentStatus == 'PAID' ||
-            data.paymentStatus == 'PROCESSED' ||
-            data.paymentStatus == 'COMPLETED' ||
-            data.paymentStatus == 'SUCCESS' ||
-            data.paymentStatus == 'SUCEEDED'
-        ) {
-            setPaid(true)
-            return router.push('/')
+    useEffect(() => {
+        const getTransaction = async () => {
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/transactions/${transaction.id}`, {
+                headers: {
+                    Authorization: `Bearer ${session.jwt}`,
+                },
+            })
+            if (
+                data.paymentStatus == 'SETTLED' ||
+                data.paymentStatus == 'SETTLEMENT' ||
+                data.paymentStatus == 'PAID' ||
+                data.paymentStatus == 'PROCESSED' ||
+                data.paymentStatus == 'COMPLETED' ||
+                data.paymentStatus == 'SUCCESS' ||
+                data.paymentStatus == 'SUCCEEDED'
+            ) {
+                setPaid(true)
+            } else {
+                setPaid(false)
+            }
         }
-        setPaid(false)
-        return
-    }
-
-    if (!paid) {
-        setInterval(() => {
-            getTransactionStatus()
-        }, 10000)
-    }
+        const handler = setInterval(() => {
+            getTransaction()
+        }, 5000)
+        return () => {
+            clearInterval(handler)
+            router.push('/')
+        }
+    }, [paid])
 
     return (
         <Layout title='Selesaikan Pembayaran'>
@@ -62,6 +69,12 @@ const index = ({ transaction }) => {
 export const getServerSideProps = async (context) => {
     const session = await getSession(context)
 
+    if (!session) {
+        return {
+            redirect: { destination: '/', permanent: false },
+        }
+    }
+
     const getTransaction = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/transactions?user=${session.id}&paymentStatus=PENDING&paymentStatus=ACTIVE`, {
         headers: {
             Authorization: `Bearer ${session.jwt}`,
@@ -75,6 +88,7 @@ export const getServerSideProps = async (context) => {
     return {
         props: {
             transaction,
+            session,
         },
     }
 }
