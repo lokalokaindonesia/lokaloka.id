@@ -600,6 +600,7 @@ export const getServerSideProps = async ({ params }) => {
         }
     }
 
+    // Get similar products
     const resSimilarProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.product_category.id}&_limit=6`)
     const similarProducts = await resSimilarProducts.data
 
