@@ -24,7 +24,7 @@ import { setFavorite } from '@/redux/favoriteSlice'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationCircleIcon, ExclamationIcon } from '@heroicons/react/outline'
 
-const Product = ({ product, similarProducts, reviews, baseLink }) => {
+const Product = ({ product, similarProducts, baseLink }) => {
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
     const cancelButtonRef = useRef(null)
@@ -563,29 +563,6 @@ const Product = ({ product, similarProducts, reviews, baseLink }) => {
                     </div>
                 </div>
 
-                {/* Reviews */}
-                {reviews.length !== 0 && (
-                    <div className='flex flex-col space-y-10 my-8'>
-                        <FancySectionTitle title='Reviews' />
-
-                        <div className='flex space-y-4 flex-col'>
-                            {reviews.map((review) => {
-                                return (
-                                    <div className='flex flex-col space-y-2' key={review.id}>
-                                        <div className='flex space-x-4 items-center'>
-                                            <div className='w-12 h-12 rounded-full bg-red-500'></div>
-                                            <div className='flex flex-col'>
-                                                <p className='text-lg font-semibold'>{review.user.username}</p>
-                                                <p className='text-xs text-slate-500'>{moment(review.createdAt).format('ll')}</p>
-                                            </div>
-                                        </div>
-                                        <span className='pl-16'>{review.text}</span>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                )}
                 {/* Similar Products */}
                 <div className='flex flex-col space-y-4'>
                     <FancySectionTitle title='Produk serupa' />
@@ -626,15 +603,11 @@ export const getServerSideProps = async ({ params }) => {
     const resSimilarProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.product_category.id}&_limit=6`)
     const similarProducts = await resSimilarProducts.data
 
-    const resReviews = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/reviews/${data.id}`)
-    const reviews = await resReviews.data
-
     return {
         props: {
             product: data,
             similarProducts: similarProducts,
             baseLink,
-            reviews,
         },
     }
 }
