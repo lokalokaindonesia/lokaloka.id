@@ -600,13 +600,13 @@ export const getServerSideProps = async ({ params }) => {
         }
     }
 
-    // const resSimilarProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.product_category.id}&_limit=6`)
-    // const similarProducts = await resSimilarProducts.data
+    const resSimilarProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.product_category.id}&_limit=6`)
+    const similarProducts = await resSimilarProducts.data
 
     return {
         props: {
             product: data,
-            similarProducts: [],
+            similarProducts: similarProducts,
             baseLink,
         },
     }
