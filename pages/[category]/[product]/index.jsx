@@ -589,7 +589,7 @@ const Product = ({ product, similarProducts, baseLink }) => {
 }
 
 export const getServerSideProps = async ({ params }) => {
-    const getProduct = await axios.get(`${process.env.NEXT_URL}/api/products/${params.product}`)
+    const getProduct = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products/${params.product}`)
     const data = await getProduct.data
 
     const baseLink = await process.env.NEXT_URL
