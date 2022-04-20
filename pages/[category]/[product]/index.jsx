@@ -33,25 +33,15 @@ export const getServerSideProps = async ({ params }) => {
     const getProduct = await axios.get(`${process.env.NEXT_URL}/api/products/${params.product}`)
     const data = await getProduct.data
 
-    const baseLink = await process.env.NEXT_URL
     if (!data) {
         return {
             notFound: true,
         }
     }
 
-    const resSimilarProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.product_category.id}&_limit=6`)
-    const similarProducts = await resSimilarProducts.data
-
-    const resReviews = await axios.get(`${process.env.NEXT_URL}/api/reviews/${data.id}`)
-    const reviews = await resReviews.data
-
     return {
         props: {
             product: data,
-            similarProducts: similarProducts,
-            baseLink,
-            reviews,
         },
     }
 }
