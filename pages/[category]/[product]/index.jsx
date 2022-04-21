@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm'
 import Image from 'next/image'
 import { ChevronRightIcon, ChevronLeftIcon, LinkIcon } from '@heroicons/react/solid'
 import { FaFacebookSquare, FaWhatsapp, FaHeart } from 'react-icons/fa'
+import moment from 'moment'
 import { useState, useEffect, useRef, Fragment } from 'react'
 import NumberFormat from 'react-number-format'
 import 'react-toastify/dist/ReactToastify.css'
@@ -588,21 +589,12 @@ const Product = ({ product, similarProducts, baseLink }) => {
 }
 
 export const getServerSideProps = async ({ params }) => {
-    const getProduct = await axios.get(`${process.env.NEXT_URL}/api/products/${params.product}`)
-    const data = await getProduct.data
+    const { data } = await axios.get(`${process.env.NEXT_URL}/api/products/${params.product}`)
 
-    const baseLink = await process.env.NEXT_URL
+    const baseLink = process.env.NEXT_URL
 
-    // Get similar products
-    const resSimilarProducts = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.product_category.id}&_limit=6`)
-    // const resSimilarProducts = await axios.get(`${process.env.NEXT_URL}/api/similar-products?id=${data.product_category.id}`)
-    const similarProducts = await resSimilarProducts.data
+    const { data: similarProducts } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products?product_category=${data.product_category.id}&_limit=6`)
 
-    if (!data) {
-        return {
-            notFound: true,
-        }
-    }
     return {
         props: {
             product: data,
