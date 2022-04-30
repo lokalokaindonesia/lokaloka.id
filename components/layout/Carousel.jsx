@@ -5,8 +5,10 @@ import janMobile from '../../public/images/desain-juragan-kondang/januari_lokalo
 import janDesktop from '../../public/images/desain-juragan-kondang/januari_lokaloka.jpg'
 import desainKondangDesktop from '../../public/images/desain-juragan-kondang/banner_pc.jpg'
 import desainkondangMobile from '../../public/images/desain-juragan-kondang/banner_mobile.jpg'
-import myDsWeb from '../../public/images/banner/valentine/ValentineWeb.png'
-import myDsMobile from '../../public/images/banner/valentine/ValentineMobile.png'
+import myDsWeb from '../../public/images/banner/lebaran-promo/Lebaran02042022.jpg'
+import myDsMobile from '../../public/images/banner/lebaran-promo/Lebaran02042022.jpg'
+import banner1Web from '../../public/images/banner/lebaran-promo/Lebaranvibes042022.jpg'
+import banner1Mobile from '../../public/images/banner/lebaran-promo/Lebaranvibes042022.jpg'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -28,16 +30,16 @@ const Carousel = () => {
                     pagination={{ clickable: true }}
                     centeredSlides={true}
                 >
-                    {/* <SwiperSlide>
-                        <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
-                            <Image src={newYearBanner} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={2} />
-                        </div>
-                    </SwiperSlide> */}
                     <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
                             <Image src={myDsWeb} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
                         </div>
                     </SwiperSlide>
+                    <SwiperSlide>
+                       <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
+                           <Image src={banner1Web} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={2} />
+                       </div>
+                   </SwiperSlide>
                     {/* <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
                             <Image src={desainKondangDesktop} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
@@ -61,11 +63,11 @@ const Carousel = () => {
                             <Image src={myDsMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
                         </div>
                     </SwiperSlide>
-                    {/* <SwiperSlide>
+                     <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
-                            <Image src={desainkondangMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
+                            <Image src={banner1Mobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
                         </div>
-                    </SwiperSlide> */}
+                    </SwiperSlide>
                     {/* <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
                             <Image src={newYearBanner} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
