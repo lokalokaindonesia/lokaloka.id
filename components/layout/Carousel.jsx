@@ -5,10 +5,10 @@ import janMobile from '../../public/images/desain-juragan-kondang/januari_lokalo
 import janDesktop from '../../public/images/desain-juragan-kondang/januari_lokaloka.jpg'
 import desainKondangDesktop from '../../public/images/desain-juragan-kondang/banner_pc.jpg'
 import desainkondangMobile from '../../public/images/desain-juragan-kondang/banner_mobile.jpg'
-import myDsWeb from '../../public/images/banner/lebaran-promo/Lebaran02042022.jpg'
-import myDsMobile from '../../public/images/banner/lebaran-promo/Lebaran02042022.jpg'
-import banner1Web from '../../public/images/banner/lebaran-promo/Lebaranvibes042022.jpg'
-import banner1Mobile from '../../public/images/banner/lebaran-promo/Lebaranvibes042022.jpg'
+import myDsWeb from '../../public/images/banner/lebaran/Lebaran02042022.jpg'
+import myDsMobile from '../../public/images/banner/lebaran/Lebaran02042022.jpg'
+import banner1Web from '../../public/images/banner/lebaran/Lebaranvibes042022.jpg'
+import banner1Mobile from '../../public/images/banner/lebaran/Lebaranvibes042022.jpg'
 
 // Import Swiper styles
 import 'swiper/css'
