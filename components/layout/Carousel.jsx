@@ -38,11 +38,11 @@ const Carousel = () => {
                             <Image src={myDsWeb} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
                         </div>
                     </SwiperSlide>
-                    {/* <SwiperSlide>
+                     <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
                             <Image src={desainKondangDesktop} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
                         </div>
-                    </SwiperSlide> */}
+                    </SwiperSlide>
                 </Swiper>
             </div>
             <div className='my-4 lg:hidden md:my-8 px-4 md:px-12 lg:px-16 drop-shadow-md container mx-auto'>
@@ -61,11 +61,11 @@ const Carousel = () => {
                             <Image src={myDsMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
                         </div>
                     </SwiperSlide>
-                    {/* <SwiperSlide>
+                     <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
                             <Image src={desainkondangMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
                         </div>
-                    </SwiperSlide> */}
+                    </SwiperSlide>
                     {/* <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
                             <Image src={newYearBanner} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
