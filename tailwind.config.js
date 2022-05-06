@@ -17,12 +17,15 @@ module.exports = {
           200: '#fffbb1',
           300: '#ffe79d',
           400: '#ffd389',
-          500: '#FFBF75',
+          500: '#37bad8',
           600: '#ebab61',
           700: '#d7974d',
           800: '#c38339',
           900: '#af6f25'
         },
+        blue: {
+          100: '#37bad8'
+        }
         teal: color.teal
       }
     },
