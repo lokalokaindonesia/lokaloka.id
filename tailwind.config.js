@@ -23,9 +23,6 @@ module.exports = {
           800: '#c38339',
           900: '#af6f25'
         },
-        blue: {
-          100: '#37bad8'
-        }
         teal: color.teal
       }
     },
