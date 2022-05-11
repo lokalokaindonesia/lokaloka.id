@@ -283,14 +283,14 @@ const Cart = ({ cartProducts, session, productCategories, user }) => {
                                                                         <div className='flex items-center border h-6 md:h-8 w-max rounded ml-6 md:ml-[8.7rem] border-slate-300'>
                                                                             <div
                                                                                 onClick={() => reduceQty(product)}
-                                                                                className='select-none rounded-l cursor-pointer transition duration-100 ease-in hover:bg-slate-200 px-2 md:px-3 md:py-1 font-bold text-center border-r border-slate-300 text-orange-gray-800'
+                                                                                className='select-none rounded-l cursor-pointer transition duration-100 ease-in hover:bg-slate-200 px-2 md:px-3 md:py-1 font-bold text-center border-r border-slate-300 text-orange-gray-800 color:red'
                                                                             >
                                                                                 -
                                                                             </div>
                                                                             <div className='px-4 py-1 w-12 flex-1 text-center text-orange-gray-800 '>{product.quantity}</div>
                                                                             <div
                                                                                 onClick={() => addQty(product)}
-                                                                                className='select-none rounded-r cursor-pointer transition duration-100 ease-in hover:bg-slate-200 px-2 md:px-3 md:py-1 font-bold text-center border-l border-slate-300 text-orange-gray-800'
+                                                                                className='select-none rounded-r cursor-pointer transition duration-100 ease-in hover:bg-slate-200 px-2 md:px-3 md:py-1 font-bold text-center border-l border-slate-300 text-orange-gray-800 color:green'
                                                                             >
                                                                                 +
                                                                             </div>
