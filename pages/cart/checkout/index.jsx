@@ -30,7 +30,7 @@ const cardBoardBoxOpt = [
     {
         value: 0,
         id: 'no-cardboard',
-        label: 'Tanpa Kardus',
+        label: 'Kantong Plastik',
     },
     {
         value: 8000,
