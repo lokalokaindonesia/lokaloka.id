@@ -7,6 +7,10 @@ import desainKondangDesktop from '../../public/images/desain-juragan-kondang/ban
 import desainkondangMobile from '../../public/images/desain-juragan-kondang/banner_mobile.jpg'
 import myDsWeb from '../../public/images/banner/valentine/ValentineWeb.png'
 import myDsMobile from '../../public/images/banner/valentine/ValentineMobile.png'
+import samaraDesktop from '../../public/images/banner/samarahotel.jpg'
+import samaraMobile from '../../public/images/banner/samarahotel.jpg'
+import zamzamDesktop from '../../public/images/banner/zamzam.jpg'
+import zamzamMobile from '../../public/images/banner/zamzam.jpg'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -43,6 +47,16 @@ const Carousel = () => {
                             <Image src={desainKondangDesktop} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
                         </div>
                     </SwiperSlide>
+                    <SwiperSlide>
+                       <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
+                           <Image src={samaraDesktop} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
+                       </div>
+                   </SwiperSlide>
+                   <SwiperSlide>
+                      <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
+                          <Image src={zamzamDesktop} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={75} height={2} />
+                      </div>
+                  </SwiperSlide>
                 </Swiper>
             </div>
             <div className='my-4 lg:hidden md:my-8 px-4 md:px-12 lg:px-16 drop-shadow-md container mx-auto'>
@@ -69,6 +83,16 @@ const Carousel = () => {
                     <SwiperSlide>
                         <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
                             <Image src={janMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
+                            <Image src={samaraMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
+                        </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <div className='w-full h-full cursor-pointer bg-slate-600 rounded-md'>
+                            <Image src={zamzamMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
                         </div>
                     </SwiperSlide>
                 </Swiper>
