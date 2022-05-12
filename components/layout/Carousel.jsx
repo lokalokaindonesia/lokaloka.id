@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Navigation, Autoplay } from 'swiper'
 import Image from 'next/image'
-import janMobile from '../../public/images/desain-juragan-kondang/januari_lokaloka_pc.jpg'
+import janMobile from '../../public/images/banner/lokalokaMagerMobile.jpg'
 import janDesktop from '../../public/images/desain-juragan-kondang/januari_lokaloka.jpg'
 import desainKondangDesktop from '../../public/images/desain-juragan-kondang/banner_pc.jpg'
 import desainkondangMobile from '../../public/images/desain-juragan-kondang/banner_mobile.jpg'
@@ -10,7 +10,7 @@ import myDsMobile from '../../public/images/banner/valentine/ValentineMobile.png
 import samaraDesktop from '../../public/images/banner/samarahotel.jpg'
 import samaraMobile from '../../public/images/banner/samarahotel.jpg'
 import zamzamDesktop from '../../public/images/banner/zamzam.jpg'
-import zamzamMobile from '../../public/images/banner/zamzam.jpg'
+import zamzamMobile from '../../public/images/banner/zamzamAndroid.jpg'
 
 // Import Swiper styles
 import 'swiper/css'
