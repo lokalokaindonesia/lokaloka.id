@@ -13,6 +13,7 @@ import { Fragment, useEffect, useState } from 'react'
 import Category from '@/components/layout/Category'
 import Carousel from '@/components/layout/Carousel'
 import Script from 'next/script'
+import ReactGA from 'react-ga'
 
 const Home = () => {
     const [session, loading] = useSession()
@@ -24,6 +25,7 @@ const Home = () => {
 
     const router = useRouter()
 
+    ReactGA.initialize('UA-221072764-1') // Ganti TRACKING-ID dengan Tracking ID website kamu. cth: UA-000000–2
     useEffect(() => {
         const getProducts = async () => {
             const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`)
