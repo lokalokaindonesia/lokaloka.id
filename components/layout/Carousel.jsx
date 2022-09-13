@@ -5,6 +5,8 @@ import janMobile from "../../public/images/banner/lokalokaMagerMobile.jpg";
 import janDesktop from "../../public/images/desain-juragan-kondang/januari_lokaloka.jpg";
 import coverMobile from "../../public/images/banner/coverAndroid.jpg";
 import coverDesktop from "../../public/images/banner/coverWeb.jpg";
+import comboHotelDesktop from "../../public/images/banner/ComboHotelWeb.jpg";
+import comboHotelAndroid from "../../public/images/banner/ComboHotelAndroid.jpg";
 
 import myDsWeb from "../../public/images/banner/valentine/ValentineWeb.png";
 import myDsMobile from "../../public/images/banner/valentine/ValentineMobile.png";
@@ -33,6 +35,20 @@ const Carousel = () => {
           pagination={{ clickable: true }}
           centeredSlides={true}
         >
+          <SwiperSlide>
+            <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
+              <Image
+                src={comboHotelDesktop}
+                alt="Promo"
+                className="rounded-md"
+                layout="responsive"
+                width={6}
+                priority
+                quality={100}
+                height={2}
+              />
+            </div>
+          </SwiperSlide>
           <SwiperSlide>
             <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
               <Image
@@ -114,6 +130,20 @@ const Carousel = () => {
                             <Image src={myDsMobile} alt='Promo' className='rounded-md' layout='responsive' width={6} priority quality={100} height={3} />
                         </div>
                     </SwiperSlide>  */}
+          <SwiperSlide>
+            <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
+              <Image
+                src={comboHotelAndroid}
+                alt="Promo"
+                className="rounded-md"
+                layout="responsive"
+                width={6}
+                priority
+                quality={100}
+                height={3}
+              />
+            </div>
+          </SwiperSlide>
           <SwiperSlide>
             <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
               <Image
