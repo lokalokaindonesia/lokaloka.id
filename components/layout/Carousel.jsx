@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper";
 import Image from "next/image";
 import janMobile from "../../public/images/banner/lokalokaMagerMobile.jpg";
-import janDesktop from "../../public/images/desain-juragan-kondang/januari_lokaloka.jpg";
+import janDesktop from "../../public/images/banner/lokalokaalfa.png";
 import coverMobile from "../../public/images/banner/coverAndroid.jpg";
 import coverDesktop from "../../public/images/banner/coverWeb.jpg";
 import comboHotelDesktop from "../../public/images/banner/ComboHotelWeb.jpg";
