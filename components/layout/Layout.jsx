@@ -22,7 +22,7 @@ const Layout = ({ title, children }) => {
                 <script type='text/javascript' src={urlMidtransSnap} data-client-key={clientKey}></script>
             </Head>
             {/* Header - Navbar */}
-            <div className='sticky top-0 z-30 backdrop-filter backdrop-blur-sm bg-opacity-75 shadow bg-white'>{session ? <Header /> : <HeaderNotSignIn />}</div>
+            <div className='sticky top-0 z-30 backdrop-filter backdrop-blur-sm bg-opacity-75 shadow bg-[#f54548]'>{session ? <Header /> : <HeaderNotSignIn />}</div>
 
             {children}
 
