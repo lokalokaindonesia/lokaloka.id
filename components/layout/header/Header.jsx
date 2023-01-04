@@ -70,7 +70,7 @@ const Header = () => {
                             name='search'
                             onChange={handleInputSearch}
                             id='search'
-                            className='block w-full bg-white bg-opacity-100 text-blue border-r-0 placeholder-white border-white px-2 py-2 md:px-3 md:py-3 shadow-sm text-xs focus:border-white focus:ring-0 rounded-l-0 rounded-l-md'
+                            className='block w-full bg-white bg-opacity-100 text-slate-700 border-r-0 placeholder-zinc-400 border-slate-300 px-2 py-2 md:px-3 md:py-3 shadow-sm text-xs focus:border-slate-300 focus:ring-0 rounded-l-0 rounded-l-md'
                             placeholder='Cari produk disini...'
                         />
                         <button type='submit' className='inline-flex bg-white bg-opacity-100 border border-l-0 border-slate-300 items-center px-3 md:px-4 rounded-r-md'>
