@@ -15,7 +15,7 @@ const Category = () => {
             <FancySectionTitle title='Kategori' />
             <div className='drop-shadow grid grid-cols-3 gap-2 md:gap-4 lg:gap-6 xl:gap-8 rounded-md'>
                 <Link href='/makanan-dan-minuman'>
-                    <div className='cursor-pointer grid grid-rows-2 md:grid-rows-none md:grid-cols-2 w-auto h-full rounded-md bg-white'>
+                    <div className='cursor-pointer grid grid-rows-2 md:grid-rows-none md:grid-cols-2 w-auto h-full rounded-md bg-[#f54548]'>
                         <Image
                             src={food}
                             alt='kategori makanan dan minuman'
