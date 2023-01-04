@@ -40,7 +40,7 @@ const Footer = () => {
                         </span>
                         <span className='flex space-x-2 items-center'>
                             <FaWhatsapp className='w-4 h-4' />
-                            <a href='wa.me/+6285158916899'>085158916899 (Chat only)</a>
+                            <a href='https://wa.me/+6285158916899'>085158916899 (Chat only)</a>
                         </span>
                     </div>
                 </div>
@@ -55,7 +55,7 @@ const Footer = () => {
                         </span>
                         <span className='flex space-x-2 items-center'>
                             <FaInstagram className='w-4 h-4' />
-                            <a href='https://instagram.com/lokaloa.official' target='_blank' rel='noopener noreferrer'>
+                            <a href='https://instagram.com/lokaloka.official' target='_blank' rel='noopener noreferrer'>
                                 Lokaloka Official
                             </a>
                         </span>
