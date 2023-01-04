@@ -61,7 +61,7 @@ const Header = () => {
                 </a>
             </div>
 
-            <div className='w-9/12 flex justify-start md:justify-center'>
+            <div className='w-9/12 flex justify-start md:justify-center bg-white'>
                 <form method='post' className='w-full' action={`/search?s=${inputText}`}>
                     <div className='flex rounded-md shadow-sm w-full'>
                         <input
