@@ -15,7 +15,7 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
                     <FancySectionTitle title={sectionTitle} />
 
                     <Button size='sm' href={() => router.push(href)} type='tertiary' size='sm' display='flex' width='max'>
-                        <span className='text-xs'>Lihat semua</span>
+                        <span className='text-xs'>Rekomendasi</span>
                         <ArrowRightIcon className='h-4' />
                     </Button>
                 </div>
@@ -23,7 +23,7 @@ const HighlightedSection = ({ sectionTitle, href, data, bgColor = '' }) => {
                     <FancySectionTitle title={sectionTitle} />
 
                     <Button href={() => router.push(href)} type='tertiary' size='sm' display='flex' width='max'>
-                        <span>Lihat semua</span>
+                        <span>Rekomendasi</span>
                         <ArrowRightIcon className='h-5' />
                     </Button>
                 </div>
