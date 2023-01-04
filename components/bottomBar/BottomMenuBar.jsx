@@ -4,7 +4,7 @@ import BottomActiveLink from './BottomActiveLink'
 
 const BottomMenuBar = () => {
     return (
-        <div className='sticky bottom-0 md:hidden flex justify-between h-14 border border-slate-100 bg-[#ca1212]'>
+        <div className='sticky bottom-0 md:hidden flex justify-between h-14 border border-slate-100 bg-[#ff2d3e]'>
             <div className='w-full h-full flex items-center justify-center'>
                 <BottomActiveLink href='/'>
                     <div className='flex flex-col items-center justify-center text-sm'>
