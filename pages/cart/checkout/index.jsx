@@ -25,7 +25,7 @@ import user from "pages/api/user";
 const areaCollection = [
   {
     value: "malang-batu",
-    label: "Kota Malang - Batu",
+    label: "Kota Batu",
   },
   {
     value: "anotherCity",
