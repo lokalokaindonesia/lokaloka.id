@@ -52,21 +52,21 @@ const Carousel = () => {
                         </div>
                     </SwiperSlide> */}
 
-          <SwiperSlide>
+          {/* <SwiperSlide>
             <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
               <Image src={samaraDesktop} alt="Promo" className="rounded-md" layout="responsive" width={6} priority quality={75} height={2} />
             </div>
-          </SwiperSlide>
-          <SwiperSlide>
+          </SwiperSlide>*/}
+         {/* <SwiperSlide>
             <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
               <Image src={zamzamDesktop} alt="Promo" className="rounded-md" layout="responsive" width={6} priority quality={75} height={2} />
             </div>
-          </SwiperSlide>
-          <SwiperSlide>
+          </SwiperSlide>*/}
+          {/*<SwiperSlide>
             <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
               <Image src={riverstoneDesktop} alt="Promo" className="rounded-md" layout="responsive" width={6} priority quality={75} height={2} />
             </div>
-          </SwiperSlide>
+          </SwiperSlide>*/}
           <SwiperSlide>
             <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
               <Image src={kotenaDesktop} alt="Promo" className="rounded-md" layout="responsive" width={6} priority quality={75} height={2} />
@@ -98,21 +98,21 @@ const Carousel = () => {
             </div>
           </SwiperSlide>
 
-          <SwiperSlide>
+         {/* <SwiperSlide>
             <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
               <Image src={samaraMobile} alt="Promo" className="rounded-md" layout="responsive" width={6} priority quality={100} height={3} />
             </div>
-          </SwiperSlide>
-          <SwiperSlide>
+          </SwiperSlide>*/}
+          {/*<SwiperSlide>
             <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
               <Image src={zamzamMobile} alt="Promo" className="rounded-md" layout="responsive" width={6} priority quality={100} height={3} />
             </div>
-          </SwiperSlide>
-          <SwiperSlide>
+          </SwiperSlide>*/}
+         {/* <SwiperSlide>
             <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
               <Image src={riverstoneMobile} alt="Promo" className="rounded-md" layout="responsive" width={6} priority quality={100} height={3} />
             </div>
-          </SwiperSlide>
+          </SwiperSlide>*/}
           <SwiperSlide>
             <div className="w-full h-full cursor-pointer bg-slate-600 rounded-md">
               <Image src={kontenaMobile} alt="Promo" className="rounded-md" layout="responsive" width={6} priority quality={100} height={3} />
