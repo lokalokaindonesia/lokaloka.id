@@ -40,7 +40,7 @@ const Footer = () => {
                         </span>
                         <span className='flex space-x-2 items-center'>
                             <FaWhatsapp className='w-4 h-4' />
-                            <a href='https://wa.me/+6285158916899'>085158916899 (Chat only)</a>
+                            <a href='https://wa.me/+6285158916899'><font className="text-blue-500">085158916899 (Klik untuk order by WA)</font></a>
                         </span>
                     </div>
                 </div>
