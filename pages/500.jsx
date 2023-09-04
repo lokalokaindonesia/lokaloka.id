@@ -15,7 +15,7 @@ const Custom505 = () => {
                             <p className='mb-2 text-2xl font-bold text-center text-gray-800 md:text-3xl'>
                                 <span className='text-red-500'>Oops!</span> Server Error.
                             </p>
-                            <p className='mb-8 text-center text-gray-500 md:text-lg'>Maaf atas kendalanya. 🙏</p>
+                            <p className='mb-8 text-center text-gray-500 md:text-lg'>Mohon Maaf atas kendalanya. 🙏</p>
                             <Link href='/'>
                                 <button className='px-6 py-2 rounded text-sm font-semibold text-blue-600 bg-blue-100'>He Halaman Utama</button>
                             </Link>
